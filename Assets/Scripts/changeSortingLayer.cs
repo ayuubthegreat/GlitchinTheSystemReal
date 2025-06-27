@@ -15,7 +15,7 @@ public class changeSortingLayer : MonoBehaviour
         player player = collision.GetComponent<player>();
         if (playerpg != null || player != null)
         {
-            sprite.sortingLayerName = "background";
+            sprite.sortingLayerName = "houseBackground";
         }
     }
 
@@ -25,7 +25,7 @@ public class changeSortingLayer : MonoBehaviour
         player playerReal = collision.GetComponent<player>();
         if (player != null || playerReal != null)
         {
-            sprite.sortingLayerName = "backgroundtop";
+            sprite.sortingLayerName = "house";
         }
     }
 
