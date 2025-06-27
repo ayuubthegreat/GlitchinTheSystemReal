@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 40152776b7a50b041929e72bfd894215
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - myButton: {instanceID: 0}
+  - saveFileScreen: {fileID: 5703462296808861905, guid: 04d552cd91342364cbd1071e6094f019, type: 3}
+  - optionsScreen: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
