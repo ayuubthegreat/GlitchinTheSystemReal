@@ -28,6 +28,10 @@ public class door : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         audioSource = FindFirstObjectByType<Camera>().GetComponent<AudioSource>();
+        if (mainMap == null)
+        {
+            mainMap = GameObject.Find("mainMap");
+        }
     }
 
     // Update is called once per frame
@@ -94,7 +98,7 @@ public class door : MonoBehaviour
                 GameManager.instance.outsideDoorSpawnObject = GameManager.instance.doorSpawn.transform.position;
             }
             GameManager.instance.playerpg.transform.position = GameManager.instance.outsideDoorSpawnObject;
-            audioSource.clip = GameManager.instance.cameraControllerRPG.clip;
+            audioSource.clip = GameManager.instance.cameraControllerRPG.clipOld;
             audioSource.Play();
 
         }

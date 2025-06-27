@@ -145,15 +145,18 @@ public class GameManager : MonoBehaviour
 
     public void DefiningGameObjectsandScripts()
     {
-        var foundPlayer = GameObject.Find("player");
-        if (foundPlayer != null)
+        
+        playerpg = FindFirstObjectByType<playerpg>();
+        if (playerpg == null)
         {
-            playerpg = foundPlayer.GetComponent<playerpg>();
-            player = foundPlayer.GetComponent<player>();
+            player = FindFirstObjectByType<player>();
         }
-
+        else
+        {
+            playerpg = FindFirstObjectByType<playerpg>();
+        }
+        
         startSpawnRPG = GameObject.Find("spawnPointRPG");
-        doorSpawn = GameObject.Find("doorhouse");
 
         camera = FindFirstObjectByType<Camera>();
         if (camera != null)

@@ -49,7 +49,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2436111807249067076
 Transform:
   m_ObjectHideFlags: 0
@@ -878,9 +878,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2436111807249067076}
     m_Modifications:
+    - target: {fileID: 561428673095245523, guid: d303aa594ac32d44088f0d0845ae415e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 561428673095245523, guid: d303aa594ac32d44088f0d0845ae415e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 584171249
+      objectReference: {fileID: 0}
     - target: {fileID: 1611447961299551341, guid: d303aa594ac32d44088f0d0845ae415e, type: 3}
       propertyPath: m_Name
       value: playerHouse
+      objectReference: {fileID: 0}
+    - target: {fileID: 4486464136056119245, guid: d303aa594ac32d44088f0d0845ae415e, type: 3}
+      propertyPath: clipNew
+      value: 
+      objectReference: {fileID: 8300000, guid: 9d0390fd668b312478aab1caebecfa50, type: 3}
+    - target: {fileID: 4486464136056119245, guid: d303aa594ac32d44088f0d0845ae415e, type: 3}
+      propertyPath: mainMap
+      value: 
+      objectReference: {fileID: 1162620958887309682}
+    - target: {fileID: 5844886759865057819, guid: d303aa594ac32d44088f0d0845ae415e, type: 3}
+      propertyPath: m_Name
+      value: startoutsideplayerdoor
       objectReference: {fileID: 0}
     - target: {fileID: 7597098047500661776, guid: d303aa594ac32d44088f0d0845ae415e, type: 3}
       propertyPath: m_LocalPosition.x
