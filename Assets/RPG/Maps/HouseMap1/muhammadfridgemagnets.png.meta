@@ -1,0 +1,442 @@
+fileFormatVersion: 2
+guid: 8d2ab029e9a267740a27a08444b111a9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4193664295990200231
+    second: muhammadfridgemagnets_0
+  - first:
+      213: -3955321552647062681
+    second: muhammadfridgemagnets_1
+  - first:
+      213: -7506581029083118935
+    second: muhammadfridgemagnets_2
+  - first:
+      213: 4961570040833370900
+    second: muhammadfridgemagnets_3
+  - first:
+      213: -7778985754790777892
+    second: muhammadfridgemagnets_4
+  - first:
+      213: 1054615675150584543
+    second: muhammadfridgemagnets_5
+  - first:
+      213: 7102244228512282665
+    second: muhammadfridgemagnets_6
+  - first:
+      213: 7138183661653686063
+    second: muhammadfridgemagnets_7
+  - first:
+      213: -1060945594162575844
+    second: muhammadfridgemagnets_8
+  - first:
+      213: -6424298145240457517
+    second: muhammadfridgemagnets_9
+  - first:
+      213: 1624689321769611725
+    second: muhammadfridgemagnets_10
+  - first:
+      213: 454610172217835442
+    second: muhammadfridgemagnets_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: muhammadfridgemagnets_0
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 1550
+        width: 186
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 958f342ba8c1dc5c0800000000000000
+      internalID: -4193664295990200231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: muhammadfridgemagnets_1
+      rect:
+        serializedVersion: 2
+        x: 1545
+        y: 1398
+        width: 118
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76b760a0100eb19c0800000000000000
+      internalID: -3955321552647062681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: muhammadfridgemagnets_2
+      rect:
+        serializedVersion: 2
+        x: 1595
+        y: 1165
+        width: 177
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a280db535443d790800000000000000
+      internalID: -7506581029083118935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: muhammadfridgemagnets_3
+      rect:
+        serializedVersion: 2
+        x: 1326
+        y: 939
+        width: 182
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41be7142aa90bd440800000000000000
+      internalID: 4961570040833370900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: muhammadfridgemagnets_4
+      rect:
+        serializedVersion: 2
+        x: 1591
+        y: 823
+        width: 202
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdb2fdcbbad7b0490800000000000000
+      internalID: -7778985754790777892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: muhammadfridgemagnets_5
+      rect:
+        serializedVersion: 2
+        x: 1337
+        y: 626
+        width: 165
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdac8e37e5fb2ae00800000000000000
+      internalID: 1054615675150584543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: muhammadfridgemagnets_6
+      rect:
+        serializedVersion: 2
+        x: 1659
+        y: 607
+        width: 187
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 928fa8c1f7d309260800000000000000
+      internalID: 7102244228512282665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: muhammadfridgemagnets_7
+      rect:
+        serializedVersion: 2
+        x: 1726
+        y: 600
+        width: 25
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f277d56783cef0360800000000000000
+      internalID: 7138183661653686063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: muhammadfridgemagnets_8
+      rect:
+        serializedVersion: 2
+        x: 1730
+        y: 588
+        width: 26
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c168ced6a93c641f0800000000000000
+      internalID: -1060945594162575844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: muhammadfridgemagnets_9
+      rect:
+        serializedVersion: 2
+        x: 1512
+        y: 396
+        width: 125
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3deddb1dfde48d6a0800000000000000
+      internalID: -6424298145240457517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: muhammadfridgemagnets_10
+      rect:
+        serializedVersion: 2
+        x: 1671
+        y: 415
+        width: 133
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc1b276845e0c8610800000000000000
+      internalID: 1624689321769611725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: muhammadfridgemagnets_11
+      rect:
+        serializedVersion: 2
+        x: 1787
+        y: 477
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bfb2520b891f4600800000000000000
+      internalID: 454610172217835442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      muhammadfridgemagnets_0: -4193664295990200231
+      muhammadfridgemagnets_1: -3955321552647062681
+      muhammadfridgemagnets_10: 1624689321769611725
+      muhammadfridgemagnets_11: 454610172217835442
+      muhammadfridgemagnets_2: -7506581029083118935
+      muhammadfridgemagnets_3: 4961570040833370900
+      muhammadfridgemagnets_4: -7778985754790777892
+      muhammadfridgemagnets_5: 1054615675150584543
+      muhammadfridgemagnets_6: 7102244228512282665
+      muhammadfridgemagnets_7: 7138183661653686063
+      muhammadfridgemagnets_8: -1060945594162575844
+      muhammadfridgemagnets_9: -6424298145240457517
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
