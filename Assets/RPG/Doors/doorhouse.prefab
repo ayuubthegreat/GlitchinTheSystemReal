@@ -78,7 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1704146037
-  m_SortingLayer: 5
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 757481950541644591, guid: d5fa8ec8a73f68847b95dce99b5d1846, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: rpgScene1
   teleportationPoint: {fileID: 0}
-  mainMap: {fileID: 6875457449779704945, guid: 453b1e24ccfe52045baa088c18f217e2, type: 3}
+  mainMap: {fileID: 1162620958887309682, guid: b61e1c410fe547c4fa4b91f0a2d5d921, type: 3}
   houseMap: {fileID: 0}
   yInputNum: -1
   xInputNum: 0
@@ -182,6 +182,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   seconds2Wait: 1
   canNotBeASpawnPoint: 1
+  audioSource: {fileID: 0}
+  clipNew: {fileID: 0}
 --- !u!61 &5633838780884203460
 BoxCollider2D:
   m_ObjectHideFlags: 0

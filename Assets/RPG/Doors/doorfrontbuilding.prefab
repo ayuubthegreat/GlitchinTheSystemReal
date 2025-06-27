@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: housemap3
   teleportationPoint: {fileID: 0}
-  mainMap: {fileID: 6875457449779704945, guid: 453b1e24ccfe52045baa088c18f217e2, type: 3}
+  mainMap: {fileID: 1162620958887309682, guid: b61e1c410fe547c4fa4b91f0a2d5d921, type: 3}
   houseMap: {fileID: 0}
   yInputNum: 1
   xInputNum: 0
