@@ -136,6 +136,11 @@ if (player == null) {
 player = newPlayerScript; 
 }
 }
+public void NewRPGPlayeronTheBlock(playerpg newPlayerScript) {
+if (playerpg == null) {
+playerpg = newPlayerScript; 
+}
+}
 
     public void RespawnPlayerInCheckpoint(Vector3 newSpawnPoint, int index)
     {
