@@ -25,6 +25,13 @@ public class playerpg : MonoBehaviour
     [SerializeField] private LayerMask whatisGround;
     [SerializeField] public int facingDir = 1;
     private bool isTouchingWall;
+
+void Awake() {
+if (GameManager.instance != null) {
+
+}
+
+} 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
