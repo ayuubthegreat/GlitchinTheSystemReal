@@ -13,6 +13,7 @@ public class door : MonoBehaviour
     public GameObject teleportationPoint;
     public GameObject mainMap;
     public GameObject houseMap;
+    public string newLocationName;
     public int yInputNum;
     public int xInputNum;
     public int facingDir;
@@ -82,6 +83,8 @@ public class door : MonoBehaviour
             GameManager.instance.playerpg.transform.position = teleportationPoint.transform.position;
             audioSource.clip = clipNew;
             audioSource.Play();
+            UIManager.instance.location = newLocationName;
+            UIManager.instance.locationAnnouncerBool = true;
         }
         else
         {
@@ -100,6 +103,8 @@ public class door : MonoBehaviour
             GameManager.instance.playerpg.transform.position = GameManager.instance.outsideDoorSpawnObject;
             audioSource.clip = GameManager.instance.cameraControllerRPG.clipOld;
             audioSource.Play();
+            UIManager.instance.location = newLocationName;
+            UIManager.instance.locationAnnouncerBool = true;
 
         }
         GameManager.instance.iswalkingdoor = false;

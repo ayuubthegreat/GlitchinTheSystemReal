@@ -10,7 +10,9 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI warningText;
+    public string location;
     public GameObject warningScreen;
+    public bool locationAnnouncerBool;
 
     public GameObject coinsScreen;
     public GameObject livesScreen;
@@ -55,6 +57,8 @@ public class UIManager : MonoBehaviour
             fade.transform.position = GameManager.instance.player.transform.position;
         }
         fadeNums = 2;
+        location = "Abdurahman's House";
+        locationAnnouncerBool = true;
     }
 
     void Update()
@@ -160,4 +164,17 @@ public class UIManager : MonoBehaviour
         isAlive = !isDeadinner;
     }
     public void SetStartBool(int value) => UIManager.instance.start = value == 1 ? true : false;
+    public void SetLocationAnnouncerBool(bool value)
+    {
+        locationAnnouncerBool = value;
+        if (locationAnnouncerBool)
+        {
+            Debug.Log("Location Announcer is enabled.");
+        }
+        else
+        {
+            Debug.Log("Location Announcer is disabled.");
+        }
+    }
+    public void SetLocation(string newLocation) => location = newLocation;
 }
