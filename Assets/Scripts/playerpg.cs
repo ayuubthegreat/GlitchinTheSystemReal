@@ -28,7 +28,7 @@ public class playerpg : MonoBehaviour
 
 void Awake() {
 if (GameManager.instance != null) {
- GameManager.instance.NewRPGPlayeronTheBlock(playerpg);
+ GameManager.instance.NewRPGPlayeronTheBlock(this);
 }
 
 } 
