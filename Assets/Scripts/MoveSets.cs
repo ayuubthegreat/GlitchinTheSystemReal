@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NewScript : MonoBehaviour
+public class MoveSets : MonoBehaviour
 {
 public struct moveSet{
 public string moveName;
