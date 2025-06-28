@@ -131,6 +131,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+public void NewPlayeronTheBlock(player newPlayerScript) {
+if (player == null) {
+player = newPlayerScript; 
+}
+}
+
     public void RespawnPlayerInCheckpoint(Vector3 newSpawnPoint, int index)
     {
         startSpawnBool = false;
