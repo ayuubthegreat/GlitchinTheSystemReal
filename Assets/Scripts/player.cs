@@ -78,6 +78,9 @@ public class player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+if (GameManager.instance != null) {
+GameManager.instance.NewPlayerOnTheBlock(player);
+}
         
         
     }
