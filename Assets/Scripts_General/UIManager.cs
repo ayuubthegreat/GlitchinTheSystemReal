@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI warningText;
     public string location;
     public GameObject warningScreen;
-    public bool locationAnnouncerBool;
+    public bool canTransition;
 
     public GameObject coinsScreen;
     public GameObject livesScreen;
@@ -58,7 +58,7 @@ public class UIManager : MonoBehaviour
         }
         fadeNums = 2;
         location = "Abdurahman's House";
-        locationAnnouncerBool = true;
+        canTransition = true;
     }
 
     void Update()
