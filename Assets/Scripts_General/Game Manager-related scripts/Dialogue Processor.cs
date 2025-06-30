@@ -18,6 +18,8 @@ public class DialogueProcessor : MonoBehaviour
     public bool mouthMovement2 = false;
     public bool twopeopletalking = false;
     public bool isPhoneActive = false;
+    public bool isThinking = false;
+    public bool isSurprised = false;
 
     void Awake()
     {
@@ -119,6 +121,29 @@ public class DialogueProcessor : MonoBehaviour
             DialogueManager.instance.StartRPGTextBox(0, 1, 2, dialogueVault.dialogueSets[0]);
     }
     public void recieverPhoneDialogue2SetActive() => recieverPhoneDialogue2.SetActive(DialogueProcessor.instance.isPhoneActive);
+    public void ConversationManager() {
+        if (isPhoneActive && DialogueManager.instance.DialogueProgression < 3) {
+            PhoneConversationManager1();
+        } else {
+            return;
+        }
+
+    }
+    public void PhoneConversationManager1() {
+        if (!isPhoneActive && DialogueManager.instance.DialogueProgression > 3) {
+            return;
+        }
+        if (DialogueManager.instance.dialogueNumber == 4 || DialogueManager.instance.dialogueNumber == 5) {
+            isThinking = true;
+            isSurprised = false;
+        } else if (DialogueManager.instance.dialogueNumber == 10 || DialogueManager.instance.dialogueNumber == 11) {
+            isThinking = false;
+            isSurprised = true;
+        } else {
+            isThinking = false;
+            isSurprised = false;
+        }
+    }
     
     
 }

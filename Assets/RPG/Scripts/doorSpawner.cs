@@ -6,6 +6,5 @@ public class doorSpawner : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         GameManager.instance.RespawnPlayerInCheckpoint(transform.position, 2);
-        DontDestroyOnLoad(gameObject);
     }
 }

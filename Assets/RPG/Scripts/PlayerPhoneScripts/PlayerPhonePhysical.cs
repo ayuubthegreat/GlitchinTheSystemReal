@@ -30,20 +30,6 @@ public class PlayerPhonePhysical : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D collision)
     {
-        playerpg playerpg = collision.gameObject.GetComponent<playerpg>();
-        if (playerpg != null)
-        {
-            bool DialogueProgress = DialogueManager.instance.DialogueProgression < 3;
-            if (Input.GetKeyDown(KeyCode.Space) && !DialogueProcessor.instance.isConversationActive && !DialogueProcessor.instance.isPhoneActive && DialogueProgress)
-            {
-                playerpg.isMovable = false;
-                DialogueProcessor.instance.isPhoneActive = true;
-                Debug.Log("Player is interacting with the phone.");
-                DialogueManager.instance.DialogueProgression = 2;
-                DialogueProcessor.instance.DialogueProgressionFunction();
-                
-            }
-            
-        }
+        
     }
 }

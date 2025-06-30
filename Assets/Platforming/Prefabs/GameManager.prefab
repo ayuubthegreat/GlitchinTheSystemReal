@@ -150,16 +150,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1067073246516206669}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03d927fd806f1b14aa62078e5ae030cf, type: 3}
+  m_Script: {fileID: 11500000, guid: fa16803e41206f1489e385e62d64fb64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  livesText: {fileID: 6066912232012706820}
-  coinsText: {fileID: 1715857783108804387}
-  warningText: {fileID: 7015904937029651247}
-  warningScreen: {fileID: 366554093245682219}
-  coinsScreen: {fileID: 3132836373339606953}
-  livesScreen: {fileID: 2207628422647707627}
-  abdurahmanHealthScreen: {fileID: 8829193786337823474}
+  livesText: {fileID: 0}
+  coinsText: {fileID: 0}
+  warningText: {fileID: 0}
+  location: 
+  warningScreen: {fileID: 0}
+  canTransition: 0
+  coinsScreen: {fileID: 0}
+  livesScreen: {fileID: 0}
+  abdurahmanHealthScreen: {fileID: 0}
   fadeNums: 0
   fade: {fileID: 0}
   startFader: 0
@@ -656,7 +658,6 @@ GameObject:
   - component: {fileID: 8783382079643261407}
   - component: {fileID: 4703776291645929355}
   - component: {fileID: 4381727525764200380}
-  - component: {fileID: 5621949403032208426}
   m_Layer: 5
   m_Name: abdurahmanface
   m_TagString: Untagged
@@ -743,20 +744,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5621949403032208426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3556158424930486524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea0638b61801eda4eb2597a89e71f1a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthScriptt: {fileID: 0}
-  anim: {fileID: 0}
 --- !u!1 &4223974718541806838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1689,7 +1676,6 @@ GameObject:
   - component: {fileID: 191947384218358627}
   - component: {fileID: 7210565711966239013}
   - component: {fileID: 6687953238248417848}
-  - component: {fileID: 5865631502374013698}
   m_Layer: 5
   m_Name: heartcounter
   m_TagString: Untagged
@@ -1779,22 +1765,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5865631502374013698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6898657559710734885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d11e7ed0d5803f44891cf994130e18a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  hearts: []
-  showHealth: 0
-  GameStarted: 0
 --- !u!1 &7761548008654449240
 GameObject:
   m_ObjectHideFlags: 0

@@ -164,16 +164,16 @@ public class UIManager : MonoBehaviour
         isAlive = !isDeadinner;
     }
     public void SetStartBool(int value) => UIManager.instance.start = value == 1 ? true : false;
-    public void SetLocationAnnouncerBool(bool value)
+    public void SetCanTransitionBool(bool value)
     {
-        locationAnnouncerBool = value;
-        if (locationAnnouncerBool)
+        canTransition = value;
+        if (canTransition)
         {
-            Debug.Log("Location Announcer is enabled.");
+            Debug.Log("Transitioning is enabled.");
         }
         else
         {
-            Debug.Log("Location Announcer is disabled.");
+            Debug.Log("Transitioning is disabled.");
         }
     }
     public void SetLocation(string newLocation) => location = newLocation;

@@ -123,22 +123,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1292744160821833243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec8e5914f891910459e843784088a52c, type: 3}
+  m_Script: {fileID: 11500000, guid: a189cd4358c81d24d8dc1c29d937da38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: housemap3
+  scene: 
   teleportationPoint: {fileID: 0}
-  mainMap: {fileID: 1162620958887309682, guid: b61e1c410fe547c4fa4b91f0a2d5d921, type: 3}
+  mainMap: {fileID: 0}
   houseMap: {fileID: 0}
-  yInputNum: 1
+  newLocationName: 
+  yInputNum: 0
   xInputNum: 0
   facingDir: 0
   isTouchingPlayer: 0
   anim: {fileID: 0}
-  seconds2Wait: 2
+  seconds2Wait: 0
   canNotBeASpawnPoint: 0
   audioSource: {fileID: 0}
-  clipNew: {fileID: 8300000, guid: 47475ef719754ff4f8158a10b87dd6ba, type: 3}
+  clipNew: {fileID: 0}
 --- !u!61 &3583860528124710915
 BoxCollider2D:
   m_ObjectHideFlags: 0

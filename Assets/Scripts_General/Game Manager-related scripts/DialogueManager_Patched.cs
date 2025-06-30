@@ -79,6 +79,9 @@ public class DialogueManager : MonoBehaviour
 
         if (dialogueNumber < endDialogueRange)
         {
+            if (DialogueProcessor.instance.isPhoneActive) {
+                DialogueProcessor.instance.ConversationManager();
+            }
             // Replace 'dialogueArr.Length' with the correct property or field, e.g., 'dialogueArr.dialogues.Length'
             if (dialogueArr != null && dialogueNumber >= dialogueArr.Length)
             {

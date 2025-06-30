@@ -84,7 +84,7 @@ public class door : MonoBehaviour
             audioSource.clip = clipNew;
             audioSource.Play();
             UIManager.instance.location = newLocationName;
-            UIManager.instance.locationAnnouncerBool = true;
+            UIManager.instance.canTransition = true;
         }
         else
         {
@@ -104,7 +104,7 @@ public class door : MonoBehaviour
             audioSource.clip = GameManager.instance.cameraControllerRPG.clipOld;
             audioSource.Play();
             UIManager.instance.location = newLocationName;
-            UIManager.instance.locationAnnouncerBool = true;
+            UIManager.instance.canTransition = true;
 
         }
         GameManager.instance.iswalkingdoor = false;

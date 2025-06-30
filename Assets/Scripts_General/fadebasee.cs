@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using TMPro;
 
 
 public class fadebase : MonoBehaviour
@@ -11,7 +10,7 @@ public class fadebase : MonoBehaviour
     public Animator anim;
 
 
-    void Start()
+    public void Start()
     {
         anim = GetComponent<Animator>();
     }
@@ -33,7 +32,7 @@ public class fadebase : MonoBehaviour
         }
     }
     
-    void Update()
+    public void Update()
     {
         anim.SetBool("canMove", UIManager.instance.canTransition);
     }
