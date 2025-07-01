@@ -12,7 +12,7 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager instance;
     public DialogueVault dialogueVault;
     public GameObject rpgTextObject;
-   public GameObject personNameObject;
+    public GameObject personNameObject;
     public int DialogueProgression = 0;
     public int dialogueNumber = 0;
     public int endDialogueRange;
@@ -21,6 +21,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI rpgText;
     public TextMeshProUGUI personNameText;
     public bool isEnabled = false;
+    public bool isTalking = false;
 
     void Awake()
     {
@@ -32,14 +33,14 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-        
+
+
     }
     void Start()
     {
         dialogueVault = GetComponent<DialogueVault>();
 
-        DialogueProgression = 0;
+        // DialogueProgression = 0;
 
         if (rpgTextObject == null)
         {
@@ -62,14 +63,24 @@ public class DialogueManager : MonoBehaviour
         {
             StartRPGTextBox(3, 0, 1, dialogueVault.dialogueSets[0]);
         }
-        
+
     }
 
     void Update()
     {
-        
-        if (isEnabled && rpgText != null && rpgTextObject != null)
-            DialogueController(dialogueShells);
+
+        if (isEnabled)
+        {
+            if (rpgTextObject != null) rpgTextObject.SetActive(true);
+            if (personNameObject != null) personNameObject.SetActive(true);
+        }
+        else
+        {
+            rpgTextObject.SetActive(false);
+            personNameObject.SetActive(false);
+        }
+            
+
 
 
     }
@@ -80,7 +91,8 @@ public class DialogueManager : MonoBehaviour
 
         if (dialogueNumber < endDialogueRange)
         {
-            if (DialogueProcessor.instance.isPhoneActive) {
+            if (DialogueProcessor.instance.isPhoneActive)
+            {
                 DialogueProcessor.instance.ConversationManager();
             }
             // Replace 'dialogueArr.Length' with the correct property or field, e.g., 'dialogueArr.dialogues.Length'
@@ -94,14 +106,10 @@ public class DialogueManager : MonoBehaviour
                 Debug.LogWarning("Dialogue at index " + dialogueNumber + " is null.");
                 return;
             }
-            if (rpgText.textInfo.pageCount <= 1) {
-                RPGTextScroll(dialogueArr[dialogueNumber].dialogueLine, 1);
-            } else {
-                rpgText.pageToDisplay = currentPage;
-                RPGTextScroll(dialogueArr[dialogueNumber].dialogueLine, 1);
-            }
+            StartRPGTextScroll(dialogueArr);
+
             personNameText.text = dialogueArr[dialogueNumber].characterName;
-            
+
             Debug.Log(dialogueArr[dialogueNumber].characterName + ": " + dialogueArr[dialogueNumber].dialogueLine);
         }
         else
@@ -168,6 +176,7 @@ public class DialogueManager : MonoBehaviour
     public void RPGTextBox(int startRange, int endRange, DialogueVault.DialogueSet[] dialogues)
     {
         isEnabled = true;
+        
         if (GameManager.instance?.playerpg != null)
         {
             GameManager.instance.playerpg.isMovable = false;
@@ -175,23 +184,51 @@ public class DialogueManager : MonoBehaviour
         dialogueNumber = startRange;
         endDialogueRange = endRange;
         dialogueShells = dialogues;
-        if (rpgTextObject != null) rpgTextObject.SetActive(true);
-        if (personNameObject != null) personNameObject.SetActive(true);
         
+        DialogueController(dialogueShells);
 
 
     }
-    public IEnumerator RPGTextScroll(string sentence, int scrollSpeed)
+    public IEnumerator RPGTextScroll(string sentence, float scrollSpeed)
     {
+
+        if (!isTalking)
+        {
+            yield break;
+        }
         System.Text.StringBuilder newSentence = new System.Text.StringBuilder();
+        if (newSentence.ToString() == sentence)
+        {
+            isTalking = false;
+            rpgText.text = sentence;
+            yield break;
+        }
         for (int i = 0; i < sentence.Length; i++)
         {
-            newSentence.Append(sentence[i]);
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                rpgText.text = sentence;
+                isTalking = false;
+            }
             if (rpgText != null)
             {
+                newSentence.Append(sentence[i]);
                 rpgText.text = newSentence.ToString();
             }
-            yield return new WaitForSeconds(scrollSpeed / 1000f);
+            yield return new WaitForSeconds(scrollSpeed);
         }
+
     }
+    public void StartRPGTextScroll(DialogueVault.DialogueSet[] dialogueArr)
+    {
+        if (rpgText.textInfo.pageCount <= 1) {
+                isTalking = true;
+                StartCoroutine(RPGTextScroll(dialogueArr[dialogueNumber].dialogueLine, .05f));
+            } else {
+                rpgText.pageToDisplay = currentPage;
+                isTalking = true;
+                StartCoroutine(RPGTextScroll(dialogueArr[dialogueNumber].dialogueLine, .05f));
+            }
+    }
+    
 }

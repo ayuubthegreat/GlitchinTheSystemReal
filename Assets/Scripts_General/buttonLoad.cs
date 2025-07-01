@@ -78,6 +78,7 @@ public class buttonLoad : MonoBehaviour
                         }
                     }
                 }
+                DialogueManager.instance.DialogueController(DialogueManager.instance.dialogueShells);
                 break;
             case ButtonType.Phone:
 
