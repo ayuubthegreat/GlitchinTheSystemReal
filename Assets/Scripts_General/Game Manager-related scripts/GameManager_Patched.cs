@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
     public GameObject doorSpawn;
     public Vector3 phoneBoothSpawn;
     public bool isDonewithPlatforming;
+    [Header("RPG Maps")]
+    public GameObject mainMap;
+    public GameObject playerHouse;
 
     public bool iswalkingdoor;
     public bool canNotBeASpawnPoint;
@@ -87,6 +90,11 @@ public class GameManager : MonoBehaviour
             phoneBoothSpawn = startSpawnRPG.transform.position;
             startSpawnBool = false;
             isDonewithPlatforming = false;
+        }
+        if (DialogueManager.instance.DialogueProgression < 3)
+        {
+            mainMap.SetActive(false);
+            playerHouse.SetActive(true);
         }
 
 
@@ -165,6 +173,9 @@ playerpg = newPlayerScript;
         else
         {
             playerpg = FindFirstObjectByType<playerpg>();
+            if (mainMap == null) mainMap = GameObject.Find("mainMap");
+            if (playerHouse == null) playerHouse = GameObject.Find("playerHouseMap");
+
         }
         
         startSpawnRPG = GameObject.Find("spawnPointRPG");

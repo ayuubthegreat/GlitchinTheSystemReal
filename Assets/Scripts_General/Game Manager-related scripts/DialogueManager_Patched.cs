@@ -95,10 +95,10 @@ public class DialogueManager : MonoBehaviour
                 return;
             }
             if (rpgText.textInfo.pageCount <= 1) {
-                rpgText.text = dialogueArr[dialogueNumber].dialogueLine;
+                RPGTextScroll(dialogueArr[dialogueNumber].dialogueLine, 1);
             } else {
                 rpgText.pageToDisplay = currentPage;
-                rpgText.text = dialogueArr[dialogueNumber].dialogueLine;
+                RPGTextScroll(dialogueArr[dialogueNumber].dialogueLine, 1);
             }
             personNameText.text = dialogueArr[dialogueNumber].characterName;
             
@@ -181,5 +181,17 @@ public class DialogueManager : MonoBehaviour
 
 
     }
-    
+    public IEnumerator RPGTextScroll(string sentence, int scrollSpeed)
+    {
+        System.Text.StringBuilder newSentence = new System.Text.StringBuilder();
+        for (int i = 0; i < sentence.Length; i++)
+        {
+            newSentence.Append(sentence[i]);
+            if (rpgText != null)
+            {
+                rpgText.text = newSentence.ToString();
+            }
+            yield return new WaitForSeconds(scrollSpeed / 1000f);
+        }
+    }
 }
