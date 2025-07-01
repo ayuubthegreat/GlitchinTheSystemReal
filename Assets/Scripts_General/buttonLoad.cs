@@ -12,7 +12,9 @@ public enum ButtonType
     Back,
     Warning,
     Next,
-    Phone
+    Phone,
+    Bool,
+
 }
 
 public class buttonLoad : MonoBehaviour

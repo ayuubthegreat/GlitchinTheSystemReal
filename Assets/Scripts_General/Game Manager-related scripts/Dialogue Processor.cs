@@ -122,7 +122,7 @@ public class DialogueProcessor : MonoBehaviour
     }
     public void recieverPhoneDialogue2SetActive() => recieverPhoneDialogue2.SetActive(DialogueProcessor.instance.isPhoneActive);
     public void ConversationManager() {
-        if (isPhoneActive && DialogueManager.instance.DialogueProgression < 3) {
+        if (DialogueManager.instance.DialogueProgression < 3) {
             PhoneConversationManager1();
         } else {
             return;
