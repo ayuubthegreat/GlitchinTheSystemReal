@@ -1089,7 +1089,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &694608732
 Transform:
   m_ObjectHideFlags: 0
@@ -2159,6 +2159,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2013175867}
     - target: {fileID: 2674399383581185752, guid: a6b377066ebfcd44eb71d00182b5b1ac, type: 3}
+      propertyPath: yInputNum
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2674399383581185752, guid: a6b377066ebfcd44eb71d00182b5b1ac, type: 3}
+      propertyPath: seconds2Wait
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2674399383581185752, guid: a6b377066ebfcd44eb71d00182b5b1ac, type: 3}
       propertyPath: newLocationName
       value: Abdurahman's Terrace
       objectReference: {fileID: 0}
@@ -3132,6 +3140,14 @@ PrefabInstance:
       propertyPath: houseMap
       value: 
       objectReference: {fileID: 2013175867}
+    - target: {fileID: 6737836033879984032, guid: b61e1c410fe547c4fa4b91f0a2d5d921, type: 3}
+      propertyPath: yInputNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737836033879984032, guid: b61e1c410fe547c4fa4b91f0a2d5d921, type: 3}
+      propertyPath: seconds2Wait
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6737836033879984032, guid: b61e1c410fe547c4fa4b91f0a2d5d921, type: 3}
       propertyPath: newLocationName
       value: Abdurahman's House
