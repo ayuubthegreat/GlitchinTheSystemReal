@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     public int DialogueProgression = 0;
     public int dialogueNumber = 0;
     public int endDialogueRange;
+    public int currentPage = 1;
     public DialogueVault.DialogueSet[] dialogueShells;
     public TextMeshProUGUI rpgText;
     public TextMeshProUGUI personNameText;
@@ -93,8 +94,14 @@ public class DialogueManager : MonoBehaviour
                 Debug.LogWarning("Dialogue at index " + dialogueNumber + " is null.");
                 return;
             }
+            if (rpgText.textInfo.pageCount <= 1) {
+                rpgText.text = dialogueArr[dialogueNumber].dialogueLine;
+            } else {
+                rpgText.pageToDisplay = currentPage;
+                rpgText.text = dialogueArr[dialogueNumber].dialogueLine;
+            }
             personNameText.text = dialogueArr[dialogueNumber].characterName;
-            rpgText.text = dialogueArr[dialogueNumber].dialogueLine;
+            
             Debug.Log(dialogueArr[dialogueNumber].characterName + ": " + dialogueArr[dialogueNumber].dialogueLine);
         }
         else

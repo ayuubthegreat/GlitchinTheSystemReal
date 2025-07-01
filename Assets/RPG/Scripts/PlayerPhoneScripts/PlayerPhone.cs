@@ -17,8 +17,10 @@ public class PlayerPhone : MonoBehaviour
         {
             anim.SetInteger("DP", DialogueManager.instance.DialogueProgression);
             anim.SetBool("player1talking", DialogueProcessor.instance.person1turn);
-            anim.SetBool("isThinking", DialogueProcessor.instance.isThinking);
-            anim.SetBool("isSurprised", DialogueProcessor.instance.isSurprised);
+            anim.SetBool("isThinking", DialogueProcessor.instance.expressions[0]);
+            anim.SetBool("isSurprised", DialogueProcessor.instance.expressions[1]);
+            anim.SetBool("isThinkingFace", DialogueProcessor.instance.faces[0]);
+            anim.SetBool("isSurprisedFace", DialogueProcessor.instance.faces[1]);
         }
         else
         {
