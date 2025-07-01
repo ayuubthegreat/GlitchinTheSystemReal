@@ -57,7 +57,27 @@ public class buttonLoad : MonoBehaviour
                 warningScreen.SetActive(false);
                 break;
             case ButtonType.Next:
-                DialogueManager.instance.dialogueNumber++;
+                if (DialogueManager.instance.rpgText.textInfo.pageCount == 1)
+                {
+                    DialogueManager.instance.dialogueNumber++;
+                    DialogueManager.instance.currentPage = 1;
+                    DialogueManager.instance.rpgText.pageToDisplay = DialogueManager.instance.currentPage;
+                }
+                else
+                {
+                    if (DialogueManager.instance.currentPage < DialogueManager.instance.rpgText.textInfo.pageCount)
+                    {
+                        DialogueManager.instance.currentPage++;
+                        DialogueManager.instance.rpgText.pageToDisplay = DialogueManager.instance.currentPage;
+                    } else {
+                      DialogueManager.instance.currentPage = 1;
+                        DialogueManager.instance.rpgText.pageToDisplay = DialogueManager.instance.currentPage;
+                        if (DialogueManager.instance.dialogueNumber < DialogueManager.instance.endDialogueRange)
+                        {
+                            DialogueManager.instance.dialogueNumber++;
+                        }
+                    }
+                }
                 break;
             case ButtonType.Phone:
 

@@ -18,8 +18,9 @@ public class DialogueProcessor : MonoBehaviour
     public bool mouthMovement2 = false;
     public bool twopeopletalking = false;
     public bool isPhoneActive = false;
-    public bool isThinking = false;
-    public bool isSurprised = false;
+    
+    public bool[] faces;
+    public bool[] expressions;
 
     void Awake()
     {
@@ -37,7 +38,18 @@ public class DialogueProcessor : MonoBehaviour
     }
     void Start()
     {
-
+        faces = new bool[] {
+            // isThinking
+            false,
+            // isSurprised
+            false
+        };
+        expressions = new bool[] {
+            // isThinkingFace
+            false,
+            // isSurprisedFace
+            false
+        };
 
         if (gameManager == null)
         {
@@ -56,7 +68,7 @@ public class DialogueProcessor : MonoBehaviour
         if (DialogueManager.instance.DialogueProgression == 0)
         {
             GameManager.instance.iswalkingdoor = false;
-            
+
             GameManager.instance.outsideDoorSpawnObject = GameManager.instance.doorSpawn.transform.position;
 
         }
@@ -64,12 +76,12 @@ public class DialogueProcessor : MonoBehaviour
     public void Update()
     {
 
-       
+
 
     }
     public void DialogueProgressionFunction()
     {
-        bool conversationEnded =  DialogueManager.instance.DialogueProgression == 3 && isPhoneActive;
+        bool conversationEnded = DialogueManager.instance.DialogueProgression == 3 && isPhoneActive;
         bool conversationBegan = DialogueManager.instance.DialogueProgression == 2 && isPhoneActive;
         if (DialogueManager.instance.DialogueProgression == 1)
         {
@@ -97,7 +109,7 @@ public class DialogueProcessor : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         isConversationActive = true;
         recieverPhoneDialogue2SetActive();
-        
+
         DialogueManager.instance.StartRPGTextBox(1, 0, dialogueVault.dialogueSets[1].Length, dialogueVault.dialogueSets[1]);
     }
     public IEnumerator DialogueProgression1()
@@ -111,38 +123,84 @@ public class DialogueProcessor : MonoBehaviour
         }
         yield return new WaitForSeconds(secondstoWait);
         DialogueProgression1Func();
-            
+
     }
-    public void DialogueProgression1Func() {
+    public void DialogueProgression1Func()
+    {
         if (isPhoneActive)
-            {
-                return;
-            }
-            DialogueManager.instance.StartRPGTextBox(0, 1, 2, dialogueVault.dialogueSets[0]);
+        {
+            return;
+        }
+        DialogueManager.instance.StartRPGTextBox(0, 1, 2, dialogueVault.dialogueSets[0]);
     }
     public void recieverPhoneDialogue2SetActive() => recieverPhoneDialogue2.SetActive(DialogueProcessor.instance.isPhoneActive);
-    public void ConversationManager() {
-        if (DialogueManager.instance.DialogueProgression < 3) {
+    public void ConversationManager()
+    {
+        if (DialogueManager.instance.DialogueProgression < 3)
+        {
             PhoneConversationManager1();
-        } else {
+        }
+        else
+        {
             return;
         }
 
     }
-    public void PhoneConversationManager1() {
-        if (!isPhoneActive && DialogueManager.instance.DialogueProgression > 3) {
+    public void PhoneConversationManager1()
+    {
+        if (!isPhoneActive && DialogueManager.instance.DialogueProgression > 3)
+        {
             return;
         }
-        if (DialogueManager.instance.dialogueNumber == 4 || DialogueManager.instance.dialogueNumber == 5) {
-            isThinking = true;
-            isSurprised = false;
-        } else if (DialogueManager.instance.dialogueNumber == 10 || DialogueManager.instance.dialogueNumber == 11) {
-            isThinking = false;
-            isSurprised = true;
-        } else {
-            isThinking = false;
-            isSurprised = false;
+        if (DialogueManager.instance.dialogueNumber == 4 || DialogueManager.instance.dialogueNumber == 5)
+        {
+            ChangeExpressionBools(0);
+            ChangeFaceExpressionBools(0);
         }
+        else if (DialogueManager.instance.dialogueNumber == 10 || DialogueManager.instance.dialogueNumber == 11)
+        {
+            ChangeExpressionBools(1);
+            ChangeFaceExpressionBools(1);
+        }
+        else
+        {
+            ChangeExpressionBools(expressions.Length + 5);
+            ChangeFaceExpressionBools(faces.Length + 1);
+        }
+    }
+    public void ChangeExpressionBools(int value)
+    {
+        
+            for (int i = 0; i < expressions.Length; i++)
+            {
+                if (value == i && value <= expressions.Length)
+                {
+                    Debug.Log(expressions[i]);
+                    expressions[i] = true;
+                }
+                else
+                {
+                    expressions[i] = false;
+                }
+            }
+        
+        
+    }
+    public void ChangeFaceExpressionBools(int value)
+    {
+            for (int i = 0; i < faces.Length; i++)
+            {
+            if (value == i && value <= expressions.Length)
+            {
+                faces[i] = true;
+            }
+            else
+            {
+                faces[i] = false;
+            }
+            
+            }
+        
     }
     
     

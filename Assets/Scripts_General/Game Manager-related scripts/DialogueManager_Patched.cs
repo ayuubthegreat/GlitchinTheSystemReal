@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     public int DialogueProgression = 0;
     public int dialogueNumber = 0;
     public int endDialogueRange;
+    public int currentPage = 1;
     public DialogueVault.DialogueSet[] dialogueShells;
     public TextMeshProUGUI rpgText;
     public TextMeshProUGUI personNameText;
@@ -93,8 +94,14 @@ public class DialogueManager : MonoBehaviour
                 Debug.LogWarning("Dialogue at index " + dialogueNumber + " is null.");
                 return;
             }
+            if (rpgText.textInfo.pageCount <= 1) {
+                RPGTextScroll(dialogueArr[dialogueNumber].dialogueLine, 1);
+            } else {
+                rpgText.pageToDisplay = currentPage;
+                RPGTextScroll(dialogueArr[dialogueNumber].dialogueLine, 1);
+            }
             personNameText.text = dialogueArr[dialogueNumber].characterName;
-            rpgText.text = dialogueArr[dialogueNumber].dialogueLine;
+            
             Debug.Log(dialogueArr[dialogueNumber].characterName + ": " + dialogueArr[dialogueNumber].dialogueLine);
         }
         else
@@ -174,5 +181,17 @@ public class DialogueManager : MonoBehaviour
 
 
     }
-    
+    public IEnumerator RPGTextScroll(string sentence, int scrollSpeed)
+    {
+        System.Text.StringBuilder newSentence = new System.Text.StringBuilder();
+        for (int i = 0; i < sentence.Length; i++)
+        {
+            newSentence.Append(sentence[i]);
+            if (rpgText != null)
+            {
+                rpgText.text = newSentence.ToString();
+            }
+            yield return new WaitForSeconds(scrollSpeed / 1000f);
+        }
+    }
 }

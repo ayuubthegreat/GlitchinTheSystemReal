@@ -147,7 +147,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.04050827, y: 0.8112831}
+  m_Offset: {x: -0.012194276, y: 0.09094453}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -157,7 +157,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.3868713, y: 3.9205132}
+  m_Size: {x: 4.4620123, y: 2.479836}
   m_EdgeRadius: 0
 --- !u!114 &2674399383581185752
 MonoBehaviour:
@@ -175,13 +175,13 @@ MonoBehaviour:
   teleportationPoint: {fileID: 0}
   mainMap: {fileID: 0}
   houseMap: {fileID: 0}
-  newLocationName: 
-  yInputNum: 0
+  newLocationName: Abdurahman's Terrace
+  yInputNum: -1
   xInputNum: 0
   facingDir: 0
   isTouchingPlayer: 0
   anim: {fileID: 0}
-  seconds2Wait: 0
+  seconds2Wait: 1
   canNotBeASpawnPoint: 0
   audioSource: {fileID: 0}
   clipNew: {fileID: 0}
