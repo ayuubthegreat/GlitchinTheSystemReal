@@ -14,14 +14,20 @@ public class DialogueManager : MonoBehaviour
     public GameObject rpgTextObject;
     public GameObject personNameObject;
     public int DialogueProgression = 0;
+    public int startRange;
     public int dialogueNumber = 0;
     public int endDialogueRange;
     public int currentPage = 1;
+    public int currentPageAuto;
     public DialogueVault.DialogueSet[] dialogueShells;
     public TextMeshProUGUI rpgText;
     public TextMeshProUGUI personNameText;
     public bool isEnabled = false;
     public bool isTalking = false;
+    public int startBrokenSentence = 0;
+    public int endBrokenSentence = 0;
+    public string brokenSentence;
+    public int dialogueSpeed;
 
     void Awake()
     {
@@ -40,6 +46,7 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueVault = GetComponent<DialogueVault>();
 
+
         // DialogueProgression = 0;
 
         if (rpgTextObject == null)
@@ -54,6 +61,7 @@ public class DialogueManager : MonoBehaviour
         if (rpgText == null && rpgTextObject != null)
         {
             rpgText = rpgTextObject.GetComponent<TextMeshProUGUI>();
+            currentPageAuto = rpgText.pageToDisplay;
         }
         if (personNameText == null && personNameObject != null)
         {
@@ -61,7 +69,7 @@ public class DialogueManager : MonoBehaviour
         }
         if (DialogueProgression == 0 && dialogueVault != null && GameManager.instance.playerpg != null)
         {
-            StartRPGTextBox(3, 0, 1, dialogueVault.dialogueSets[0]);
+            StartTextBox(3, 0, 1, dialogueVault.dialogueSets[0]);
         }
 
     }
@@ -79,156 +87,58 @@ public class DialogueManager : MonoBehaviour
             rpgTextObject.SetActive(false);
             personNameObject.SetActive(false);
         }
-            
-
-
-
     }
-
-    public void DialogueController(DialogueVault.DialogueSet[] dialogueArr)
+    public void StartTextBox(int seconds, int startRangee, int endRange, DialogueVault.DialogueSet[] dialogueSet) => StartCoroutine(RPGTextBox(seconds, startRangee, endRange, dialogueSet)); 
+    public IEnumerator RPGTextBox(int seconds, int startRangee, int endRange, DialogueVault.DialogueSet[] dialogueSet)
     {
-        if (dialogueArr == null || rpgText == null || rpgTextObject == null) return;
-
-        if (dialogueNumber < endDialogueRange)
-        {
-            if (DialogueProcessor.instance.isPhoneActive)
-            {
-                DialogueProcessor.instance.ConversationManager();
-            }
-            // Replace 'dialogueArr.Length' with the correct property or field, e.g., 'dialogueArr.dialogues.Length'
-            if (dialogueArr != null && dialogueNumber >= dialogueArr.Length)
-            {
-                Debug.LogWarning("Dialogue number exceeds the length of the dialogue array." + endDialogueRange);
-                return;
-            }
-            if (dialogueArr[dialogueNumber].dialogueLine == null)
-            {
-                Debug.LogWarning("Dialogue at index " + dialogueNumber + " is null.");
-                return;
-            }
-            StartRPGTextScroll(dialogueArr);
-
-            personNameText.text = dialogueArr[dialogueNumber].characterName;
-
-            Debug.Log(dialogueArr[dialogueNumber].characterName + ": " + dialogueArr[dialogueNumber].dialogueLine);
-        }
-        else
-        {
-
-            if (!isEnabled && rpgTextObject != null)
-            {
-                return;
-            }
-            if (rpgTextObject != null)
-            {
-                rpgTextObject.SetActive(false);
-            }
-            if (personNameObject != null)
-            {
-                personNameObject.SetActive(false);
-            }
-            Debug.Log("Dialogue ended at number: " + dialogueNumber);
-            if (GameManager.instance != null && GameManager.instance.playerpg != null)
-            {
-                GameManager.instance.playerpg.isMovable = true;
-            }
-            dialogueShells = null;
-            endDialogueRange = 0;
-            dialogueArr = null;
-            dialogueVault = null;
-            dialogueNumber = 0;
-            if (rpgText != null)
-            {
-                rpgText.text = "";
-            }
-            Debug.Log("Dialogue ended.");
-            if (isEnabled)
-            {
-                DialogueProgression++;
-            }
-            DialogueProcessor.instance.DialogueProgressionFunction();
-            isEnabled = false;
-
-        }
-    }
-
-    public void StartRPGTextBox(int seconds, int startRange, int endRange, DialogueVault.DialogueSet[] dialogueArr)
-    {
-        StartCoroutine(generateRPGTextBox(seconds, startRange, endRange, dialogueArr));
-    }
-
-    public IEnumerator generateRPGTextBox(int seconds, int startRange, int endRange, DialogueVault.DialogueSet[] dialogueArr)
-    {
-        int originaldialogueNumber = DialogueProgression;
         yield return new WaitForSeconds(seconds);
-        if (DialogueProgression == originaldialogueNumber)
-        {
-            Debug.Log("Starting RPG Text Box after " + seconds + " seconds.");
-        }
-        else
-        {
-            Debug.Log("Dialogue progression changed during wait, not starting RPG Text Box.");
-            yield break;
-        }
-        RPGTextBox(startRange, endRange, dialogueArr);
-    }
-
-    public void RPGTextBox(int startRange, int endRange, DialogueVault.DialogueSet[] dialogues)
-    {
         isEnabled = true;
-        
-        if (GameManager.instance?.playerpg != null)
-        {
-            GameManager.instance.playerpg.isMovable = false;
-        }
-        dialogueNumber = startRange;
+        startRange = startRangee;
         endDialogueRange = endRange;
-        dialogueShells = dialogues;
-        
-        DialogueController(dialogueShells);
-
-
+        dialogueNumber = 0;
+        dialogueShells = dialogueSet;
+        StartCoroutine(DialogueController(dialogueSet));
     }
-    public IEnumerator RPGTextScroll(string sentence, float scrollSpeed)
+    public IEnumerator DialogueController(DialogueVault.DialogueSet[] sets)
     {
-
-        if (!isTalking)
-        {
-            yield break;
-        }
-        System.Text.StringBuilder newSentence = new System.Text.StringBuilder();
-        if (newSentence.ToString() == sentence)
-        {
-            isTalking = false;
-            rpgText.text = sentence;
-            yield break;
-        }
+        personNameText.text = sets[dialogueNumber].characterName;
+        string sentence = sets[dialogueNumber].dialogueLine;
+        System.Text.StringBuilder emptySentence = new System.Text.StringBuilder();
+        isTalking = true;
+        int lastPage = 1;
         for (int i = 0; i < sentence.Length; i++)
         {
-            if (Input.GetKeyDown(KeyCode.X))
+            rpgText.text = sentence.Substring(0, i + 1);
+            yield return new WaitForSeconds(dialogueSpeed);
+            yield return null;
+            if (rpgText.pageToDisplay > lastPage)
             {
-                rpgText.text = sentence;
-                isTalking = false;
+                while (!Input.GetKeyDown(KeyCode.Space))
+                {
+                    yield return null;
+                }
+                lastPage = rpgText.pageToDisplay;
             }
-            if (rpgText != null)
+            if (rpgText.textInfo.pageCount > 1)
             {
-                newSentence.Append(sentence[i]);
-                rpgText.text = newSentence.ToString();
+                while (!Input.GetKeyDown(KeyCode.Space))
+                {
+                    yield return null;
+                }
             }
-            yield return new WaitForSeconds(scrollSpeed);
         }
-
+        isTalking = false;
     }
-    public void StartRPGTextScroll(DialogueVault.DialogueSet[] dialogueArr)
+    public void ResetDialogue()
     {
-        if (rpgText.textInfo.pageCount <= 1) {
-                isTalking = true;
-                StartCoroutine(RPGTextScroll(dialogueArr[dialogueNumber].dialogueLine, .05f));
-            } else {
-                rpgText.pageToDisplay = currentPage;
-                isTalking = true;
-                StartCoroutine(RPGTextScroll(dialogueArr[dialogueNumber].dialogueLine, .05f));
-            }
+        DialogueProgression++;
+        dialogueNumber = 0;
+        dialogueShells = null;
+        startRange = 0;
+        endDialogueRange = 0;
+        currentPage = 1;
+        DialogueProcessor.instance.DialogueProgressionFunction();
     }
+
     
 }

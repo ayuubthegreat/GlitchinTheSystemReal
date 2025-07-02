@@ -110,7 +110,7 @@ public class DialogueProcessor : MonoBehaviour
         isConversationActive = true;
         recieverPhoneDialogue2SetActive();
 
-        DialogueManager.instance.StartRPGTextBox(1, 0, dialogueVault.dialogueSets[1].Length, dialogueVault.dialogueSets[1]);
+        DialogueManager.instance.StartTextBox(0, 0, dialogueVault.dialogueSets[1].Length, dialogueVault.dialogueSets[1]);
     }
     public IEnumerator DialogueProgression1()
     {
@@ -131,7 +131,7 @@ public class DialogueProcessor : MonoBehaviour
         {
             return;
         }
-        DialogueManager.instance.StartRPGTextBox(0, 1, 2, dialogueVault.dialogueSets[0]);
+        DialogueManager.instance.StartTextBox(2, 1, 2, dialogueVault.dialogueSets[0]);
     }
     public void recieverPhoneDialogue2SetActive() => recieverPhoneDialogue2.SetActive(DialogueProcessor.instance.isPhoneActive);
     public void ConversationManager()

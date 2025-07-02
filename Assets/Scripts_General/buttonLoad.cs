@@ -59,26 +59,22 @@ public class buttonLoad : MonoBehaviour
             case ButtonType.Next:
                 if (DialogueManager.instance.rpgText.textInfo.pageCount == 1)
                 {
-                    DialogueManager.instance.dialogueNumber++;
-                    DialogueManager.instance.currentPage = 1;
-                    DialogueManager.instance.rpgText.pageToDisplay = DialogueManager.instance.currentPage;
+                    OnWithTheShow();
                 }
                 else
                 {
                     if (DialogueManager.instance.currentPage < DialogueManager.instance.rpgText.textInfo.pageCount)
                     {
                         DialogueManager.instance.currentPage++;
-                        DialogueManager.instance.rpgText.pageToDisplay = DialogueManager.instance.currentPage;
-                    } else {
-                      DialogueManager.instance.currentPage = 1;
-                        DialogueManager.instance.rpgText.pageToDisplay = DialogueManager.instance.currentPage;
-                        if (DialogueManager.instance.dialogueNumber < DialogueManager.instance.endDialogueRange)
-                        {
-                            DialogueManager.instance.dialogueNumber++;
-                        }
+
                     }
+                    else
+                    {
+                        OnWithTheShow();
+                    }
+
                 }
-                DialogueManager.instance.DialogueController(DialogueManager.instance.dialogueShells);
+
                 break;
             case ButtonType.Phone:
 
@@ -89,8 +85,9 @@ public class buttonLoad : MonoBehaviour
                 break;
         }
     }
-    public void HandlePhoneInteraction() {
-      playerpg playerpg = GameManager.instance.playerpg;
+    public void HandlePhoneInteraction()
+    {
+        playerpg playerpg = GameManager.instance.playerpg;
         if (playerpg != null)
         {
             bool DialogueProgress = DialogueManager.instance.DialogueProgression < 3 && DialogueManager.instance.DialogueProgression > 0;
@@ -101,10 +98,27 @@ public class buttonLoad : MonoBehaviour
                 Debug.Log("Player is interacting with the phone.");
                 DialogueManager.instance.DialogueProgression = 2;
                 DialogueProcessor.instance.DialogueProgressionFunction();
-                
+
             }
-            
+
         }
+    }
+    public void OnWithTheShow()
+    {
+        DialogueManager.instance.currentPage = 1;
+        DialogueManager.instance.rpgText.pageToDisplay = DialogueManager.instance.currentPage;
+        if (DialogueManager.instance.dialogueNumber < DialogueManager.instance.endDialogueRange)
+        {
+            DialogueManager.instance.dialogueNumber++;
+            DialogueManager.instance.DialogueController(DialogueManager.instance.dialogueShells);
+
+        }
+        else
+        {
+            DialogueManager.instance.isEnabled = false;
+            DialogueManager.instance.ResetDialogue();
+        }
+        
     }
     
 }
