@@ -95,7 +95,7 @@ public class DialogueManager : MonoBehaviour
         isEnabled = true;
         startRange = startRangee;
         endDialogueRange = endRange;
-        dialogueNumber = 0;
+        dialogueNumber = startRangee;
         dialogueShells = dialogueSet;
         StartCoroutine(DialogueController(dialogueSet));
     }
