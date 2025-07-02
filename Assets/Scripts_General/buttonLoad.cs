@@ -63,9 +63,10 @@ public class buttonLoad : MonoBehaviour
                 }
                 else
                 {
-                    if (DialogueManager.instance.currentPage < DialogueManager.instance.rpgText.textInfo.pageCount)
+                    Debug.Log(DialogueManager.instance.rpgText.textInfo.pageCount);
+                    if (DialogueManager.instance.brokenSentence != string.Empty)
                     {
-                        DialogueManager.instance.currentPage++;
+                        DialogueManager.instance.StartDialogueController();
 
                     }
                     else
@@ -107,10 +108,10 @@ public class buttonLoad : MonoBehaviour
     {
         DialogueManager.instance.currentPage = 1;
         DialogueManager.instance.rpgText.pageToDisplay = DialogueManager.instance.currentPage;
-        if (DialogueManager.instance.dialogueNumber < DialogueManager.instance.endDialogueRange)
+        if (DialogueManager.instance.dialogueNumber < DialogueManager.instance.endDialogueRange - 1)
         {
             DialogueManager.instance.dialogueNumber++;
-            DialogueManager.instance.DialogueController(DialogueManager.instance.dialogueShells);
+            DialogueManager.instance.StartDialogueController();
 
         }
         else

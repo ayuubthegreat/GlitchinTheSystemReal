@@ -88,7 +88,8 @@ public class DialogueManager : MonoBehaviour
             personNameObject.SetActive(false);
         }
     }
-    public void StartTextBox(int seconds, int startRangee, int endRange, DialogueVault.DialogueSet[] dialogueSet) => StartCoroutine(RPGTextBox(seconds, startRangee, endRange, dialogueSet)); 
+    public void StartTextBox(int seconds, int startRangee, int endRange, DialogueVault.DialogueSet[] dialogueSet) {
+        StartCoroutine(RPGTextBox(seconds, startRangee, endRange, dialogueSet)); } 
     public IEnumerator RPGTextBox(int seconds, int startRangee, int endRange, DialogueVault.DialogueSet[] dialogueSet)
     {
         yield return new WaitForSeconds(seconds);
@@ -99,33 +100,41 @@ public class DialogueManager : MonoBehaviour
         dialogueShells = dialogueSet;
         StartCoroutine(DialogueController(dialogueSet));
     }
+    public void StartDialogueController() {
+        StopAllCoroutines();
+        StartCoroutine(DialogueController(dialogueShells));} 
     public IEnumerator DialogueController(DialogueVault.DialogueSet[] sets)
     {
         personNameText.text = sets[dialogueNumber].characterName;
         string sentence = sets[dialogueNumber].dialogueLine;
-        System.Text.StringBuilder emptySentence = new System.Text.StringBuilder();
-        isTalking = true;
-        int lastPage = 1;
-        for (int i = 0; i < sentence.Length; i++)
+        if (brokenSentence != string.Empty)
         {
+            sentence = brokenSentence;
+            brokenSentence = string.Empty;
+        }
+        isTalking = true;
+        for (int i = 0; i < sentence.Length; i++)
+        {while (!Input.GetKeyDown(KeyCode.Space))
+            {
             rpgText.text = sentence.Substring(0, i + 1);
             yield return new WaitForSeconds(dialogueSpeed);
             yield return null;
-            if (rpgText.pageToDisplay > lastPage)
-            {
-                while (!Input.GetKeyDown(KeyCode.Space))
+        } 
+        {
+                if (sentence.Length < 50)
                 {
-                    yield return null;
+                    rpgText.text = sentence;
                 }
-                lastPage = rpgText.pageToDisplay;
-            }
-            if (rpgText.textInfo.pageCount > 1)
-            {
-                while (!Input.GetKeyDown(KeyCode.Space))
+                else
                 {
-                    yield return null;
-                }
+                    rpgText.text = sentence.Substring(0, 50);
+                    brokenSentence = sentence.Substring(50, sentence.Length);
+
             }
+                
+        }
+            
+            
         }
         isTalking = false;
     }
