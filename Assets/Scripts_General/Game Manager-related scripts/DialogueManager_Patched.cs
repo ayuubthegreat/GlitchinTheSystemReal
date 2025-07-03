@@ -28,6 +28,7 @@ public class DialogueManager : MonoBehaviour
     public int endBrokenSentence = 0;
     public string brokenSentence;
     public int dialogueSpeed;
+    public int dialogueBounds;
 
     void Awake()
     {
@@ -88,21 +89,25 @@ public class DialogueManager : MonoBehaviour
             personNameObject.SetActive(false);
         }
     }
-    public void StartTextBox(int seconds, int startRangee, int endRange, DialogueVault.DialogueSet[] dialogueSet) {
-        StartCoroutine(RPGTextBox(seconds, startRangee, endRange, dialogueSet)); } 
+    public void StartTextBox(int seconds, int startRangee, int endRange, DialogueVault.DialogueSet[] dialogueSet)
+    {
+        StartCoroutine(RPGTextBox(seconds, startRangee, endRange, dialogueSet));
+    }
     public IEnumerator RPGTextBox(int seconds, int startRangee, int endRange, DialogueVault.DialogueSet[] dialogueSet)
     {
         yield return new WaitForSeconds(seconds);
         isEnabled = true;
+        UIManager.instance.startTransitions[0] = true;
         startRange = startRangee;
         endDialogueRange = endRange;
         dialogueNumber = startRangee;
         dialogueShells = dialogueSet;
-        StartCoroutine(DialogueController(dialogueSet));
     }
-    public void StartDialogueController() {
+    public void StartDialogueController()
+    {
         StopAllCoroutines();
-        StartCoroutine(DialogueController(dialogueShells));} 
+        StartCoroutine(DialogueController(dialogueShells));
+    }
     public IEnumerator DialogueController(DialogueVault.DialogueSet[] sets)
     {
         personNameText.text = sets[dialogueNumber].characterName;
@@ -113,41 +118,98 @@ public class DialogueManager : MonoBehaviour
             brokenSentence = string.Empty;
         }
         isTalking = true;
-        for (int i = 0; i < sentence.Length; i++)
-        {while (!Input.GetKeyDown(KeyCode.Space))
-            {
-            rpgText.text = sentence.Substring(0, i + 1);
-            yield return new WaitForSeconds(dialogueSpeed);
-            yield return null;
-        } 
+        GameManager.instance.playerpg.isMovable = false;
+        if (!isTalking)
         {
-                if (sentence.Length < 50)
+            yield break;
+        }
+        for (int i = 0; i < sentence.Length + 1; i++)
+        {
+
+
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log(sentence.Length);
+
+                if (sentence.Length < dialogueBounds)
                 {
                     rpgText.text = sentence;
+                    brokenSentence = string.Empty;
                 }
                 else
                 {
-                    rpgText.text = sentence.Substring(0, 50);
-                    brokenSentence = sentence.Substring(50, sentence.Length);
+                    rpgText.text = sentence.Substring(0, dialogueBounds);
+                    int newLength = sentence.Length - dialogueBounds;
+
+
+                    brokenSentence = sentence.Substring(dialogueBounds, newLength);
+
+
+                }
+                isTalking = false;
+                continue;
+            }
+            if (rpgText.text.Length < dialogueBounds - 1)
+            {
+                Debug.Log(rpgText.text.Length);
+                rpgText.text = sentence.Substring(0, i + 1);
+                yield return new WaitForSeconds(dialogueSpeed);
+                continue;
+            }
+                
+
+
+
+            if (sentence.Length < dialogueBounds)
+            {
+                rpgText.text = sentence;
+                brokenSentence = string.Empty;
+                isTalking = false;
+                break;
+            }
+            else
+            {
+                rpgText.text = sentence.Substring(0, dialogueBounds);
+                int newLength = sentence.Length - dialogueBounds;
+
+
+                brokenSentence = sentence.Substring(dialogueBounds, newLength);
+                isTalking = false;
+                break;
+
 
             }
                 
-        }
             
-            
+
+
+
+
+
         }
-        isTalking = false;
+        
+        
+        
+
     }
+
+
     public void ResetDialogue()
     {
+        GameManager.instance.playerpg.isMovable = true;
         DialogueProgression++;
         dialogueNumber = 0;
         dialogueShells = null;
         startRange = 0;
         endDialogueRange = 0;
         currentPage = 1;
+        rpgText.text = string.Empty;
+        UIManager.instance.ChangeStartTransitionsBoolArray(0, false);
+        UIManager.instance.ChangeStartTransitionsBoolArray(1, false);
+
         DialogueProcessor.instance.DialogueProgressionFunction();
     }
-
+    
     
 }

@@ -3,6 +3,8 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEditorInternal;
+using System.Linq;
 
 public class UIManager : MonoBehaviour
 {
@@ -25,6 +27,7 @@ public class UIManager : MonoBehaviour
     public bool start = false;
     public bool isDead = false;
     public bool isAlive = true;
+    public bool[] startTransitions;
 
     void Awake()
     {
@@ -48,6 +51,7 @@ public class UIManager : MonoBehaviour
             abdurahmanHealthScreen = GameObject.Find("abdurahmanplayerhealth");
 
         ScreenControls();
+
     }
 
     void Start()
@@ -59,6 +63,12 @@ public class UIManager : MonoBehaviour
         fadeNums = 2;
         location = "Abdurahman's House";
         canTransition = true;
+        startTransitions = new bool[] {
+            // Start of RPG Text Box
+            false,
+            // Start of Person Name Text
+            false,
+        };
     }
 
     void Update()
@@ -177,4 +187,18 @@ public class UIManager : MonoBehaviour
         }
     }
     public void SetLocation(string newLocation) => location = newLocation;
+    public void ChangeStartTransitionsBool(int initialValue)
+    {
+        UIManager.instance.startTransitions[initialValue] = true;
+    }
+    public void ChangeStartTransitionsBoolArray(int initialValue, bool boolValue)
+    {
+        for (int i = 0; i < startTransitions.Length; i++)
+        {
+            if (initialValue == i)
+            {
+                startTransitions[i] = boolValue;
+            }
+        }
+    }
 }

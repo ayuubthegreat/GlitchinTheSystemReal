@@ -57,13 +57,7 @@ public class buttonLoad : MonoBehaviour
                 warningScreen.SetActive(false);
                 break;
             case ButtonType.Next:
-                if (DialogueManager.instance.rpgText.textInfo.pageCount == 1)
-                {
-                    OnWithTheShow();
-                }
-                else
-                {
-                    Debug.Log(DialogueManager.instance.rpgText.textInfo.pageCount);
+                    Debug.Log(DialogueManager.instance.brokenSentence);
                     if (DialogueManager.instance.brokenSentence != string.Empty)
                     {
                         DialogueManager.instance.StartDialogueController();
@@ -73,10 +67,10 @@ public class buttonLoad : MonoBehaviour
                     {
                         OnWithTheShow();
                     }
-
-                }
-
                 break;
+                
+
+                
             case ButtonType.Phone:
 
                 HandlePhoneInteraction();

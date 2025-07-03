@@ -31,7 +31,7 @@ public class fadebase : MonoBehaviour
             UIManager.instance.canTransition = false;
         }
     }
-    
+
     public void Update()
     {
         anim.SetBool("canMove", UIManager.instance.canTransition);

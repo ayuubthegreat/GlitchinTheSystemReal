@@ -21,6 +21,7 @@ public class PlayerPhone : MonoBehaviour
             anim.SetBool("isSurprised", DialogueProcessor.instance.expressions[1]);
             anim.SetBool("isThinkingFace", DialogueProcessor.instance.faces[0]);
             anim.SetBool("isSurprisedFace", DialogueProcessor.instance.faces[1]);
+            anim.SetBool("isTalking", DialogueManager.instance.isTalking);
         }
         else
         {
