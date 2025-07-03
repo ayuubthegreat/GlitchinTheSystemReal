@@ -12,6 +12,6 @@ public class mouthAnimScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        anim.SetBool("isTalking", DialogueManager.instance.isTalking);
+        anim.SetBool("isTalking", DialogueManager.instance.playersTalking[0]);
     }
 }

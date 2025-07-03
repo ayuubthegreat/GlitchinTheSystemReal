@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework.Constraints;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,10 +25,11 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI personNameText;
     public bool isEnabled = false;
     public bool isTalking = false;
+    public bool[] playersTalking;
     public int startBrokenSentence = 0;
     public int endBrokenSentence = 0;
     public string brokenSentence;
-    public int dialogueSpeed;
+    public float dialogueSpeed;
     public int dialogueBounds;
 
     void Awake()
@@ -47,7 +49,12 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueVault = GetComponent<DialogueVault>();
 
-
+        playersTalking = new bool[] {
+            // Player 1 (usually Abdurahman)
+            false,
+            // Player 2 (the other person Abdurahman is speaking to)
+            false,
+        };
         // DialogueProgression = 0;
 
         if (rpgTextObject == null)
@@ -110,19 +117,19 @@ public class DialogueManager : MonoBehaviour
     }
     public IEnumerator DialogueController(DialogueVault.DialogueSet[] sets)
     {
+        isTalking = true;
         personNameText.text = sets[dialogueNumber].characterName;
+        TalkingStick(sets[dialogueNumber].characterName);
+
         string sentence = sets[dialogueNumber].dialogueLine;
+        rpgText.text = string.Empty;
         if (brokenSentence != string.Empty)
         {
             sentence = brokenSentence;
             brokenSentence = string.Empty;
         }
-        isTalking = true;
+        
         GameManager.instance.playerpg.isMovable = false;
-        if (!isTalking)
-        {
-            yield break;
-        }
         for (int i = 0; i < sentence.Length + 1; i++)
         {
 
@@ -130,6 +137,7 @@ public class DialogueManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                TalkingStick("0");
                 Debug.Log(sentence.Length);
 
                 if (sentence.Length < dialogueBounds)
@@ -147,25 +155,23 @@ public class DialogueManager : MonoBehaviour
 
 
                 }
-                isTalking = false;
-                continue;
+                
+                break;
             }
             if (rpgText.text.Length < dialogueBounds - 1)
             {
                 Debug.Log(rpgText.text.Length);
-                rpgText.text = sentence.Substring(0, i + 1);
+                rpgText.text = sentence.Substring(0, i);
                 yield return new WaitForSeconds(dialogueSpeed);
                 continue;
             }
-                
-
-
-
+            else
+            {
+                TalkingStick("0");
             if (sentence.Length < dialogueBounds)
             {
                 rpgText.text = sentence;
                 brokenSentence = string.Empty;
-                isTalking = false;
                 break;
             }
             else
@@ -175,11 +181,17 @@ public class DialogueManager : MonoBehaviour
 
 
                 brokenSentence = sentence.Substring(dialogueBounds, newLength);
-                isTalking = false;
+                
                 break;
 
 
+            } 
             }
+            
+
+
+
+            
                 
             
 
@@ -210,6 +222,23 @@ public class DialogueManager : MonoBehaviour
 
         DialogueProcessor.instance.DialogueProgressionFunction();
     }
-    
+    public void TalkingStick(string characterName)
+    {
+        switch(characterName) {
+            case "Abdurahman":
+                playersTalking[0] = true;
+                break;
+            case "Yasir":
+                playersTalking[1] = true;
+                break;
+            // Add more cases as needed
+            default:
+                for (int i = 0; i < playersTalking.Length; i++)
+                {
+                    playersTalking[i] = false;
+                }
+                break;
+        }
+    }
     
 }
