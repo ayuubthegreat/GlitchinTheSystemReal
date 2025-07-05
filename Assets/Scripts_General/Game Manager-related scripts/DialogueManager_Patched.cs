@@ -128,8 +128,12 @@ public class DialogueManager : MonoBehaviour
             sentence = brokenSentence;
             brokenSentence = string.Empty;
         }
-        
+
         GameManager.instance.playerpg.isMovable = false;
+        if (!isTalking)
+        {
+            yield break;
+        }
         for (int i = 0; i < sentence.Length + 1; i++)
         {
 
@@ -137,7 +141,8 @@ public class DialogueManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                TalkingStick("0");
+                isTalking = false;
+                ResetTalkingStick();
                 Debug.Log(sentence.Length);
 
                 if (sentence.Length < dialogueBounds)
@@ -155,7 +160,7 @@ public class DialogueManager : MonoBehaviour
 
 
                 }
-                
+
                 break;
             }
             if (rpgText.text.Length < dialogueBounds - 1)
@@ -167,42 +172,43 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                TalkingStick("0");
-            if (sentence.Length < dialogueBounds)
-            {
-                rpgText.text = sentence;
-                brokenSentence = string.Empty;
-                break;
+                isTalking = false;
+                ResetTalkingStick();
+                if (sentence.Length < dialogueBounds)
+                {
+                    rpgText.text = sentence;
+                    brokenSentence = string.Empty;
+                    break;
+                }
+                else
+                {
+                    rpgText.text = sentence.Substring(0, dialogueBounds);
+                    int newLength = sentence.Length - dialogueBounds;
+
+
+                    brokenSentence = sentence.Substring(dialogueBounds, newLength);
+
+                    break;
+
+
+                }
             }
-            else
-            {
-                rpgText.text = sentence.Substring(0, dialogueBounds);
-                int newLength = sentence.Length - dialogueBounds;
-
-
-                brokenSentence = sentence.Substring(dialogueBounds, newLength);
-                
-                break;
-
-
-            } 
-            }
-            
 
 
 
-            
-                
-            
+
+
+
+
 
 
 
 
 
         }
-        
-        
-        
+
+
+
 
     }
 
@@ -219,12 +225,14 @@ public class DialogueManager : MonoBehaviour
         rpgText.text = string.Empty;
         UIManager.instance.ChangeStartTransitionsBoolArray(0, false);
         UIManager.instance.ChangeStartTransitionsBoolArray(1, false);
+        ResetTalkingStick();
 
         DialogueProcessor.instance.DialogueProgressionFunction();
     }
     public void TalkingStick(string characterName)
     {
-        switch(characterName) {
+        switch (characterName)
+        {
             case "Abdurahman":
                 playersTalking[0] = true;
                 break;
@@ -233,12 +241,16 @@ public class DialogueManager : MonoBehaviour
                 break;
             // Add more cases as needed
             default:
-                for (int i = 0; i < playersTalking.Length; i++)
+
+                break;
+        }
+    }
+    public void ResetTalkingStick()
+    {
+        for (int i = 0; i < playersTalking.Length; i++)
                 {
                     playersTalking[i] = false;
                 }
-                break;
-        }
     }
     
 }

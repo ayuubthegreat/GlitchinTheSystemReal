@@ -104,7 +104,8 @@ public class door : MonoBehaviour
             audioSource.clip = GameManager.instance.cameraControllerRPG.clipOld;
             audioSource.Play();
             UIManager.instance.location = newLocationName;
-            UIManager.instance.canTransition = true;
+            StopAllCoroutines();
+            UIManager.instance.StartChangeTransitionBools();
 
         }
         GameManager.instance.iswalkingdoor = false;

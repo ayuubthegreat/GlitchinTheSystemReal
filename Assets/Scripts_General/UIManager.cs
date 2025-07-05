@@ -62,13 +62,16 @@ public class UIManager : MonoBehaviour
         }
         fadeNums = 2;
         location = "Abdurahman's House";
-        canTransition = true;
+        
         startTransitions = new bool[] {
             // Start of RPG Text Box
             false,
             // Start of Person Name Text
             false,
+            // Start of Location Announcer
+            false,
         };
+        StartCoroutine(ChangeTransitionBools());
     }
 
     void Update()
@@ -173,7 +176,7 @@ public class UIManager : MonoBehaviour
         isDead = isDeadinner;
         isAlive = !isDeadinner;
     }
-    public void SetStartBool(int value) => UIManager.instance.start = value == 1 ? true : false;
+    public void SetStartBool(int value) => start = value == 1 ? true : false;
     public void SetCanTransitionBool(bool value)
     {
         canTransition = value;
@@ -189,7 +192,7 @@ public class UIManager : MonoBehaviour
     public void SetLocation(string newLocation) => location = newLocation;
     public void ChangeStartTransitionsBool(int initialValue)
     {
-        UIManager.instance.startTransitions[initialValue] = true;
+        startTransitions[initialValue] = true;
     }
     public void ChangeStartTransitionsBoolArray(int initialValue, bool boolValue)
     {
@@ -201,4 +204,18 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+    public IEnumerator ChangeTransitionBools()
+    {
+        
+        
+        startTransitions[2] = true;
+        canTransition = true;
+        yield return new WaitForSeconds(.3f);
+        startTransitions[2] = false;
+        yield break;
+
+        
+       
+    }
+    public void StartChangeTransitionBools() => StartCoroutine(ChangeTransitionBools());
 }

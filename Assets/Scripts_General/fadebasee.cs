@@ -16,10 +16,12 @@ public class fadebase : MonoBehaviour
     }
     public IEnumerator ChangeTransitionBoolTimer()
     {
+       
         UIManager.instance.canTransition = false;
         yield return new WaitForSeconds(moveDuration);
         UIManager.instance.canTransition = true;
     }
+    
     public void ChangeTransitionBool(int value)
     {
         if (value == 1)
@@ -29,12 +31,14 @@ public class fadebase : MonoBehaviour
         else
         {
             UIManager.instance.canTransition = false;
+            UIManager.instance.startTransitions[2] = false;
         }
     }
 
     public void Update()
     {
         anim.SetBool("canMove", UIManager.instance.canTransition);
+        anim.SetBool("canStartMoving", UIManager.instance.startTransitions[2]);
     }
 
 
