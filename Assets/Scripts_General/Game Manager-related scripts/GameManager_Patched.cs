@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
             startSpawnBool = false;
             isDonewithPlatforming = false;
         }
-        if (DialogueManager.instance.DialogueProgression < 3)
+        if (DialogueManager.instance.DialogueProgression <= 3)
         {
             mainMap.SetActive(false);
             playerHouse.SetActive(true);

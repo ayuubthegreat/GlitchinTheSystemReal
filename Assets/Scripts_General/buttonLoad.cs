@@ -35,19 +35,23 @@ public class buttonLoad : MonoBehaviour
 
     public void buttonLoader()
     {
+        for (int i = 0; i < UIManager.instance.MainMenuTransitions.Length; i++)
+        {
+            UIManager.instance.MainMenuTransitions[i] = false;
+        }
         switch (buttonType)
         {
             case ButtonType.SaveFile:
                 if (SaveFileFound)
-                    SceneManager.LoadScene(sceneName);
+                    UIManager.instance.MainMenuTransitions[1] = true;
                 else
-                    warningScreen.SetActive(true);
+                    UIManager.instance.MainMenuTransitions[2] = true;
                 break;
             case ButtonType.Options:
                 optionsScreen.SetActive(true);
                 break;
             case ButtonType.Start:
-                saveFileScreen.SetActive(true);
+                UIManager.instance.MainMenuTransitions[0] = true;
                 break;
             case ButtonType.Back:
                 saveFileScreen.SetActive(false);
@@ -57,20 +61,20 @@ public class buttonLoad : MonoBehaviour
                 warningScreen.SetActive(false);
                 break;
             case ButtonType.Next:
-                    Debug.Log(DialogueManager.instance.brokenSentence);
-                    if (DialogueManager.instance.brokenSentence != string.Empty)
-                    {
-                        DialogueManager.instance.StartDialogueController();
+                Debug.Log(DialogueManager.instance.brokenSentence);
+                if (DialogueManager.instance.brokenSentence != string.Empty)
+                {
+                    DialogueManager.instance.StartDialogueController();
 
-                    }
-                    else
-                    {
-                        OnWithTheShow();
-                    }
+                }
+                else
+                {
+                    OnWithTheShow();
+                }
                 break;
-                
 
-                
+
+
             case ButtonType.Phone:
 
                 HandlePhoneInteraction();

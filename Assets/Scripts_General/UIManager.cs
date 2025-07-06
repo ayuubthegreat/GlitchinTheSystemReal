@@ -5,29 +5,54 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEditorInternal;
 using System.Linq;
-
+public enum MainScreens{
+RPG,
+Platforming,
+mainMenu,
+}
 public class UIManager : MonoBehaviour
 {
+
     public static UIManager instance;
+    [Header("Audio Source(s)")]
+    public AudioSource source;
+    [Header("Audio")]
+    public AudioClip mainMenuMusic;
+    [Header("Texts")]
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI warningText;
+    [Header("Fade-related Material")]
     public string location;
-    public GameObject warningScreen;
+    public float fadeNums;
     public bool canTransition;
-
+    public bool startFader;
+    public int fadeNumPeriod;
+    public bool[] startTransitions;
+    public int logoTransitions = 0;
+    [Header("Screens")]
+    public GameObject warningScreen;
     public GameObject coinsScreen;
     public GameObject livesScreen;
     public GameObject abdurahmanHealthScreen;
-    public float fadeNums;
+    public GameObject phone;
+    public GameObject dialogueScreen;
+    public GameObject mainMenu;
+
     public GameObject fade;
 
-    public bool startFader;
-    public int fadeNumPeriod;
+    [Header("Player States")]
     public bool start = false;
     public bool isDead = false;
     public bool isAlive = true;
-    public bool[] startTransitions;
+    [Header("Miscellanous States")]
+    public bool logosAreDone = false;
+    public bool startButton;
+    public bool filefound;
+    public bool warningScreenEnabled;
+    public bool[] MainMenuTransitions;
+    public string streetName;
+
 
     void Awake()
     {
@@ -50,7 +75,7 @@ public class UIManager : MonoBehaviour
         if (abdurahmanHealthScreen == null)
             abdurahmanHealthScreen = GameObject.Find("abdurahmanplayerhealth");
 
-        ScreenControls();
+
 
     }
 
@@ -62,7 +87,14 @@ public class UIManager : MonoBehaviour
         }
         fadeNums = 2;
         location = "Abdurahman's House";
-        
+        MainMenuTransitions = new bool[] {
+            // Start Button Bool
+            false,
+            // Save File Found
+            false,
+            // Warning Screen Enabled
+            false,
+        };
         startTransitions = new bool[] {
             // Start of RPG Text Box
             false,
@@ -71,12 +103,18 @@ public class UIManager : MonoBehaviour
             // Start of Location Announcer
             false,
         };
+
+        CheckForGameState();
+        ScreenControls();
         StartCoroutine(ChangeTransitionBools());
+        source.clip = null;
     }
 
     void Update()
     {
-        if (GameManager.instance?.player != null)
+        CheckForGameState();
+
+        if (MainScreens.Platforming == currentScreen)
         {
             if (coinsText != null)
                 coinsText.text = GameManager.instance.player.coinNumbers.ToString();
@@ -87,8 +125,8 @@ public class UIManager : MonoBehaviour
 
     public void ScreenControls()
     {
-        var player = GameManager.instance?.player;
-        if (player != null)
+
+        if (currentScreen == MainScreens.Platforming)
         {
             if (coinsScreen != null) coinsScreen.SetActive(true);
             if (livesScreen != null) livesScreen.SetActive(true);
@@ -96,12 +134,20 @@ public class UIManager : MonoBehaviour
             if (abdurahmanHealthScreen != null) abdurahmanHealthScreen.SetActive(true);
             Debug.Log("The Screen Controller works.");
         }
+        else if (currentScreen == MainScreens.RPG)
+        {
+            phone.SetActive(true);
+        }
+        else if (currentScreen == MainScreens.mainMenu)
+        {
+            phone.SetActive(false);
+            dialogueScreen.SetActive(false);
+        }
         else
         {
-            if (coinsScreen != null) coinsScreen.SetActive(false);
-            if (livesScreen != null) livesScreen.SetActive(false);
-            if (abdurahmanHealthScreen != null) abdurahmanHealthScreen.SetActive(false);
+
         }
+
     }
 
     public void FadeController(int seconds)
@@ -206,16 +252,47 @@ public class UIManager : MonoBehaviour
     }
     public IEnumerator ChangeTransitionBools()
     {
-        
-        
+
+
         startTransitions[2] = true;
         canTransition = true;
         yield return new WaitForSeconds(.3f);
         startTransitions[2] = false;
         yield break;
 
-        
-       
+
+
     }
     public void StartChangeTransitionBools() => StartCoroutine(ChangeTransitionBools());
+    public MainScreens currentScreen;
+
+    public void CheckForGameState()
+    {
+        if (GameManager.instance.player == null && GameManager.instance.playerpg != null)
+        {
+            currentScreen = MainScreens.RPG;
+        }
+        else if (GameManager.instance.player != null && GameManager.instance.playerpg == null)
+        {
+            currentScreen = MainScreens.Platforming;
+        }
+        else if (GameManager.instance.player == null && GameManager.instance.playerpg == null)
+        {
+            currentScreen = MainScreens.mainMenu;
+        }
+    }
+    public void toPlayMainMenu() => StartCoroutine(PlayMainMenu());
+    public IEnumerator PlayMainMenu()
+    {
+        GameObject logoScreen = GameObject.Find("LogoImages");
+        source.clip = mainMenuMusic;
+        source.Play();
+        yield return new WaitForSeconds(2);
+        
+        logoScreen.SetActive(false);
+        mainMenu.SetActive(true);
+        yield return new WaitForSeconds(7);
+        StartChangeTransitionBools();
+    }
+    
 }
