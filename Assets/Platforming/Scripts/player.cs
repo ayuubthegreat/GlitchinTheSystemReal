@@ -291,8 +291,8 @@ GameManager.instance.NewPlayeronTheBlock(this);
     }
     private void WallSlide()
     {
-        bool canWallSlide = isTouchingWall && yInput < 0;
-        float yModifier = yInput < 0 ? 1 : .3f;
+        bool canWallSlide = isTouchingWall && rb.linearVelocity.y < 0 && xInput < 0;
+        float yModifier = yInput < 0 ? .1f : .3f;
         if (!canWallSlide)
         {
             return;
