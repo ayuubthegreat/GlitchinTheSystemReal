@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework.Constraints;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -57,13 +58,16 @@ public class DialogueManager : MonoBehaviour
         };
         // DialogueProgression = 0;
 
-        if (rpgTextObject == null)
+        if (rpgTextObject == null && UIManager.instance.currentScreen == MainScreens.RPG)
         {
             rpgTextObject = GameObject.Find("rpgText");
+            rpgTextObject.SetActive(false);
+        
         }
-        if (personNameObject == null)
+        if (personNameObject == null && UIManager.instance.currentScreen == MainScreens.RPG)
         {
             personNameObject = GameObject.Find("personNameText");
+            personNameObject.SetActive(false);
         }
 
         if (rpgText == null && rpgTextObject != null)
@@ -80,12 +84,15 @@ public class DialogueManager : MonoBehaviour
             StartTextBox(3, 0, 1, dialogueVault.dialogueSets[0]);
         }
 
+        
+
     }
 
     void Update()
     {
-
-        if (isEnabled)
+        if (GameManager.instance.playerpg != null)
+        {
+          if (isEnabled)
         {
             if (rpgTextObject != null) rpgTextObject.SetActive(true);
             if (personNameObject != null) personNameObject.SetActive(true);
@@ -94,7 +101,9 @@ public class DialogueManager : MonoBehaviour
         {
             rpgTextObject.SetActive(false);
             personNameObject.SetActive(false);
+        }  
         }
+        
     }
     public void StartTextBox(int seconds, int startRangee, int endRange, DialogueVault.DialogueSet[] dialogueSet)
     {

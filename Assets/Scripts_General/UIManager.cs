@@ -31,7 +31,6 @@ public class UIManager : MonoBehaviour
     public bool[] startTransitions;
     public int logoTransitions = 0;
     [Header("Screens")]
-    public GameObject warningScreen;
     public GameObject coinsScreen;
     public GameObject livesScreen;
     public GameObject abdurahmanHealthScreen;
@@ -49,7 +48,6 @@ public class UIManager : MonoBehaviour
     public bool logosAreDone = false;
     public bool startButton;
     public bool filefound;
-    public bool warningScreenEnabled;
     public bool[] MainMenuTransitions;
     public string streetName;
 
@@ -70,8 +68,6 @@ public class UIManager : MonoBehaviour
 
         if (livesScreen == null)
             livesScreen = GameObject.Find("livesUI");
-        if (warningScreen == null)
-            warningScreen = GameObject.Find("warningScreen");
         if (abdurahmanHealthScreen == null)
             abdurahmanHealthScreen = GameObject.Find("abdurahmanplayerhealth");
 
@@ -130,7 +126,6 @@ public class UIManager : MonoBehaviour
         {
             if (coinsScreen != null) coinsScreen.SetActive(true);
             if (livesScreen != null) livesScreen.SetActive(true);
-            if (warningScreen != null) warningScreen.SetActive(false);
             if (abdurahmanHealthScreen != null) abdurahmanHealthScreen.SetActive(true);
             Debug.Log("The Screen Controller works.");
         }
@@ -194,11 +189,7 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("This function was called.");
 
-        if (warningScreen != null && warningText != null)
-        {
-            warningScreen.SetActive(true);
-            warningText.text = "Teleporting to rpgScene1";
-        }
+        
 
         if (GameManager.instance != null)
         {
@@ -208,10 +199,7 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
 
-        if (warningScreen != null)
-            warningScreen.SetActive(false);
-
-        SceneManager.LoadScene("rpgScene1");
+        SceneManager.LoadScene("ManicMinnesotaRPGScene");
     }
     public void SetStartBool()
     {
@@ -271,14 +259,22 @@ public class UIManager : MonoBehaviour
         if (GameManager.instance.player == null && GameManager.instance.playerpg != null)
         {
             currentScreen = MainScreens.RPG;
+            phone = FindAnyObjectByType<PlayerPhonePhysical>().gameObject;
         }
         else if (GameManager.instance.player != null && GameManager.instance.playerpg == null)
         {
             currentScreen = MainScreens.Platforming;
+            coinsScreen = GameObject.Find("coinsScreen");
+            livesScreen = GameObject.Find("livesScreen");
+            abdurahmanHealthScreen = GameObject.Find("abdurahmanHealthScreen");
+            coinsScreen.SetActive(true);
+            livesScreen.SetActive(true);
+            abdurahmanHealthScreen.SetActive(true);
         }
         else if (GameManager.instance.player == null && GameManager.instance.playerpg == null)
         {
             currentScreen = MainScreens.mainMenu;
+            
         }
     }
     public void toPlayMainMenu() => StartCoroutine(PlayMainMenu());
@@ -291,7 +287,7 @@ public class UIManager : MonoBehaviour
         
         logoScreen.SetActive(false);
         mainMenu.SetActive(true);
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(3);
         StartChangeTransitionBools();
     }
     

@@ -41,6 +41,7 @@ public class player : MonoBehaviour
     [SerializeField] private float wallJumpDuration = .6f;
     [SerializeField] private Vector2 wallJumpForce;
     private bool isWallMoving = false;
+    public bool canWallSlide;
     [Header("Double Jump")]
     public bool canDoubleJump;
     [SerializeField] private float doubleJumpForce = 20;
@@ -62,7 +63,7 @@ public class player : MonoBehaviour
     [Header("Dash")]
     public float dashDuration = 0.5f;
     public Vector2 dashPower;
-    public bool canDash;
+    public bool canDash = true;
     public bool isDashing;
     [Header("Layer Masks")]
     [SerializeField] private LayerMask whatIsGround;
@@ -78,14 +79,16 @@ public class player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
-if (GameManager.instance != null) {
-GameManager.instance.NewPlayeronTheBlock(this);
-}
+
         
         
     }
     void Start()
     {
+        if (GameManager.instance.player == null && GameManager.instance.playerpg == null)
+        {
+            GameManager.instance.player = gameObject.GetComponent<player>();
+        } 
         if (GameManager.instance.startSpawnBoolPlatforming)
         {
             transform.position = GameManager.instance.startSpawnPlatforming.transform.position;
@@ -147,6 +150,7 @@ GameManager.instance.NewPlayeronTheBlock(this);
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
         isTouchingWall = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
         isDead = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsDeadZone);
+        canWallSlide = isTouchingWall && rb.linearVelocity.y < 0;
 
         bool coyoteJumpAvailable = Time.time < coyoteJumpActivated + coyoteJumpWindow;
         if (Input.GetKeyDown(KeyCode.Space))
@@ -291,16 +295,15 @@ GameManager.instance.NewPlayeronTheBlock(this);
     }
     private void WallSlide()
     {
-        bool canWallSlide = isTouchingWall && yInput < 0;
-        float yModifier = yInput < 0 ? 1 : .3f;
         if (!canWallSlide)
         {
             return;
         }
-        if (isTouchingWall && rb.linearVelocity.y < 0)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * yModifier);
-        }
+        float yModifier = yInput < 0 ? .15f : .3f;
+        
+        
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * yModifier);
+        
     }
     private void UpdateAirbornStatus()
     {

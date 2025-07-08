@@ -22,6 +22,7 @@ public class fadebase : MonoBehaviour
     {
         if (MainScreens.mainMenu == UIManager.instance.currentScreen && UIManager.instance.logoTransitions >= logoNumLimit)
         {
+            logoNumLimit = 0;
             Destroy(gameObject);
 
         }
@@ -70,9 +71,7 @@ public class fadebase : MonoBehaviour
     {
         anim.SetBool("canMove", UIManager.instance.canTransition);
         anim.SetBool("canStartMoving", UIManager.instance.startTransitions[2]);
-        anim.SetBool("startButton", UIManager.instance.MainMenuTransitions[0]);
-        anim.SetBool("saveFileFound", UIManager.instance.MainMenuTransitions[1]);
-        anim.SetBool("warningScreen", UIManager.instance.MainMenuTransitions[2]);
+        
 
     }
 

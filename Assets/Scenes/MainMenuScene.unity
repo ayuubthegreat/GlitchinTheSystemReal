@@ -278,13 +278,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 266088815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 320d8ac57703bce42a42c6ea6b651c6a, type: 3}
+  m_Script: {fileID: 11500000, guid: dc4ae5eba4d727e4086515e6fbbdac93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveDuration: 2
   logoDuration: 2
   logoNumLimit: 2
-  anim: {fileID: 266088818}
+  anim: {fileID: 0}
   sceneName: 
 --- !u!95 &266088818
 Animator:
@@ -609,7 +609,7 @@ GameObject:
   - component: {fileID: 1000995988}
   - component: {fileID: 1000995987}
   - component: {fileID: 1000995986}
-  - component: {fileID: 1000995985}
+  - component: {fileID: 1000995989}
   m_Layer: 5
   m_Name: MainMenuScreen
   m_TagString: Untagged
@@ -639,23 +639,6 @@ RectTransform:
   m_AnchoredPosition: {x: -44.09253, y: 141.25488}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1000995985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000995983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 320d8ac57703bce42a42c6ea6b651c6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveDuration: 2
-  logoDuration: 2
-  logoNumLimit: 4
-  anim: {fileID: 0}
-  sceneName: ManicMinnesotaRPGScene
 --- !u!95 &1000995986
 Animator:
   serializedVersion: 7
@@ -716,6 +699,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000995983}
   m_CullTransparentMesh: 1
+--- !u!114 &1000995989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000995983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b95de54b091354287d1c4337c0f52f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDuration: 2
+  logoDuration: 2
+  logoNumLimit: 4
+  anim: {fileID: 1000995986}
+  sceneName: ManicMinnesotaRPGScene
+  button: {fileID: 1948816601}
+  buttonFaderStart: 0
 --- !u!1 &1174498965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,7 +1271,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1513078282}
   - component: {fileID: 1513078284}
-  - component: {fileID: 1513078283}
   m_Layer: 0
   m_Name: logo1_0
   m_TagString: Untagged
@@ -1296,25 +1297,6 @@ RectTransform:
   m_AnchoredPosition: {x: -38, y: 91}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1513078283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513078281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40b95de54b091354287d1c4337c0f52f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveDuration: 2
-  logoDuration: 2
-  logoNumLimit: 4
-  anim: {fileID: 0}
-  sceneName: 
-  button: {fileID: 0}
-  buttonFaderStart: 0
 --- !u!222 &1513078284
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1335,6 +1317,10 @@ PrefabInstance:
       propertyPath: source
       value: 
       objectReference: {fileID: 1174498970}
+    - target: {fileID: 103523432012286817, guid: 0159be88d5d57bf4ab684c709b71edc4, type: 3}
+      propertyPath: mainMenu
+      value: 
+      objectReference: {fileID: 1000995983}
     - target: {fileID: 1067073246516206669, guid: 0159be88d5d57bf4ab684c709b71edc4, type: 3}
       propertyPath: m_Name
       value: GameManager

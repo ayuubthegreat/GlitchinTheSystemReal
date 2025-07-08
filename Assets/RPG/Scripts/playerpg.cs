@@ -39,13 +39,17 @@ if (GameManager.instance != null) {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         isMovable = true;
+        if (GameManager.instance.playerpg == null && GameManager.instance.player == null)
+        {
+            GameManager.instance.playerpg = gameObject.GetComponent<playerpg>();
+        }
         if (GameManager.instance.isDonewithPlatforming)
         {
             transform.position = GameManager.instance.phoneBoothSpawn;
         }
         else
         {
-           transform.position = GameManager.instance.startSpawnRPG.transform.position; 
+            transform.position = GameManager.instance.startSpawnRPG.transform.position;
         }
         
         

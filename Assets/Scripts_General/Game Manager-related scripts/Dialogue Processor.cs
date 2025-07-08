@@ -72,6 +72,7 @@ public class DialogueProcessor : MonoBehaviour
             GameManager.instance.outsideDoorSpawnObject = GameManager.instance.doorSpawn.transform.position;
 
         }
+        
     }
     public void Update()
     {

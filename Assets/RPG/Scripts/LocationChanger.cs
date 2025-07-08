@@ -9,6 +9,7 @@ public class LocationChanger : MonoBehaviour
     public BoxCollider2D b2d;
     public string backLocation;
     public string frontLocation;
+    public bool showLocationSlider = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,7 +24,7 @@ public class LocationChanger : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision) {
         playerpg player = collision.gameObject.GetComponent<playerpg>();
-        if (player) {
+        if (player && showLocationSlider) {
             if (player.yInput == 1) {
                 UIManager.instance.location = backLocation;
             } else if (player.yInput == -1) {

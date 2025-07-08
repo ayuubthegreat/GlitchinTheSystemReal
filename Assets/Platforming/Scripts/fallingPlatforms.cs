@@ -26,7 +26,7 @@ public class fallingPlatforms : MonoBehaviour
     }
     void Start()
     {
-        randomDelay = Random.Range(0, 1); 
+        randomDelay = Random.Range(0f, 1f); 
         SetUpWayPoints();
        
 
