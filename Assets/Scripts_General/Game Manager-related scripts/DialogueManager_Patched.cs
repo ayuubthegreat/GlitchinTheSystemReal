@@ -106,6 +106,7 @@ public class DialogueManager : MonoBehaviour
                 Debug.LogWarning("Dialogue at index " + dialogueNumber + " is null.");
                 return;
             }
+            StopAllCoroutines();
             StartRPGTextScroll(dialogueArr);
 
             personNameText.text = dialogueArr[dialogueNumber].characterName;

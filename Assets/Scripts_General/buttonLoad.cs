@@ -69,8 +69,11 @@ public class buttonLoad : MonoBehaviour
                     {
                         DialogueManager.instance.currentPage++;
                         DialogueManager.instance.rpgText.pageToDisplay = DialogueManager.instance.currentPage;
-                    } else {
-                      DialogueManager.instance.currentPage = 1;
+                        DialogueManager.instance.StartRPGTextScroll(DialogueManager.instance.dialogueShells);
+                    }
+                    else
+                    {
+                        DialogueManager.instance.currentPage = 1;
                         DialogueManager.instance.rpgText.pageToDisplay = DialogueManager.instance.currentPage;
                         if (DialogueManager.instance.dialogueNumber < DialogueManager.instance.endDialogueRange)
                         {
@@ -78,7 +81,7 @@ public class buttonLoad : MonoBehaviour
                         }
                     }
                 }
-                DialogueManager.instance.DialogueController(DialogueManager.instance.dialogueShells);
+               
                 break;
             case ButtonType.Phone:
 
