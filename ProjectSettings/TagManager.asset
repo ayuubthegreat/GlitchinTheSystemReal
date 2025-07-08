@@ -12,7 +12,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - ground
   - 
   - 
   - 
@@ -50,6 +50,9 @@ TagManager:
     locked: 0
   - name: door
     uniqueID: 1624259077
+    locked: 0
+  - name: traps
+    uniqueID: 1541418519
     locked: 0
   - name: house
     uniqueID: 2059063379

@@ -28,11 +28,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.2, y: 4.6, z: 0}
-  m_LocalScale: {x: 0.5227, y: 0.5227, z: 0.5227}
+  m_LocalScale: {x: 1.0262692, y: 1.0262692, z: 1.0262692}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6755316365404730307}
-  - {fileID: 7649671428213247142}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3410341610950857608
@@ -76,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1704146037
-  m_SortingLayer: 5
+  m_SortingLayerID: 2059063379
+  m_SortingLayer: 4
   m_SortingOrder: 2
   m_Sprite: {fileID: 229992989312293679, guid: 7bb5c803ed695ca4498e4622e6929e73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -227,17 +226,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 2746570360344883073}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec8e5914f891910459e843784088a52c, type: 3}
+  m_Script: {fileID: 11500000, guid: a189cd4358c81d24d8dc1c29d937da38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: homemap1
+  scene: 
+  teleportationPoint: {fileID: 0}
+  mainMap: {fileID: 0}
+  houseMap: {fileID: 0}
+  newLocationName: 
   yInputNum: 0
   xInputNum: 0
-  facingDir: 1
+  facingDir: 0
   isTouchingPlayer: 0
-  anim: {fileID: 6335818451227590389}
-  seconds2Wait: 1
+  anim: {fileID: 0}
+  seconds2Wait: 0
   canNotBeASpawnPoint: 0
+  audioSource: {fileID: 0}
+  clipNew: {fileID: 0}
 --- !u!95 &6335818451227590389
 Animator:
   serializedVersion: 7
@@ -302,7 +307,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -401005011
-  m_SortingLayer: -1
+  m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 229992989312293679, guid: ffa5e13807c50b24e91ec73f0980023a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -361,65 +366,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 3.7423081, y: 20}
   m_EdgeRadius: 0
---- !u!1001 &7512420942259807757
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 433971119048054085}
-    m_Modifications:
-    - target: {fileID: 173508059791026859, guid: 874de762ffdb9ac4b8d8d6dac4361ffe, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 173508059791026859, guid: 874de762ffdb9ac4b8d8d6dac4361ffe, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -9.55
-      objectReference: {fileID: 0}
-    - target: {fileID: 173508059791026859, guid: 874de762ffdb9ac4b8d8d6dac4361ffe, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 173508059791026859, guid: 874de762ffdb9ac4b8d8d6dac4361ffe, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 173508059791026859, guid: 874de762ffdb9ac4b8d8d6dac4361ffe, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 173508059791026859, guid: 874de762ffdb9ac4b8d8d6dac4361ffe, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 173508059791026859, guid: 874de762ffdb9ac4b8d8d6dac4361ffe, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 173508059791026859, guid: 874de762ffdb9ac4b8d8d6dac4361ffe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 173508059791026859, guid: 874de762ffdb9ac4b8d8d6dac4361ffe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 173508059791026859, guid: 874de762ffdb9ac4b8d8d6dac4361ffe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2215154883588944549, guid: 874de762ffdb9ac4b8d8d6dac4361ffe, type: 3}
-      propertyPath: m_Name
-      value: spriteLayerChanger
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 874de762ffdb9ac4b8d8d6dac4361ffe, type: 3}
---- !u!4 &7649671428213247142 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 173508059791026859, guid: 874de762ffdb9ac4b8d8d6dac4361ffe, type: 3}
-  m_PrefabInstance: {fileID: 7512420942259807757}
-  m_PrefabAsset: {fileID: 0}

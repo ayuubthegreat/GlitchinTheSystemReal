@@ -27,9 +27,6 @@ public class playerpg : MonoBehaviour
     private bool isTouchingWall;
 
 void Awake() {
-if (GameManager.instance != null) {
- GameManager.instance.NewRPGPlayeronTheBlock(this);
-}
 
 } 
     
@@ -39,14 +36,14 @@ if (GameManager.instance != null) {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         isMovable = true;
-        if (GameManager.instance.isDonewithPlatforming)
+        if (GameManagerRPG.instance.playerpg == null)
         {
-            transform.position = GameManager.instance.phoneBoothSpawn;
+            GameManagerRPG.instance.playerpg = gameObject.GetComponent<playerpg>();
         }
-        else
-        {
-           transform.position = GameManager.instance.startSpawnRPG.transform.position; 
-        }
+        
+        
+            transform.position = GameManagerRPG.instance.startSpawnRPG.transform.position;
+        
         
         
 

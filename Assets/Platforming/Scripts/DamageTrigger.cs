@@ -24,7 +24,7 @@ public class DamageTrigger : MonoBehaviour
             }
             else
             {
-                GameManager.instance.warningScreenandTeleport(5);
+                gameManagerPlatformer.instance.warningScreenandTeleport(5);
             }
 
         }

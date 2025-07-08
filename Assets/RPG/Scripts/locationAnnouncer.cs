@@ -4,8 +4,10 @@ using TMPro;
 public class locationAnnouncer : fadebase
 {
     public TextMeshProUGUI text;
-    // Start is called before the first frame update
-    void Start()
+
+    new
+        // Start is called before the first frame update
+        void Start()
     {
         text = GetComponentInChildren<TextMeshProUGUI>(); // Initialize text
     }

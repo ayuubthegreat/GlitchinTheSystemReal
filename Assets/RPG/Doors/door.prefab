@@ -90,20 +90,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 7166403833839823276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec8e5914f891910459e843784088a52c, type: 3}
+  m_Script: {fileID: 11500000, guid: a189cd4358c81d24d8dc1c29d937da38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: rpgScene1
+  scene: 
   teleportationPoint: {fileID: 0}
-  mainMap: {fileID: 6875457449779704945, guid: 453b1e24ccfe52045baa088c18f217e2, type: 3}
+  mainMap: {fileID: 0}
   houseMap: {fileID: 0}
+  newLocationName: 
   yInputNum: 0
-  xInputNum: 1
-  facingDir: -1
+  xInputNum: 0
+  facingDir: 0
   isTouchingPlayer: 0
-  anim: {fileID: 6080036658263134183}
-  seconds2Wait: 3
+  anim: {fileID: 0}
+  seconds2Wait: 0
   canNotBeASpawnPoint: 0
+  audioSource: {fileID: 0}
+  clipNew: {fileID: 0}
 --- !u!95 &6080036658263134183
 Animator:
   serializedVersion: 7
@@ -168,7 +171,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -401005011
-  m_SortingLayer: -1
+  m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 229992989312293679, guid: ffa5e13807c50b24e91ec73f0980023a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

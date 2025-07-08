@@ -1,0 +1,598 @@
+fileFormatVersion: 2
+guid: f9dba5928b66a9242b38e26553899139
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8799210173234920395
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_0
+  - first:
+      213: 8001541012871332566
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_1
+  - first:
+      213: -981821521051521303
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_2
+  - first:
+      213: -5601695096995843567
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_3
+  - first:
+      213: -3213360113496103995
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_4
+  - first:
+      213: -5842816787517033813
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_5
+  - first:
+      213: 5879364909011886351
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_6
+  - first:
+      213: 2220237336814049889
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_7
+  - first:
+      213: 8096111426037843281
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_8
+  - first:
+      213: 4913220207043398237
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_9
+  - first:
+      213: -2326967535427262329
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_10
+  - first:
+      213: -2484765455650700590
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_11
+  - first:
+      213: -1204737643128883892
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_12
+  - first:
+      213: -8171957215458984312
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_13
+  - first:
+      213: -7645592359789677374
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_14
+  - first:
+      213: 3405906286373393643
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_15
+  - first:
+      213: 2383368268776769948
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_16
+  - first:
+      213: 1735783323049832973
+    second: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1024
+        height: 1525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5344458b7fce2e580800000000000000
+      internalID: -8799210173234920395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_1
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 841
+        width: 71
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d24aef382f2b0f60800000000000000
+      internalID: 8001541012871332566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_2
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 841
+        width: 60
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9eee3ec478edf52f0800000000000000
+      internalID: -981821521051521303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_3
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 839
+        width: 51
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 112f3830df7c242b0800000000000000
+      internalID: -5601695096995843567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_4
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 841
+        width: 68
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c3e7ab700ad763d0800000000000000
+      internalID: -3213360113496103995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_5
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 841
+        width: 61
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba2bb5c96152aeea0800000000000000
+      internalID: -5842816787517033813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_6
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 841
+        width: 81
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f01ec8a0c33b79150800000000000000
+      internalID: 5879364909011886351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_7
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 842
+        width: 69
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16a5cd1381edfce10800000000000000
+      internalID: 2220237336814049889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_8
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 715
+        width: 93
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15587fa627a2b5070800000000000000
+      internalID: 8096111426037843281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_9
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 715
+        width: 81
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5ac7183fb34f2440800000000000000
+      internalID: 4913220207043398237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_10
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 715
+        width: 83
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 788edf6fa53f4bfd0800000000000000
+      internalID: -2326967535427262329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_11
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 716
+        width: 83
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d247c1abf6548dd0800000000000000
+      internalID: -2484765455650700590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_12
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 622
+        width: 34
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c45f2cd1f79e74fe0800000000000000
+      internalID: -1204737643128883892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_13
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 623
+        width: 47
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88e70ec9530679e80800000000000000
+      internalID: -8171957215458984312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_14
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 622
+        width: 52
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c4bb41c14665e590800000000000000
+      internalID: -7645592359789677374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_15
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 623
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be45e81e8b5344f20800000000000000
+      internalID: 3405906286373393643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_16
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 623
+        width: 26
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c99806510dc631120800000000000000
+      internalID: 2383368268776769948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_17
+      rect:
+        serializedVersion: 2
+        x: 705
+        y: 622
+        width: 51
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d02be695cbdb61810800000000000000
+      internalID: 1735783323049832973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_0: -8799210173234920395
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_1: 8001541012871332566
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_10: -2326967535427262329
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_11: -2484765455650700590
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_12: -1204737643128883892
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_13: -8171957215458984312
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_14: -7645592359789677374
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_15: 3405906286373393643
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_16: 2383368268776769948
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_17: 1735783323049832973
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_2: -981821521051521303
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_3: -5601695096995843567
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_4: -3213360113496103995
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_5: -5842816787517033813
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_6: 5879364909011886351
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_7: 2220237336814049889
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_8: 8096111426037843281
+      20250704_2243_Crescent Moon Logo_simple_compose_01jzcavwstf8jtd0qsbkrak599_9: 4913220207043398237
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

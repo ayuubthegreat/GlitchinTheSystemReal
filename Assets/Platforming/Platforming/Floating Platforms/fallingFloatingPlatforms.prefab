@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1735942293324093252}
   - component: {fileID: 4795775150986857279}
   - component: {fileID: 568133645077511685}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: fallingFloatingPlatforms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1015282043
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 229992989312293679, guid: 573ece2ac07e8694e808c697dbf075e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -173,14 +173,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1675914707184825234}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe3dc472587524749b2cde15a647d582, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a699b19fd7e68f49a2625c9071d4ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxcolliders: []
   rb: {fileID: 0}
   positions: []
-  speed: 0.1
-  travelDistance: 3
+  originalTransformPosition: {x: 0, y: 0, z: 0}
+  speed: 0.2
+  travelDistance: 5
   positionindex: 0
   floatDelays: 1
   canMove: 1

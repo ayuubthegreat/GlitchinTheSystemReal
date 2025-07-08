@@ -35,19 +35,23 @@ public class buttonLoad : MonoBehaviour
 
     public void buttonLoader()
     {
+        for (int i = 0; i < UIManager.instance.MainMenuTransitions.Length; i++)
+        {
+            UIManager.instance.MainMenuTransitions[i] = false;
+        }
         switch (buttonType)
         {
             case ButtonType.SaveFile:
                 if (SaveFileFound)
-                    SceneManager.LoadScene(sceneName);
+                    UIManager.instance.MainMenuTransitions[1] = true;
                 else
-                    warningScreen.SetActive(true);
+                    UIManager.instance.MainMenuTransitions[2] = true;
                 break;
             case ButtonType.Options:
                 optionsScreen.SetActive(true);
                 break;
             case ButtonType.Start:
-                saveFileScreen.SetActive(true);
+                UIManager.instance.MainMenuTransitions[0] = true;
                 break;
             case ButtonType.Back:
                 saveFileScreen.SetActive(false);
@@ -57,32 +61,20 @@ public class buttonLoad : MonoBehaviour
                 warningScreen.SetActive(false);
                 break;
             case ButtonType.Next:
-                if (DialogueManager.instance.rpgText.textInfo.pageCount == 1)
+                Debug.Log(DialogueManager.instance.brokenSentence);
+                if (DialogueManager.instance.brokenSentence != string.Empty)
                 {
-                    DialogueManager.instance.dialogueNumber++;
-                    DialogueManager.instance.currentPage = 1;
-                    DialogueManager.instance.rpgText.pageToDisplay = DialogueManager.instance.currentPage;
+                    DialogueManager.instance.StartDialogueController();
+
                 }
                 else
                 {
-                    if (DialogueManager.instance.currentPage < DialogueManager.instance.rpgText.textInfo.pageCount)
-                    {
-                        DialogueManager.instance.currentPage++;
-                        DialogueManager.instance.rpgText.pageToDisplay = DialogueManager.instance.currentPage;
-                        DialogueManager.instance.StartRPGTextScroll(DialogueManager.instance.dialogueShells);
-                    }
-                    else
-                    {
-                        DialogueManager.instance.currentPage = 1;
-                        DialogueManager.instance.rpgText.pageToDisplay = DialogueManager.instance.currentPage;
-                        if (DialogueManager.instance.dialogueNumber < DialogueManager.instance.endDialogueRange)
-                        {
-                            DialogueManager.instance.dialogueNumber++;
-                        }
-                    }
+                    OnWithTheShow();
                 }
-               
                 break;
+
+
+
             case ButtonType.Phone:
 
                 HandlePhoneInteraction();
@@ -92,22 +84,40 @@ public class buttonLoad : MonoBehaviour
                 break;
         }
     }
-    public void HandlePhoneInteraction() {
-      playerpg playerpg = GameManager.instance.playerpg;
+    public void HandlePhoneInteraction()
+    {
+        playerpg playerpg = GameManager.instance.playerpg;
         if (playerpg != null)
         {
-            bool DialogueProgress = DialogueManager.instance.DialogueProgression < 3 && DialogueManager.instance.DialogueProgression > 0;
+            bool DialogueProgress = GameManager.instance.DialogueProgression < 3 && GameManager.instance.DialogueProgression > 0;
             if (!DialogueProcessor.instance.isConversationActive && !DialogueProcessor.instance.isPhoneActive && DialogueProgress)
             {
                 playerpg.isMovable = false;
                 DialogueProcessor.instance.isPhoneActive = true;
                 Debug.Log("Player is interacting with the phone.");
-                DialogueManager.instance.DialogueProgression = 2;
+                GameManager.instance.DialogueProgression = 2;
                 DialogueProcessor.instance.DialogueProgressionFunction();
-                
+
             }
-            
+
         }
+    }
+    public void OnWithTheShow()
+    {
+        DialogueManager.instance.currentPage = 1;
+        DialogueManager.instance.rpgText.pageToDisplay = DialogueManager.instance.currentPage;
+        if (DialogueManager.instance.dialogueNumber < DialogueManager.instance.endDialogueRange - 1)
+        {
+            DialogueManager.instance.dialogueNumber++;
+            DialogueManager.instance.StartDialogueController();
+
+        }
+        else
+        {
+            DialogueManager.instance.isEnabled = false;
+            DialogueManager.instance.ResetDialogue();
+        }
+        
     }
     
 }

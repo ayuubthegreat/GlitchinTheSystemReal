@@ -65,13 +65,14 @@ public class DialogueProcessor : MonoBehaviour
         {
             return;
         }
-        if (DialogueManager.instance.DialogueProgression == 0)
+        if (GameManager.instance.DialogueProgression == 0)
         {
             GameManager.instance.iswalkingdoor = false;
 
             GameManager.instance.outsideDoorSpawnObject = GameManager.instance.doorSpawn.transform.position;
 
         }
+        
     }
     public void Update()
     {
@@ -81,9 +82,9 @@ public class DialogueProcessor : MonoBehaviour
     }
     public void DialogueProgressionFunction()
     {
-        bool conversationEnded = DialogueManager.instance.DialogueProgression == 3 && isPhoneActive;
-        bool conversationBegan = DialogueManager.instance.DialogueProgression == 2 && isPhoneActive;
-        if (DialogueManager.instance.DialogueProgression == 1)
+        bool conversationEnded = GameManager.instance.DialogueProgression == 3 && isPhoneActive;
+        bool conversationBegan = GameManager.instance.DialogueProgression == 2 && isPhoneActive;
+        if (GameManager.instance.DialogueProgression == 1)
         {
             StartCoroutine(DialogueProgression1());
 
@@ -110,7 +111,7 @@ public class DialogueProcessor : MonoBehaviour
         isConversationActive = true;
         recieverPhoneDialogue2SetActive();
 
-        DialogueManager.instance.StartRPGTextBox(1, 0, dialogueVault.dialogueSets[1].Length, dialogueVault.dialogueSets[1]);
+        DialogueManager.instance.StartTextBox(0, 0, dialogueVault.dialogueSets[1].Length, dialogueVault.dialogueSets[1]);
     }
     public IEnumerator DialogueProgression1()
     {
@@ -131,12 +132,12 @@ public class DialogueProcessor : MonoBehaviour
         {
             return;
         }
-        DialogueManager.instance.StartRPGTextBox(0, 1, 2, dialogueVault.dialogueSets[0]);
+        DialogueManager.instance.StartTextBox(2, 1, 2, dialogueVault.dialogueSets[0]);
     }
     public void recieverPhoneDialogue2SetActive() => recieverPhoneDialogue2.SetActive(DialogueProcessor.instance.isPhoneActive);
     public void ConversationManager()
     {
-        if (DialogueManager.instance.DialogueProgression < 3)
+        if (GameManager.instance.DialogueProgression < 3)
         {
             PhoneConversationManager1();
         }
@@ -148,7 +149,7 @@ public class DialogueProcessor : MonoBehaviour
     }
     public void PhoneConversationManager1()
     {
-        if (!isPhoneActive && DialogueManager.instance.DialogueProgression > 3)
+        if (!isPhoneActive && GameManager.instance.DialogueProgression > 3)
         {
             return;
         }
