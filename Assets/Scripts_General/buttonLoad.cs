@@ -89,13 +89,13 @@ public class buttonLoad : MonoBehaviour
         playerpg playerpg = GameManager.instance.playerpg;
         if (playerpg != null)
         {
-            bool DialogueProgress = DialogueManager.instance.DialogueProgression < 3 && DialogueManager.instance.DialogueProgression > 0;
+            bool DialogueProgress = GameManager.instance.DialogueProgression < 3 && GameManager.instance.DialogueProgression > 0;
             if (!DialogueProcessor.instance.isConversationActive && !DialogueProcessor.instance.isPhoneActive && DialogueProgress)
             {
                 playerpg.isMovable = false;
                 DialogueProcessor.instance.isPhoneActive = true;
                 Debug.Log("Player is interacting with the phone.");
-                DialogueManager.instance.DialogueProgression = 2;
+                GameManager.instance.DialogueProgression = 2;
                 DialogueProcessor.instance.DialogueProgressionFunction();
 
             }

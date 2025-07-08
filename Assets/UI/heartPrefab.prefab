@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4428473024113908534}
   - component: {fileID: 4467081859498321123}
   - component: {fileID: 926505690346871426}
-  - component: {fileID: -6407120353960988108}
+  - component: {fileID: 6311143672203350032}
   m_Layer: 0
   m_Name: heartPrefab
   m_TagString: Untagged
@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4925906849856315347}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0692482, y: 1.0169077, z: 1.0169077}
   m_ConstrainProportionsScale: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &-6407120353960988108
+--- !u!114 &6311143672203350032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,6 +85,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4925906849856315347}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9df3f2dee3bd6c04c875b1b1f2bd147b, type: 3}
+  m_Script: {fileID: 11500000, guid: 22f5a1bd035fb3c43b03f65b972e195e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

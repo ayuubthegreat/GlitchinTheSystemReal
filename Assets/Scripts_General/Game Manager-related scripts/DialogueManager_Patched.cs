@@ -15,7 +15,7 @@ public class DialogueManager : MonoBehaviour
     public DialogueVault dialogueVault;
     public GameObject rpgTextObject;
     public GameObject personNameObject;
-    public int DialogueProgression = 0;
+    
     public int startRange;
     public int dialogueNumber = 0;
     public int endDialogueRange;
@@ -56,7 +56,7 @@ public class DialogueManager : MonoBehaviour
             // Player 2 (the other person Abdurahman is speaking to)
             false,
         };
-        // DialogueProgression = 0;
+        // GameManager.instance.DialogueProgression = 0;
 
         if (rpgTextObject == null && UIManager.instance.currentScreen == MainScreens.RPG)
         {
@@ -79,7 +79,7 @@ public class DialogueManager : MonoBehaviour
         {
             personNameText = personNameObject.GetComponent<TextMeshProUGUI>();
         }
-        if (DialogueProgression == 0 && dialogueVault != null && GameManager.instance.playerpg != null)
+        if (GameManager.instance.DialogueProgression == 0 && dialogueVault != null && GameManagerRPG.instance.playerpg != null)
         {
             StartTextBox(3, 0, 1, dialogueVault.dialogueSets[0]);
         }
@@ -90,7 +90,7 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.instance.playerpg != null)
+        if (GameManagerRPG.instance.playerpg != null)
         {
           if (isEnabled)
         {
@@ -138,7 +138,7 @@ public class DialogueManager : MonoBehaviour
             brokenSentence = string.Empty;
         }
 
-        GameManager.instance.playerpg.isMovable = false;
+        GameManagerRPG.instance.playerpg.isMovable = false;
         if (!isTalking)
         {
             yield break;
@@ -224,8 +224,8 @@ public class DialogueManager : MonoBehaviour
 
     public void ResetDialogue()
     {
-        GameManager.instance.playerpg.isMovable = true;
-        DialogueProgression++;
+        GameManagerRPG.instance.playerpg.isMovable = true;
+        GameManager.instance.DialogueProgression++;
         dialogueNumber = 0;
         dialogueShells = null;
         startRange = 0;

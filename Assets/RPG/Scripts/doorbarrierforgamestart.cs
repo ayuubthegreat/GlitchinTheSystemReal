@@ -12,7 +12,7 @@ public class doorbarrierforgamestart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (DialogueManager.instance.DialogueProgression < 3)
+        if (GameManager.instance.DialogueProgression < 3)
         {
             bd.enabled = true;
 

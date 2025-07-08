@@ -10,6 +10,7 @@ public class CameraControllerRPG : MonoBehaviour
     public bool platformingCamera;
     public player playerScripts;
     public playerpg playerpg;
+    public bool startFollowingPlayer;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class CameraControllerRPG : MonoBehaviour
         GameObject foundPlayer = GameObject.Find("player");
         if (foundPlayer != null)
         {
+            
             playerpg = foundPlayer.GetComponent<playerpg>();
         }
     }
@@ -34,7 +36,11 @@ public class CameraControllerRPG : MonoBehaviour
 
             if (platformingCamera && playerScripts != null)
             {
-                transform.position = playerScripts.transform.position;
+                if (startFollowingPlayer)
+                {
+                    transform.position = playerScripts.transform.position;  
+                }
+                
             }
             else if (playerpg != null)
             {

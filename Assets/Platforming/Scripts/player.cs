@@ -17,8 +17,8 @@ public class player : MonoBehaviour
     [Header("VFX's")]
     public GameObject deathVFX;
     [Header("Inputs")]
-    private float xInput;
-    private float yInput;
+    public float xInput;
+    public float yInput;
     [Header("Conditions")]
     private bool isGrounded;
     private bool isAirbone;
@@ -88,7 +88,7 @@ public class player : MonoBehaviour
         if (GameManager.instance.player == null && GameManager.instance.playerpg == null)
         {
             GameManager.instance.player = gameObject.GetComponent<player>();
-        } 
+        }
         if (GameManager.instance.startSpawnBoolPlatforming)
         {
             transform.position = GameManager.instance.startSpawnPlatforming.transform.position;
@@ -98,21 +98,17 @@ public class player : MonoBehaviour
         {
             transform.position = GameManager.instance.spawnObject;
         }
+        GameManager.instance.StartCutscene(1, 2, 4f);
        
     }
     private void HandleMovement()
     {
         xInput = Input.GetAxisRaw("Horizontal");
         yInput = Input.GetAxisRaw("Vertical");
-        if (isTouchingWall)
+        if (isTouchingWall || isWallMoving)
         {
             return;
         }
-        if (isWallMoving)
-        {
-            return;
-        }
-        isMovable = true;
         if (isMovable && !crouched)
         {
             rb.linearVelocity = new Vector2(xInput * moveSpeed, rb.linearVelocity.y);
@@ -139,7 +135,7 @@ public class player : MonoBehaviour
             Dash(0);
         }
         UpdateAirbornStatus();
-        if (isKnocked || isDashing)
+        if (isKnocked || isDashing || !isMovable)
         {
             return;
         }
@@ -150,7 +146,7 @@ public class player : MonoBehaviour
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
         isTouchingWall = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
         isDead = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsDeadZone);
-        canWallSlide = isTouchingWall && rb.linearVelocity.y < 0;
+        canWallSlide = isTouchingWall && xInput == (1 * facingDir);
 
         bool coyoteJumpAvailable = Time.time < coyoteJumpActivated + coyoteJumpWindow;
         if (Input.GetKeyDown(KeyCode.Space))
@@ -163,7 +159,7 @@ public class player : MonoBehaviour
                 }
                 Jump();
             }
-            else if (isTouchingWall && !isGrounded)
+            else if (canWallSlide)
             {
                 WallJump();
 
@@ -236,12 +232,17 @@ public class player : MonoBehaviour
         {
             return;
         }
+        anim.SetTrigger("dashing");
         StartCoroutine(KnockbackandDashRoutine(1));
         rb.linearVelocity = new Vector2(dashPower.x * facingDir, 0f);
     }
 
     private void WallJump()
     {
+        if (!canWallSlide)
+        {
+            return;
+        }
 
         rb.linearVelocity = new Vector2(wallJumpForce.x * -facingDir, wallJumpForce.y);
         Flip();
@@ -253,6 +254,7 @@ public class player : MonoBehaviour
         isWallMoving = true;
         yield return new WaitForSeconds(wallJumpDuration);
         isWallMoving = false;
+        canDoubleJump = true;
     }
     private IEnumerator KnockbackandDashRoutine(int value)
     {
@@ -269,6 +271,7 @@ public class player : MonoBehaviour
         {
             canDash = false;
             isDashing = true;
+            
         }
 
         yield return new WaitForSeconds(value == 0 ? knockbackDuration : dashDuration);
@@ -295,13 +298,13 @@ public class player : MonoBehaviour
     }
     private void WallSlide()
     {
-        bool canWallSlide = isTouchingWall && rb.linearVelocity.y < 0 && xInput < 0;
         
         if (!canWallSlide)
         {
             return;
         }
         float yModifier = yInput < 0 ? .15f : .3f;
+        anim.SetTrigger("wallSlide");
         
         
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * yModifier);
@@ -361,7 +364,6 @@ public class player : MonoBehaviour
     }
     public void Die()
     {
-        GameObject newDeathVFX = Instantiate(deathVFX, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
     #endregion

@@ -188,12 +188,8 @@ public class UIManager : MonoBehaviour
     public IEnumerator TimetoDie(float duration)
     {
         Debug.Log("This function was called.");
-
-        
-
-        if (GameManager.instance != null)
+    if (GameManager.instance != null)
         {
-            GameManager.instance.isDonewithPlatforming = true;
             GameManager.instance.startSpawnBoolPlatforming = true;
         }
 
@@ -259,6 +255,7 @@ public class UIManager : MonoBehaviour
         if (GameManager.instance.player == null && GameManager.instance.playerpg != null)
         {
             currentScreen = MainScreens.RPG;
+            GameManager.instance.RPGTimes++;
             phone = FindAnyObjectByType<PlayerPhonePhysical>().gameObject;
         }
         else if (GameManager.instance.player != null && GameManager.instance.playerpg == null)
@@ -270,11 +267,12 @@ public class UIManager : MonoBehaviour
             coinsScreen.SetActive(true);
             livesScreen.SetActive(true);
             abdurahmanHealthScreen.SetActive(true);
+            GameManager.instance.platformerTimes++;
         }
         else if (GameManager.instance.player == null && GameManager.instance.playerpg == null)
         {
             currentScreen = MainScreens.mainMenu;
-            
+
         }
     }
     public void toPlayMainMenu() => StartCoroutine(PlayMainMenu());

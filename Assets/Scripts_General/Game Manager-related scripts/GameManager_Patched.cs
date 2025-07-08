@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -52,6 +53,11 @@ public class GameManager : MonoBehaviour
     public bool FruitsRandom;
     public Dead dead;
     public Canvas canvas;
+    [Header("Game States")]
+    public int platformerTimes;
+    public int RPGTimes;
+    [Header("Dialogue Progression")]
+    public int DialogueProgression = 0;
 
     void Awake()
     {
@@ -80,10 +86,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if (startSpawnBool && !isDonewithPlatforming && startSpawnRPG != null && dialogueManager.DialogueProgression == 0)
+        if (startSpawnBool && !isDonewithPlatforming && startSpawnRPG != null && DialogueProgression == 0)
         {
             outsideDoorSpawnObject = startSpawnRPG.transform.position;
-            
+
         }
         else if (isDonewithPlatforming && startSpawnRPG != null)
         {
@@ -91,11 +97,7 @@ public class GameManager : MonoBehaviour
             startSpawnBool = false;
             isDonewithPlatforming = false;
         }
-        if (DialogueManager.instance.DialogueProgression <= 3)
-        {
-            mainMap.SetActive(false);
-            playerHouse.SetActive(true);
-        }
+        
 
 
         iswalkingdoor = false;
@@ -103,52 +105,22 @@ public class GameManager : MonoBehaviour
 
     public bool FruitsAreRandom() => FruitsRandom;
 
-    public void RespawnPlayer() => StartCoroutine(DieandRespawner());
+    
 
-    public IEnumerator DieandRespawner()
+    public void NewPlayeronTheBlock(player newPlayerScript)
     {
-        playerLives--;
-
-        if (player != null)
-            player.Die();
-
-        yield return new WaitForSeconds(1);
-
-        if (UIManager.instance != null)
+        if (player == null)
         {
-            UIManager.instance.coinsScreen?.SetActive(false);
-            UIManager.instance.livesScreen?.SetActive(false);
-            UIManager.instance.Fade(5);
-            UIManager.instance.SetIsDeadandIsAliveBool(true);
-            UIManager.instance.SetStartBool(0);
-        }
-
-        yield return new WaitForSeconds(1);
-
-        GameObject newPlayer = Instantiate(playerPrefab, spawnObject, Quaternion.identity);
-        player = newPlayer.GetComponent<player>();
-        UIManager.instance.SetIsDeadandIsAliveBool(false);
-        
-
-        startSpawnPlatforming = GameObject.Find("spawnPointPlatforming");
-
-        if (UIManager.instance != null)
-        {
-            UIManager.instance.coinsScreen?.SetActive(true);
-            UIManager.instance.livesScreen?.SetActive(true);
+            player = newPlayerScript;
         }
     }
-
-public void NewPlayeronTheBlock(player newPlayerScript) {
-if (player == null) {
-player = newPlayerScript; 
-}
-}
-public void NewRPGPlayeronTheBlock(playerpg newPlayerScript) {
-if (playerpg == null) {
-playerpg = newPlayerScript; 
-}
-}
+    public void NewRPGPlayeronTheBlock(playerpg newPlayerScript)
+    {
+        if (playerpg == null)
+        {
+            playerpg = newPlayerScript;
+        }
+    }
 
     public void RespawnPlayerInCheckpoint(Vector3 newSpawnPoint, int index)
     {
@@ -164,7 +136,7 @@ playerpg = newPlayerScript;
 
     public void DefiningGameObjectsandScripts()
     {
-        
+
         playerpg = FindFirstObjectByType<playerpg>();
         if (playerpg == null)
         {
@@ -177,7 +149,7 @@ playerpg = newPlayerScript;
             if (playerHouse == null) playerHouse = GameObject.Find("playerHouseMap");
 
         }
-        
+
         startSpawnRPG = GameObject.Find("spawnPointRPG");
 
         camera = FindFirstObjectByType<Camera>();
@@ -193,18 +165,7 @@ playerpg = newPlayerScript;
         }
     }
 
-    public void warningScreenandTeleport(float duration)
-    {
-        if (playerLives == 0)
-        {
-            if (UIManager.instance != null)
-                StartCoroutine(UIManager.instance.TimetoDie(duration));
-        }
-        else
-        {
-            RespawnPlayer();
-        }
-    }
+    
 
     public void CreateNewObjectReal(GameObject go, Transform position, float delay = 0)
     {
@@ -225,8 +186,29 @@ playerpg = newPlayerScript;
     }
 
     public IEnumerator LoadNewScene(int seconds, string scene)
+
     {
         yield return new WaitForSeconds(seconds);
         SceneManager.LoadScene(scene);
+    }
+    public void StartCutscene(int cutsceneNum, int seconds, float moveSpeed) => StartCoroutine(StartingCutscene(cutsceneNum, seconds, moveSpeed));
+    public IEnumerator StartingCutscene(int cutsceneNum, int seconds, float moveSpeed)
+    {
+        switch (cutsceneNum)
+        {
+            case 1:
+                player.isMovable = false;
+                camera.orthographicSize = 1.5f;
+                yield return new WaitForSeconds(seconds);
+                gameManagerPlatformer.instance.targetCameraSize = 5f;
+                gameManagerPlatformer.instance.cameraSpeed = moveSpeed;
+                yield return new WaitForSeconds(2);
+                UIManagerPlatformer.instance.SetUIElementsActive(true);
+                player.isMovable = true;
+                break;
+            case 2:
+                break;
+        }
+        
     }
 }
