@@ -2510,6 +2510,10 @@ PrefabInstance:
       propertyPath: m_margin.z
       value: -269.79605
       objectReference: {fileID: 0}
+    - target: {fileID: 7323868811522972258, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 2164260863
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7782960616408278311, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
@@ -2549,7 +2553,7 @@ RectTransform:
   m_GameObject: {fileID: 1120404810}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 9.53506, y: 3.9043698, z: 3.53137}
+  m_LocalScale: {x: 5.4866643, y: 2.2466526, z: 2.032021}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 389266028}
@@ -2558,7 +2562,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 3256.8452, y: -120.55054}
+  m_AnchoredPosition: {x: 1872, y: -116.41}
   m_SizeDelta: {x: 100, y: 264}
   m_Pivot: {x: 3.4, y: 0.5}
 --- !u!95 &1120404812
@@ -3877,6 +3881,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7323868811522972258, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
       propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782960616408278311, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8778113165892148467, guid: b2abf5fc6388304428ef2f8552999419, type: 3}

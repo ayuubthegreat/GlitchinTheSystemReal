@@ -132,6 +132,7 @@ public class DialogueProcessor : MonoBehaviour
         {
             return;
         }
+        UIManagerRPG.instance.phone.SetActive(true);
         DialogueManager.instance.StartTextBox(2, 1, 2, dialogueVault.dialogueSets[0]);
     }
     public void recieverPhoneDialogue2SetActive() => recieverPhoneDialogue2.SetActive(DialogueProcessor.instance.isPhoneActive);

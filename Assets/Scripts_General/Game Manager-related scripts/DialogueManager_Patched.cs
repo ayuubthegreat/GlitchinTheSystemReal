@@ -15,6 +15,7 @@ public class DialogueManager : MonoBehaviour
     public DialogueVault dialogueVault;
     public GameObject rpgTextObject;
     public GameObject personNameObject;
+    public GameObject nextButton;
     
     public int startRange;
     public int dialogueNumber = 0;
@@ -127,6 +128,7 @@ public class DialogueManager : MonoBehaviour
     public IEnumerator DialogueController(DialogueVault.DialogueSet[] sets)
     {
         isTalking = true;
+        nextButton.SetActive(false);
         personNameText.text = sets[dialogueNumber].characterName;
         TalkingStick(sets[dialogueNumber].characterName);
 
@@ -169,6 +171,7 @@ public class DialogueManager : MonoBehaviour
 
 
                 }
+                nextButton.SetActive(true);
 
                 break;
             }
@@ -187,6 +190,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     rpgText.text = sentence;
                     brokenSentence = string.Empty;
+                    nextButton.SetActive(true);
                     break;
                 }
                 else
@@ -196,7 +200,7 @@ public class DialogueManager : MonoBehaviour
 
 
                     brokenSentence = sentence.Substring(dialogueBounds, newLength);
-
+                    nextButton.SetActive(true);
                     break;
 
 
