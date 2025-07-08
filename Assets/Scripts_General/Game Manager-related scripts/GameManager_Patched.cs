@@ -199,6 +199,7 @@ public class GameManager : MonoBehaviour
             case 1:
                 player.isMovable = false;
                 camera.orthographicSize = 1.5f;
+                gameManagerPlatformer.instance.targetCameraSize = 1.5f;
                 yield return new WaitForSeconds(seconds);
                 gameManagerPlatformer.instance.targetCameraSize = 5f;
                 gameManagerPlatformer.instance.cameraSpeed = moveSpeed;

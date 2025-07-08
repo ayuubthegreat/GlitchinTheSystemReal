@@ -13,9 +13,9 @@ public class PlayerPhone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (DialogueManager.instance.DialogueProgression != 0 && DialogueProcessor.instance.isPhoneActive)
+        if (GameManager.instance.DialogueProgression != 0 && DialogueProcessor.instance.isPhoneActive)
         {
-            anim.SetInteger("DP", DialogueManager.instance.DialogueProgression);
+            anim.SetInteger("DP", GameManager.instance.DialogueProgression);
             anim.SetBool("player1talking", DialogueProcessor.instance.person1turn);
             anim.SetBool("isThinking", DialogueProcessor.instance.expressions[0]);
             anim.SetBool("isSurprised", DialogueProcessor.instance.expressions[1]);

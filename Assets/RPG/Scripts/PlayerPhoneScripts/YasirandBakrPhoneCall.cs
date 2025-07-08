@@ -26,6 +26,6 @@ public class YasirandBakrPhoneCall : MonoBehaviour
     public void Update()
     {
         phoneAnimator.SetBool("player2talking", DialogueProcessor.instance.person2turn);
-        phoneAnimator.SetInteger("DP", DialogueManager.instance.DialogueProgression);
+        phoneAnimator.SetInteger("DP", GameManager.instance.DialogueProgression);
     }
 }

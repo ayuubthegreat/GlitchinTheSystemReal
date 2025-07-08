@@ -255,6 +255,155 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8953313574584432667, guid: 98e73c5c770af4d4588b1e7152df499b, type: 3}
   m_PrefabInstance: {fileID: 39325520}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &102804292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 102804297}
+  - component: {fileID: 102804296}
+  - component: {fileID: 102804295}
+  - component: {fileID: 102804294}
+  - component: {fileID: 102804293}
+  - component: {fileID: 102804298}
+  m_Layer: 0
+  m_Name: RPGGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &102804293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102804292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca79d2a27bacbcd4e8d0542db12fca59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  dialogueVault: {fileID: 0}
+  playerPhoneDialogue: {fileID: 0}
+  recieverPhoneDialogue2: {fileID: 0}
+  PhoneRingingSeconds: 0
+  isConversationActive: 0
+  person1turn: 0
+  person2turn: 0
+  mouthMovement1: 0
+  mouthMovement2: 0
+  twopeopletalking: 0
+  isPhoneActive: 0
+  faces: 
+  expressions: 
+--- !u!114 &102804294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102804292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f57190350b3db094487f050880da5198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &102804295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102804292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef08f3c8966447049891d82e98a44d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueVault: {fileID: 102804294}
+  rpgTextObject: {fileID: 1021619528}
+  personNameObject: {fileID: 367964284}
+  startRange: 0
+  dialogueNumber: 0
+  endDialogueRange: 0
+  currentPage: 1
+  currentPageAuto: 0
+  dialogueShells: []
+  rpgText: {fileID: 1469994117}
+  personNameText: {fileID: 135797990}
+  isEnabled: 0
+  isTalking: 0
+  playersTalking: 
+  startBrokenSentence: 0
+  endBrokenSentence: 0
+  brokenSentence: 
+  dialogueSpeed: 0
+  dialogueBounds: 82
+--- !u!114 &102804296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102804292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4efc8c3daca2fba4f99b4b5c2071aad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rpgTextObject: {fileID: 1021619528}
+  personNameObject: {fileID: 367964284}
+  phone: {fileID: 1347589300}
+  dialogueAnimations: {fileID: 682257085}
+--- !u!4 &102804297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102804292}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -18.83236, y: 14.102063, z: -10.699662}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &102804298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102804292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9a5608c2a3bed4f8b989ca42eb33a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerpg: {fileID: 1916094753}
+  startSpawnRPG: {fileID: 1944592912}
+  spawnObject: {x: 0, y: 0, z: 0}
+  mainMap: {fileID: 847337967}
+  playerHouse: {fileID: 2013175867}
+--- !u!114 &135797990 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7323868811522972258, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
+  m_PrefabInstance: {fileID: 1113466731}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &204320129 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5570968367209030824, guid: a6b377066ebfcd44eb71d00182b5b1ac, type: 3}
@@ -833,6 +982,7 @@ MonoBehaviour:
   platformingCamera: 0
   playerScripts: {fileID: 0}
   playerpg: {fileID: 1916094753}
+  startFollowingPlayer: 0
 --- !u!82 &519420034
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2361,7 +2511,8 @@ PrefabInstance:
       value: -269.79605
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7782960616408278311, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3496008404311260382, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
@@ -3272,7 +3423,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2060142389
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -2221091813415597717, guid: 7ddaf852e7b76f44f809b03e101c354a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3384,7 +3535,6 @@ GameObject:
   - component: {fileID: 1397720632}
   - component: {fileID: 1397720631}
   - component: {fileID: 1397720630}
-  - component: {fileID: 1397720634}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3480,22 +3630,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1397720634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1397720629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73878e407c50e0c40800096cb6102580, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rpgTextObject: {fileID: 1021619528}
-  personNameObject: {fileID: 367964284}
-  phone: {fileID: 1347589300}
-  dialogueAnimations: {fileID: 682257085}
 --- !u!1001 &1419430116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3570,6 +3704,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6559251441830113664, guid: 578da3dcebf89c1449cfbdde09696964, type: 3}
   m_PrefabInstance: {fileID: 5721226039849186094}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1469994117 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7323868811522972258, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
+  m_PrefabInstance: {fileID: 1492550409}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1492550409
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4547,7 +4692,10 @@ PrefabInstance:
       propertyPath: startSpawnRPG
       value: 
       objectReference: {fileID: 1944592912}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1993040491824811336, guid: 0159be88d5d57bf4ab684c709b71edc4, type: 3}
+    - {fileID: 8918808786028296380, guid: 0159be88d5d57bf4ab684c709b71edc4, type: 3}
+    - {fileID: 3714801808742980296, guid: 0159be88d5d57bf4ab684c709b71edc4, type: 3}
     m_RemovedGameObjects:
     - {fileID: 366554093245682219, guid: 0159be88d5d57bf4ab684c709b71edc4, type: 3}
     m_AddedGameObjects: []
@@ -7096,3 +7244,4 @@ SceneRoots:
   - {fileID: 2013175868}
   - {fileID: 1944592913}
   - {fileID: 1023853912}
+  - {fileID: 102804297}
