@@ -295,6 +295,8 @@ public class player : MonoBehaviour
     }
     private void WallSlide()
     {
+        bool canWallSlide = isTouchingWall && rb.linearVelocity.y < 0 && xInput < 0;
+        
         if (!canWallSlide)
         {
             return;
