@@ -102,11 +102,14 @@ public class DialogueProcessor : MonoBehaviour
         {
             isPhoneActive = false;
             recieverPhoneDialogue2SetActive();
+            UIManagerRPG.instance.phone.SetActive(false);
         }
 
     }
     public IEnumerator PhoneRinging(int seconds)
     {
+        UIManagerRPG.instance.dialogueAnimations.SetActive(true);
+        recieverPhoneDialogue2.SetActive(false);
         yield return new WaitForSeconds(seconds);
         isConversationActive = true;
         recieverPhoneDialogue2SetActive();
@@ -135,7 +138,7 @@ public class DialogueProcessor : MonoBehaviour
         UIManagerRPG.instance.phone.SetActive(true);
         DialogueManager.instance.StartTextBox(2, 1, 2, dialogueVault.dialogueSets[0]);
     }
-    public void recieverPhoneDialogue2SetActive() => recieverPhoneDialogue2.SetActive(DialogueProcessor.instance.isPhoneActive);
+    public void recieverPhoneDialogue2SetActive() => recieverPhoneDialogue2.SetActive(isPhoneActive);
     public void ConversationManager()
     {
         if (GameManager.instance.DialogueProgression < 3)

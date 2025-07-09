@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -401005011
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7939457749851398443, guid: a60ba330ea811094aa3a099c4a1561dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -144,16 +144,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 4009015668886701182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1408c1c54c263864e8ee8ba276a88e6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 8883af2f667342b4cb43f1d3df8933f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: platformerScene1
-  PlayerCheckDistance: 1
+  scene: 
+  PlayerCheckDistance: 0
   whatisPlayer:
     serializedVersion: 2
-    m_Bits: 512
-  facingDir: -1
+    m_Bits: 0
+  facingDir: 1
+  xInputNum: 0
+  yInputNum: 0
   isTouchingPlayer: 0
+  seconds: 0
 --- !u!1 &4751646682107403357
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +231,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -401005011
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -8374406825309485557, guid: cb94a35136696a045812c29cd3d2cfdc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -322,7 +325,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1064535543
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 4
   m_Sprite: {fileID: 229992989312293679, guid: 08023df172ff0204793c08e81597c670, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

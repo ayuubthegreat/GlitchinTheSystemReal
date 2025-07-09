@@ -40,9 +40,7 @@ void Awake() {
         {
             GameManagerRPG.instance.playerpg = gameObject.GetComponent<playerpg>();
         }
-        
-        
-            transform.position = GameManagerRPG.instance.startSpawnRPG.transform.position;
+        transform.position = GameManagerRPG.instance.spawnObject;
         
         
         

@@ -22,6 +22,7 @@ public class MainMenuLoader : fadebase
         anim.SetBool("startButton", UIManager.instance.MainMenuTransitions[0]);
         anim.SetBool("saveFileFound", UIManager.instance.MainMenuTransitions[1]);
         anim.SetBool("warningScreen", UIManager.instance.MainMenuTransitions[2]);
+        anim.SetBool("backButton", UIManager.instance.MainMenuTransitions[3]);
     }
     public void FadeButton()
     {

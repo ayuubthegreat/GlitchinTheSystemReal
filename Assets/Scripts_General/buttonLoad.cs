@@ -35,12 +35,10 @@ public class buttonLoad : MonoBehaviour
 
     public void buttonLoader()
     {
-        for (int i = 0; i < UIManager.instance.MainMenuTransitions.Length; i++)
-        {
-            UIManager.instance.MainMenuTransitions[i] = false;
-        }
+        UIManager.instance.ChangeValueOfEntireArray(UIManager.instance.MainMenuTransitions, false);
         switch (buttonType)
         {
+            
             case ButtonType.SaveFile:
                 if (SaveFileFound)
                     UIManager.instance.MainMenuTransitions[1] = true;
@@ -54,8 +52,8 @@ public class buttonLoad : MonoBehaviour
                 UIManager.instance.MainMenuTransitions[0] = true;
                 break;
             case ButtonType.Back:
-                saveFileScreen.SetActive(false);
-                optionsScreen.SetActive(false);
+                
+                UIManager.instance.MainMenuTransitions[3] = true;
                 break;
             case ButtonType.Warning:
                 warningScreen.SetActive(false);

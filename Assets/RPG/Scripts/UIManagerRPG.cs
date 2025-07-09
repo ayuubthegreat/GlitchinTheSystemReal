@@ -25,6 +25,7 @@ public class UIManagerRPG : MonoBehaviour
         rpgTextObject.SetActive(false);
         personNameObject.SetActive(false);
         dialogueAnimations.SetActive(false);
+        phone.SetActive(false);
     }
 
     // Update is called once per frame

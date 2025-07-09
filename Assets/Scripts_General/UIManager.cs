@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEditorInternal;
 using System.Linq;
+using System;
 public enum MainScreens{
 RPG,
 Platforming,
@@ -89,6 +90,8 @@ public class UIManager : MonoBehaviour
             // Save File Found
             false,
             // Warning Screen Enabled
+            false,
+            // Back Button
             false,
         };
         startTransitions = new bool[] {
@@ -188,13 +191,12 @@ public class UIManager : MonoBehaviour
     public IEnumerator TimetoDie(float duration)
     {
         Debug.Log("This function was called.");
-    if (GameManager.instance != null)
+        if (GameManager.instance != null)
         {
             GameManager.instance.startSpawnBoolPlatforming = true;
         }
 
         yield return new WaitForSeconds(duration);
-
         SceneManager.LoadScene("ManicMinnesotaRPGScene");
     }
     public void SetStartBool()
@@ -282,11 +284,18 @@ public class UIManager : MonoBehaviour
         source.clip = mainMenuMusic;
         source.Play();
         yield return new WaitForSeconds(2);
-        
+
         logoScreen.SetActive(false);
         mainMenu.SetActive(true);
         yield return new WaitForSeconds(3);
         StartChangeTransitionBools();
     }
+    public void ChangeValueOfEntireArray(bool[] bools, bool value)
+    {
+        for (int i = 0; i < bools.Length; i++)
+        {
+            bools[i] = value;
+        }
+    } 
     
 }

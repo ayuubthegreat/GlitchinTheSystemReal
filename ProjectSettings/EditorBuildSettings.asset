@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ManicMinnesotaRPGScene.unity
     guid: 3ae6571ae58023f4cbda8603a76987ae
+  - enabled: 1
+    path: Assets/Scenes/platformerScene1.unity
+    guid: 9fbec2b761471b84eac72f9c0b24dd1a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

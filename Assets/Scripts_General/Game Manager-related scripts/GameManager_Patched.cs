@@ -191,25 +191,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         SceneManager.LoadScene(scene);
     }
-    public void StartCutscene(int cutsceneNum, int seconds, float moveSpeed) => StartCoroutine(StartingCutscene(cutsceneNum, seconds, moveSpeed));
-    public IEnumerator StartingCutscene(int cutsceneNum, int seconds, float moveSpeed)
-    {
-        switch (cutsceneNum)
-        {
-            case 1:
-                player.isMovable = false;
-                camera.orthographicSize = 1.5f;
-                gameManagerPlatformer.instance.targetCameraSize = 1.5f;
-                yield return new WaitForSeconds(seconds);
-                gameManagerPlatformer.instance.targetCameraSize = 5f;
-                gameManagerPlatformer.instance.cameraSpeed = moveSpeed;
-                yield return new WaitForSeconds(2);
-                UIManagerPlatformer.instance.SetUIElementsActive(true);
-                player.isMovable = true;
-                break;
-            case 2:
-                break;
-        }
-        
-    }
+   
+    
 }

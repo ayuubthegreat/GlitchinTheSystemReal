@@ -14,6 +14,7 @@ public class deadZoneScript : MonoBehaviour
         player player = collision.GetComponent<player>();
         if (player != null)
         {
+            GameManager.instance.startSpawnBool = false;
             gameManagerPlatformer.instance.warningScreenandTeleport(5);
         }
     }

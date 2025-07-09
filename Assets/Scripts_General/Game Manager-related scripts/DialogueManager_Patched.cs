@@ -93,16 +93,17 @@ public class DialogueManager : MonoBehaviour
     {
         if (GameManagerRPG.instance.playerpg != null)
         {
-          if (isEnabled)
-        {
-            if (rpgTextObject != null) rpgTextObject.SetActive(true);
-            if (personNameObject != null) personNameObject.SetActive(true);
-        }
-        else
-        {
-            rpgTextObject.SetActive(false);
-            personNameObject.SetActive(false);
-        }  
+            if (isEnabled)
+            {
+                if (rpgTextObject != null) rpgTextObject.SetActive(true);
+                if (personNameObject != null) personNameObject.SetActive(true);
+            }
+            else
+            {
+                rpgTextObject.SetActive(false);
+                personNameObject.SetActive(false);
+            }  
+            
         }
         
     }
@@ -143,6 +144,7 @@ public class DialogueManager : MonoBehaviour
         GameManagerRPG.instance.playerpg.isMovable = false;
         if (!isTalking)
         {
+            nextButton.SetActive(!isTalking);
             yield break;
         }
         for (int i = 0; i < sentence.Length + 1; i++)
@@ -160,6 +162,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     rpgText.text = sentence;
                     brokenSentence = string.Empty;
+                    nextButton.SetActive(!isTalking);
                 }
                 else
                 {
@@ -168,10 +171,11 @@ public class DialogueManager : MonoBehaviour
 
 
                     brokenSentence = sentence.Substring(dialogueBounds, newLength);
+                    nextButton.SetActive(!isTalking);
 
 
                 }
-                nextButton.SetActive(true);
+                
 
                 break;
             }
@@ -180,6 +184,7 @@ public class DialogueManager : MonoBehaviour
                 Debug.Log(rpgText.text.Length);
                 rpgText.text = sentence.Substring(0, i);
                 yield return new WaitForSeconds(dialogueSpeed);
+                nextButton.SetActive(!isTalking);
                 continue;
             }
             else
@@ -190,7 +195,8 @@ public class DialogueManager : MonoBehaviour
                 {
                     rpgText.text = sentence;
                     brokenSentence = string.Empty;
-                    nextButton.SetActive(true);
+                    nextButton.SetActive(!isTalking);
+                    
                     break;
                 }
                 else
@@ -200,14 +206,15 @@ public class DialogueManager : MonoBehaviour
 
 
                     brokenSentence = sentence.Substring(dialogueBounds, newLength);
-                    nextButton.SetActive(true);
+                    nextButton.SetActive(!isTalking);
+                    
                     break;
 
 
                 }
             }
 
-
+            
 
 
 
@@ -220,7 +227,7 @@ public class DialogueManager : MonoBehaviour
 
         }
 
-
+        
 
 
     }

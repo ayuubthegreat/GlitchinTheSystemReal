@@ -11,7 +11,7 @@ public class startHealthScriptt : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        hearts = GetComponentsInChildren<hearts>();
+        hearts = FindObjectsByType<hearts>(FindObjectsSortMode.None);
         SetShowHealth(0); // Initialize health display to off
         GameStarted = true; // Initialize game state
     }

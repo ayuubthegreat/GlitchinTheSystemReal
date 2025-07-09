@@ -69,18 +69,16 @@ public class door : MonoBehaviour
         GameManager.instance.startSpawnBool = false;
         yield return new WaitForSeconds(seconds2Wait);
         TeleportationPoint();
-        GameManager.instance.playerpg.isMovable = true;
+        GameManagerRPG.instance.playerpg.isMovable = true;
 
     }
     public void TeleportationPoint()
     {
         if (GameManager.instance.iswalkingdoor)
         {
-            UIManager.instance.ScreenControls();
-            GameManager.instance.DefiningGameObjectsandScripts();
             mainMap.SetActive(false);
             houseMap.SetActive(true);
-            GameManager.instance.playerpg.transform.position = teleportationPoint.transform.position;
+            GameManagerRPG.instance.playerpg.transform.position = teleportationPoint.transform.position;
             audioSource.clip = clipNew;
             audioSource.Play();
             UIManager.instance.location = newLocationName;
@@ -88,20 +86,20 @@ public class door : MonoBehaviour
         }
         else
         {
-            UIManager.instance.ScreenControls();
-            GameManager.instance.DefiningGameObjectsandScripts();
+            
+            
             houseMap.SetActive(false);
             mainMap.SetActive(true);
-            if (GameManager.instance.doorSpawn == null)
+            if (GameManagerRPG.instance.doorSpawn == null)
             {
-                GameManager.instance.doorSpawn = GameObject.Find("startoutsideplayerdoor");
+                GameManagerRPG.instance.doorSpawn = GameObject.Find("startoutsideplayerdoor");
             }
-            if (GameManager.instance.outsideDoorSpawnObject == Vector3.zero)
+            if (GameManagerRPG.instance.spawnObject == Vector3.zero)
             {
-                GameManager.instance.outsideDoorSpawnObject = GameManager.instance.doorSpawn.transform.position;
+                GameManagerRPG.instance.spawnObject = GameManagerRPG.instance.doorSpawn.transform.position;
             }
-            GameManager.instance.playerpg.transform.position = GameManager.instance.outsideDoorSpawnObject;
-            audioSource.clip = GameManager.instance.cameraControllerRPG.clipOld;
+            GameManagerRPG.instance.playerpg.transform.position = GameManagerRPG.instance.spawnObject;
+            audioSource.clip = GameManagerRPG.instance.cameraController.clipOld;
             audioSource.Play();
             UIManager.instance.location = newLocationName;
             StopAllCoroutines();

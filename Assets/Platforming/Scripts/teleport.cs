@@ -14,6 +14,7 @@ public class teleport : MonoBehaviour
     public int xInputNum;
     public int yInputNum;
     public bool isTouchingPlayer;
+    public Vector3 spawnDistance;
     public int seconds;
     public SceneManager sm;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,7 +31,7 @@ public class teleport : MonoBehaviour
 
 
     }
-    void OnTriggerStay2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         isTouchingPlayer = xInput == xInputNum && yInput == yInputNum;
         playerpg playerpg = collision.gameObject.GetComponent<playerpg>();
@@ -40,7 +41,7 @@ public class teleport : MonoBehaviour
             if (xInput == xInputNum && yInput == yInputNum)
             {
                 playerpg.isMovable = false;
-                GameManager.instance.phoneBoothSpawn = gameObject.transform.position;
+                GameManager.instance.phoneBoothSpawn = transform.position + spawnDistance;
                 GameManager.instance.LoadNewSceneReal(seconds, scene);
                 
             }

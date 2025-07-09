@@ -25,7 +25,6 @@ public class gameManagerPlatformer : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        player = FindFirstObjectByType<player>();
         spawnObject = startSpawnPlatforming.transform.position;
         CheckObjectStates();
     }
@@ -62,7 +61,7 @@ public class gameManagerPlatformer : MonoBehaviour
         GameObject newPlayer = Instantiate(playerPrefab, spawnObject, Quaternion.identity);
         player = newPlayer.GetComponent<player>();
         CheckObjectStates();
-        
+
     }
     public void RespawnPlayerInCheckpoint(Vector3 newSpawnPoint, int index)
     {
@@ -74,6 +73,27 @@ public class gameManagerPlatformer : MonoBehaviour
     {
         camera = FindFirstObjectByType<Camera>();
         cameraController = camera.GetComponent<CameraControllerRPG>();
+    }
+     public void StartCutscene(int cutsceneNum, int seconds, float moveSpeed) => StartCoroutine(StartingCutscene(cutsceneNum, seconds, moveSpeed));
+    public IEnumerator StartingCutscene(int cutsceneNum, int seconds, float moveSpeed)
+    {
+        switch (cutsceneNum)
+        {
+            case 1:
+                player.isMovable = false;
+                camera.orthographicSize = 1.5f;
+                targetCameraSize = 1.5f;
+                yield return new WaitForSeconds(seconds);
+                targetCameraSize = 5f;
+                cameraSpeed = moveSpeed;
+                yield return new WaitForSeconds(2);
+                UIManagerPlatformer.instance.SetUIElementsActive(true);
+                player.isMovable = true;
+                break;
+            case 2:
+                break;
+        }
+
     }
 
 }

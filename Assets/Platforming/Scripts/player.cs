@@ -98,7 +98,7 @@ public class player : MonoBehaviour
         {
             transform.position = GameManager.instance.spawnObject;
         }
-        GameManager.instance.StartCutscene(1, 2, 4f);
+        gameManagerPlatformer.instance.StartCutscene(1, 2, 4f);
        
     }
     private void HandleMovement()
