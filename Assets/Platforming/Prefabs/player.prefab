@@ -150,8 +150,8 @@ MonoBehaviour:
   groundCheckDistance: 1
   wallCheckDistance: 0.5
   deadZoneCheckDistance: 0
-  knockbackDuration: 1
-  knockbackPower: {x: 10, y: 2}
+  knockbackDuration: 0.5
+  knockbackPower: {x: 4, y: 2}
   isKnocked: 0
   canBeKnocked: 1
   coinCheckDistance: 0

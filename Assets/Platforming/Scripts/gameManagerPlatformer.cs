@@ -88,7 +88,7 @@ public class gameManagerPlatformer : MonoBehaviour
                 yield return new WaitForSeconds(seconds);
                 targetCameraSize = 5f;
                 cameraSpeed = moveSpeed;
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(1);
                 UIManagerPlatformer.instance.SetUIElementsActive(true);
                 player.isMovable = true;
                 break;
