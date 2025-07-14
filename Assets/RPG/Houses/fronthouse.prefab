@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2059063379
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -3968110728592384696, guid: 6dfd97700689e5b458f7627f9327df65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -223,6 +223,10 @@ PrefabInstance:
       propertyPath: scene
       value: housemap3
       objectReference: {fileID: 0}
+    - target: {fileID: 9128397467690038221, guid: 42c364186d715094b952f95d2dbedfaa, type: 3}
+      propertyPath: mainMap
+      value: 
+      objectReference: {fileID: 1162620958887309682, guid: b61e1c410fe547c4fa4b91f0a2d5d921, type: 3}
     - target: {fileID: 9128397467690038221, guid: 42c364186d715094b952f95d2dbedfaa, type: 3}
       propertyPath: doorrespawnTime
       value: 2

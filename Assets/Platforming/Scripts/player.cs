@@ -146,7 +146,7 @@ public class player : MonoBehaviour
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
         isTouchingWall = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
         isDead = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsDeadZone);
-        canWallSlide = isTouchingWall && xInput == (1 * facingDir);
+        canWallSlide = isTouchingWall && xInput == (1 * facingDir) && rb.linearVelocity.y < 0;
 
         bool coyoteJumpAvailable = Time.time < coyoteJumpActivated + coyoteJumpWindow;
         if (Input.GetKeyDown(KeyCode.Space))
@@ -338,6 +338,10 @@ public class player : MonoBehaviour
     }
     private void HandleFlip()
     {
+        if (isWallMoving)
+        {
+            return;
+        }
         if (xInput < 0 && facingRight || xInput > 0 && !facingRight)
         {
             Flip();

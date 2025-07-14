@@ -246,6 +246,8 @@ public class DialogueManager : MonoBehaviour
         UIManager.instance.ChangeStartTransitionsBoolArray(0, false);
         UIManager.instance.ChangeStartTransitionsBoolArray(1, false);
         ResetTalkingStick();
+        DialogueProcessor.instance.npcDetector.enabled = true;
+        DialogueProcessor.instance.isTalkingToHomelessMan = false;
 
         DialogueProcessor.instance.DialogueProgressionFunction();
     }

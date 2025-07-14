@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class enemy : MonoBehaviour
 {
-    public int moveDistance;
     public SpriteRenderer sr;
-    public Animator anim;
     public float moveSpeed = 3;
     public Transform[] waypoints;
     public Vector3[] waypointPositions;
     public int waypointCurrent = 1;
-    public Transform startPosition;
     public bool canMove;
     public float coolDown;
     public float beginningDelay;
@@ -19,7 +16,7 @@ public class enemy : MonoBehaviour
 
     void Awake()
     {
-        startPosition = transform;
+        
     }
     void Start()
     {
@@ -63,7 +60,7 @@ public class enemy : MonoBehaviour
     }
     void Update()
     {
-        
+        EnemyMovement();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Die()
@@ -74,7 +71,6 @@ public class enemy : MonoBehaviour
     {
         if (GameManager.instance != null && GameManager.instance.player != null)
         {
-        GameObject newDeathVFX = Instantiate(GameManager.instance.player.deathVFX, transform.position, Quaternion.identity);
         GameManager.instance.player.landedonEnemy = false;
         }
         
@@ -89,8 +85,10 @@ public class enemy : MonoBehaviour
     }
     public IEnumerator BeginEnemyMovement()
     {
+        canMove = false;
         yield return new WaitForSeconds(beginningDelay);
-        EnemyMovement();
+        canMove = true;
+
     }
     public void EnemyMovement()
     {

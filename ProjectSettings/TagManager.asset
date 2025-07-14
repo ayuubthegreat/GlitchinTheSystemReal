@@ -45,6 +45,9 @@ TagManager:
   - name: houseBackground
     uniqueID: 584171249
     locked: 0
+  - name: enemies
+    uniqueID: 2903612461
+    locked: 0
   - name: player
     uniqueID: 3469011689
     locked: 0

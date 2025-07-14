@@ -10,6 +10,9 @@ public class LocationChanger : MonoBehaviour
     public string backLocation;
     public string frontLocation;
     public bool showLocationSlider = true;
+    public AudioClip clipBehind;
+    public AudioClip clipFront;
+    public bool musicChanges;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,11 +28,26 @@ public class LocationChanger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         playerpg player = collision.gameObject.GetComponent<playerpg>();
         if (player && showLocationSlider) {
-            if (player.yInput == 1) {
+            if (player.yInput == 1)
+            {
                 UIManager.instance.location = backLocation;
-            } else if (player.yInput == -1) {
-                UIManager.instance.location = frontLocation;
+                if (musicChanges)
+                {
+                    GameManagerRPG.instance.StartFadingVolume(clipBehind, 3);
+                      
+                }
+                
             }
+            else if (player.yInput == -1)
+            {
+                UIManager.instance.location = frontLocation;
+                if (musicChanges)
+                {
+                    GameManagerRPG.instance.StartFadingVolume(clipFront, 3); 
+                }
+                
+            }
+            
             UIManager.instance.StartChangeTransitionBools();
         }
     }

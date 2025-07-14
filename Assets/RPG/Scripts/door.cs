@@ -66,7 +66,7 @@ public class door : MonoBehaviour
     public IEnumerator LoadandRespawnPlayer()
     {
         GameManager.instance.iswalkingdoor = GetComponentInChildren<doorSpawner>() ? true : false;
-        GameManager.instance.startSpawnBool = false;
+       
         yield return new WaitForSeconds(seconds2Wait);
         TeleportationPoint();
         GameManagerRPG.instance.playerpg.isMovable = true;
@@ -79,8 +79,8 @@ public class door : MonoBehaviour
             mainMap.SetActive(false);
             houseMap.SetActive(true);
             GameManagerRPG.instance.playerpg.transform.position = teleportationPoint.transform.position;
-            audioSource.clip = clipNew;
-            audioSource.Play();
+            GameManagerRPG.instance.source.clip = clipNew;
+            GameManagerRPG.instance.source.Play();
             UIManager.instance.location = newLocationName;
             UIManager.instance.canTransition = true;
         }
@@ -90,23 +90,21 @@ public class door : MonoBehaviour
             
             houseMap.SetActive(false);
             mainMap.SetActive(true);
-            if (GameManagerRPG.instance.doorSpawn == null)
-            {
-                GameManagerRPG.instance.doorSpawn = GameObject.Find("startoutsideplayerdoor");
-            }
-            if (GameManagerRPG.instance.spawnObject == Vector3.zero)
+            if (GameManager.instance.DialogueProgression == 3 && GameManager.instance.startSpawnBool)
             {
                 GameManagerRPG.instance.spawnObject = GameManagerRPG.instance.doorSpawn.transform.position;
             }
+            GameManager.instance.startSpawnBool = false;
             GameManagerRPG.instance.playerpg.transform.position = GameManagerRPG.instance.spawnObject;
-            audioSource.clip = GameManagerRPG.instance.cameraController.clipOld;
+            audioSource.clip = GameManagerRPG.instance.audioClips[1];
             audioSource.Play();
             UIManager.instance.location = newLocationName;
             StopAllCoroutines();
             UIManager.instance.StartChangeTransitionBools();
+            GameManager.instance.iswalkingdoor = false;
 
         }
-        GameManager.instance.iswalkingdoor = false;
+        
 
         
         

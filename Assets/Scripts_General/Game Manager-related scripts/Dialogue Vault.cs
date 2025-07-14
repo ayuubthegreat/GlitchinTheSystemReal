@@ -36,7 +36,12 @@ public class DialogueVault : MonoBehaviour
                 new DialogueSet { dialogueLine = "You see now? This cannot be just a coincidence. My house has been deserted ever since my siblings received VR sets from the P-tech corporation, and now yours has left you as well! There’s a deeper agenda here, and I think it’s those VR goggles that are the main pawn in it.", characterName = "Abdurahman" },
                 new DialogueSet { dialogueLine = "...That does make sense…….but what are we supposed to do about it, other than ensure we never get those goggles?", characterName = "Yasir" },
                 new DialogueSet { dialogueLine = "I just called a police officer yesterday, who explained to me that what P-Tech is doing to our society is far beyond illegal, even more so than they usually are. I mean, you’ve seen the news. Society has basically halted. No stores are running, no banks are printing checks…...it’s like those VR headsets pulled everyone in to them and left only husks walking around the streets.", characterName = "Abdurahman" },
-                }
+                },
+            // Homeless man dialogue
+            new DialogueSet[] {
+                new DialogueSet{dialogueLine = "Please....help me out, brother. I have nothing to eat.....I've been starving for" + UnityEngine.Random.Range(3, 6).ToString() + "days! <page> Won't you please give me some money?", characterName = "Needy Man"},
+                new DialogueSet{dialogueLine = "Well....", characterName = "Abdurahman" },
+            }
         };
         
 

@@ -17,6 +17,7 @@ public class gameManagerPlatformer : MonoBehaviour
     public float originalCameraSize;
     public float targetCameraSize;
     public float cameraSpeed;
+    public AudioSource source;
 
     void Awake()
     {
@@ -58,6 +59,7 @@ public class gameManagerPlatformer : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         startSpawnPlatforming = GameObject.Find("spawnPointPlatforming");
+        source.time = 0f;
         GameObject newPlayer = Instantiate(playerPrefab, spawnObject, Quaternion.identity);
         player = newPlayer.GetComponent<player>();
         CheckObjectStates();
