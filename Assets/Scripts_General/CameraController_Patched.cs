@@ -11,6 +11,7 @@ public class CameraControllerRPG : MonoBehaviour
     public player playerScripts;
     public playerpg playerpg;
     public bool startFollowingPlayer;
+    public float distancefromPlayer;
 
     void Start()
     {
@@ -23,7 +24,7 @@ public class CameraControllerRPG : MonoBehaviour
         GameObject foundPlayer = GameObject.Find("player");
         if (foundPlayer != null)
         {
-            
+
             playerpg = foundPlayer.GetComponent<playerpg>();
         }
     }
@@ -38,14 +39,41 @@ public class CameraControllerRPG : MonoBehaviour
             {
                 if (startFollowingPlayer)
                 {
-                    transform.position = playerScripts.transform.position;  
+                    FollowPlayer();
+
                 }
-                
+                else
+                {
+                    transform.position = playerScripts.transform.position;
+                }
+
             }
             else if (playerpg != null)
             {
                 transform.position = playerpg.transform.position;
             }
+        }
+    }
+    public void FollowPlayer()
+    {
+        transform.position = Vector3.Lerp(transform.position, playerScripts.transform.position + new Vector3(2, 0, 0), Time.deltaTime * 15);
+    }
+    public void DecreaseDistanceFromPlayer()
+    {
+        if (playerScripts.xInput == 0)
+        {
+            distancefromPlayer = 2;
+            return;
+        }
+        if (playerScripts.xInput != 0)
+        {
+         distancefromPlayer -= Time.deltaTime;   
+        }
+        
+        if (distancefromPlayer <= 0)
+        {
+            distancefromPlayer = 2;
+            return;
         }
     }
 }
