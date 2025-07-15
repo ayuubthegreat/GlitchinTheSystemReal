@@ -1556,7 +1556,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.7033868, y: -0.5710597}
+  m_Offset: {x: 0.6148424, y: -0.11358309}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1566,7 +1566,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 8.606774, y: 7.3257036}
+  m_Size: {x: 8.429686, y: 3.1051168}
   m_EdgeRadius: 0
 --- !u!95 &851471042
 Animator:
@@ -2012,7 +2012,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1872, y: -116.41}
+  m_AnchoredPosition: {x: 1872, y: -116.40991}
   m_SizeDelta: {x: 100, y: 264}
   m_Pivot: {x: 3.4, y: 0.5}
 --- !u!95 &1120404812

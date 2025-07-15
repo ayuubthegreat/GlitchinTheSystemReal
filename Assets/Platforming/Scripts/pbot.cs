@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemy : MonoBehaviour
+public class pbot : MonoBehaviour
 {
     public SpriteRenderer sr;
     public float moveSpeed = 3;
@@ -72,6 +72,10 @@ public class enemy : MonoBehaviour
         if (GameManager.instance != null && GameManager.instance.player != null)
         {
         GameManager.instance.player.landedonEnemy = false;
+        }
+        if (gameManagerPlatformer.instance.player.yInput > 0)
+        {
+            yield break;
         }
         
         yield return new WaitForSeconds(0.2f);
