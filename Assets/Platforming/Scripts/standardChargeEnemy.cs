@@ -13,7 +13,7 @@ public class StandardEnemy : ComplexEnemy
     protected override void Update()
     {
         base.Update();
-        if (isWallDetected || !isGroundDetected)
+        if (isWallDetected || !isGroundDetected || isEnemyDetected)
         {
             Flip();
         }

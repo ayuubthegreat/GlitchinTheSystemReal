@@ -69,9 +69,14 @@ public class player : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private LayerMask whatIsDeadZone;
     [SerializeField] private LayerMask whatisCoins;
+    [SerializeField] private LayerMask whatisEnemy;
+    [Header("Enemy Destruction Values")]
+    public Transform enemyDestroy;
+    public float enemyDestroyRadius;
     [Header("Other Values")]
     public float TargetTime = 0.01f;
     private int facingDir = 1;
+
     #endregion
 
 
@@ -80,8 +85,8 @@ public class player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
 
-        
-        
+
+
     }
     void Start()
     {
@@ -99,7 +104,7 @@ public class player : MonoBehaviour
             transform.position = GameManager.instance.spawnObject;
         }
         gameManagerPlatformer.instance.StartCutscene(1, 1, 6f);
-       
+
     }
     private void HandleMovement()
     {
@@ -140,7 +145,7 @@ public class player : MonoBehaviour
             return;
         }
         HandleMovement();
-
+        EnemyDetectionandDestruction();
         WallSlide();
         HandleFlip();
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
@@ -271,7 +276,7 @@ public class player : MonoBehaviour
         {
             canDash = false;
             isDashing = true;
-            
+
         }
 
         yield return new WaitForSeconds(value == 0 ? knockbackDuration : dashDuration);
@@ -298,17 +303,17 @@ public class player : MonoBehaviour
     }
     private void WallSlide()
     {
-        
+
         if (!canWallSlide)
         {
             return;
         }
         float yModifier = yInput < 0 ? .15f : .3f;
         anim.SetTrigger("wallSlide");
-        
-        
+
+
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * yModifier);
-        
+
     }
     private void UpdateAirbornStatus()
     {
@@ -369,6 +374,20 @@ public class player : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+    }
+    public void EnemyDetectionandDestruction()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(enemyDestroy.position, enemyDestroyRadius, whatisEnemy);
+        foreach (var collider in colliders)
+        {
+            ComplexEnemy enemy = collider.gameObject.GetComponent<ComplexEnemy>();
+            if (enemy != null && !isGrounded)
+            {
+                Debug.Log("This worked....");
+                Destroy(collider.gameObject);
+                Jump();
+            }
+        }
     }
     #endregion
 

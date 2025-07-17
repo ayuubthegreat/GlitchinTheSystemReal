@@ -73,12 +73,13 @@ public class pbot : MonoBehaviour
         {
         GameManager.instance.player.landedonEnemy = false;
         }
-        if (gameManagerPlatformer.instance.player.yInput > 0)
+        if (gameManagerPlatformer.instance.player.yInput >= 0)
         {
             yield break;
         }
         
         yield return new WaitForSeconds(0.2f);
+        gameManagerPlatformer.instance.player.Push(new Vector2(0, 10), .3f);
         Destroy(gameObject);
     }
     public IEnumerator CooldownMan(float delay) {

@@ -29,7 +29,7 @@ public class CameraControllerRPG : MonoBehaviour
         }
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (GameManager.instance != null)
         {
@@ -56,7 +56,7 @@ public class CameraControllerRPG : MonoBehaviour
     }
     public void FollowPlayer()
     {
-        transform.position = Vector3.Lerp(transform.position, playerScripts.transform.position + new Vector3(2, 0, 0), Time.deltaTime * 15);
+        transform.position = Vector3.Lerp(transform.position, playerScripts.transform.position + new Vector3(distancefromPlayer, 0, 0), Time.deltaTime * 15);
     }
     public void DecreaseDistanceFromPlayer()
     {
