@@ -32,8 +32,9 @@ public class ComplexEnemy : MonoBehaviour
     protected virtual void Update()
     {
         HandleMovement();
-        anim.SetFloat("xVelocity", rb.linearVelocity.x);
+        
         HandleCollision();
+        anim.SetFloat("xVelocity", rb.linearVelocity.x);
     }
 
     protected virtual void HandleCollision()
@@ -52,8 +53,11 @@ public class ComplexEnemy : MonoBehaviour
     }
     protected virtual void Flip()
     {
-        
 
+        if (rb.linearVelocityY != 0)
+        {
+            return;
+        }
         facingDir = facingDir * -1;
         transform.Rotate(0, 180, 0);
     }
