@@ -57,6 +57,6 @@ public class Charger_Rhino : ComplexEnemy
     {
         rb.linearVelocity = Vector2.zero;
         anim.SetBool("wallBounce", false);
-        Invoke(nameof(Flip), .3f);
+        Flip();
     }
 }
