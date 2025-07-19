@@ -53,10 +53,6 @@ public class ComplexEnemy : MonoBehaviour
     }
     protected virtual void Flip()
     {
-        if (canMove == false)
-        {
-            return;
-        }
         facingDir = facingDir * -1;
         transform.Rotate(0, 180, 0);
     }

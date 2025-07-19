@@ -18,6 +18,7 @@ public class gameManagerPlatformer : MonoBehaviour
     public float targetCameraSize;
     public float cameraSpeed;
     public AudioSource source;
+    public int coinNumbers = 0;
 
     void Awake()
     {
