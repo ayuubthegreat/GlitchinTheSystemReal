@@ -53,8 +53,7 @@ public class ComplexEnemy : MonoBehaviour
     }
     protected virtual void Flip()
     {
-
-        if (rb.linearVelocityY != 0)
+        if (canMove == false)
         {
             return;
         }

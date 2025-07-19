@@ -50,13 +50,15 @@ public class Charger_Rhino : ComplexEnemy
         canMove = false;
         anim.SetBool("wallBounce", true);
         rb.linearVelocity = new Vector2(impact.x * -facingDir, impact.y);
-        
+
 
     }
     public void EndTheCharge()
     {
         rb.linearVelocity = Vector2.zero;
+        Debug.Log("This is working.");
         anim.SetBool("wallBounce", false);
-        Invoke(nameof(Flip), .3f);
+        Invoke(nameof(Flip), .5f);
+
     }
 }
