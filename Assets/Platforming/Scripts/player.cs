@@ -323,6 +323,7 @@ public class player : MonoBehaviour
             isWallMoving = false;
             canDoubleJump = true;
             isMovable = true;
+            landedonEnemy = false;
             AttemptBufferJump();
         }
         if (!isGrounded && !isAirbone)
@@ -383,9 +384,14 @@ public class player : MonoBehaviour
             ComplexEnemy enemy = collider.gameObject.GetComponent<ComplexEnemy>();
             if (enemy != null && !isGrounded)
             {
+                anim.SetTrigger("landonenemy");
+                landedonEnemy = true;
+                int jumpForcer = 20;
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForcer);
                 Debug.Log("This worked....");
-                Destroy(collider.gameObject);
-                Jump();
+                collider.gameObject.SetActive(false);
+                
+                
             }
         }
     }

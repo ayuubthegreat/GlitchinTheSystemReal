@@ -11,7 +11,8 @@ public class coins : MonoBehaviour
         if (collision.gameObject.GetComponent<player>())
         {
             gameManagerPlatformer.instance.coinNumbers++;
-            Destroy(gameObject);
+            gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.coinSound);
+            gameObject.SetActive(false);
         
         }
 

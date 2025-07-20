@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -12,7 +13,15 @@ public class DamageTrigger : MonoBehaviour
     {
         healthScript = FindFirstObjectByType<startHealthScriptt>();
     }
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnEnable()
+    {
+        canBeHit = true;
+        if (healthScript == null)
+        {
+            healthScript = FindFirstObjectByType<startHealthScriptt>();
+        }
+    }
+    public void OnTriggerStay2D(Collider2D collision)
     {
         if (!canBeHit)
         {
@@ -25,8 +34,8 @@ public class DamageTrigger : MonoBehaviour
             {
                 player.Knockback(transform.position.x);
                 player.playerHealth--;
-                healthScript.SetDestroyIndividualHealth(player.playerHealth - 1);
-                StopAllCoroutines();
+                healthScript.SetDestroyIndividualHealth(player.playerHealth);
+                Debug.Log("Player Health: " + player.playerHealth);
                 StartCoroutine(CooldownforHits());
 
             }

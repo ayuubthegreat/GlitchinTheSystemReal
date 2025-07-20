@@ -17,5 +17,6 @@ public class StandardEnemy : ComplexEnemy
         {
             Flip();
         }
+        ComeBackHere();
     }
 }

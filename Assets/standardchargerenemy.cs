@@ -29,12 +29,15 @@ public class Standardchargerenemy : ComplexEnemy
         {
             canMove = true;
             toroTimer = toroDuration;
+            ComeBackHere();
         }
         if (toroTimer <= 0)
         {
             canMove = false;
             toroTimer = 0;
         }
+
+
     }
     protected override void HandleCollision()
     {
@@ -42,4 +45,5 @@ public class Standardchargerenemy : ComplexEnemy
         isPlayerDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, detectionRange, whatisPlayer);
 
     }
+   
 }

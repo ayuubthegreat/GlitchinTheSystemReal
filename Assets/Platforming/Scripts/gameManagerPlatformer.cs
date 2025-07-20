@@ -18,7 +18,11 @@ public class gameManagerPlatformer : MonoBehaviour
     public float targetCameraSize;
     public float cameraSpeed;
     public AudioSource source;
+    public AudioSource soundEffectSource;
+    public AudioClip coinSound;
     public int coinNumbers = 0;
+    public coins[] coins;
+    public ComplexEnemy[] enemies;
 
     void Awake()
     {
@@ -29,6 +33,13 @@ public class gameManagerPlatformer : MonoBehaviour
     {
         spawnObject = startSpawnPlatforming.transform.position;
         CheckObjectStates();
+        coins = FindObjectsByType<coins>(FindObjectsSortMode.None);
+        enemies = FindObjectsByType<ComplexEnemy>(FindObjectsSortMode.None);
+        playerLives = 3;
+
+        ReviveCoins();
+        ReviveEnemy();
+
     }
 
     // Update is called once per frame
@@ -64,6 +75,8 @@ public class gameManagerPlatformer : MonoBehaviour
         GameObject newPlayer = Instantiate(playerPrefab, spawnObject, Quaternion.identity);
         player = newPlayer.GetComponent<player>();
         CheckObjectStates();
+        ReviveCoins();
+        ReviveEnemy();
 
     }
     public void RespawnPlayerInCheckpoint(Vector3 newSpawnPoint, int index)
@@ -76,8 +89,9 @@ public class gameManagerPlatformer : MonoBehaviour
     {
         camera = FindFirstObjectByType<Camera>();
         cameraController = camera.GetComponent<CameraControllerRPG>();
+        soundEffectSource = GetComponent<AudioSource>();
     }
-     public void StartCutscene(int cutsceneNum, int seconds, float moveSpeed) => StartCoroutine(StartingCutscene(cutsceneNum, seconds, moveSpeed));
+    public void StartCutscene(int cutsceneNum, int seconds, float moveSpeed) => StartCoroutine(StartingCutscene(cutsceneNum, seconds, moveSpeed));
     public IEnumerator StartingCutscene(int cutsceneNum, int seconds, float moveSpeed)
     {
         switch (cutsceneNum)
@@ -98,5 +112,22 @@ public class gameManagerPlatformer : MonoBehaviour
         }
 
     }
+    public void ReviveCoins()
+    {
+        coinNumbers = 0;
+        foreach (coins coin in coins)
+        {
+            coin.gameObject.SetActive(true);
+        }
+    }
+    public void ReviveEnemy()
+    {
+        foreach (ComplexEnemy enemy in enemies)
+        {
+            enemy.gameObject.SetActive(true);
+            
+            }
+        }
+    }
 
-}
+

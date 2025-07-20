@@ -181,9 +181,9 @@ MonoBehaviour:
   positions: []
   originalTransformPosition: {x: 0, y: 0, z: 0}
   speed: 0.2
-  travelDistance: 5
+  travelDistance: 8
   positionindex: 0
-  floatDelays: 1
+  floatDelays: 4
   canMove: 1
   randomDelay: 0
 --- !u!61 &568133645077511685

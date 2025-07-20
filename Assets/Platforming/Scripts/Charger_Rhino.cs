@@ -8,6 +8,7 @@ public class Charger_Rhino : ComplexEnemy
     public float toroTimer;
     public int toroDuration;
     public bool isPlayerDetected;
+    public bool isBouncing = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
@@ -20,6 +21,11 @@ public class Charger_Rhino : ComplexEnemy
     {
         base.Update();
         toroTimer -= Time.deltaTime;
+        if (rb.linearVelocity.y == 0 && isBouncing) {
+            
+            isBouncing = false;
+            Flip();
+        }
         if (!isGroundDetected || isEnemyDetected)
         {
             Flip();
@@ -36,6 +42,7 @@ public class Charger_Rhino : ComplexEnemy
         }
         if (isWallDetected)
         {
+            
             WallBounce();
         }
     }
@@ -47,6 +54,7 @@ public class Charger_Rhino : ComplexEnemy
     }
     private void WallBounce()
     {
+        isBouncing = true;
         canMove = false;
         anim.SetBool("wallBounce", true);
         rb.linearVelocity = new Vector2(impact.x * -facingDir, impact.y);
@@ -55,9 +63,16 @@ public class Charger_Rhino : ComplexEnemy
     }
     public void EndTheCharge()
     {
-        rb.linearVelocity = Vector2.zero;
         Debug.Log("This is working.");
         anim.SetBool("wallBounce", false);
-        Flip();
+    }
+    protected override void Flip()
+    {
+        if (isBouncing) // Prevent flipping while bouncing
+        {
+            return;
+        }
+        transform.Rotate(0, 180, 0);
+        facingDir = facingDir * -1;
     }
 }
