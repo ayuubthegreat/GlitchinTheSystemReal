@@ -5,10 +5,9 @@ using UnityEngine.PlayerLoop;
 
 public class Standardchargerenemy : ComplexEnemy
 {
-    public float detectionRange;
     public float toroTimer;
     public int toroDuration;
-    public bool isPlayerDetected;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {

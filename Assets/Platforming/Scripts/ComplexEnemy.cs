@@ -9,9 +9,11 @@ public class ComplexEnemy : MonoBehaviour
     [SerializeField] protected int moveSpeed = 10;
     protected int coolDownTime;
     [SerializeField] protected int facingDir = -1;
+    [SerializeField] protected float detectionRange = 20f;
     [SerializeField] protected bool isGroundDetected;
     [SerializeField] protected bool isWallDetected;
     [SerializeField] protected bool isEnemyDetected;
+    [SerializeField] protected bool isPlayerDetected;
     [SerializeField] protected Transform groundDetection;
     [SerializeField] protected float groundCheckDistance = 1.1f;
     [SerializeField] protected float wallCheckDistance = 1.1f;
@@ -42,6 +44,7 @@ public class ComplexEnemy : MonoBehaviour
         isGroundDetected = Physics2D.Raycast(groundDetection.position, Vector2.down, groundCheckDistance, whatisGround);
         isWallDetected = Physics2D.Raycast(groundDetection.position, Vector2.right * facingDir, wallCheckDistance, whatisGround);
         isEnemyDetected = Physics2D.Raycast(groundDetection.position, Vector2.right * facingDir, wallCheckDistance, whatisEnemy);
+         isPlayerDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, detectionRange, whatisPlayer);
 
     }
     protected virtual void HandleMovement()

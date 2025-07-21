@@ -4,10 +4,10 @@ public class Charger_Rhino : ComplexEnemy
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Vector2 impact;
-    public float detectionRange;
+    
     public float toroTimer;
     public int toroDuration;
-    public bool isPlayerDetected;
+ 
     public bool isBouncing = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -49,7 +49,7 @@ public class Charger_Rhino : ComplexEnemy
     protected override void HandleCollision()
     {
         base.HandleCollision();
-        isPlayerDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, detectionRange, whatisPlayer);
+       
 
     }
     private void WallBounce()
