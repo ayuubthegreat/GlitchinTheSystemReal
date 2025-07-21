@@ -41,7 +41,7 @@ public class player : MonoBehaviour
     [SerializeField] private float wallJumpDuration = .6f;
     [SerializeField] private Vector2 wallJumpForce;
     private bool isWallMoving = false;
-    public bool canWallSlide;
+    public bool canWallSlide = false;
     [Header("Double Jump")]
     public bool canDoubleJump;
     [SerializeField] private float doubleJumpForce = 20;
@@ -303,17 +303,23 @@ public class player : MonoBehaviour
     }
     private void WallSlide()
     {
-
-        if (!canWallSlide)
+        if (!canWallSlide || isWallMoving)
         {
             return;
         }
-        float yModifier = yInput < 0 ? .15f : .3f;
-        anim.SetTrigger("wallSlide");
 
+        // Only trigger animation if not already sliding
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("WallSlide"))
+        {
+            anim.SetTrigger("wallSlide");
+        }
 
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * yModifier);
-
+        // Clamp downward velocity for consistent sliding
+        float slideSpeed = yInput < 0 ? -2f : -1f;
+        if (rb.linearVelocity.y < slideSpeed)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, slideSpeed);
+        }
     }
     private void UpdateAirbornStatus()
     {

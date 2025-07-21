@@ -5,7 +5,7 @@ using System.Collections;
 public class gameManagerPlatformer : MonoBehaviour
 {
     public static gameManagerPlatformer instance;
-    public Camera camera;
+    public new Camera camera;
     public player player;
     public GameObject playerPrefab;
     public CameraControllerRPG cameraController;
