@@ -80,22 +80,25 @@ MonoBehaviour:
   anim: {fileID: 0}
   moveSpeed: 2
   facingDir: -1
+  detectionRange: 20
   isGroundDetected: 0
   isWallDetected: 0
   isEnemyDetected: 0
+  isPlayerDetected: 0
   groundDetection: {fileID: 1906861662708643201}
-  groundCheckDistance: 1.1
-  wallCheckDistance: 0.5
+  groundCheckDistance: 2
+  wallCheckDistance: 1
   canMove: 1
   whatisGround:
-    serializedVersion: 2
-    m_Bits: 64
-  whatisWall:
     serializedVersion: 2
     m_Bits: 64
   whatisEnemy:
     serializedVersion: 2
     m_Bits: 8
+  whatisPlayer:
+    serializedVersion: 2
+    m_Bits: 0
+  yVelocity: 0
 --- !u!61 &2788528933578434499
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -130,7 +133,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.56339645, y: 0.3803792}
+  m_Offset: {x: -0.56339645, y: 0.9511299}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -140,7 +143,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 7.6999903, y: 20.10804}
+  m_Size: {x: 7.6999903, y: 18.966537}
   m_EdgeRadius: 0
 --- !u!95 &8638580496256504831
 Animator:
@@ -229,7 +232,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1979358351235130479, guid: ad0d8efcad9e891478f61be6f087fa06, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.8
+      value: -7.4
       objectReference: {fileID: 0}
     - target: {fileID: 1979358351235130479, guid: ad0d8efcad9e891478f61be6f087fa06, type: 3}
       propertyPath: m_LocalPosition.y

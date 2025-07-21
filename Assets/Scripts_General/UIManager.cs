@@ -254,21 +254,18 @@ public class UIManager : MonoBehaviour
 
     public void CheckForGameState()
     {
-        if (GameManager.instance.player == null && GameManager.instance.playerpg != null)
+        if (UIManagerRPG.instance != null)
         {
             currentScreen = MainScreens.RPG;
             GameManager.instance.RPGTimes++;
-            phone = FindAnyObjectByType<PlayerPhonePhysical>().gameObject;
+            if (phone == null)
+            {
+                phone = FindAnyObjectByType<PlayerPhonePhysical>().gameObject;
+            }
         }
-        else if (GameManager.instance.player != null && GameManager.instance.playerpg == null)
+        else if (UIManagerPlatformer.instance != null)
         {
             currentScreen = MainScreens.Platforming;
-            coinsScreen = GameObject.Find("coinsScreen");
-            livesScreen = GameObject.Find("livesScreen");
-            abdurahmanHealthScreen = GameObject.Find("abdurahmanHealthScreen");
-            coinsScreen.SetActive(true);
-            livesScreen.SetActive(true);
-            abdurahmanHealthScreen.SetActive(true);
             GameManager.instance.platformerTimes++;
         }
         else if (GameManager.instance.player == null && GameManager.instance.playerpg == null)

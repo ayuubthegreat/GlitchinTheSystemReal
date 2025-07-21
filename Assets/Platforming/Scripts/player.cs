@@ -392,8 +392,8 @@ public class player : MonoBehaviour
             {
                 anim.SetTrigger("landonenemy");
                 landedonEnemy = true;
-                int jumpForcer = 20;
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForcer);
+                int jumpForcer = 5;
+                Push(new Vector2(0, jumpForcer), 0.1f);
                 Debug.Log("This worked....");
                 collider.gameObject.SetActive(false);
                 
