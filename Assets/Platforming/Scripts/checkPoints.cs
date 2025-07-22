@@ -44,7 +44,7 @@ public class checkPoints : MonoBehaviour
             return;
         }
         
-        GameManager.instance.RespawnPlayerInCheckpoint(transform.position, 1);
+        gameManagerPlatformer.instance.RespawnPlayerInCheckpoint(transform.position, 1);
     }
     public void sortingLayerAdjust()
     {
