@@ -94,14 +94,14 @@ public class player : MonoBehaviour
         {
             GameManager.instance.player = gameObject.GetComponent<player>();
         }
-        if (GameManager.instance.startSpawnBoolPlatforming)
+        if (gameManagerPlatformer.instance.startSpawnBool)
         {
-            transform.position = GameManager.instance.startSpawnPlatforming.transform.position;
+            transform.position = gameManagerPlatformer.instance.startSpawnPlatforming.transform.position;
 
         }
         else
         {
-            transform.position = GameManager.instance.spawnObject;
+            transform.position = gameManagerPlatformer.instance.spawnObject;
         }
         gameManagerPlatformer.instance.StartCutscene(1, 1, 6f);
 
@@ -384,6 +384,7 @@ public class player : MonoBehaviour
     }
     public void EnemyDetectionandDestruction()
     {
+        anim.SetBool("landonenemy", false);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(enemyDestroy.position, enemyDestroyRadius, whatisEnemy);
         foreach (var collider in colliders)
         {
@@ -396,9 +397,10 @@ public class player : MonoBehaviour
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForcer);
                 Debug.Log("This worked....");
                 collider.gameObject.SetActive(false);
-                
-                
+
+
             }
+            anim.SetBool("landonenemy", false);
         }
     }
     #endregion

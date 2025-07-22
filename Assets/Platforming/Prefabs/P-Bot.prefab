@@ -80,6 +80,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   moveSpeed: 2
   facingDir: -1
+  yInput: 0
   detectionRange: 20
   isGroundDetected: 0
   isWallDetected: 0
@@ -209,7 +210,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1391354835
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 229992989312293679, guid: 3021a0455e931f64fa3e27d4a57dbbe8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -232,7 +233,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1979358351235130479, guid: ad0d8efcad9e891478f61be6f087fa06, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.4
+      value: -10.4
       objectReference: {fileID: 0}
     - target: {fileID: 1979358351235130479, guid: ad0d8efcad9e891478f61be6f087fa06, type: 3}
       propertyPath: m_LocalPosition.y

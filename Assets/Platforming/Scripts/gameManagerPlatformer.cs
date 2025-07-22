@@ -13,6 +13,7 @@ public class gameManagerPlatformer : MonoBehaviour
     public int playerHealth;
     public GameObject startSpawnPlatforming;
     public Vector3 spawnObject;
+    public bool startSpawnBool = true;
     [Header("Camera-related Variables")]
     public float originalCameraSize;
     public float targetCameraSize;
@@ -31,8 +32,9 @@ public class gameManagerPlatformer : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        spawnObject = startSpawnPlatforming.transform.position;
         CheckObjectStates();
+        spawnObject = startSpawnPlatforming.transform.position;
+        
         coins = FindObjectsByType<coins>(FindObjectsSortMode.None);
         enemies = FindObjectsByType<ComplexEnemy>(FindObjectsSortMode.None);
         playerLives = 3;
@@ -70,18 +72,19 @@ public class gameManagerPlatformer : MonoBehaviour
         UIManagerPlatformer.instance.SetUIElementsActive(false);
 
         yield return new WaitForSeconds(1);
-        startSpawnPlatforming = GameObject.Find("spawnPointPlatforming");
+        CheckObjectStates();
+        
         source.time = 0f;
         GameObject newPlayer = Instantiate(playerPrefab, spawnObject, Quaternion.identity);
         player = newPlayer.GetComponent<player>();
-        CheckObjectStates();
+        
         ReviveCoins();
         ReviveEnemy();
 
     }
     public void RespawnPlayerInCheckpoint(Vector3 newSpawnPoint, int index)
     {
-        GameManager.instance.startSpawnBoolPlatforming = false;
+        startSpawnBool = false;
         spawnObject = newSpawnPoint;
 
     }
@@ -90,6 +93,7 @@ public class gameManagerPlatformer : MonoBehaviour
         camera = FindFirstObjectByType<Camera>();
         cameraController = camera.GetComponent<CameraControllerRPG>();
         soundEffectSource = GetComponent<AudioSource>();
+        startSpawnPlatforming = GameObject.Find("startSpawnPlatforming");
     }
     public void StartCutscene(int cutsceneNum, int seconds, float moveSpeed) => StartCoroutine(StartingCutscene(cutsceneNum, seconds, moveSpeed));
     public IEnumerator StartingCutscene(int cutsceneNum, int seconds, float moveSpeed)

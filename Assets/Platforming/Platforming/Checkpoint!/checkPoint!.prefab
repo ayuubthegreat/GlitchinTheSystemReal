@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1816392598977114806}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.020000458, y: -0.029999971, z: 5.1796722}
+  m_LocalPosition: {x: 0.05, y: -0.029999971, z: 5.1796722}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 89685149
-  m_SortingLayer: 0
+  m_SortingLayerID: 36051585
+  m_SortingLayer: 2
   m_SortingOrder: -1
   m_Sprite: {fileID: 229992989312293679, guid: 10ad64ec2910890448988b77f2e0d575, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -257,9 +257,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1704146037
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: 1624259077
+  m_SortingLayer: 5
+  m_SortingOrder: 3
   m_Sprite: {fileID: 7939457749851398443, guid: 90ce03e6e66b73240af5cc5704af993f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -283,9 +283,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a26cef13a96181468dc59cc7f48126e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 6728083594614807052}
   active: 0
-  canBeaSpawnPoint: 0
+  canBeaSpawnPoint: 1
   lightcheck: 0
 --- !u!61 &166485795122574797
 BoxCollider2D:
@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 7982320398231016285}
   - component: {fileID: 4294073700045654673}
   - component: {fileID: 6867754121915327878}
+  - component: {fileID: 437696058815606914}
   m_Layer: 0
   m_Name: light
   m_TagString: Untagged
@@ -408,8 +409,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1704146037
-  m_SortingLayer: 0
+  m_SortingLayerID: 2060142389
+  m_SortingLayer: 8
   m_SortingOrder: 2
   m_Sprite: {fileID: -2221091813415597717, guid: bb4fa9ffd840dec4a8831c9d8e12b2ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -490,3 +491,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.7592063, y: 5.003707}
   m_EdgeRadius: 0
+--- !u!114 &437696058815606914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5783534611957141768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a26cef13a96181468dc59cc7f48126e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 7982320398231016285}
+  active: 0
+  canBeaSpawnPoint: 0
+  lightcheck: 1

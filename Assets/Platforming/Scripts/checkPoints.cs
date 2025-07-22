@@ -12,6 +12,7 @@ public class checkPoints : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -36,7 +37,7 @@ public class checkPoints : MonoBehaviour
         anim.SetBool("active", active);
         if (lightcheck)
         {
-            sprite.sortingLayerName = "playeranim";
+            sprite.sortingLayerName = "darklight";
         }
 
         if (!canBeaSpawnPoint)
@@ -48,7 +49,15 @@ public class checkPoints : MonoBehaviour
     }
     public void sortingLayerAdjust()
     {
-        sprite.sortingLayerName = "backgroundtop";
+        if (!lightcheck)
+        {
+            sprite.sortingLayerName = "door";
+        }
+        else
+        {
+            sprite.sortingLayerName = "lights/gradients";
+        }
+        
         sprite.sortingOrder = 3;
     }
 }
