@@ -391,7 +391,7 @@ public class player : MonoBehaviour
             ComplexEnemy enemy = collider.gameObject.GetComponent<ComplexEnemy>();
             if (enemy != null && !isGrounded)
             {
-                anim.SetTrigger("landonenemy");
+                anim.SetBool("landonenemy", true);
                 landedonEnemy = true;
                 int jumpForcer = 10;
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForcer);
