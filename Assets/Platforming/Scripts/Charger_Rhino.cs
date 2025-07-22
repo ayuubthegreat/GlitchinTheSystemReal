@@ -24,7 +24,11 @@ public class Charger_Rhino : ComplexEnemy
         if (rb.linearVelocity.y == 0 && isBouncing) {
             
             isBouncing = false;
-            Invoke(nameof(Flip), 0.1f); // Delay flip to allow for bounce animation
+            if (facingDir == 1 && gameManagerPlatformer.instance.player.transform.position.x < transform.position.x || facingDir == -1 && gameManagerPlatformer.instance.player.transform.position.x > transform.position.x)
+            {
+                Invoke(nameof(Flip), 0.1f);
+            } else {}
+             // Delay flip to allow for bounce animation
             anim.SetBool("wallBounce", false);
         }
          if (isWallDetected)

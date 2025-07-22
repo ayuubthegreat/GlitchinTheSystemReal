@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7417926470553763790
+--- !u!1 &7789972464558684167
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,12 +8,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5987008686297921856}
-  - component: {fileID: 1569686405846959232}
-  - component: {fileID: 6320197129055553346}
-  - component: {fileID: 4863697548781465421}
-  - component: {fileID: 3101994363942554500}
-  - component: {fileID: 7480695588074519152}
+  - component: {fileID: 3911507593000887723}
+  - component: {fileID: 4175119283033006055}
+  - component: {fileID: 8473007631408101992}
+  - component: {fileID: 3460714423443776366}
+  - component: {fileID: 8241996770011534330}
+  - component: {fileID: 8295275952165045273}
   m_Layer: 3
   m_Name: charger_rhino
   m_TagString: Untagged
@@ -21,30 +21,30 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5987008686297921856
+--- !u!4 &3911507593000887723
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417926470553763790}
+  m_GameObject: {fileID: 7789972464558684167}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 209.41, y: 15.59, z: 0}
   m_LocalScale: {x: 1.6496, y: 1.6496, z: 1.6496}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3352693428808951120}
-  - {fileID: 3819727130025474660}
+  - {fileID: 5349602710058555626}
+  - {fileID: 381170993596351079}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1569686405846959232
+--- !u!212 &4175119283033006055
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417926470553763790}
+  m_GameObject: {fileID: 7789972464558684167}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -93,14 +93,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &6320197129055553346
+--- !u!95 &8473007631408101992
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417926470553763790}
+  m_GameObject: {fileID: 7789972464558684167}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2007bbdc5d03b944d9b1b4245f9b3d89, type: 2}
@@ -115,14 +115,14 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!50 &4863697548781465421
+--- !u!50 &3460714423443776366
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417926470553763790}
+  m_GameObject: {fileID: 7789972464558684167}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -142,13 +142,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &3101994363942554500
+--- !u!61 &8241996770011534330
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417926470553763790}
+  m_GameObject: {fileID: 7789972464558684167}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -188,13 +188,13 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.71888924, y: 1.5388968}
   m_EdgeRadius: 0
---- !u!114 &7480695588074519152
+--- !u!114 &8295275952165045273
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417926470553763790}
+  m_GameObject: {fileID: 7789972464558684167}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ce8ee43d11d5734b85ab1a3bf675868, type: 3}
@@ -209,7 +209,7 @@ MonoBehaviour:
   isWallDetected: 0
   isEnemyDetected: 0
   isPlayerDetected: 0
-  groundDetection: {fileID: 3819727130025474660}
+  groundDetection: {fileID: 381170993596351079}
   groundCheckDistance: 1.1
   wallCheckDistance: 1.1
   canMove: 0
@@ -226,13 +226,13 @@ MonoBehaviour:
   toroTimer: 0
   toroDuration: 5
   isBouncing: 0
---- !u!1001 &3349115135653682699
+--- !u!1001 &2175844524871181832
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5987008686297921856}
+    m_TransformParent: {fileID: 3911507593000887723}
     m_Modifications:
     - target: {fileID: 1979358351235130479, guid: ad0d8efcad9e891478f61be6f087fa06, type: 3}
       propertyPath: m_LocalPosition.x
@@ -283,18 +283,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad0d8efcad9e891478f61be6f087fa06, type: 3}
---- !u!4 &3819727130025474660 stripped
+--- !u!4 &381170993596351079 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1979358351235130479, guid: ad0d8efcad9e891478f61be6f087fa06, type: 3}
-  m_PrefabInstance: {fileID: 3349115135653682699}
+  m_PrefabInstance: {fileID: 2175844524871181832}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6801839425324817314
+--- !u!1001 &4241915104780346904
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5987008686297921856}
+    m_TransformParent: {fileID: 3911507593000887723}
     m_Modifications:
     - target: {fileID: 7614014255222033770, guid: 4af8ff4c0e7b0a443b62a67f92497e70, type: 3}
       propertyPath: m_Size.y
@@ -353,8 +353,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4af8ff4c0e7b0a443b62a67f92497e70, type: 3}
---- !u!4 &3352693428808951120 stripped
+--- !u!4 &5349602710058555626 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8134578458849853170, guid: 4af8ff4c0e7b0a443b62a67f92497e70, type: 3}
-  m_PrefabInstance: {fileID: 6801839425324817314}
+  m_PrefabInstance: {fileID: 4241915104780346904}
   m_PrefabAsset: {fileID: 0}

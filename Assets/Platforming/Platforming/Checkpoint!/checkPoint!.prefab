@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 816424733501213378}
   - component: {fileID: 239136499591086079}
   - component: {fileID: 3576072081376044720}
-  - component: {fileID: 8820598936358816842}
   - component: {fileID: 8383594258693083986}
   m_Layer: 0
   m_Name: frame000000000000_0
@@ -77,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 89685149
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 229992989312293679, guid: 10ad64ec2910890448988b77f2e0d575, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -112,22 +111,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8820598936358816842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1816392598977114806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ef7e2c94ad71b04780361e8b4fc347b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprite: {fileID: 7982320398231016285}
-  active: 0
-  canBeaSpawnPoint: 0
-  lightcheck: 0
 --- !u!61 &8383594258693083986
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -275,7 +258,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1704146037
-  m_SortingLayer: 5
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7939457749851398443, guid: 90ce03e6e66b73240af5cc5704af993f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -297,12 +280,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4770419291335344802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ef7e2c94ad71b04780361e8b4fc347b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a26cef13a96181468dc59cc7f48126e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 7982320398231016285}
+  sprite: {fileID: 0}
   active: 0
-  canBeaSpawnPoint: 1
+  canBeaSpawnPoint: 0
   lightcheck: 0
 --- !u!61 &166485795122574797
 BoxCollider2D:
@@ -361,7 +344,6 @@ GameObject:
   - component: {fileID: 8907396589241032547}
   - component: {fileID: 7982320398231016285}
   - component: {fileID: 4294073700045654673}
-  - component: {fileID: 2539596816231823896}
   - component: {fileID: 6867754121915327878}
   m_Layer: 0
   m_Name: light
@@ -427,7 +409,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1704146037
-  m_SortingLayer: 5
+  m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: -2221091813415597717, guid: bb4fa9ffd840dec4a8831c9d8e12b2ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -462,22 +444,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2539596816231823896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5783534611957141768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ef7e2c94ad71b04780361e8b4fc347b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprite: {fileID: 7982320398231016285}
-  active: 0
-  canBeaSpawnPoint: 0
-  lightcheck: 1
 --- !u!61 &6867754121915327878
 BoxCollider2D:
   m_ObjectHideFlags: 0
