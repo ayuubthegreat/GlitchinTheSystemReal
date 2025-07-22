@@ -15,6 +15,10 @@ public class StandardEnemy : ComplexEnemy
     protected override void Update()
     {
         base.Update();
+        if (isWallDetected || !isGroundDetected || isEnemyDetected)
+        {
+            Flip();
+        }
 
         yVelocity = rb.linearVelocity.y;
     }

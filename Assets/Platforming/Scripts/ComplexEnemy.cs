@@ -9,6 +9,7 @@ public class ComplexEnemy : MonoBehaviour
     [SerializeField] protected int moveSpeed = 10;
     protected int coolDownTime;
     [SerializeField] protected int facingDir = -1;
+    [SerializeField] protected float yInput;
     [SerializeField] protected float detectionRange = 20f;
     [SerializeField] protected bool isGroundDetected;
     [SerializeField] protected bool isWallDetected;
@@ -36,10 +37,6 @@ public class ComplexEnemy : MonoBehaviour
         HandleMovement();
 
         HandleCollision();
-        if (isWallDetected || !isGroundDetected || isEnemyDetected)
-        {
-            Flip();
-        }
         anim.SetFloat("xVelocity", rb.linearVelocity.x);
     }
 
@@ -57,6 +54,7 @@ public class ComplexEnemy : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(moveSpeed * facingDir, rb.linearVelocity.y);
         }
+        yInput = rb.linearVelocity.y;
     }
     protected virtual void Flip()
     {

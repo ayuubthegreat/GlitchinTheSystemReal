@@ -174,7 +174,7 @@ MonoBehaviour:
   coyoteJumpWindow: 0.5
   coyoteJumpActivated: -1
   wallJumpDuration: 0.6
-  wallJumpForce: {x: 10, y: 25}
+  wallJumpForce: {x: 10, y: 15}
   canWallSlide: 0
   canDoubleJump: 0
   doubleJumpForce: 10

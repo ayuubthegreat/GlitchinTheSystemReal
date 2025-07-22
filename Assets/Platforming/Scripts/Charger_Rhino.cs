@@ -24,7 +24,12 @@ public class Charger_Rhino : ComplexEnemy
         if (rb.linearVelocity.y == 0 && isBouncing) {
             
             isBouncing = false;
-            Flip();
+            Invoke(nameof(Flip), 0.1f); // Delay flip to allow for bounce animation
+            anim.SetBool("wallBounce", false);
+        }
+         if (isWallDetected)
+        {
+            WallBounce();
         }
         if (!isGroundDetected || isEnemyDetected)
         {
@@ -40,11 +45,7 @@ public class Charger_Rhino : ComplexEnemy
             canMove = false;
             toroTimer = 0;
         }
-        if (isWallDetected)
-        {
-            
-            WallBounce();
-        }
+       
     }
     protected override void HandleCollision()
     {
@@ -68,11 +69,10 @@ public class Charger_Rhino : ComplexEnemy
     }
     protected override void Flip()
     {
-        if (isBouncing) // Prevent flipping while bouncing
+        if ((yInput != 0 && !isBouncing) || isBouncing)
         {
             return;
         }
-        transform.Rotate(0, 180, 0);
-        facingDir = facingDir * -1;
+        base.Flip();
     }
 }

@@ -10,7 +10,7 @@ public class fallingPlatforms : MonoBehaviour
     public BoxCollider2D[] boxcolliders;
     public Rigidbody2D rb;
     public Vector3[] positions;
-    public Vector3 originalTransformPosition;
+    public Vector3 originalRBPosition;
     public float speed = .75f;
     public float travelDistance;
     public int positionindex;
@@ -22,7 +22,7 @@ public class fallingPlatforms : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         boxcolliders = GetComponents<BoxCollider2D>();
-        originalTransformPosition = transform.position;
+        originalRBPosition = rb.position;
     }
     void Start()
     {
@@ -41,24 +41,24 @@ public class fallingPlatforms : MonoBehaviour
     }
     void Update()
     {
-        Invoke(nameof(handleAnimation), randomDelay);
+        Invoke(nameof(HandleAnimation), randomDelay);
     }
     private void SetUpWayPoints()
     {
         positions = new Vector3[2];
         float yOffset = travelDistance / 2;
-        positions[0] = transform.position + new Vector3(0, yOffset, 0);
-        positions[1] = transform.position + new Vector3(0, -yOffset, 0);
+        positions[0] = rb.position + new Vector2(0, yOffset);
+        positions[1] = rb.position + new Vector2(0, -yOffset);
     }
-    private void handleAnimation()
+    private void HandleAnimation()
     {
 
         if (!canMove)
         {
             return;
         }
-        transform.position = Vector3.MoveTowards(transform.position, positions[positionindex], speed);
-        if (Vector3.Distance(transform.position, positions[positionindex]) < .1f)
+        rb.position = Vector3.MoveTowards(rb.position, positions[positionindex], speed);
+        if (Vector3.Distance(rb.position, positions[positionindex]) < .1f)
         {
             positionindex++;
             if (positionindex >= positions.Length)
@@ -86,9 +86,9 @@ public class fallingPlatforms : MonoBehaviour
     }
     private IEnumerator deathtoYou() {
         yield return new WaitForSeconds(2);
-        GameObject newObject = Instantiate(GameManager.instance.fallingPlatforms, originalTransformPosition, quaternion.identity);
-        
-        
+        GameObject newObject = Instantiate(GameManager.instance.fallingPlatforms, originalRBPosition, quaternion.identity);
+
+
         Destroy(gameObject);
     }
 

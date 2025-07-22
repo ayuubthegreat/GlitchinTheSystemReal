@@ -77,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1015282043
-  m_SortingLayer: 0
+  m_SortingLayerID: -1391354835
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 229992989312293679, guid: 573ece2ac07e8694e808c697dbf075e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -125,7 +125,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.08982849, y: -2.7889166}
+  m_Offset: {x: 0.08982849, y: 4.2084446}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -135,7 +135,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 25.515854, y: 14.422167}
+  m_Size: {x: 25.515854, y: 14.1333275}
   m_EdgeRadius: 0
 --- !u!50 &1735942293324093252
 Rigidbody2D:
@@ -160,9 +160,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &4795775150986857279
 MonoBehaviour:
@@ -180,8 +180,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   positions: []
   originalTransformPosition: {x: 0, y: 0, z: 0}
-  speed: 0.05
-  travelDistance: 10
+  speed: 0.3
+  travelDistance: 8
   positionindex: 0
   floatDelays: 4
   canMove: 1
@@ -220,7 +220,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.20960236, y: -3.3203082}
+  m_Offset: {x: 0.14274645, y: 0.7743521}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -230,5 +230,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 26.234497, y: 13.359384}
+  m_Size: {x: 24.965878, y: 5.197732}
   m_EdgeRadius: 0
