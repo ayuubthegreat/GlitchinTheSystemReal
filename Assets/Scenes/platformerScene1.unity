@@ -56826,7 +56826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 3292906041075625187}
   sr: {fileID: 3971399073495795668}
-  moveSpeed: 1
+  moveSpeed: 5
   facingDir: -1
   yInput: 0
   detectionRange: 10

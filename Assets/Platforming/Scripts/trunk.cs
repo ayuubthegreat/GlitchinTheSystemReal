@@ -25,13 +25,18 @@ public class trunk : ComplexEnemy
         {
             Flip();
         }
+        ComeBackHere();
         if (isPlayerDetected)
         {
+            
             if (canAttackAgain && Vector2.Distance(transform.position, gameManagerPlatformer.instance.player.transform.position) <= attackRange)
             {
                 Attack();
             }
+            
+            
         }
+
     }
     protected void Attack()
     {
@@ -46,4 +51,5 @@ public class trunk : ComplexEnemy
         yield return new WaitForSeconds(1f);
         canMove = true;
     }
+   
 }

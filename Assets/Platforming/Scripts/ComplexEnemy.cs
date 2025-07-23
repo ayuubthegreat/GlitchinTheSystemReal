@@ -76,15 +76,12 @@ public class ComplexEnemy : MonoBehaviour
     }
     protected virtual void ComeBackHere()
     {
-        player player = FindFirstObjectByType<player>();
-        if (player == null)
-        {
-            return; // No player found, exit the method
-        }
-        if (player.transform.position.x < transform.position.x)
-        {
-            Flip();
-        }
+    if ((facingDir == -1 && gameManagerPlatformer.instance.player.transform.position.x > transform.position.x) || 
+        (facingDir == 1 && gameManagerPlatformer.instance.player.transform.position.x < transform.position.x))
+    {
+        Flip();
+    }
+    
 
 
     }
