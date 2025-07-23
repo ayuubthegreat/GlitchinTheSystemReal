@@ -17,7 +17,7 @@ public class plant_hammerbros : ComplexEnemy
     {
         canMove = false;
         base.Start();
-        
+
     }
 
     // Update is called once per frame
@@ -45,7 +45,7 @@ public class plant_hammerbros : ComplexEnemy
             return;
         }
         Debug.Log("Launching head at player!");
-        Instantiate(hammerHeadPrefab, headLaunchPoint.position, Quaternion.identity);
+        SpawnHammerHead();
         StartCoroutine(HandleHeadLaunchBool());
 
     }
@@ -54,6 +54,28 @@ public class plant_hammerbros : ComplexEnemy
         isHeadLaunched = true;
         yield return new WaitForSeconds(.1f);
         isHeadLaunched = false;
+    }
+    private void SpawnHammerHead()
+    {
+        if (isHeadLaunched)
+        {
+            Debug.Log("Head already launched!");
+            return;
+        }
+        Debug.Log("Spawning hammer head!");
+        GameObject hammerheadObject = Instantiate(hammerHeadPrefab, headLaunchPoint.position, Quaternion.identity);
+        hammerhead hammerheadScript = hammerheadObject.GetComponent<hammerhead>();
+        hammerheadScript.plantHammerBrosScript = this;
+        hammerheadScript.facingDir = facingDir;
+        hammerheadScript.rb = hammerheadObject.GetComponent<Rigidbody2D>();
+        if (hammerheadScript.originalPosition == null)
+        {
+            hammerheadScript.originalPosition = headLaunchPoint.transform;
+        }
+        hammerheadScript.waypoints = new Vector3[3];
+        hammerheadScript.waypoints[0] = hammerheadScript.originalPosition.position;
+        hammerheadScript.waypoints[1] = hammerheadScript.originalPosition.position + new Vector3(5 * facingDir, 0);
+        hammerheadScript.waypoints[2] = hammerheadScript.waypoints[1] + new Vector3(2 * facingDir, -0.5f, 0);
     }
 
 }

@@ -1,11 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ComplexEnemy : MonoBehaviour
 {
     [SerializeField] protected Animator anim;
     protected Collider2D cd;
     protected Rigidbody2D rb;
+    [SerializeField] protected SpriteRenderer sr;
     [SerializeField] protected int moveSpeed = 10;
     protected int coolDownTime;
     [SerializeField] protected int facingDir = -1;
@@ -28,6 +30,12 @@ public class ComplexEnemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+        if (sr.flipX == true && facingDir == -1)
+        {
+            sr.flipX = false;
+            Flip();
+        }
 
     }
 
@@ -61,6 +69,11 @@ public class ComplexEnemy : MonoBehaviour
         facingDir = facingDir * -1;
         transform.Rotate(0, 180, 0);
     }
+    [ContextMenu("Flip")]
+    protected virtual void FlipContext()
+    {
+        sr.flipX = !sr.flipX;
+    }
     protected virtual void ComeBackHere()
     {
         player player = FindFirstObjectByType<player>();
@@ -72,7 +85,7 @@ public class ComplexEnemy : MonoBehaviour
         {
             Flip();
         }
-        
+
 
     }
    

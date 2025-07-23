@@ -2,33 +2,32 @@ using UnityEngine;
 
 public class hammerhead : MonoBehaviour
 {
+    public plant_hammerbros plantHammerBrosScript;
+    public SpriteRenderer hammerHeadSprite;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public float speed = 5f;
     public float rotationSpeed = 200f;
-    public int facingDir = -1;
+    public int facingDir;
     private int index = 1;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     public Transform originalPosition;
     public bool canBeDestroyed = false;
+    public bool canMove = true;
     public Vector3[] waypoints;
+    public DamageTrigger damageTrigger;
 
-    public void Awake()
+    public void Start()
     {
-        if (facingDir == 0)
+        hammerHeadSprite = GetComponent<SpriteRenderer>();
+        if (facingDir == 1)
         {
-            facingDir = -1; // Default to left if not set
+            hammerHeadSprite.flipX = true;
         }
-    
-    
-        rb = GetComponent<Rigidbody2D>();
-        if (originalPosition == null)
+        else
         {
-            originalPosition = transform;
+            hammerHeadSprite.flipX = false;
         }
-        waypoints = new Vector3[3];
-        waypoints[0] = originalPosition.position;
-        waypoints[1] = originalPosition.position + new Vector3((5 * facingDir), 0);
-        waypoints[2] = waypoints[1] + new Vector3((2 * facingDir), -0.5f, 0);
+        damageTrigger = GetComponentInChildren<DamageTrigger>();
     }
     public void Update()
     {
@@ -37,27 +36,34 @@ public class hammerhead : MonoBehaviour
         {
             canBeDestroyed = true;
         }
+        if (plantHammerBrosScript.gameObject.activeSelf == false)
+        {
+            DropDown();
+            
+        }
     }
     private void HandleMovement()
     {
+        if (!canMove || waypoints.Length == 0)
+            return;
 
 
-            Vector2 targetPosition = waypoints[index];
-            Vector2 newPosition = Vector2.MoveTowards(rb.position, targetPosition, speed * Time.deltaTime);
-            rb.MovePosition(newPosition);
-            if (Vector2.Distance(rb.position, targetPosition) < 0.1f)
-            {
-                index++;
+        Vector2 targetPosition = waypoints[index];
+        Vector2 newPosition = Vector2.MoveTowards(rb.position, targetPosition, speed * Time.deltaTime);
+        rb.MovePosition(newPosition);
+        if (Vector2.Distance(rb.position, targetPosition) < 0.1f)
+        {
+            index++;
             if (index >= waypoints.Length)
             {
                 index = 0;
             }
-            }
-        
+        }
+
 
 
     }
-    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         ComplexEnemy enemy = collision.GetComponent<ComplexEnemy>();
@@ -65,7 +71,16 @@ public class hammerhead : MonoBehaviour
         {
             Destroy(gameObject);
         }
-       
+
+    }
+    private void DropDown()
+    {
+        canMove = false;
+        rb.linearVelocity = new Vector2(0, -5f);
+        rb.angularVelocity = 0f;
+        rb.gravityScale = 1f;
+        damageTrigger.gameObject.SetActive(false);
+        Destroy(gameObject, 15f);
     }
     
 }
