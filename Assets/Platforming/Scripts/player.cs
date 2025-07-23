@@ -384,14 +384,14 @@ public class player : MonoBehaviour
     }
     public void EnemyDetectionandDestruction()
     {
-        anim.SetBool("landonenemy", false);
+        
         Collider2D[] colliders = Physics2D.OverlapCircleAll(enemyDestroy.position, enemyDestroyRadius, whatisEnemy);
         foreach (var collider in colliders)
         {
             ComplexEnemy enemy = collider.gameObject.GetComponent<ComplexEnemy>();
             if (enemy != null && !isGrounded)
             {
-                anim.SetBool("landonenemy", true);
+                anim.SetTrigger("landonenemy");
                 landedonEnemy = true;
                 int jumpForcer = 10;
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForcer);
@@ -400,7 +400,7 @@ public class player : MonoBehaviour
 
 
             }
-            anim.SetBool("landonenemy", false);
+            
         }
     }
     #endregion
