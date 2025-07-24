@@ -37,7 +37,6 @@ public class gameManagerPlatformer : MonoBehaviour
         
         coins = FindObjectsByType<coins>(FindObjectsSortMode.None);
         enemies = FindObjectsByType<ComplexEnemy>(FindObjectsSortMode.None);
-        playerLives = 3;
 
         ReviveCoins();
         ReviveEnemy();
