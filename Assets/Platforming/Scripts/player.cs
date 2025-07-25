@@ -335,7 +335,7 @@ public class player : MonoBehaviour
         if (!isGrounded && !isAirbone)
         {
             isAirbone = true;
-            if (rb.linearVelocity.y < 0)
+            if (rb.linearVelocity.y < 0 && !isWallMoving)
             {
                 Debug.Log("Coyote Jump activated!");
                 ActivateCoyoteJump();
@@ -384,15 +384,15 @@ public class player : MonoBehaviour
     }
     public void EnemyDetectionandDestruction()
     {
-        
+
         Collider2D[] colliders = Physics2D.OverlapCircleAll(enemyDestroy.position, enemyDestroyRadius, whatisEnemy);
         foreach (var collider in colliders)
         {
             ComplexEnemy enemy = collider.gameObject.GetComponent<ComplexEnemy>();
             if (enemy != null && !isGrounded)
             {
-                anim.SetTrigger("landonenemy");
                 landedonEnemy = true;
+                StartCoroutine(ChangeLandOnEnemyState());
                 int jumpForcer = 10;
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForcer);
                 Debug.Log("This worked....");
@@ -400,8 +400,14 @@ public class player : MonoBehaviour
 
 
             }
-            
+
         }
+    }
+    public IEnumerator ChangeLandOnEnemyState()
+    {
+        anim.SetTrigger("landonenemy");
+        yield return new WaitForSeconds(0.1f);
+        landedonEnemy = false;
     }
     #endregion
 
