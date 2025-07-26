@@ -21,6 +21,13 @@ public class gameManagerPlatformer : MonoBehaviour
     public AudioSource source;
     public AudioSource soundEffectSource;
     public AudioClip coinSound;
+    public AudioClip playerDieSound;
+    public AudioClip playerHurtSound;
+    public AudioClip playerJumpSound;
+    public AudioClip playerLandSound;
+    public AudioClip extraLifeSound;
+    public AudioClip playerDashSound;
+    public AudioClip playerAttackSound;
     public int coinNumbers = 0;
     public coins[] coins;
     public ComplexEnemy[] enemies;
@@ -34,7 +41,7 @@ public class gameManagerPlatformer : MonoBehaviour
     {
         CheckObjectStates();
         spawnObject = startSpawnPlatforming.transform.position;
-        
+
         coins = FindObjectsByType<coins>(FindObjectsSortMode.None);
         enemies = FindObjectsByType<ComplexEnemy>(FindObjectsSortMode.None);
 
@@ -47,6 +54,7 @@ public class gameManagerPlatformer : MonoBehaviour
     void Update()
     {
         camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, targetCameraSize, Time.deltaTime * cameraSpeed);
+        FiftyCoins();
     }
     public void warningScreenandTeleport(float duration)
     {
@@ -72,11 +80,11 @@ public class gameManagerPlatformer : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         CheckObjectStates();
-        
+
         source.time = 0f;
         GameObject newPlayer = Instantiate(playerPrefab, spawnObject, Quaternion.identity);
         player = newPlayer.GetComponent<player>();
-        
+
         ReviveCoins();
         ReviveEnemy();
 
@@ -128,9 +136,19 @@ public class gameManagerPlatformer : MonoBehaviour
         foreach (ComplexEnemy enemy in enemies)
         {
             enemy.gameObject.SetActive(true);
-            
-            }
+
         }
     }
+    public void FiftyCoins()
+    {
+        if (coinNumbers == 50)
+        {
+            source.PlayOneShot(extraLifeSound);
+            // Grant extra life
+            playerLives++;
+            coinNumbers = 0; // Reset coin count after granting life
+        }
+    }
+}
 
 

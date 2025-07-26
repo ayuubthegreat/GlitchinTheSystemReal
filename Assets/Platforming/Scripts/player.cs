@@ -76,6 +76,7 @@ public class player : MonoBehaviour
     [Header("Other Values")]
     public float TargetTime = 0.01f;
     private int facingDir = 1;
+    private int enemyTrounceCount = 0; // Used to count how many enemies the player has trounced before he hits the ground again
 
     #endregion
 
@@ -114,7 +115,7 @@ public class player : MonoBehaviour
         {
             return;
         }
-        if (isMovable && !crouched)
+        if (isMovable && !crouched && !isDashing)
         {
             rb.linearVelocity = new Vector2(xInput * moveSpeed, rb.linearVelocity.y);
         }
@@ -131,16 +132,12 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            Knockback(0);
-        }
         if (Input.GetKeyDown(KeyCode.N))
         {
             Dash(0);
         }
         UpdateAirbornStatus();
-        if (isKnocked || isDashing || !isMovable)
+        if (isKnocked || !isMovable)
         {
             return;
         }
@@ -151,7 +148,7 @@ public class player : MonoBehaviour
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
         isTouchingWall = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
         isDead = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsDeadZone);
-        canWallSlide = isTouchingWall && xInput == (1 * facingDir) && rb.linearVelocity.y < 0;
+        canWallSlide = isTouchingWall && rb.linearVelocity.y < 0;
 
         bool coyoteJumpAvailable = Time.time < coyoteJumpActivated + coyoteJumpWindow;
         if (Input.GetKeyDown(KeyCode.Space))
@@ -244,7 +241,7 @@ public class player : MonoBehaviour
 
     private void WallJump()
     {
-        if (!canWallSlide)
+        if (!isTouchingWall || !canBeKnocked || isDashing)
         {
             return;
         }
@@ -259,7 +256,6 @@ public class player : MonoBehaviour
         isWallMoving = true;
         yield return new WaitForSeconds(wallJumpDuration);
         isWallMoving = false;
-        canDoubleJump = true;
     }
     private IEnumerator KnockbackandDashRoutine(int value)
     {
@@ -294,7 +290,13 @@ public class player : MonoBehaviour
 
     private void Jump()
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        rb.linearVelocity = new Vector2(isDashing ? rb.linearVelocity.x * 1.5f : rb.linearVelocity.x, isDashing ? jumpForce * 1.2f : jumpForce);
+        if (isDashing && !isGrounded)
+        {
+            canDoubleJump = false;
+        }
+        gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.playerJumpSound);
+        
     }
     private void DoubleJump()
     {
@@ -303,15 +305,9 @@ public class player : MonoBehaviour
     }
     private void WallSlide()
     {
-        if (!canWallSlide || isWallMoving)
+        if (!canWallSlide || isWallMoving || xInput == 0 || isGrounded || isDashing || isAirbone)
         {
             return;
-        }
-
-        // Only trigger animation if not already sliding
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("WallSlide"))
-        {
-            anim.SetTrigger("wallSlide");
         }
 
         // Clamp downward velocity for consistent sliding
@@ -330,7 +326,14 @@ public class player : MonoBehaviour
             canDoubleJump = true;
             isMovable = true;
             landedonEnemy = false;
-            AttemptBufferJump();
+            enemyTrounceCount = 0;
+            gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.playerLandSound);
+            gameManagerPlatformer.instance.soundEffectSource.pitch = 1.4f; // Reset pitch after landing
+            if (rb.linearVelocity.x == 0)
+            {
+               AttemptBufferJump(); 
+            }
+            
         }
         if (!isGrounded && !isAirbone)
         {
@@ -398,6 +401,17 @@ public class player : MonoBehaviour
                 Debug.Log("This worked....");
                 collider.gameObject.SetActive(false);
 
+                enemyTrounceCount++;
+                if (enemyTrounceCount >= 3)
+                {
+                    gameManagerPlatformer.instance.coinNumbers += 5;
+                    gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.coinSound);
+                    gameManagerPlatformer.instance.soundEffectSource.pitch -= 0.1f;
+                    if (gameManagerPlatformer.instance.soundEffectSource.pitch < 1f)
+                    {
+                        gameManagerPlatformer.instance.soundEffectSource.pitch = 1.4f; // Reset pitch after trouncing multiple enemies
+                    }
+                }
 
             }
 
