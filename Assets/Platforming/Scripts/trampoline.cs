@@ -17,6 +17,9 @@ public class trampolineNew : MonoBehaviour
         player player = collision.gameObject.GetComponent<player>();
         if (player != null)
         {
+            Vector3 newPosition = player.transform.position;
+            newPosition.x = transform.position.x;
+            player.transform.position = newPosition;
             gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.springSound);
             gameManagerPlatformer.instance.player.Push(transform.up * pushPowerY, duration);
             anim.SetTrigger("active");
