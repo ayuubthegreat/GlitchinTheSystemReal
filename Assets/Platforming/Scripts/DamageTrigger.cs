@@ -32,7 +32,7 @@ public class DamageTrigger : MonoBehaviour
         {
             if (player.playerHealth != 0)
             {
-                gameManagerPlatformer.instance.source.PlayOneShot(gameManagerPlatformer.instance.playerHurtSound);
+                gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.playerHitSound);
                 player.Knockback(transform.position.x);
                 player.playerHealth--;
                 healthScript.SetDestroyIndividualHealth(player.playerHealth);

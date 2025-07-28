@@ -58,7 +58,7 @@ public class ComplexEnemy : MonoBehaviour
     }
     protected virtual void HandleMovement()
     {
-        if (canMove)
+        if (canMove && Vector2.Distance(transform.position, gameManagerPlatformer.instance.player.transform.position) < detectionRange * 2)
         {
             rb.linearVelocity = new Vector2(moveSpeed * facingDir, rb.linearVelocity.y);
         }

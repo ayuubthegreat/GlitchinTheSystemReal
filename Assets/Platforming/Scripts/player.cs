@@ -227,6 +227,7 @@ public class player : MonoBehaviour
         StartCoroutine(KnockbackandDashRoutine(0));
         anim.SetTrigger("knockback");
         rb.linearVelocity = new Vector2(knockbackPower.x * knockbackDirection, knockbackPower.y);
+        gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.playerHitSound);
     }
     public void Dash(float currentenemyXPosition)
     {
@@ -302,10 +303,11 @@ public class player : MonoBehaviour
     {
         isWallMoving = false;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, doubleJumpForce);
+        gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.playerJumpSound);
     }
     private void WallSlide()
     {
-        if (!canWallSlide || isWallMoving || xInput == 0 || isGrounded || isDashing || isAirbone)
+        if (!canWallSlide || isWallMoving || xInput == 0 || isGrounded)
         {
             return;
         }
@@ -327,8 +329,8 @@ public class player : MonoBehaviour
             isMovable = true;
             landedonEnemy = false;
             enemyTrounceCount = 0;
+            gameManagerPlatformer.instance.soundEffectSource.pitch = 1f; // Reset pitch after landing
             gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.playerLandSound);
-            gameManagerPlatformer.instance.soundEffectSource.pitch = 1.4f; // Reset pitch after landing
             if (rb.linearVelocity.x == 0)
             {
                AttemptBufferJump(); 
@@ -407,9 +409,9 @@ public class player : MonoBehaviour
                     gameManagerPlatformer.instance.coinNumbers += 5;
                     gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.coinSound);
                     gameManagerPlatformer.instance.soundEffectSource.pitch -= 0.1f;
-                    if (gameManagerPlatformer.instance.soundEffectSource.pitch < 1f)
+                    if (gameManagerPlatformer.instance.soundEffectSource.pitch < 0.5f)
                     {
-                        gameManagerPlatformer.instance.soundEffectSource.pitch = 1.4f; // Reset pitch after trouncing multiple enemies
+                        gameManagerPlatformer.instance.soundEffectSource.pitch = 1f; // Reset pitch after trouncing multiple enemies
                     }
                 }
 

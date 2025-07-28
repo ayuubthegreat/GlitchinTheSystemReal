@@ -69,7 +69,7 @@ MonoBehaviour:
   iswalkingdoor: 0
   canNotBeASpawnPoint: 0
   startSpawnBool: 1
-  playerLives: 3
+  playerLives: 10
   FruitsRandom: 0
   dead: {fileID: 0}
   canvas: {fileID: 759548618053650620}
@@ -505,8 +505,8 @@ MonoBehaviour:
   optionsScreen: {fileID: 0}
   warningScreen: {fileID: 0}
   SaveFileFound: 1
-  sceneName: rpgScene1
-  buttonType: 0
+  sceneName: ManicMinnesotaRPGScene
+  buttonType: 9
 --- !u!1 &5085889581710168965
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,8 +737,8 @@ MonoBehaviour:
   optionsScreen: {fileID: 0}
   warningScreen: {fileID: 0}
   SaveFileFound: 1
-  sceneName: menuScreen
-  buttonType: 0
+  sceneName: MainMenuScene
+  buttonType: 9
 --- !u!1 &6492169866225266902
 GameObject:
   m_ObjectHideFlags: 0

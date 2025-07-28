@@ -22,12 +22,15 @@ public class gameManagerPlatformer : MonoBehaviour
     public AudioSource soundEffectSource;
     public AudioClip coinSound;
     public AudioClip playerDieSound;
-    public AudioClip playerHurtSound;
+    public AudioClip playerHitSound;
     public AudioClip playerJumpSound;
     public AudioClip playerLandSound;
     public AudioClip extraLifeSound;
     public AudioClip playerDashSound;
     public AudioClip playerAttackSound;
+    public AudioClip playerWallSlideSound;
+    public AudioClip musicClip;
+    public AudioClip springSound;
     public int coinNumbers = 0;
     public coins[] coins;
     public ComplexEnemy[] enemies;
@@ -76,6 +79,8 @@ public class gameManagerPlatformer : MonoBehaviour
 
         if (player != null)
             player.Die();
+        if (soundEffectSource != null)
+            soundEffectSource.PlayOneShot(playerDieSound);
         UIManagerPlatformer.instance.SetUIElementsActive(false);
 
         yield return new WaitForSeconds(1);
@@ -143,12 +148,33 @@ public class gameManagerPlatformer : MonoBehaviour
     {
         if (coinNumbers == 50)
         {
-            source.PlayOneShot(extraLifeSound);
-            // Grant extra life
+            Debug.Log("You have collected 50 coins! Extra life granted.");
+            Debug.Log("Audio Clip: " + extraLifeSound.name);
+            StartCoroutine(RevertOriginalSoundClip(extraLifeSound));
+            source.loop = false;
+            source.pitch = 1f;
             playerLives++;
             coinNumbers = 0; // Reset coin count after granting life
         }
     }
+    public IEnumerator RevertOriginalSoundClip(AudioClip clip)
+    {
+        float musicTime = source.time;
+        AudioClip musicClip = source.clip; // Store the original music clip
+        if (source != null)
+        {
+            source.clip = clip;
+            source.pitch = 1f; // Reset pitch after playing
+            source.Play();
+        }
+        yield return new WaitForSeconds(clip.length);
+        source.clip = musicClip; // Revert to original music clip
+        source.time = musicTime; // Restore the original time
+        source.pitch = 1f; // Reset pitch to normal
+        source.Play();
+
+    }
+    
 }
 
 

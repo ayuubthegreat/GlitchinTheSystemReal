@@ -17,7 +17,8 @@ public class trampolineNew : MonoBehaviour
         player player = collision.gameObject.GetComponent<player>();
         if (player != null)
         {
-            GameManager.instance.player.Push(transform.up * pushPowerY, duration);
+            gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.springSound);
+            gameManagerPlatformer.instance.player.Push(transform.up * pushPowerY, duration);
             anim.SetTrigger("active");
         }
     }

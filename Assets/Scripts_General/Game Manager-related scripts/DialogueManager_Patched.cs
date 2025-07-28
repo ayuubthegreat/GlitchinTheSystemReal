@@ -235,8 +235,10 @@ public class DialogueManager : MonoBehaviour
 
     public void ResetDialogue()
     {
-        GameManagerRPG.instance.playerpg.isMovable = true;
         GameManager.instance.DialogueProgression++;
+        DialogueProcessor.instance.DialogueProgressionFunction();
+        GameManagerRPG.instance.playerpg.isMovable = true;
+        
         dialogueNumber = 0;
         dialogueShells = null;
         startRange = 0;
@@ -249,7 +251,7 @@ public class DialogueManager : MonoBehaviour
         DialogueProcessor.instance.npcDetector.enabled = true;
         DialogueProcessor.instance.isTalkingToHomelessMan = false;
 
-        DialogueProcessor.instance.DialogueProgressionFunction();
+        
     }
     public void TalkingStick(string characterName)
     {
