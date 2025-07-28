@@ -27,7 +27,7 @@ public class gameManagerPlatformer : MonoBehaviour
     public AudioClip playerLandSound;
     public AudioClip extraLifeSound;
     public AudioClip playerDashSound;
-    public AudioClip playerAttackSound;
+    public AudioClip pbotdestroyedSound;
     public AudioClip playerWallSlideSound;
     public AudioClip musicClip;
     public AudioClip springSound;

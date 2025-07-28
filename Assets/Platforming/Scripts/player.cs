@@ -397,6 +397,7 @@ public class player : MonoBehaviour
             if (enemy != null && !isGrounded)
             {
                 landedonEnemy = true;
+                gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.pbotdestroyedSound);
                 StartCoroutine(ChangeLandOnEnemyState());
                 int jumpForcer = 10;
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForcer);
