@@ -180,7 +180,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   positions: []
   originalRBPosition: {x: 0, y: 0, z: 0}
-  speed: 0.5
+  speed: 0.05
   travelDistance: 8
   positionindex: 0
   floatDelays: 3
