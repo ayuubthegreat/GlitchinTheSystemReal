@@ -3,9 +3,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using UnityEditorInternal;
-using System.Linq;
-using System;
+
 public enum MainScreens{
 RPG,
 Platforming,
