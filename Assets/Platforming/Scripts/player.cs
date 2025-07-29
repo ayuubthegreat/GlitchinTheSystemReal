@@ -141,6 +141,7 @@ public class player : MonoBehaviour
         {
             return;
         }
+
         HandleMovement();
         EnemyDetectionandDestruction();
         WallSlide();
@@ -328,6 +329,8 @@ public class player : MonoBehaviour
             canDoubleJump = true;
             isMovable = true;
             landedonEnemy = false;
+            gameManagerPlatformer.instance.isTrampolining = false;
+            rb.linearVelocity = Vector2.zero;
             enemyTrounceCount = 0;
             gameManagerPlatformer.instance.soundEffectSource.pitch = 1f; // Reset pitch after landing
             gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.playerLandSound);
@@ -371,6 +374,7 @@ public class player : MonoBehaviour
     public IEnumerator PushCoroutine(Vector2 direction, float duration)
     {
         isMovable = false;
+        
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(direction, ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);

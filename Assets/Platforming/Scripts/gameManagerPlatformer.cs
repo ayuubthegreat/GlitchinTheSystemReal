@@ -15,6 +15,8 @@ public class gameManagerPlatformer : MonoBehaviour
     public Vector3 spawnObject;
     public bool startSpawnBool = true;
     [Header("Camera-related Variables")]
+    public bool isTrampolining = false;
+    public bool isCutscene = false;
     public float originalCameraSize;
     public float targetCameraSize;
     public float cameraSpeed;

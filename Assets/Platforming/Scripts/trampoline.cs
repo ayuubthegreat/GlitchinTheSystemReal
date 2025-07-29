@@ -22,6 +22,7 @@ public class trampolineNew : MonoBehaviour
             player.transform.position = newPosition;
             gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.springSound);
             gameManagerPlatformer.instance.player.Push(transform.up * pushPowerY, duration);
+            gameManagerPlatformer.instance.isTrampolining = true;
             anim.SetTrigger("active");
         }
     }
