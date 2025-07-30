@@ -4,6 +4,8 @@ public class Parallax_Effect : MonoBehaviour
 {
     public float parallaxMultiplier = 0.5f;
     private Transform cameraTransform;
+    public Transform sharedTransform;
+    public bool isSharedTransform = true;
     public float yOffset;
     public bool canMoveY;
     public float initialYPosition;
@@ -26,7 +28,7 @@ public class Parallax_Effect : MonoBehaviour
     {
         canMoveY = transform.position.y < yOffset && transform.position.y >= initialYPosition + yOffset;
         Vector3 deltaPosition = cameraTransform.position - previousCameraPosition;
-        transform.position += new Vector3(deltaPosition.x * parallaxMultiplier, transform.position.y, 0f);
+        transform.position += new Vector3(deltaPosition.x * parallaxMultiplier, (deltaPosition.y * parallaxMultiplier) * (canMoveY ? 1 : 0), 0f);
 
         previousCameraPosition = cameraTransform.position;
     }
