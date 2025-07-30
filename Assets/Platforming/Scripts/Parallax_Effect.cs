@@ -1,0 +1,33 @@
+using UnityEngine;
+
+public class Parallax_Effect : MonoBehaviour
+{
+    public float parallaxMultiplier = 0.5f;
+    private Transform cameraTransform;
+    public float yOffset;
+    public bool canMoveY;
+    public float initialYPosition;
+    public Vector3 previousCameraPosition;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        if (Camera.main == null)
+        {
+            Debug.LogError("No main camera found. Please assign a camera with the 'MainCamera' tag.");
+            return;
+        }
+        cameraTransform = Camera.main.transform;
+        previousCameraPosition = cameraTransform.position;
+        initialYPosition = transform.position.y;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        canMoveY = transform.position.y < yOffset && transform.position.y >= initialYPosition + yOffset;
+        Vector3 deltaPosition = cameraTransform.position - previousCameraPosition;
+        transform.position += new Vector3(deltaPosition.x * parallaxMultiplier, transform.position.y, 0f);
+
+        previousCameraPosition = cameraTransform.position;
+    }
+}

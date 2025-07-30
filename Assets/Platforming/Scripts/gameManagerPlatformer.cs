@@ -17,6 +17,7 @@ public class gameManagerPlatformer : MonoBehaviour
     [Header("Camera-related Variables")]
     public bool isTrampolining = false;
     public bool isCutscene = false;
+    public bool canBeHit = true;
     public float originalCameraSize;
     public float targetCameraSize;
     public float cameraSpeed;
@@ -34,6 +35,7 @@ public class gameManagerPlatformer : MonoBehaviour
     public AudioClip musicClip;
     public AudioClip springSound;
     public int coinNumbers = 0;
+    public int invincibilityPeriod = 2;
     public coins[] coins;
     public ComplexEnemy[] enemies;
 
@@ -175,6 +177,19 @@ public class gameManagerPlatformer : MonoBehaviour
         source.pitch = 1f; // Reset pitch to normal
         source.Play();
 
+    }
+    public void StartCooldownforHits()
+    {
+        if (canBeHit)
+        {
+            StartCoroutine(CooldownforHits());
+        }
+    }
+    public IEnumerator CooldownforHits()
+    {
+        canBeHit = false;
+        yield return new WaitForSeconds(invincibilityPeriod);
+        canBeHit = true;
     }
     
 }

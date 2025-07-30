@@ -117,7 +117,8 @@ public class player : MonoBehaviour
         }
         if (isMovable && !crouched && !isDashing)
         {
-            rb.linearVelocity = new Vector2(xInput * moveSpeed, rb.linearVelocity.y);
+            bool isTrampolining = gameManagerPlatformer.instance.isTrampolining && xInput == 0;
+            rb.linearVelocity = new Vector2(isTrampolining ? rb.linearVelocity.x : xInput * moveSpeed, rb.linearVelocity.y);
         }
         if (yInput < 0 && isGrounded)
         {
@@ -137,17 +138,23 @@ public class player : MonoBehaviour
             Dash(0);
         }
         UpdateAirbornStatus();
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
+        isTouchingWall = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
         if (isKnocked || !isMovable)
         {
+            if (gameManagerPlatformer.instance.isTrampolining && !isMovable)
+            {
+                HandleAnimations();
+            }
             return;
         }
-
+        
         HandleMovement();
+        HandleAnimations();
         EnemyDetectionandDestruction();
         WallSlide();
         HandleFlip();
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
-        isTouchingWall = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
+        
         isDead = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsDeadZone);
         canWallSlide = isTouchingWall && rb.linearVelocity.y < 0;
 
@@ -180,17 +187,20 @@ public class player : MonoBehaviour
             Flip();
         }
 
+        
+        
 
+
+    }
+    #region Functions that are not Update
+    private void HandleAnimations() {
         anim.SetFloat("xVelocity", rb.linearVelocity.x);
         anim.SetFloat("yVelocity", rb.linearVelocity.y);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetBool("isTouchingWall", isTouchingWall);
         anim.SetBool("landonenemy", landedonEnemy);
         anim.SetBool("crouched", crouched);
-
-
     }
-    #region Functions that are not Update
     private void requestBufferJump()
     {
         if (isAirbone)
@@ -375,6 +385,7 @@ public class player : MonoBehaviour
     {
         isMovable = false;
         
+
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(direction, ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);

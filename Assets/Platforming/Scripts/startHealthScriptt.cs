@@ -11,7 +11,7 @@ public class startHealthScriptt : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        hearts = FindObjectsByType<hearts>(FindObjectsSortMode.None);
+        hearts = GetComponentsInChildren<hearts>();
         SetShowHealth(0); // Initialize health display to off
         GameStarted = true; // Initialize game state
     }
@@ -19,6 +19,7 @@ public class startHealthScriptt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         anim.SetBool("start", UIManager.instance.start);
         anim.SetBool("isDead", UIManager.instance.isDead);
         anim.SetBool("isAlive", UIManager.instance.isAlive);
@@ -26,7 +27,7 @@ public class startHealthScriptt : MonoBehaviour
     }
     public void SetIsDeadandIsAlive2(bool isDeadinner) => UIManager.instance.SetIsDeadandIsAliveBool(isDeadinner);
     public void SetShowHealth(int value) {
-        showHealth = value == 1 ? true : false;
+        showHealth = value == 1;
         foreach (hearts heart in hearts)
         {
             heart.gameObject.SetActive(showHealth);
@@ -35,9 +36,10 @@ public class startHealthScriptt : MonoBehaviour
     public void SetDestroyIndividualHealth(int value)
     {
         GameStarted = false;
-        if (value >= 0 && value < hearts.Length)
+        if (value > 0 && value <= hearts.Length)
         {
-            hearts[value].gameObject.SetActive(false);
+            Debug.Log("Destroying health: " + value);
+            hearts[value - 1].gameObject.SetActive(false);
         }
     }
 }

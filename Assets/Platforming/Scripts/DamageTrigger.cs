@@ -7,7 +7,7 @@ using UnityEngine;
 public class DamageTrigger : MonoBehaviour
 {
     public int coolDownPeriod = 2;
-    public bool canBeHit = true;
+    
     public startHealthScriptt healthScript;
     public void Start()
     {
@@ -15,7 +15,6 @@ public class DamageTrigger : MonoBehaviour
     }
     public void OnEnable()
     {
-        canBeHit = true;
         if (healthScript == null)
         {
             healthScript = FindFirstObjectByType<startHealthScriptt>();
@@ -23,7 +22,7 @@ public class DamageTrigger : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D collision)
     {
-        if (!canBeHit)
+        if (!gameManagerPlatformer.instance.canBeHit)
         {
             return;
         }
@@ -32,12 +31,14 @@ public class DamageTrigger : MonoBehaviour
         {
             if (player.playerHealth != 0)
             {
+                healthScript.SetDestroyIndividualHealth(player.playerHealth);
                 gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.playerHitSound);
                 player.Knockback(transform.position.x);
+                
                 player.playerHealth--;
-                healthScript.SetDestroyIndividualHealth(player.playerHealth);
                 Debug.Log("Player Health: " + player.playerHealth);
-                StartCoroutine(CooldownforHits());
+                StopAllCoroutines();
+                gameManagerPlatformer.instance.StartCooldownforHits();
 
             }
             else
@@ -50,12 +51,7 @@ public class DamageTrigger : MonoBehaviour
 
 
     }
-    public IEnumerator CooldownforHits()
-    {
-        canBeHit = false;
-        yield return new WaitForSeconds(coolDownPeriod);
-        canBeHit = true;
-    }
+    
 
 }
 
