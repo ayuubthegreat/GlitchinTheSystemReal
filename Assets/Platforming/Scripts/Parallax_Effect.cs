@@ -26,10 +26,16 @@ public class Parallax_Effect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        canMoveY = transform.position.y < yOffset && transform.position.y >= initialYPosition + yOffset;
+        if (gameManagerPlatformer.instance.player == null)
+        {
+            transform.position = new Vector3(transform.position.x, initialYPosition, transform.position.z);
+            return;
+        }
+        canMoveY = transform.position.y < initialYPosition + yOffset && transform.position.y >= initialYPosition;
         Vector3 deltaPosition = cameraTransform.position - previousCameraPosition;
-        transform.position += new Vector3(deltaPosition.x * parallaxMultiplier, (deltaPosition.y * parallaxMultiplier) * (canMoveY ? 1 : 0), 0f);
+        transform.position += new Vector3(deltaPosition.x * parallaxMultiplier, deltaPosition.y * parallaxMultiplier * (canMoveY ? 1 : 0), 0f);
 
         previousCameraPosition = cameraTransform.position;
+        
     }
 }

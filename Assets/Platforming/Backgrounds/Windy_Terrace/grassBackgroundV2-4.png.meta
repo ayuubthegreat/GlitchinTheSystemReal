@@ -181,6 +181,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -747,7 +760,32 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      grassBackgroundV2-4_0: -8103291613151224552
+      grassBackgroundV2-4_1: 5604462085795613475
+      grassBackgroundV2-4_10: 1663723884867499660
+      grassBackgroundV2-4_11: 1348094072474781963
+      grassBackgroundV2-4_12: -7448977296102296546
+      grassBackgroundV2-4_13: 1893570421946514225
+      grassBackgroundV2-4_14: -4279467038566953825
+      grassBackgroundV2-4_15: -7179198783301404277
+      grassBackgroundV2-4_16: 1896525753860478849
+      grassBackgroundV2-4_17: 3810830640549009510
+      grassBackgroundV2-4_18: -1298826657662034784
+      grassBackgroundV2-4_19: 4948134538900255941
+      grassBackgroundV2-4_2: 8155331728621373583
+      grassBackgroundV2-4_20: -2179544973031466058
+      grassBackgroundV2-4_21: 1577929946766864882
+      grassBackgroundV2-4_22: 5392556107092989386
+      grassBackgroundV2-4_23: -6173576228575069174
+      grassBackgroundV2-4_24: -1582971103730517123
+      grassBackgroundV2-4_3: 973633768311403443
+      grassBackgroundV2-4_4: 1256687950401287177
+      grassBackgroundV2-4_5: -2440337288181572215
+      grassBackgroundV2-4_6: -2148000199441584124
+      grassBackgroundV2-4_7: 3876235776682877630
+      grassBackgroundV2-4_8: 7086681260936566936
+      grassBackgroundV2-4_9: 3527394931431156487
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
