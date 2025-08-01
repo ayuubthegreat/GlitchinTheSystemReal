@@ -49,6 +49,7 @@ public class UIManager : MonoBehaviour
     public bool filefound;
     public bool[] MainMenuTransitions;
     public string streetName;
+    public string deathScene;
 
 
     void Awake()
@@ -195,7 +196,7 @@ public class UIManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(duration);
-        SceneManager.LoadScene("ManicMinnesotaRPGScene");
+        SceneManager.LoadScene(deathScene);
     }
     public void SetStartBool()
     {

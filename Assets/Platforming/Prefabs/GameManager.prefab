@@ -115,6 +115,7 @@ MonoBehaviour:
   filefound: 0
   MainMenuTransitions: 
   streetName: 
+  deathScene: MainMenuScene
   currentScreen: 0
 --- !u!1 &1667687237331931383
 GameObject:

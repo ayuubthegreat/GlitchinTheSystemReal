@@ -132,7 +132,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -825955607
-  m_SortingLayer: 4
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 229992989312293679, guid: af59379c45621fd43aaf2f589ed5faf9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -160,7 +160,7 @@ MonoBehaviour:
   rb: {fileID: 7053913541073404388}
   anim: {fileID: 6300133904293311085}
   scene: 
-  playerHealth: 3
+  playerHealth: 10
   deathVFX: {fileID: 0}
   xInput: 0
   yInput: 0
@@ -267,7 +267,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.7189255, y: 0.39618158}
+  m_Offset: {x: -0.7189255, y: -0.25401068}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -277,5 +277,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 7.6553316, y: 19.207638}
+  m_Size: {x: 7.6553316, y: 14.5132}
   m_EdgeRadius: 0

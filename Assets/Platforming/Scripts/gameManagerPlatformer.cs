@@ -18,6 +18,7 @@ public class gameManagerPlatformer : MonoBehaviour
     public bool isTrampolining = false;
     public bool isCutscene = false;
     public bool canBeHit = true;
+    public bool gameOver = false;
     public float originalCameraSize;
     public float targetCameraSize;
     public float cameraSpeed;
@@ -83,6 +84,7 @@ public class gameManagerPlatformer : MonoBehaviour
 
         if (player != null)
             player.Die();
+            gameOver = true;
         if (soundEffectSource != null)
             soundEffectSource.PlayOneShot(playerDieSound);
         UIManagerPlatformer.instance.SetUIElementsActive(false);
@@ -93,6 +95,7 @@ public class gameManagerPlatformer : MonoBehaviour
         source.time = 0f;
         GameObject newPlayer = Instantiate(playerPrefab, spawnObject, Quaternion.identity);
         player = newPlayer.GetComponent<player>();
+        gameOver = false;
 
         ReviveCoins();
         ReviveEnemy();
