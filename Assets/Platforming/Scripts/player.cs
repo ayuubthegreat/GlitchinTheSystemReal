@@ -76,7 +76,8 @@ public class player : MonoBehaviour
     [Header("Other Values")]
     public float TargetTime = 0.01f;
     private int facingDir = 1;
-    private int enemyTrounceCount = 0; // Used to count how many enemies the player has trounced before he hits the ground again
+    private int enemyTrounceCount = 0;
+    public bool whoosh = false;// Used to count how many enemies the player has trounced before he hits the ground again
 
     #endregion
 
@@ -142,19 +143,25 @@ public class player : MonoBehaviour
         isTouchingWall = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
         if (isKnocked || !isMovable)
         {
-            if (gameManagerPlatformer.instance.isTrampolining && !isMovable)
+            if (gameManagerPlatformer.instance.isTrampolining && !isMovable || gameManagerPlatformer.instance.levelOver && !isMovable)
             {
                 HandleAnimations();
+                if (whoosh)
+                {
+                    Whoosh();
+
+                }
             }
             return;
         }
-        
+
         HandleMovement();
         HandleAnimations();
         EnemyDetectionandDestruction();
         WallSlide();
         HandleFlip();
         
+
         isDead = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsDeadZone);
         canWallSlide = isTouchingWall && rb.linearVelocity.y < 0;
 
@@ -187,13 +194,14 @@ public class player : MonoBehaviour
             Flip();
         }
 
-        
-        
+
+
 
 
     }
     #region Functions that are not Update
-    private void HandleAnimations() {
+    private void HandleAnimations()
+    {
         anim.SetFloat("xVelocity", rb.linearVelocity.x);
         anim.SetFloat("yVelocity", rb.linearVelocity.y);
         anim.SetBool("isGrounded", isGrounded);
@@ -308,7 +316,7 @@ public class player : MonoBehaviour
             canDoubleJump = false;
         }
         gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.playerJumpSound);
-        
+
     }
     private void DoubleJump()
     {
@@ -337,7 +345,10 @@ public class player : MonoBehaviour
             isAirbone = false;
             isWallMoving = false;
             canDoubleJump = true;
-            isMovable = true;
+            if (gameManagerPlatformer.instance.isTrampolining)
+            {
+                isMovable = true;
+            }
             landedonEnemy = false;
             gameManagerPlatformer.instance.isTrampolining = false;
             rb.linearVelocity = Vector2.zero;
@@ -346,9 +357,9 @@ public class player : MonoBehaviour
             gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.playerLandSound);
             if (rb.linearVelocity.x == 0)
             {
-               AttemptBufferJump(); 
+                AttemptBufferJump();
             }
-            
+
         }
         if (!isGrounded && !isAirbone)
         {
@@ -384,7 +395,7 @@ public class player : MonoBehaviour
     public IEnumerator PushCoroutine(Vector2 direction, float duration)
     {
         isMovable = false;
-        
+
 
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(direction, ForceMode2D.Impulse);
@@ -440,6 +451,44 @@ public class player : MonoBehaviour
         anim.SetTrigger("landonenemy");
         yield return new WaitForSeconds(0.1f);
         landedonEnemy = false;
+    }
+    public void EndGame(Transform finishLineTransform)
+    {
+        gameManagerPlatformer.instance.cameraController.followPlayer = false;
+        isMovable = false;
+        rb.gravityScale = 0;
+        rb.linearVelocity = Vector2.zero;
+        if (finishLineTransform != null)
+        {
+            gameManagerPlatformer.instance.levelOver = true;
+            StartCoroutine(MoveToFinishLine(finishLineTransform));
+        }
+    }
+
+    private IEnumerator MoveToFinishLine(Transform finishLineTransform)
+    {
+        while (Vector2.Distance(transform.position, finishLineTransform.position) > 0.1f)
+        {
+            transform.position = Vector2.Lerp(transform.position, finishLineTransform.position, 3f * Time.deltaTime);
+            yield return null;
+        }
+        transform.position = finishLineTransform.position;
+        yield return new WaitForSeconds(2f);
+        Debug.Log("Level Completed!");
+        whoosh = true;
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+        
+
+
+
+
+
+
+    }
+    public void Whoosh()
+    {
+        rb.linearVelocity = new Vector2(100, 0);
     }
     #endregion
 

@@ -12,6 +12,7 @@ public class cloud : MonoBehaviour
     public bool fillerCloud = false;
     public float xLimit = 10f;
     public float destroyTime = 5f;
+    public bool canBeDestroyed = true; // Whether the cloud can be destroyed or not
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,8 +27,8 @@ public class cloud : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        canMove = Vector2.Distance(transform.position, gameManagerPlatformer.instance.player.transform.position) <= xLimit || fillerCloud;
-        if (fillerCloud && Vector2.Distance(transform.position, gameManagerPlatformer.instance.player.transform.position) > xLimit)
+        rb.linearVelocity = new Vector2(cloudSpeed, 0f);
+        if (fillerCloud)
         {
             // If the cloud is a filler cloud and the player is far away, destroy it after a certain time
             if (destroyTime > 0)
@@ -37,28 +38,9 @@ public class cloud : MonoBehaviour
             else
             {
                 Destroy(gameObject);
-            }
-        }
-        else
-        {
-            destroyTime = 5f; // Reset destroy time if the player is close
-        }
-        
-        if (gameManagerPlatformer.instance.gameOver)
-        {
-            // Stop the cloud movement if the game is over
-            rb.linearVelocity = Vector2.zero;
-            StartCoroutine(returnToInitialPosition());
-            Debug.Log("Game Over, stopping cloud movement.");
-            return;
-        }
-        else
-        {
-            if (canMove)
-            {
-                rb.linearVelocity = new Vector2(cloudSpeed, 0f);
-            }
-
+            } 
+            
+            
         }
 
 
@@ -66,15 +48,7 @@ public class cloud : MonoBehaviour
     private IEnumerator returnToInitialPosition()
     {
         yield return new WaitForSeconds(.5f);
-        if (shouldRespawn)
-        {
-            transform.position = initialPosition;
-            rb.linearVelocity = Vector2.zero;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
 
     }
     

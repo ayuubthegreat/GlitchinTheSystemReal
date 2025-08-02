@@ -19,6 +19,7 @@ public class gameManagerPlatformer : MonoBehaviour
     public bool isCutscene = false;
     public bool canBeHit = true;
     public bool gameOver = false;
+    public bool levelOver = false;
     public float originalCameraSize;
     public float targetCameraSize;
     public float cameraSpeed;

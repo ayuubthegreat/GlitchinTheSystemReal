@@ -11,6 +11,7 @@ public class CameraControllerRPG : MonoBehaviour
     public player playerScripts;
     public playerpg playerpg;
     public bool startFollowingPlayer;
+    public bool followPlayer = true;
     public float distancefromPlayer;
 
     void Start()
@@ -37,14 +38,9 @@ public class CameraControllerRPG : MonoBehaviour
 
             if (platformingCamera && playerScripts != null)
             {
-                if (startFollowingPlayer)
+                if (followPlayer)
                 {
-                    FollowPlayer();
-
-                }
-                else
-                {
-                    transform.position = playerScripts.transform.position;
+                    transform.position = Vector3.Lerp(transform.position, playerScripts.transform.position, Time.deltaTime * 5);
                 }
 
             }

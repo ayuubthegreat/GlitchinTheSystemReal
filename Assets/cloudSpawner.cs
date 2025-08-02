@@ -15,6 +15,7 @@ public class cloudSpawner : MonoBehaviour
     public BoxCollider2D spawnAreaCollider;
     public int playerXInput = 0; // Placeholder for player input, adjust as needed
     public bool spawnAreaActive = false;
+    public bool endOfLevelClouds = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,6 +41,7 @@ public class cloudSpawner : MonoBehaviour
             cloud cloudScript = fillerCloud.GetComponent<cloud>();
             cloudScript.shouldRespawn = false; // Disable respawn for filler clouds
             cloudScript.fillerCloud = true; // Mark as filler cloud
+            cloudScript.canBeDestroyed = !endOfLevelClouds;
             cloudScript.xLimit = 15f;
             yield return new WaitForSeconds(spawnInterval);
         }

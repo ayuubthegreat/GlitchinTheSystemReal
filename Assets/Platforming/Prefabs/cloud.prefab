@@ -108,7 +108,8 @@ MonoBehaviour:
   canMove: 0
   fillerCloud: 0
   xLimit: 10
-  destroyTime: 5
+  destroyTime: 13
+  canBeDestroyed: 1
 --- !u!50 &2600801890012292388
 Rigidbody2D:
   serializedVersion: 5
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa88545e1272b3344a3d2ff586216f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxMultiplier: 0.3
+  parallaxMultiplier: 0
   playerScript: {fileID: 0}
   isPlayerScript: 1
   sharedTransform: {fileID: 0}
