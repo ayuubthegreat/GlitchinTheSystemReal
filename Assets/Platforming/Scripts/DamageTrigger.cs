@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class DamageTrigger : MonoBehaviour
 {
-    public int coolDownPeriod = 2;
-    
+    public float coolDownPeriod = 2f;
     public startHealthScriptt healthScript;
     public void Start()
     {
@@ -31,14 +30,15 @@ public class DamageTrigger : MonoBehaviour
         {
             if (player.playerHealth != 0)
             {
+                gameManagerPlatformer.instance.StartCooldownforHits(coolDownPeriod); 
                 healthScript.SetDestroyIndividualHealth(player.playerHealth);
-                gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.playerHitSound);
-                player.Knockback(transform.position.x);
-                
                 player.playerHealth--;
                 Debug.Log("Player Health: " + player.playerHealth);
+                
+                player.Knockback(transform.position.x);
                 StopAllCoroutines();
-                gameManagerPlatformer.instance.StartCooldownforHits();
+                
+                gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.playerHitSound);
 
             }
             else

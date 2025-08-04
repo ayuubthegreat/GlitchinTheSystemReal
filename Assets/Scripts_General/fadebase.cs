@@ -16,55 +16,7 @@ public class fadebase : MonoBehaviour
 
     public void Start()
     {
-        anim = GetComponent<Animator>();
-    }
-    public IEnumerator ChangeTransitionBoolTimer()
-    {
-        if (MainScreens.mainMenu == UIManager.instance.currentScreen && UIManager.instance.logoTransitions >= logoNumLimit)
-        {
-            logoNumLimit = 0;
-            Destroy(gameObject);
-
-        }
         
-        UIManager.instance.canTransition = false;
-        yield return new WaitForSeconds(moveDuration);
-        UIManager.instance.canTransition = true;
-    }
-    
-    public void ChangeTransitionBool(int value)
-    {
-        if (value == 1)
-        {
-            UIManager.instance.canTransition = true;
-        }
-        else
-        {
-            UIManager.instance.canTransition = false;
-            UIManager.instance.startTransitions[2] = false;
-        }
-    }
-    // public void StartTransitionCoroutine() => StartCoroutine(ChangeStartTransitionFaderBool());
-    // public IEnumerator ChangeStartTransitionFaderBool() {
-    //     yield return new WaitForSeconds(logoDuration);
-    //     UIManager.instance.StartChangeTransitionBools();
-
-    //     }
-    public void LogoDurations()
-    {
-        if (UIManager.instance.currentScreen == MainScreens.mainMenu && UIManager.instance.logoTransitions < logoNumLimit)
-        {
-            UIManager.instance.logoTransitions++;
-        }
-        else
-        {
-            
-            return;
-        }
-    }
-    public void SceneLoader()
-    {
-        SceneManager.LoadScene(sceneName);
     }
 
     public void Update()

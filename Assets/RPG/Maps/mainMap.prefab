@@ -7202,7 +7202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4360658474529681676, guid: 98e73c5c770af4d4588b1e7152df499b, type: 3}
       propertyPath: m_SortingLayer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4360658474529681676, guid: 98e73c5c770af4d4588b1e7152df499b, type: 3}
       propertyPath: m_SortingLayerID
@@ -7310,6 +7310,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: righthouse_UNLOCKED
       objectReference: {fileID: 0}
+    - target: {fileID: 8772480952479559030, guid: 5bde0942728e92044bd4b521786ef870, type: 3}
+      propertyPath: mainMap
+      value: 
+      objectReference: {fileID: 1162620958887309682}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8234,7 +8238,7 @@ PrefabInstance:
       objectReference: {fileID: 7939457749851398443, guid: 93abf6916e291b54ea1e877d4c86dcf3, type: 3}
     - target: {fileID: 5747966091459303131, guid: 578da3dcebf89c1449cfbdde09696964, type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5747966091459303131, guid: 578da3dcebf89c1449cfbdde09696964, type: 3}
       propertyPath: m_SortingLayerID
@@ -8337,6 +8341,30 @@ PrefabInstance:
     - target: {fileID: 3336230945151666790, guid: 146daa7c559912a4bb579abe43d19e2e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3552490412009667610, guid: 146daa7c559912a4bb579abe43d19e2e, type: 3}
+      propertyPath: scene
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3552490412009667610, guid: 146daa7c559912a4bb579abe43d19e2e, type: 3}
+      propertyPath: clipNew
+      value: 
+      objectReference: {fileID: 8300000, guid: 30f768bbca29811419a03e1280de84d0, type: 3}
+    - target: {fileID: 3552490412009667610, guid: 146daa7c559912a4bb579abe43d19e2e, type: 3}
+      propertyPath: mainMap
+      value: 
+      objectReference: {fileID: 1162620958887309682}
+    - target: {fileID: 3552490412009667610, guid: 146daa7c559912a4bb579abe43d19e2e, type: 3}
+      propertyPath: yInputNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3552490412009667610, guid: 146daa7c559912a4bb579abe43d19e2e, type: 3}
+      propertyPath: seconds2Wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3552490412009667610, guid: 146daa7c559912a4bb579abe43d19e2e, type: 3}
+      propertyPath: newLocationName
+      value: The House of Doom
       objectReference: {fileID: 0}
     - target: {fileID: 7006461711680398599, guid: 146daa7c559912a4bb579abe43d19e2e, type: 3}
       propertyPath: m_Name
@@ -9088,15 +9116,77 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5111187755504870319, guid: 5bde0942728e92044bd4b521786ef870, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6547681076777918639, guid: 5bde0942728e92044bd4b521786ef870, type: 3}
       propertyPath: m_Name
       value: righthouse_UNLOCKED
       objectReference: {fileID: 0}
+    - target: {fileID: 8772480952479559030, guid: 5bde0942728e92044bd4b521786ef870, type: 3}
+      propertyPath: mainMap
+      value: 
+      objectReference: {fileID: 1162620958887309682}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5111187755504870319, guid: 5bde0942728e92044bd4b521786ef870, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2617418278706066278}
   m_SourcePrefab: {fileID: 100100000, guid: 5bde0942728e92044bd4b521786ef870, type: 3}
+--- !u!1 &1089620183460337737 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5111187755504870319, guid: 5bde0942728e92044bd4b521786ef870, type: 3}
+  m_PrefabInstance: {fileID: 5328195854548237286}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &2617418278706066278
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089620183460337737}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 12.448657, y: -0.6623926}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 24.942343, y: 20.368357}
+  m_EdgeRadius: 0
 --- !u!4 &8437146103735310762 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4388562449066402380, guid: 5bde0942728e92044bd4b521786ef870, type: 3}
@@ -9680,6 +9770,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3552490412009667610, guid: 146daa7c559912a4bb579abe43d19e2e, type: 3}
+      propertyPath: mainMap
+      value: 
+      objectReference: {fileID: 1162620958887309682}
     - target: {fileID: 7006461711680398599, guid: 146daa7c559912a4bb579abe43d19e2e, type: 3}
       propertyPath: m_Name
       value: fronthouse_UNLOCKED
@@ -9833,7 +9927,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9155366836644473716, guid: eea68aeb6f8c06d40bfe3deca68ebe7e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eea68aeb6f8c06d40bfe3deca68ebe7e, type: 3}
@@ -10260,7 +10355,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 561428673095245523, guid: d303aa594ac32d44088f0d0845ae415e, type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 561428673095245523, guid: d303aa594ac32d44088f0d0845ae415e, type: 3}
       propertyPath: m_SortingLayerID
@@ -10281,6 +10376,10 @@ PrefabInstance:
     - target: {fileID: 4486464136056119245, guid: d303aa594ac32d44088f0d0845ae415e, type: 3}
       propertyPath: yInputNum
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4486464136056119245, guid: d303aa594ac32d44088f0d0845ae415e, type: 3}
+      propertyPath: seconds2Wait
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4486464136056119245, guid: d303aa594ac32d44088f0d0845ae415e, type: 3}
       propertyPath: newLocationName

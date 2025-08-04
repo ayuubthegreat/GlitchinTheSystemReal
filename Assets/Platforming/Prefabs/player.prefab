@@ -160,7 +160,7 @@ MonoBehaviour:
   rb: {fileID: 7053913541073404388}
   anim: {fileID: 6300133904293311085}
   scene: 
-  playerHealth: 10
+  playerHealth: 3
   deathVFX: {fileID: 0}
   xInput: 0
   yInput: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
   wallJumpForce: {x: 10, y: 15}
   canWallSlide: 0
   canDoubleJump: 0
-  doubleJumpForce: 10
+  doubleJumpForce: 15
   coinNumbers: 0
   groundCheckDistance: 1
   wallCheckDistance: 0.4
@@ -206,6 +206,8 @@ MonoBehaviour:
   enemyDestroy: {fileID: 6695240188946074909}
   enemyDestroyRadius: 0.7
   TargetTime: 0.01
+  whoosh: 0
+  startCutsceneAnimation: {fileID: 7400000, guid: adcd4d72f8cdf9142ae438e8fc3719ec, type: 2}
 --- !u!50 &7053913541073404388
 Rigidbody2D:
   serializedVersion: 5

@@ -1,30 +1,77 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LogoManager : MonoBehaviour
 {
-    public int spriteLogoNum;
+    public int spriteLogoNum = 0;
     public Sprite[] availableLogos;
     public Image image;
+    public int changeDuration = 2;
+    public int productionLogoLimit = 2;
+    public MainMenuLoader mainMenu;
+    public AudioSource mainSource;
+    public bool endLogos; // Reference to the AudioSource
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        mainSource = Camera.main.GetComponent<AudioSource>();
         image = GetComponent<Image>();
         image.sprite = availableLogos[0];
+        StartCoroutine(ChangeLogo(changeDuration));
     }
 
     // Update is called once per frame
     void Update()
     {
-        spriteLogoNum = UIManager.instance.logoTransitions;
-        if (spriteLogoNum >= 0 && spriteLogoNum < availableLogos.Length)
+        if (Input.GetKeyDown(KeyCode.Escape) && !endLogos)
         {
-            image.sprite = availableLogos[spriteLogoNum];
+            Debug.Log("Escape key pressed, skipping logos.");
+            StopCoroutine(ChangeLogo(changeDuration));
+            DisplayMainMenu();
         }
-        if (spriteLogoNum >= availableLogos.Length)
+    }
+    public IEnumerator ChangeLogo(int duration)
+    {
+        while (spriteLogoNum < availableLogos.Length)
         {
-            UIManager.instance.logosAreDone = true;
-            UIManager.instance.toPlayMainMenu();
-        } 
+            yield return new WaitForSeconds(spriteLogoNum < availableLogos.Length - 1 ? duration * 2 : duration);
+            FadeManager.instance.StartFading(duration, 0.1f, false, "", IncreaseIndex);
+        }
+        if (spriteLogoNum == availableLogos.Length && !endLogos)
+        {
+            Debug.Log("All logos displayed, displaying main menu.");
+            DisplayMainMenu();
+        }
+        // Activate the MainMenuLoader after logo changes
+    }
+    public void IncreaseIndex()
+    {
+        if (spriteLogoNum < availableLogos.Length - 1)
+        {
+            spriteLogoNum++;
+        }
+        else
+        {
+            Debug.LogWarning("No more logos available to change to. Resetting index.");
+            spriteLogoNum = availableLogos.Length;
+            return; // Exit if no more logos are available
+        }
+        Debug.Log("New logo number is:" + spriteLogoNum);
+        image.sprite = availableLogos[spriteLogoNum];
+    }
+    public void DisplayMainMenu()
+    {
+        endLogos = true;
+        spriteLogoNum = 0; // Reset the logo index
+        image.sprite = availableLogos[0]; // Reset the image to the first logo
+        Debug.Log("Displaying main menu.");
+        FadeManager.instance.StartFading(1f, 0.05f, false, "", () =>
+        {
+            gameObject.SetActive(false);
+            mainMenu.gameObject.SetActive(true);
+            mainSource.clip = UIManager.instance.mainMenuMusic;
+            mainSource.Play();
+        });
     }
 }

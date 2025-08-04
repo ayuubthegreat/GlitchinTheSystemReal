@@ -15,6 +15,7 @@ public enum ButtonType
     Phone,
     Bool,
     SceneLoader,
+    Settings,
 
 }
 
@@ -79,14 +80,10 @@ public class buttonLoad : MonoBehaviour
                 HandlePhoneInteraction();
                 break;
             case ButtonType.SceneLoader:
-                if (sceneName != string.Empty)
-                {
-                    SceneManager.LoadScene(sceneName);
-                }
-                else
-                {
-                    Debug.LogError("Scene name is empty. Please set a valid scene name.");
-                }
+             FadeManager.instance.StartFading(2f, .1f, true, sceneName);
+                break;
+            case ButtonType.Settings:
+                MainMenuLoader.instance.MoveToNewPosition(new Vector3(0, -20, 0));
                 break;
             default:
                 Debug.Log("What are you again? I forgot.");

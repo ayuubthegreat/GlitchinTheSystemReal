@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class teleport : MonoBehaviour
 {
     [SerializeField] private string scene;
+    public string newLocationName;
     [SerializeField] private float PlayerCheckDistance;
     [SerializeField] private LayerMask whatisPlayer;
     [SerializeField] private int facingDir = 1;
@@ -42,6 +43,7 @@ public class teleport : MonoBehaviour
             {
                 playerpg.isMovable = false;
                 GameManager.instance.phoneBoothSpawn = transform.position + spawnDistance;
+                UIManagerRPG.instance.ChangeText(newLocationName);
                 GameManager.instance.LoadNewSceneReal(seconds, scene);
                 
             }

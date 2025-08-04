@@ -1,31 +1,35 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenuLoader : fadebase
+public class MainMenuLoader : MonoBehaviour
 {
-    public Button button;
-    public bool buttonFaderStart;
+    public static MainMenuLoader instance;
+    public Camera mainCamera;
+    public Vector3 targetPosition;
+    public float moveSpeed = 3f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    new
+    void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
-        button = GetComponentInChildren<Button>();
-        buttonFaderStart = false;
+        mainCamera = Camera.main;
     }
 
     // Update is called once per frame
-    new
     void Update()
     {
-        anim.SetBool("canMove", UIManager.instance.canTransition);
-        anim.SetBool("canStartMoving", UIManager.instance.startTransitions[2]);
-        anim.SetBool("startButton", UIManager.instance.MainMenuTransitions[0]);
-        anim.SetBool("saveFileFound", UIManager.instance.MainMenuTransitions[1]);
-        anim.SetBool("warningScreen", UIManager.instance.MainMenuTransitions[2]);
-        anim.SetBool("backButton", UIManager.instance.MainMenuTransitions[3]);
+        
     }
-    public void FadeButton()
+    public void MoveToNewPosition(Vector3 newPosition, float speed = 3f)
     {
-        buttonFaderStart = true;
+        targetPosition = mainCamera.transform.position + newPosition;
+        moveSpeed = speed;
+        while (Vector3.Distance(mainCamera.transform.position, targetPosition) > 0.01f)
+        {
+            mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, targetPosition, Time.deltaTime * moveSpeed);
+        }
+        mainCamera.transform.position = targetPosition; // Ensure the camera reaches the exact target position
     }
 }

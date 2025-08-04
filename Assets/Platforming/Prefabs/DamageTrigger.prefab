@@ -91,6 +91,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b911c23bd8aeb94baa57257e3873608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coolDownPeriod: 2
-  canBeHit: 1
+  coolDownPeriod: 3
   healthScript: {fileID: 0}

@@ -20,10 +20,11 @@ public class door : MonoBehaviour
     public bool isTouchingPlayer;
     public SceneManager sm;
     public Animator anim;
-    public int seconds2Wait;
+    public int seconds2Wait = 3;
     public bool canNotBeASpawnPoint;
     public AudioSource audioSource;
     public AudioClip clipNew;
+    public bool announceNewLocation = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -65,6 +66,7 @@ public class door : MonoBehaviour
     }
     public IEnumerator LoadandRespawnPlayer()
     {
+        FadeManager.instance.StartFading(seconds2Wait, .1f, false);
         GameManager.instance.iswalkingdoor = GetComponentInChildren<doorSpawner>() ? true : false;
        
         yield return new WaitForSeconds(seconds2Wait);
@@ -74,6 +76,12 @@ public class door : MonoBehaviour
     }
     public void TeleportationPoint()
     {
+        if (announceNewLocation)
+        {
+            UIManagerRPG.instance.ChangeText(newLocationName);
+            UIManagerRPG.instance.StartMoveLocationAnnouncer(3f);
+        }
+        
         if (GameManager.instance.iswalkingdoor)
         {
             mainMap.SetActive(false);
@@ -81,13 +89,11 @@ public class door : MonoBehaviour
             GameManagerRPG.instance.playerpg.transform.position = teleportationPoint.transform.position;
             GameManagerRPG.instance.source.clip = clipNew;
             GameManagerRPG.instance.source.Play();
-            UIManager.instance.location = newLocationName;
-            UIManager.instance.canTransition = true;
+            
+            
         }
         else
         {
-            
-            
             houseMap.SetActive(false);
             mainMap.SetActive(true);
             if (GameManager.instance.DialogueProgression == 3 && GameManager.instance.startSpawnBool)
@@ -99,8 +105,6 @@ public class door : MonoBehaviour
             audioSource.clip = GameManagerRPG.instance.audioClips[1];
             audioSource.Play();
             UIManager.instance.location = newLocationName;
-            StopAllCoroutines();
-            UIManager.instance.StartChangeTransitionBools();
             GameManager.instance.iswalkingdoor = false;
 
         }

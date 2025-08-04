@@ -20,6 +20,7 @@ public class gameManagerPlatformer : MonoBehaviour
     public bool canBeHit = true;
     public bool gameOver = false;
     public bool levelOver = false;
+    public bool levelStarted = true;
     public float originalCameraSize;
     public float targetCameraSize;
     public float cameraSpeed;
@@ -40,6 +41,8 @@ public class gameManagerPlatformer : MonoBehaviour
     public int invincibilityPeriod = 2;
     public coins[] coins;
     public ComplexEnemy[] enemies;
+    public string worldName;
+    public int levelNumber = 1;
 
     void Awake()
     {
@@ -62,8 +65,12 @@ public class gameManagerPlatformer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, targetCameraSize, Time.deltaTime * cameraSpeed);
         FiftyCoins();
+        if (camera.orthographicSize != targetCameraSize)
+        {
+            camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, targetCameraSize, Time.deltaTime * cameraSpeed);
+        }
+        
     }
     public void warningScreenandTeleport(float duration)
     {
@@ -86,6 +93,7 @@ public class gameManagerPlatformer : MonoBehaviour
         if (player != null)
             player.Die();
             gameOver = true;
+        levelStarted = false;
         if (soundEffectSource != null)
             soundEffectSource.PlayOneShot(playerDieSound);
         UIManagerPlatformer.instance.SetUIElementsActive(false);
@@ -115,12 +123,13 @@ public class gameManagerPlatformer : MonoBehaviour
         soundEffectSource = GetComponent<AudioSource>();
         startSpawnPlatforming = GameObject.Find("startSpawnPlatforming");
     }
-    public void StartCutscene(int cutsceneNum, int seconds, float moveSpeed) => StartCoroutine(StartingCutscene(cutsceneNum, seconds, moveSpeed));
-    public IEnumerator StartingCutscene(int cutsceneNum, int seconds, float moveSpeed)
+    public void StartCutscene(int cutsceneNum, float seconds, float moveSpeed) => StartCoroutine(StartingCutscene(cutsceneNum, seconds, moveSpeed));
+    public IEnumerator StartingCutscene(int cutsceneNum, float seconds, float moveSpeed)
     {
         switch (cutsceneNum)
         {
             case 1:
+                camera.transform.position = player.transform.position;
                 player.isMovable = false;
                 camera.orthographicSize = 1.5f;
                 targetCameraSize = 1.5f;
@@ -182,17 +191,17 @@ public class gameManagerPlatformer : MonoBehaviour
         source.Play();
 
     }
-    public void StartCooldownforHits()
+    public void StartCooldownforHits(float cooldown = 1f)
     {
         if (canBeHit)
         {
-            StartCoroutine(CooldownforHits());
+            StartCoroutine(CooldownforHits(cooldown));
         }
     }
-    public IEnumerator CooldownforHits()
+    public IEnumerator CooldownforHits(float cooldown = 1f)
     {
         canBeHit = false;
-        yield return new WaitForSeconds(invincibilityPeriod);
+        yield return new WaitForSeconds(cooldown);
         canBeHit = true;
     }
     

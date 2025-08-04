@@ -77,7 +77,8 @@ public class player : MonoBehaviour
     public float TargetTime = 0.01f;
     private int facingDir = 1;
     private int enemyTrounceCount = 0;
-    public bool whoosh = false;// Used to count how many enemies the player has trounced before he hits the ground again
+    public bool whoosh = false;
+    public AnimationClip startCutsceneAnimation;
 
     #endregion
 
@@ -105,7 +106,7 @@ public class player : MonoBehaviour
         {
             transform.position = gameManagerPlatformer.instance.spawnObject;
         }
-        gameManagerPlatformer.instance.StartCutscene(1, 1, 6f);
+        gameManagerPlatformer.instance.StartCutscene(1, gameManagerPlatformer.instance.levelStarted ? startCutsceneAnimation.length : 2f, 6f);
 
     }
     private void HandleMovement()
@@ -134,6 +135,7 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        anim.SetBool("levelStarted", gameManagerPlatformer.instance.levelStarted);
         if (Input.GetKeyDown(KeyCode.N))
         {
             Dash(0);
@@ -208,6 +210,7 @@ public class player : MonoBehaviour
         anim.SetBool("isTouchingWall", isTouchingWall);
         anim.SetBool("landonenemy", landedonEnemy);
         anim.SetBool("crouched", crouched);
+        
     }
     private void requestBufferJump()
     {
@@ -467,6 +470,7 @@ public class player : MonoBehaviour
 
     private IEnumerator MoveToFinishLine(Transform finishLineTransform)
     {
+        gameManagerPlatformer.instance.source.Stop();
         while (Vector2.Distance(transform.position, finishLineTransform.position) > 0.1f)
         {
             transform.position = Vector2.Lerp(transform.position, finishLineTransform.position, 3f * Time.deltaTime);
@@ -475,9 +479,11 @@ public class player : MonoBehaviour
         transform.position = finishLineTransform.position;
         yield return new WaitForSeconds(2f);
         Debug.Log("Level Completed!");
+        
         whoosh = true;
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
+        FadeManager.instance.StartFading(3.5f, .1f);
+        this.gameObject.SetActive(false);
         
 
 

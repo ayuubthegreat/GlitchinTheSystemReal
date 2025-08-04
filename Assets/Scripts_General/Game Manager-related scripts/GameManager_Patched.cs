@@ -48,11 +48,13 @@ public class GameManager : MonoBehaviour
 
     [Header("Player Lives")]
     public int playerLives = 3;
+    public int playerCoins = 0;
 
     [Header("Misc")]
     public bool FruitsRandom;
     public Dead dead;
     public Canvas canvas;
+    public AudioClip victoryMusic;
     [Header("Game States")]
     public int platformerTimes;
     public int RPGTimes;
