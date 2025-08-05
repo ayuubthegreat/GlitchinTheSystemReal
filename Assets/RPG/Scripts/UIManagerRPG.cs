@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.UI;
 
 public class UIManagerRPG : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class UIManagerRPG : MonoBehaviour
     public GameObject personNameObject;
     public GameObject phone;
     public GameObject dialogueAnimations;
+    public Image cutsceneImageObject;
     [Header("Location Announcer Elements")]
     public RectTransform rectTransform;
     public TextMeshProUGUI text;
@@ -18,6 +20,8 @@ public class UIManagerRPG : MonoBehaviour
     public float yOffset = 10f;
     public float announcementSpeed = 5f;
     public string locationName = "Abdurahman's House";
+    [Header("Image Cutscenes")]
+    public Sprite[] cutsceneImages;
     void Awake()
     {
         if (instance == null)

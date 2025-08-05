@@ -9,7 +9,7 @@ public class LogoManager : MonoBehaviour
     public Image image;
     public int changeDuration = 2;
     public int productionLogoLimit = 2;
-    public MainMenuLoader mainMenu;
+    public MenuLoader mainMenu;
     public AudioSource mainSource;
     public bool endLogos; // Reference to the AudioSource
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,9 +24,15 @@ public class LogoManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !endLogos)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("Escape key pressed, skipping logos.");
+            Debug.Log("Escape key pressed, quitting application.");
+            Application.Quit();
+            
+        }
+        if (Input.GetKeyDown(KeyCode.Return) && !endLogos)
+        {
+            Debug.Log("Return key pressed, skipping logos.");
             StopCoroutine(ChangeLogo(changeDuration));
             DisplayMainMenu();
         }

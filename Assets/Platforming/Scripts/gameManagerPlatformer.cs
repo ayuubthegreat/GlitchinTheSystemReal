@@ -56,6 +56,7 @@ public class gameManagerPlatformer : MonoBehaviour
 
         coins = FindObjectsByType<coins>(FindObjectsSortMode.None);
         enemies = FindObjectsByType<ComplexEnemy>(FindObjectsSortMode.None);
+        source.volume = GameManager.instance.musicVolume;
 
         ReviveCoins();
         ReviveEnemy();
@@ -165,13 +166,14 @@ public class gameManagerPlatformer : MonoBehaviour
     {
         if (coinNumbers == 50)
         {
+            coinNumbers = 0; // Reset coin count after granting life
             Debug.Log("You have collected 50 coins! Extra life granted.");
             Debug.Log("Audio Clip: " + extraLifeSound.name);
             StartCoroutine(RevertOriginalSoundClip(extraLifeSound));
             source.loop = false;
             source.pitch = 1f;
             playerLives++;
-            coinNumbers = 0; // Reset coin count after granting life
+            
         }
     }
     public IEnumerator RevertOriginalSoundClip(AudioClip clip)
@@ -193,10 +195,8 @@ public class gameManagerPlatformer : MonoBehaviour
     }
     public void StartCooldownforHits(float cooldown = 1f)
     {
-        if (canBeHit)
-        {
-            StartCoroutine(CooldownforHits(cooldown));
-        }
+
+        StartCoroutine(CooldownforHits(cooldown));
     }
     public IEnumerator CooldownforHits(float cooldown = 1f)
     {

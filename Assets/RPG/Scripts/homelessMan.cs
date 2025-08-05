@@ -28,7 +28,6 @@ public class HomelessMan : MonoBehaviour
                 DialogueProcessor.instance.npcDetector = GetComponent<BoxCollider2D>();
                 DialogueProcessor.instance.isTalkingToHomelessMan = true;
                 DialogueProcessor.instance.DialogueProgressionFunction();
-                DialogueProcessor.instance.MovetoTarget(transform);
                 
                 
             }

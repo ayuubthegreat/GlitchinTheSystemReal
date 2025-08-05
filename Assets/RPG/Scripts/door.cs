@@ -99,6 +99,7 @@ public class door : MonoBehaviour
             if (GameManager.instance.DialogueProgression == 3 && GameManager.instance.startSpawnBool)
             {
                 GameManagerRPG.instance.spawnObject = GameManagerRPG.instance.doorSpawn.transform.position;
+                
             }
             GameManager.instance.startSpawnBool = false;
             GameManagerRPG.instance.playerpg.transform.position = GameManagerRPG.instance.spawnObject;

@@ -19,6 +19,7 @@ public class DialogueProcessor : MonoBehaviour
     public bool twopeopletalking = false;
     public bool isPhoneActive = false;
     public bool isTalkingToHomelessMan = false;
+    public float npcSpeed = 20f;
 
     public bool[] faces;
     public bool[] expressions;
@@ -37,46 +38,46 @@ public class DialogueProcessor : MonoBehaviour
             Destroy(gameObject);
         }
 
-        
+
     }
-        void Start()
-        {
-            faces = new bool[] {
+    void Start()
+    {
+        faces = new bool[] {
             // isThinking
             false,
             // isSurprised
             false
         };
-            expressions = new bool[] {
+        expressions = new bool[] {
             // isThinkingFace
             false,
             // isSurprisedFace
             false
         };
 
-            if (gameManager == null)
-            {
-                Debug.LogError("GameManager instance is not found in the scene.");
-                return;
-            }
+        if (gameManager == null)
+        {
+            Debug.LogError("GameManager instance is not found in the scene.");
+            return;
+        }
 
-            if (DialogueManager.instance == null)
-            {
-                Debug.LogError("DialogueManager instance is not set.");
-            }
-            if (GameManager.instance.playerpg == null)
-            {
-                return;
-            }
-            if (GameManager.instance.DialogueProgression == 0)
-            {
-                GameManager.instance.iswalkingdoor = false;
+        if (DialogueManager.instance == null)
+        {
+            Debug.LogError("DialogueManager instance is not set.");
+        }
+        if (GameManager.instance.playerpg == null)
+        {
+            return;
+        }
+        if (GameManager.instance.DialogueProgression == 0)
+        {
+            GameManager.instance.iswalkingdoor = false;
 
-                GameManager.instance.outsideDoorSpawnObject = GameManager.instance.doorSpawn.transform.position;
-
-            }
+            GameManager.instance.outsideDoorSpawnObject = GameManager.instance.doorSpawn.transform.position;
 
         }
+
+    }
     public void Update()
     {
 
@@ -85,14 +86,14 @@ public class DialogueProcessor : MonoBehaviour
     }
     public void DialogueProgressionFunction()
     {
-        bool conversationEnded = GameManager.instance.DialogueProgression == 3 && isPhoneActive;
-        bool conversationBegan = GameManager.instance.DialogueProgression == 2 && isPhoneActive;
+        bool conversationEnded1 = GameManager.instance.DialogueProgression == 3 && isPhoneActive;
+        bool conversationBegan1 = GameManager.instance.DialogueProgression == 2 && isPhoneActive;
         if (GameManager.instance.DialogueProgression == 1)
         {
             StartCoroutine(DialogueProgression1());
 
         }
-        else if (conversationBegan)
+        else if (conversationBegan1)
         {
             isPhoneActive = true;
             int secondsToWait = UnityEngine.Random.Range(5, 10);
@@ -101,11 +102,23 @@ public class DialogueProcessor : MonoBehaviour
             StartCoroutine(PhoneRinging(secondsToWait)); // Start the conversation with Abdurahman
 
         }
-        else if (conversationEnded)
+        else if (conversationEnded1)
         {
             isPhoneActive = false;
             recieverPhoneDialogue2SetActive();
             UIManagerRPG.instance.phone.SetActive(false);
+        }
+        else if (GameManager.instance.DialogueProgression > 1 && GameManager.instance.DialogueProgression < 4 && !isPhoneActive)
+        {
+            GameManagerRPG.instance.playerpg.isMovable = false;
+            GameManagerRPG.instance.CameraZoom(10f, 10f);
+            NPCManager.instance.StartMovingNPC(0, 20f, new Vector2[] { new Vector2(0, (NPCManager.instance.playerPosition.y - NPCManager.instance.transform.position.y) - 6), new Vector2(NPCManager.instance.playerPosition.x - NPCManager.instance.transform.position.x, 0) }, () => DialogueManager.instance.StartTextBox(0, 0, 5, dialogueVault.dialogueSets[2]));
+        }
+        else if (GameManager.instance.DialogueProgression == 4)
+        {
+            FadeManager.instance.Fader(false, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
+
+
         }
         else if (isTalkingToHomelessMan && GameManager.instance.DialogueProgression > 2)
         {
@@ -229,14 +242,5 @@ public class DialogueProcessor : MonoBehaviour
 
 
     }
-    public void MovetoTarget(Transform Target)
-    {
-        if (Vector2.Distance(Target.position, GameManagerRPG.instance.playerpg.transform.position) < 0.01f)
-        {
-            return;
-        }
-        npcDetector.enabled = false;
-        GameManagerRPG.instance.StartMovingAutonomously(Target.position);
-    }
+
 }
-    

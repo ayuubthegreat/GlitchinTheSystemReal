@@ -1,0 +1,481 @@
+Glitch in the System dialogue
+ Manic Minnesota
+? 	
+Abdurahman: Alhamdulillah, I managed to wake myself up so early. Now I can begin my day. 	
+? 	
+Abdurahman: I miss when there used to be other people besides me in this house…….
+? 	
+(Abdurahman comes back from praying Fajr in the masjid. The 	player moves him to his landline telephone and chooses who he will 	call first; Yasir or Bakr)
+? 	
+YASIR’S CALL:
+? 	
+Abdurahman: Assalamu Alaykum, Yasir.
+? 	
+Yasir: Wa alaykumas Salaam, Abdurahman. Are you good?
+? 	
+Abdurahman: I’m good, yes. Listen…….I’ve been thinking…….
+? 	
+Yasir: Thinking about what?
+? 	
+Abdurahman: I’ve been thinking….those VR headsets that 	everyone’s been talking about…..they weren’t just built for 	amusement and entertainment. 	
+? 	
+Yasir: What else could they have been built for? 	
+? 	
+Abdurahman: Well…...I think the P-Tech corporation had a more sinister reason for manufacturing them. 	
+? 	
+Yasir: Are you just saying that because your other siblings 	seem to have prioritized them over their Islamic duties?
+? 	
+Abdurahman: Well…..partially…….but haven’t you 	noticed your family acting strange?
+? 	
+Yasir: Not really; I’m usually away from my house. I only 	go there occasionally now. But now that you mention it………
+? 	
+Abdurahman: You do notice?
+? 	
+Yasir: ….My mother did buy the rest of my siblings the same 	VR headsets a week ago…..and I just received a call from her 	saying that they had gone missing. I’m on their trail now. 	
+? 	
+Abdurahman: You see now? This cannot be just a coincidence. 	My house has been deserted ever since my siblings received VR sets 	from the P-tech corporation, and now yours has left you as well! 	There’s a deeper agenda here, and I think it’s those VR goggles 	that are the main pawn in it. 	
+? 	
+Yasir: ...That does make sense…….but what are we 	supposed to do about it, other 	than ensure we never 	get those goggles?
+? 	
+Abdurahman: I just called a police 	officer yesterday, who explained to me that what P-Tech is doing to 	our society is far beyond illegal, even more so than they usually 	are. I mean, you’ve seen the news. Society has basically halted. 	No stores are running, no banks are printing checks…...it’s like 	those VR headsets pulled everyone in to them and left only husks 	walking around the streets. 	
+? 	
+Yasir: Now that’s what I would 	call either genius…..or a conspiracy. 	
+? 	x
+Abdurahman: Either way, Yasir…..I 	think I’m on to something here. Since what P-Tech is doing is 	illegal, we have the right to stand up against them and get society 	functional again. Yasir, I was thinking of starting a revolution 	against the P-Tech company. 	
+? 	
+Yasir: That’s…...crazy. Just 	crazy…...but if you’re going to revolt against them, you’re 	going to need some people to back you up. (He pauses for a few 	seconds.) I’m willing to join you in this cause. Inshallah, we’ll 	reach our goal!
+? 	
+Abdurahman: Well……..
+? 	
+(The player can either choose to 	accept Yasir as a partner or delegate him to giving him training 	lessons.)
+? 	
+IF PLAYER CHOOSES TO ACCEPT YASIR:
+? 	
+Abdurahman: ….let’s go, then! 	You’re on my team! 	
+? 	
+Yasir: Yeah!
+? 	
+Abdurahman: Come to my house, and 	we’ll go over what we should do. 	
+? 	
+Yasir: All right! See you there. 	Assalamu alaykum!
+? 	
+Abdurahman: Wa-alaykum salaam. 	
+? 	
+(Abdurahman hangs up the phone.)
+? 	
+IF PLAYER CHOOSES TO NOT ACCEPT 	YASIR:
+? 	
+Abdurahman: …...I don’t 	know…….I don’t want you to get hurt alongside me. It’s best 	if you lay low. 	
+? 	
+Yasir: But what about you? Aren’t 	you putting yourself at risk by fighting the largest corporation on 	Earth?
+? 	
+Abdurahman: Yes……..but I have 	to do this. You have more pressing matters to worry about.
+? 	
+Yasir: Alright……..then what 	can I do to help you out?
+? 	
+Abdurahman: You could help train 	me, get me prepared for the fight ahead. 	
+? 	
+Yasir: Okay…..that sounds good. 	Just call if you need some training, all right?
+? 	
+Abdurahman: All right. Assalamu 	alaykum.
+? 	
+Yasir: Wa-alaykum salaam, 	Abdurahman. May Allah protect you out there. 	
+? 	
+Abdurahman: Ameen…..
+? 	
+(Abdurahman hangs up the phone.)
+? 	
+? 
+? (Abdurahman calls Bakr.)
+? Bakr: Assalamu alaykum, Abdurahman. How are you?
+? Abd (Abdurahman): Wa alaykum salaam. I'm great, Bakr. How's Japan? 
+? Bakr: It's wonderful…..for a kafir (disbeliever). For me, though, it's not desirable.
+? Abd: True….true….but you know you can't just hide from the dunya your entire life. You don’t have to keep the dunya in your heart, but if you leave it behind completely……you’ll be left behind, know what I mean?
+? Bakr: That is true……..so how has things gone with you?
+? Abd: They’re not good, to be honest, Bakr. My entire family has gone AWOL….even my parents aren’t home. 
+? Bakr: Subhanallah…..what’s happened to them?
+? Abd: I don’t know for sure, but I think their VR goggles may have something to do with it. 
+? Bakr: Do you suspect their influence is too strong as well?
+? Abd: Whoa…..I didn’t even think of that….I forgot that most smart electronic devices influence people in weird ways. Do you think someone maybe channeled that influence and used it for something?
+? Bakr: It’s not entirely out of the question. Everyone has always known the people behind technology to be very shady.
+? Abd: Well, anyways, I’m starting a revolt against the P-Tech corporation. 
+? Bakr: Wow…..but you would be up against unmeasurable odds. Are you sure you can do this by yourself?
+? Abd: I can sure try. Inshallah, I’ll reach my goal. 
+? Bakr: Inshallah. May I join your cause? 
+? (The player can choose to accept him or not.)
+? (IF THE PLAYER ACCEPTS BAKR:)
+? Abd: You may. You’re on the team!
+? Bakr: Great! I’ll head for America immediately!
+? Abd: Inshallah, you’ll make it here safe. 
+? Bakr: Inshallah. See you later. 
+? Abd: See you. 
+? (Abdurahman hangs up the phone.)
+? (IF THE PLAYER DOSEN’T ACCEPT BAKR:)
+? Abd: No……I wouldn’t want you to leave Japan on such a short notice.
+? Bakr: Believe me, I don’t mind leaving for a cause as worthy as this. 
+? Abd: No, you just got there, the least I could do is let you relax there. 
+? Bakr: If you insist…….I guess I’ll stay for a little while. I’ll make dua for your victory every chance I get. 
+? Abd: Please do. Assalamu alaykum.
+? Bakr: Wa alaykum salaam, Abdurahman. 
+? (Abdurahman hangs up the phone.)
+? (Abd walks outside his house and meets a frantic teenager.)
+? FT: Oh, my god! Oh my god! 
+? Abd: (to frantic teenager) What's wrong? 
+? FT: I just got back from the P-Tech internship lobby……They were doing some weird stuff, man…..really weird stuff……
+? Abd: What were they doing? 
+? FT: Well, first I saw them experimenting with a chicken………
+? (Flashback to the P-Tech Tower, where a masked scientist stares at a lean baby chicken in the other side of a glass window. The chicken chirps sadly at the teenager, who is with the masked scientist.)
+? FT-P (Frantic Teenager---Past): What are you going to do to that chicken, Mr.?
+? S (Scientist): Charles. Mr. Charles, and I'm going to show you what we're working on in the biotechnology side of P-Tech. 
+? (The scientist fires a laser at the chicken, which causes it to inflate to five times its normal size. It flaps around on its weak legs and squawks in alarm. The teenager gasps. He whips toward Mr. Charles.)
+? FT-P: Why would……
+? S: For meat, intern, for meat. You know how much meat we can get out of this one chicken? It's the ultimate money-saver! 
+? (The teenager stares at the bird in shock. The bird squawks once more.)
+? FT-P : Wh-what bout the chicken? 
+? S: You think the chicken cares, intern? You're awfully soft, aren't you? You're gonna have to get a lot tougher if you're going to get a job here. 
+? (The teenager swallowed deeply. Fade in to now.)
+? FT: That poor chicken……he probably can't even walk now……..
+? Abd: Subhanallah……..
+? FT: What? 
+? Abd: (rushed) Oh, nothing…….so they mutated it?
+? (The teenager nods.)
+? FT: They must be stopped, man…..I can't even imagine what else they could be getting away with if they got away with mutating farm animals……..
+? Abd: Indeed, indeed. Well, you know…..I am going to start a revolt against them. 
+? FT: Really? (He stares at Abd in astonishment.) Wicked! I wanna help….how can I help?
+? Abd: Well……(he throws up his hands.) Any information would be great right now. 
+? FT: (He looks around him wildly, then whispers:) You know those P-Tech Phone Booths?
+? (Abdurahman nods. The camera pans to one right next to them.)
+? FT: Well…..I heard from a girl who was going to get an internship there that they're hiding something in there……but she left before I could get anything else out of her. That's all I know.
+? Abd: Thanks, man.
+? FT: No problem. Take ‘em down, will you? 
+? Abd: You got it. Bye! 
+? FT: (He runs off ) See you!
+WHAT HAPPENS IN THE FIRST EVER BATTLE ENCOUNTER
+* Abd: Here we go……
+* VR-Z: Rrrrr—rrrrr! 
+* (Suddenly, a small TV monitor hovers in front of the VR zombie. It reveals the P-Tech CEO.)
+* Abd: (appalled) What? Who are you?
+* CEO: Here’s a question: What do you think you’re doing?
+* Abd: I’m trying to break this poor man free! (He tugs on the VR helmet some more, but it won’t come off.)
+* CEO: (glances at the dead-looking face of the VR zombie, then back at Abdurahman.) You fool! They can’t come off. I designed them to be glued to the person’s head. 
+* Abd: How could you do such an evil thing?! 
+* CEO: Evil?! They agreed to this! It was in the Terms of Service form they agreed to! What’s so evil about a binding contract? 
+* Abd: You know nobody reads the Terms of Service form nowadays!
+* CEO: (laughs) I know…….but they signed it, so they are legally bound to it. Besides….it’s not like he cares anyway.
+* Abd: That’s because you forced him to, didn’t you?
+* CEO: (stares at Abdurahman for a long moment) You’re pretty clever, aren’t you? (Abdurahman grins.) And a clever person such as yourself deserves some brand spanking new just-released-a-few-months-ago P-Tech Vision Goggles! (A picture of the goggles appears on the screen.) 
+* Abd: (harshly) Forget it. I’m not buying those goggles. 
+* CEO: Let me finish. These goggles contain state-of-the-art VR technology! You can visualize different worlds with the tap of a button or the flick of a wrist! You can feel virtual objects as if they were really there! And you can get lost…..in a personalized virtual universe! 
+* Abd: (Simply shakes his head) 
+* CEO: What? How could that not convince you to try out my goggles? You can try them out for free! 
+* Abd: Even so, I would still ask for my money back. (He smirks at the TV.)
+* CEO: What’s wrong with you? (The TV leans uncomfortably into him.) You’re a piece of work, all right. 
+* Abd: Why? Because I think for myself? 
+* CEO: No matter. I’ll still get the last laugh. (He presses a button.)
+* (The VR zombie’s body shimmers with a blue shield energy from bottom to top.)
+* CEO: Ha! With this patented P-Tech Safety Shield, my customers can never be harmed. Try taking their helmets off now! (And with that, the TV flies away into the abyss.)
+? SITUATIONS THAT COULD HAPPEN IF HE WALKS INTO DIFFERENT HOUSES AND BUILDINGS
+? HOUSE 1 (The depressed-Muslim mother house)
+? Mother
+? Abd: Assalamu alaykum! What's up?
+? Mother: I'm just…..just sad….
+? Abd: What happened? 
+? Mother: All my sons and daughters have disappeared……it was like, one day, they were all here, alive as ever, and the next day….they all vanished. Can you find them for me, please? 
+? Abd: You got it. 
+? Father 
+? (The father is kneeling on a prayer mat, making dua.)
+? Abd: Assalamu alaykum.
+? Father: Wa alaykum salaam. 
+? (IF ABDURAHMAN MET THE MOTHER FIRST)
+? Abd: Are you making dua to Allah (SWT) to get your kids back?
+? Father: Why yes, I am. How'd you know our kids were missing?
+? Abd: Your wife downstairs told me. 
+? Father: Oh…she must have been the one to let you in. 
+? Abd: I'm going to find your kids. 
+? Father: Please do. May Allah increase you in Iman for being so brave. 
+? Abd: Ameen. 
+? (IF ABDURAHMAN DIDNT MEET THE MOTHER FIRST)
+? Abd: What are you making dua for?
+? Father: What business is it of yours? Come to think of it, how did you get in my house?
+? Abd: Your wife let me in. 
+? Father: Oh….she's always letting random people in nowadays, ever since we lost our kids. 
+? Abd: Forgive me for asking, but before your kids disappeared, did you give them…. VR goggles?
+? Father: I believe so, yes. Why do you ask?
+? Abd: I think those VR goggles are the reason why your kids left the house.
+? Father: Ridiculous….they’re probably lost in a forest or something.
+? Abd: How long were they gone for?
+? Father: About 3 days.
+? Abd: Oh. Alright. 
+? Father: Are you going to find our kids?
+? Abd: I am. 
+? Father: Alhamdulillah. May Allah make you successful. 
+? Abd: Ameen. 
+HOUSE 2
+1. Father
+* Abd: Assalamu alaykum.
+* Father: Wa alaykum salaam.
+* Abd: Did you lose your kids?
+* Father: I lost one of them. He really wanted a VR helmet, so I gave it to him…..and then he just left. 
+* Abd: I think the VR helmet is the reason why he left, sir.
+* Father: What? Why do you say that? 
+* Abd: Because, sir, I believe those VR goggles were meticulously designed to trap your children  in a world of pleasures. 
+* Father: That sounds…..crazy. Even if that was the case, why would he leave the house? 
+* Abd: I don’t know yet…..that’s what I’m planning to find out. 
+* Father: Please, find my kid. I’m really beginning to worry about him. 
+* Abd: I shall find him, Inshallah. 
+* Father: Jazakallahu Khayr. Here, take this as an incentive. (He gives him a Leveller.)
+2. Daughter
+* D: Whoa! What are you doing here?
+* Abd: Your father let me in.
+* D: Without telling me? I didn’t even have time to put my hijab on. Hold on….
+* (The daughter flees the room and returns later with her hijab.)
+* D: There. Now, what is it? Why have you come here?
+* Abd: How was your brother before he left? 
+* D: Who’s asking?
+* Abd: (Why is everyone so paranoid about me?) I just want to know.
+* D: I guess he was a bit more of a pain than usual. 
+* Abd: Did he suddenly sit in a certain place for hours on end?
+* D: Yes, he did. 
+* Abd: Then it’s just as I suspected……
+* D: What?
+* Abd: Nothing, nothing…..
+* D: Hold on….what’s your name, anyway?
+* Abd: Abdurahman. 
+* D: What are you suspecting, Abdurahman? My brother has gone missing, and if you think it's related to those VR goggles he recieved, then I have a right to know what’s really going on. 
+* Abd: Alright, alright…..if you insist. I think those VR goggles are connected to some higher, sinister ploy. My siblings all received VR goggles….and they all vanished. Same with my friends’ siblings, too. And now, your brother has gone from your house….when he received the same VR goggles! Do you see it now?
+* D: I think I do…….good thing I didn’t get them, then.
+* Abd: Why haven’t you gotten one?.....just asking.
+* D: Because I don’t need distractions such as that. My father needs someone to take care of him. 
+* Abd: Oh…..you have no other siblings that could help?
+* D: No…I’m the only one now.
+* Abd: OK. Well, I’m off.
+* D: Wait. If you’re trying to find my brother, then take this. (She gives him a pack filled with cheese smelling salts, and a Leveller.)
+* Abd: Jazakillahu khayr…..but what does this do?
+* D: If you think my brother could be around, use this on him. He’ll come running to you. 
+* Abd: OK. Thank you.
+* D: You’re most welcome. Find my brother for me, would you?
+* Abd: I’ll try.
+HOUSE 3 
+1. Mother
+* Abd: Assalamu alaykum.
+* Mother: Wa alaykum salaam. 
+* Abd: Where are your kids?
+* Mother: They’re in school. Why do you ask?
+* Abd: I’m starting a rebellion against the P-Tech company. Have your kids received VR goggles, by any chance?
+* Mother: They have not. 
+* Abd: Good. Do not let your children play with VR goggles. They’re dangerous. 
+* Mother: How are those glasses dangerous?
+* Abd: They’re honey traps of pleasure and comfort. If your kids go in there, there’s a good chance they’ll stay there. Forever. 
+* Mother: Hmm……OK. I won’t let them use it……but the school they go to might. 
+* Abd: ……….
+* Mother: Jazakallahu Khayr. Here, take this as a token of my appreciation. (She hands him a Rare Beet-y.)
+* Abd: Thank you.
+HOUSE 4 
+1. Father
+* Abd: Assalamu alaykum.
+* Father: What?
+* Abd: Wait……..sorry. I thought you were Muslim. (He’s not Muslim, and he invited me to his house? What?)
+* Father: No, I’m not. 
+* Abd: Then why did you let me into your house?
+* Father: Because I thought you’d know anything about where my kids went.
+* Abd: (This is starting to get old.) I don’t know where your kids went, exactly. 
+* Father: It’s those darn VR goggles……..I don’t know how, but I just know my kids’ disappearance is related to them. 
+* Abd: I’m starting a rebellion against them.
+* Father: You are? Excellent. I want to help. They need to know that they don’t rule the world. 
+* Abd: Do you have any insider information?
+* Father: I think I know where the P-Tech tower is. 
+* Abd: Where is it?
+* Father: Here’s a paper map with the directions. Can’t trust phones now, know what I mean? (He hands him a paper map.)
+* Abd: Thank you. 
+* Father: You’re welcome. 
+2. Son
+* (IF HE DIDN’T MEET THE FATHER FIRST)
+* Abd: Assalamu alaykum.
+* Son: What?
+* Abd: Wait….sorry. I thought you were Muslim. (His father’s not Muslim, and yet he still invited me to his house? What?)
+* Son: I’m not.
+* Abd: OK.
+* (IF HE MET THE FATHER FIRST)
+* Abd: Hello.
+* Son: Hey. 
+* 
+* Son: What are you doing here?
+* Abd: I’m starting a rebellion against P-Tech. I was hoping you’d have some information. 
+* Son: ‘Fraid not. I’ve never worked there nor do I know anyone who has worked there. But they do seem pretty shady, don’t they?
+* Abd: They do. 
+* Son: I’m too busy with my university studies, but if I wasn’t, I’d join you in this fight. Here, take this. (He gives him a Leveller and an Attacker.)
+* Abd: Thanks!
+* Son: You’re welcome. I found those around my house one day and didn’t know what to do with them. I hope you can find a use for them. 
+HOUSE 5 
+1. Daughter
+* Abd (after seeing non-Muslim daughter): (Subhanallah……why did I come here again? This is seriously beginning to test me.)
+* D: Why did you come here?
+* Abd: I’m on a mission. 
+* D: What mission? And what does it have to do with me or my family?
+* Abd: Do you know about the P-Tech Company?
+* D: Who dosen’t know about them?
+* Abd: OK, but do you know about their VR goggles?
+* D: (She glances behind her.) I do…..where are you going with this?
+* Abd: Do you have one right now?
+* D: What’s with all these questions? Are you an FBI agent?
+* Abd: No,….I was just going to tell you that those VR goggles are dangerous pleasure traps.
+* D: Pleasure traps? What are you talking about?
+* Abd: They trap you in and fill you with so many pleasures that you would never want to leave. Ever. 
+* D: I just left it, though. 
+* Abd: What……?
+* D: I was just in my VR world, and I left a minute ago. 
+* Abd: (So you can control your own time in a VR world….)
+* D: Though I must admit, it was an uphill battle. 
+* Abd: (Barely…..)
+* D: I’ve just been preparing myself breakfast for the past few minutes. 
+* Abd: Well…..I’m starting a rebellion against the P-Tech company. 
+* D: Well….that’s a tall order, isn’t it? Aren’t they a multi-billion dollar company?
+* Abd: They are, but no company is safe from the law. 
+* D: Well, I hope you succeed. 
+* Abd: Thanks.
+* D: You know…..that P-Tech company has been getting too big for their britches…so I’ll tell you what. I’ve been collecting these strange items in my chest in my room ever since I was a kid. I’ll let you have them all, if you do one thing for me. 
+* Abd: What are these strange items?
+* D: Mostly (Levellers, Attackers and Defenders). 
+* Abd: Nice…..OK. What do you want me to do?
+* D: I want you to bring me 5 Identification Tokens. They’re one of my favorite collectibles, and I haven’t had any luck in finding them. If you can find them for me, I’ll give you everything in my chest. 
+* Abd: Consider it done. 
+* D: Thanks so much.
+* Abd: You’re welcome.
+HOUSE 6 
+1. Father
+* Abd (if he visited a non-Muslim house beforehand): (Alhamdulillah…..this guy appears to be a Muslim. I’m back on the right track.)
+* Father: Assalamu alaykum, brother.
+* Abd: Wa alaykum salaam.
+* Father: What brings you to my house?
+* Abd: I wanted to ask if you have any kids.
+* Father: I do…..but they……
+* Abd: Mysteriously disappeared after receiving VR headsets?
+* Father: How did you know?
+* Abd: It hasn’t happened to only your family. Most other families are experiencing this too. It’s a local epidemic.
+* Father: Subhanallah. So what can we do?
+* Abd: Well, that’s where I come in. I’m starting a revolution against the P-Tech company. 
+* Father: All right.
+* Abd: And I need your help.
+* Father: Well, all I have to give you are these. (He gives him a Defender.)
+* Abd: azakallahu khayr. Any help is good help.
+* Father: Wa iyaak. Inshallah, you will be successful in your quest. 
+* Abd: Inshallah….
+* Father: If you need more items, go to my wife. She’ll be more than willing to give you them; she’s been meaning to throw them out anyway.
+* Abd: Thank you.
+* Father: You’re most welcome.
+2. Mother
+* Abd: Assalamu alaykum.
+* Mother: Wa alaykum salaam.
+* (IF ABDURAHMAN MET THE FATHER FIRST)
+* Abd: Your husband told me to come to you. 
+* Mother: Why’d he tell you that?
+* Abd: Because he said you would have some items you’d be willing to give away. 
+* Mother: Well, I do have these items. (She shows him a chest of Levellers.)
+*  Abd: OK…Are there any strings attached?
+* Mother: Well…..
+* Abd: (There we go…)
+* Mother: There is one thing I’d like you to do for me. Get me a flower from the valleys of West Virginia. I’d love to go there myself, but I’m worried about our kids. I presume my husband told you about our problem?
+* Abd: He did, yes. 
+* Mother: Alright. Give me a flower, and you get this chest. 
+* Abd: Can’t I have just one of those Levellers?
+* Mother: Alright…..you can have one. But I’ll need that flower if you want more. (She hands him a Mega-Leveller.)
+* Abd: OK. I shall hand you that flower. 
+* (IF ABDURAHMAN DIDN’T MEET THE FATHER FIRST)
+* Mother: What brings you here?
+* Abd: I need your help. 
+* Mother: Well, I need your help first. Do you know where my kids are? I’ve been looking for them all week. 
+* Abd: I think I know what has happened to them.
+* Mother: (panicked) What? What’s happened to them?
+* Abd: They were taken by P-Tech. You gave them VR goggles, right?
+* Mother: Well, I did….but they were supposed to just play with them! I thought they were toys!”
+* Abd: They’re much more than toys, ma’am. They’re special containment units designed to trap their users in their own desires. 
+* Mother: (blinks at him) What?
+* Abd: Your kids aren’t gone, ma’am. They’re just trapped….in limbo. 
+* Mother: Well, get them back for me! Please…..? 
+* Abd: You bet! 
+* Mother: Oh, and…..while you’re at it……There is one thing I’d like you to do for me. Get me a flower from the valleys of West Virginia. I’d love to go there myself, but I’m worried about our kids. I presume my husband told you about our problem?
+* Abd: He did, yes. 
+* Mother: Alright. Give me a flower, and you get this chest. 
+* Abd: Can’t I have just one of those Levellers?
+* Mother: Alright…..you can have one. But I’ll need that flower if you want more. (She hands him a Mega-Leveller.)
+* Abd: OK. I shall hand you that flower. 
+* Abd: Assalamu alaykum. 
+* Mother: Wa alaykum salaam. Find my kids, noble stranger. 
+* Abd: My name is Abdurahman. 
+* Mother: Oh…..that’s a nice name. Well,, Abdurahman, you will succeed in your mission, Inshallah. 
+* Abd: Inshallah. 
+SOMEWHERE BETWEEN THE COLLECTION OF 5 and 8 IDENTIFICATION TOKENS
+(A TV monitor drone hovers menacingly toward Abdurahman. Once it nears him, it turns on suddenly to reveal the P-Tech CEO, glaring menacingly at him.)
+* CEO: So, you’re the one who’s been ruining my…..presence here. 
+* Abd: I ask again, who are you? 
+* CEO: I am the CEO of P-Tech Corporation, the single greatest technology company that was ever established! 
+* Abd: So you’re the one who’s been brainwashing the entire population.
+* CEO: “Brainwashing” is such a harsh word……I prefer influencing. After all, they agreed to this on their own free will!
+* Abd: (points to a VR zombie) You call this free will? (The VR zombie groans, swatting at imaginary things.)
+* CEO: The point is, my company is not doing anything wrong. It’s the people‘s fault for buying into it! 
+* Abd: But you should‘ve at least provided them with a way out. What if they don’t want to live in VR land anymore?
+* CEO: (smiles devilishly) Oh, don’t worry about that. They’ll never want to leave. The algorithm knows them more than they know themselves—-it’ll make sure they never escape. 
+* Abd: You took my family away from me……and for that, you must be stopped. 
+* CEO: You’ll never stop me, you backwards bumpkin! I’ve got the whole world on my side! What have you got? A couple of ragtag rats? 
+* Abd: The truth always comes out on top, no matter how small its supporters are. You’ll see. 
+* (With that, he turned off the TV drone and punched the screen, destroying it.)
+WHEN ABDURAHMAN AND HIS FRIENDS REACH THE FIRST P-TOWER 
+(
+THROUGH THE HALLS
+* CEO: What on earth are these….brats doing in my tower?! SECURITY! STOP THEM!
+* CEO:  Up and at ‘em, security! 
+* CEO: P-Bots! Get your gears in gear!
+* CEO: I think it’s about time we take out the trash…..
+* CEO: They’re still here?! Security, what are you doing?!
+WHEN THEY NEAR THE CRYSTAL ROOM
+* CEO: Security! Don’t let them near the crystal! 
+* CEO: SECURITY!! Keep them back! We can’t have them destroying the crystal! 
+WHEN THEY REACH THE CRYSTAL ROOM
+* CEO: What?! How did you beat my P-Bot security grunts?! 
+* Abd: Your little tin cans were no match for us! 
+* CEO: Just wait till you get to the crystal room, you ignorant meatheads. You won’t be so tough then! 
+SMALL CUTSCENES THAT WILL PLAY WHEN YOU FREE YOUR ALLIES FROM THEIR VR PRISONS
+HAMZA 
+* H: Whoa….(he rubs his head). What happened to me?
+* Abd: Those VR goggles trapped you in a virtual world, but you’re safe now, Alhamdulillah. 
+* H: Subhanallah…..I didn’t think VR could be so…oppressive. 
+* Abd: What was it like in there?
+* H: (Sheepishly) ….I’d rather not tell you.  
+RAYYAN 
+* Abd: Whew….now you’re free….
+* R: (Grunts)….What was that? I feel like I have the world’s biggest headache…..
+* Abd: You were trapped in a world filled with your own desires. The headache part was probably because those goggles were designed to not come off. All that radiation must have gone to your head. (Chuckles).
+* R: What?! Astaghfirullah! I should’ve known that before I decided to give them a test run! (Groans)…..
+FARAH
+* F: Subhanallah…..my head feels like splitting open……
+* Abd: That should be gone in two hours, inshallah. Maybe three, tops. 
+* F: Where am I? Who are you? What….what’s going on? 
+* Abd: My name is Abdurahman, and you’re now free from P-Tech’s cursed VR goggles. 
+* F: Astaghfirullah…..I only put the goggles on because of a school-assigned project. Who would’ve guessed I’d be there for days on end? 
+AMMAR
+* Am: I’m free! At last, I’m free! Alhamdulillah! 
+* A
+* Abd: (taken aback) Whoa…..
+* Am: Oh, sorry about that. Assalamu alaykum, kind stranger. Thank you for rescuing me. 
+* Abd: What, may I ask, was going on in your VR space?
+* Am: It was horrible—-yet it was amazing at the same time. I felt like a prisoner, yet I also felt like the most free person in the world. I was so confused! 
+* Abd: P-Tech’s VR algorithm must’ve not been enough to get to you fully, huh? Good for you! (He gives Ammar a thumbs up.)
+OMAR
+* O: Well….(he shakes his head)…it’s about time someone got the guts to rescue me. 
+* Abd: (nonchalantly) Assalamu alaykum, insert name here. I have just rescued you from the evil claws of the P-Tech company, and….
+* O: Wait, wait, wait, wait, wait. Hold up. First of all, wacalaykum assalam. My name is Omar, don’t forget that. Second off, who is this “P-Tech” company?
+* Abd: They’re the company who has enslaved you in your own VR space. 
+* O: That’s ridiculous! I was perfectly fine in there! 
+* Abd: Uh-huh. What’s today’s date? 
+* O: The 5th of June.
+* Abd: (Whips out his watch. Omar peers into it and gasps.) 
+* O: What?! I can’t believe it! 
+* Abd: Yep..you’ve been gone for a long time. 
+* O: Subhanallah….who knows how long I would’ve been in there had you not saved me? Thanks, man. 
+
+
+
+ 
+
+
+

@@ -83,7 +83,7 @@ public class buttonLoad : MonoBehaviour
              FadeManager.instance.StartFading(2f, .1f, true, sceneName);
                 break;
             case ButtonType.Settings:
-                MainMenuLoader.instance.MoveToNewPosition(new Vector3(0, -20, 0));
+                MenuLoader.instance.MoveToNewPosition(200f);
                 break;
             default:
                 Debug.Log("What are you again? I forgot.");

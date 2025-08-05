@@ -4,7 +4,10 @@ using UnityEngine;
 public class GameManagerRPG : MonoBehaviour
 {
     public static GameManagerRPG instance;
+    public Camera main;
     public CameraControllerRPG cameraController;
+    public float targetSize;
+    public float cameraSpeed;
     public AudioSource source;
     public AudioClip[] audioClips;
     public playerpg playerpg;
@@ -30,7 +33,11 @@ public class GameManagerRPG : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        main = Camera.main;
         playerpg = FindFirstObjectByType<playerpg>();
+        targetSize = main.orthographicSize;
+        audioSourceVolume = GameManager.instance.musicVolume;
+        
         if (GameManager.instance.startSpawnBool && GameManager.instance.phoneBoothSpawn == Vector3.zero)
         {
             spawnObject = startSpawnRPG.transform.position;
@@ -46,6 +53,7 @@ public class GameManagerRPG : MonoBehaviour
         {
             mainMap.SetActive(false);
             playerHouse.SetActive(true);
+            
             source.clip = audioClips[0];
             source.Play();
         }
@@ -55,6 +63,10 @@ public class GameManagerRPG : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (main.orthographicSize != targetSize) {
+          main.orthographicSize = Mathf.Lerp(main.orthographicSize, targetSize, Time.deltaTime * cameraSpeed);  
+        }
+        
         source.volume = audioSourceVolume;
         if (decreaseVolume)
         {
@@ -64,12 +76,9 @@ public class GameManagerRPG : MonoBehaviour
         {
             GradualVolumeIncrease();
         }
-        if (movingAutonomously)
-        {
+        
 
-        }
-
-
+        
     }
     public void RespawnPlayerInCheckpoint(Vector3 newSpawnPoint, int index)
     {
@@ -97,9 +106,9 @@ public class GameManagerRPG : MonoBehaviour
             return;
         }
         audioSourceVolume = Mathf.MoveTowards(audioSourceVolume, 1f, fadeSpeed * Time.deltaTime);
-        if (audioSourceVolume >= 1)
+        if (audioSourceVolume >= GameManager.instance.musicVolume)
         {
-            audioSourceVolume = 1;
+            audioSourceVolume = GameManager.instance.musicVolume;
             increaseVolume = false;
             return;
         }
@@ -108,7 +117,7 @@ public class GameManagerRPG : MonoBehaviour
     {
         StopAllCoroutines();
         decreaseVolume = false;
-        audioSourceVolume = 1;
+        audioSourceVolume = GameManager.instance.musicVolume;
         StartCoroutine(FadingVolume(clipNew, waitDuration));
     }
     public IEnumerator FadingVolume(AudioClip clipNew, int waitDuration)
@@ -139,5 +148,10 @@ public class GameManagerRPG : MonoBehaviour
             movingAutonomously = false;
             playerpg.isMovable = true;
         }
+    }
+    public void CameraZoom(float newSize, float speed)
+    {
+        targetSize = newSize;
+        cameraSpeed = speed;
     }
 }

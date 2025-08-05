@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -22,10 +23,15 @@ public class GameManager : MonoBehaviour
     public GameObject arrows;
     public GameObject fallingPlatforms;
     [SerializeField] private GameObject playerPrefab;
+    [Header("Audio Sources")]
+    public AudioSource musicSource;
+    public AudioSource soundEffectSource;
 
     [Header("Scripts")]
     public player player;
     public playerpg playerpg;
+    [Header("Input System")]
+    public InputActionAsset inputActions;
 
     [Header("Spawn-Related Material")]
     public GameObject startSpawnPlatforming;
@@ -60,6 +66,9 @@ public class GameManager : MonoBehaviour
     public int RPGTimes;
     [Header("Dialogue Progression")]
     public int DialogueProgression = 0;
+    [Header("Settings for Game")]
+    public bool noMusic = false;
+    public float musicVolume = 1f;
 
     void Awake()
     {
@@ -99,6 +108,7 @@ public class GameManager : MonoBehaviour
             startSpawnBool = false;
             isDonewithPlatforming = false;
         }
+        Camera.main.GetComponent<AudioSource>().volume = musicVolume;
         
 
 
