@@ -117,8 +117,7 @@ public class DialogueProcessor : MonoBehaviour
         else if (GameManager.instance.DialogueProgression == 4)
         {
             FadeManager.instance.Fader(false, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
-
-
+            DialogueManager.instance.StartTextBox(2, 5, dialogueVault.dialogueSets[2].Length, dialogueVault.dialogueSets[2]);
         }
         else if (isTalkingToHomelessMan && GameManager.instance.DialogueProgression > 2)
         {

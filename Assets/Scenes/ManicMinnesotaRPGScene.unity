@@ -3026,10 +3026,10 @@ RectTransform:
   - {fileID: 1120404811}
   - {fileID: 1347589305}
   - {fileID: 682257086}
+  - {fileID: 1304030962}
   - {fileID: 1021619531}
   - {fileID: 2401781969913642153}
   - {fileID: 6859525759715827056}
-  - {fileID: 1304030962}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
