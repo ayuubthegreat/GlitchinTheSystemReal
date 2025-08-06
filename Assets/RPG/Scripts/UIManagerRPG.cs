@@ -51,8 +51,8 @@ public class UIManagerRPG : MonoBehaviour
     }
     public void ControlRPGUIElements(bool isActive)
     {
-        rpgTextObject.SetActive(isActive);
-        personNameObject.SetActive(isActive);
+        // rpgTextObject.SetActive(isActive);
+        // personNameObject.SetActive(isActive);
         dialogueAnimations.SetActive(isActive);
         phone.SetActive(isActive);
     }

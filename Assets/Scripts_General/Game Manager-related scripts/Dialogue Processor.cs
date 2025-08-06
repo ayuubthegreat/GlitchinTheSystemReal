@@ -112,21 +112,15 @@ public class DialogueProcessor : MonoBehaviour
         {
             GameManagerRPG.instance.playerpg.isMovable = false;
             GameManagerRPG.instance.CameraZoom(10f, 10f);
-            NPCManager.instance.StartMovingNPC(0, 20f, new Vector2[] { new Vector2(0, (NPCManager.instance.playerPosition.y - NPCManager.instance.transform.position.y) - 6), new Vector2(NPCManager.instance.playerPosition.x - NPCManager.instance.transform.position.x, 0) }, () => DialogueManager.instance.StartTextBox(0, 0, 5, dialogueVault.dialogueSets[2]));
+            NPCManager.instance.StartMovingNPC(0, 20f, new Vector2[] { new Vector2(0, (NPCManager.instance.playerPosition.y - NPCManager.instance.transform.position.y) - 6), new Vector2(NPCManager.instance.playerPosition.x - NPCManager.instance.transform.position.x, 0) });
         }
         else if (GameManager.instance.DialogueProgression == 4)
         {
             FadeManager.instance.Fader(false, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
-            DialogueManager.instance.StartTextBox(2, 5, 11, dialogueVault.dialogueSets[2]);
         } else if (GameManager.instance.DialogueProgression == 5)
         {
             FadeManager.instance.Fader(true, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
-            DialogueManager.instance.StartTextBox(2, 12, dialogueVault.dialogueSets[2].Length, dialogueVault.dialogueSets[2]);
-
-        }
-        else if (isTalkingToHomelessMan && GameManager.instance.DialogueProgression > 2)
-        {
-            DialogueManager.instance.StartTextBox(0, 0, dialogueVault.dialogueSets[2].Length, dialogueVault.dialogueSets[2]);
+           
 
         }
 
@@ -147,7 +141,6 @@ public class DialogueProcessor : MonoBehaviour
         isConversationActive = true;
         recieverPhoneDialogue2SetActive();
 
-        DialogueManager.instance.StartTextBox(0, 0, dialogueVault.dialogueSets[1].Length, dialogueVault.dialogueSets[1]);
     }
     public IEnumerator DialogueProgression1()
     {
@@ -169,43 +162,10 @@ public class DialogueProcessor : MonoBehaviour
             return;
         }
         UIManagerRPG.instance.phone.SetActive(true);
-        DialogueManager.instance.StartTextBox(2, 1, 2, dialogueVault.dialogueSets[0]);
+       
     }
     public void recieverPhoneDialogue2SetActive() => recieverPhoneDialogue2.SetActive(isPhoneActive);
-    public void ConversationManager()
-    {
-        if (GameManager.instance.DialogueProgression < 3)
-        {
-            PhoneConversationManager1();
-        }
-        else
-        {
-            return;
-        }
-
-    }
-    public void PhoneConversationManager1()
-    {
-        if (!isPhoneActive && GameManager.instance.DialogueProgression > 3)
-        {
-            return;
-        }
-        if (DialogueManager.instance.dialogueNumber == 4 || DialogueManager.instance.dialogueNumber == 5)
-        {
-            ChangeExpressionBools(0);
-            ChangeFaceExpressionBools(0);
-        }
-        else if (DialogueManager.instance.dialogueNumber == 10 || DialogueManager.instance.dialogueNumber == 11)
-        {
-            ChangeExpressionBools(1);
-            ChangeFaceExpressionBools(1);
-        }
-        else
-        {
-            ChangeExpressionBools(expressions.Length + 5);
-            ChangeFaceExpressionBools(faces.Length + 1);
-        }
-    }
+    
     public void ChangeExpressionBools(int value)
     {
 

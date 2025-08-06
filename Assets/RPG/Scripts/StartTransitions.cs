@@ -16,6 +16,5 @@ public class StartTransitions : MonoBehaviour
         anim.SetBool("canPersonNameTextMove", UIManager.instance.startTransitions[1]);
     }
     public void ChangeStartTransitionsBool(int initVal) => UIManager.instance.ChangeStartTransitionsBool(initVal);
-    public void ChangeIsTalkingBool(int initVal) => DialogueManager.instance.isTalking = initVal == 0;
-    public void StartDialogues() => DialogueManager.instance.StartDialogueController();
+    public void ChangeIsTalkingBool(int initVal) => DialogueManager.instance.isDialogueActive = initVal == 0;
 }

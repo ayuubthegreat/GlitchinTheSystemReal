@@ -61,16 +61,7 @@ public class buttonLoad : MonoBehaviour
                 warningScreen.SetActive(false);
                 break;
             case ButtonType.Next:
-                Debug.Log(DialogueManager.instance.brokenSentence);
-                if (DialogueManager.instance.brokenSentence != string.Empty)
-                {
-                    DialogueManager.instance.StartDialogueController();
-
-                }
-                else
-                {
-                    OnWithTheShow();
-                }
+                
                 break;
 
 
@@ -108,22 +99,7 @@ public class buttonLoad : MonoBehaviour
 
         }
     }
-    public void OnWithTheShow()
-    {
-        DialogueManager.instance.currentPage = 1;
-        DialogueManager.instance.rpgText.pageToDisplay = DialogueManager.instance.currentPage;
-        if (DialogueManager.instance.dialogueNumber < DialogueManager.instance.endDialogueRange - 1)
-        {
-            DialogueManager.instance.dialogueNumber++;
-            DialogueManager.instance.StartDialogueController();
-
-        }
-        else
-        {
-            DialogueManager.instance.isEnabled = false;
-            DialogueManager.instance.ResetDialogue();
-        }
-        
-    }
+    
+    
     
 }

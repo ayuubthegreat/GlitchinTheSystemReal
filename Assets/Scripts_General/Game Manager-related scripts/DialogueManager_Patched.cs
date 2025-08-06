@@ -1,260 +1,65 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using NUnit.Framework.Constraints;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager instance;
-    public DialogueVault dialogueVault;
-    public GameObject rpgTextObject;
-    public GameObject personNameObject;
-    public GameObject nextButton;
-
-    public int startRange;
-    public int dialogueNumber = 0;
-    public int endDialogueRange;
-    public int currentPage = 1;
-    public int currentPageAuto;
-    public DialogueVault.DialogueSet[] dialogueShells;
     public TextMeshProUGUI rpgText;
-    public TextMeshProUGUI personNameText;
-    public bool isEnabled = false;
-    public bool isTalking = false;
-    public bool[] playersTalking;
-    public int startBrokenSentence = 0;
-    public int endBrokenSentence = 0;
-    public string brokenSentence;
-    public float dialogueSpeed;
     public int dialogueBounds;
-    public int originalDialogueBounds;
-
+    public string brokenSentence;
+    public bool isDialogueActive = false;
+    public float dialogueSpeed = .3f;
     void Awake()
     {
-        if (instance == null)
+        if (instance != null)
         {
             instance = this;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-
     }
     void Start()
     {
-        dialogueVault = GetComponent<DialogueVault>();
-
-        playersTalking = new bool[] {
-            // Player 1 (usually Abdurahman)
-            false,
-            // Player 2 (the other person Abdurahman is speaking to)
-            false,
-        };
-        // GameManager.instance.DialogueProgression = 0;
-
-        if (rpgTextObject == null && UIManager.instance.currentScreen == MainScreens.RPG)
-        {
-            rpgTextObject = GameObject.Find("rpgText");
-            rpgTextObject.SetActive(false);
-
-        }
-        if (personNameObject == null && UIManager.instance.currentScreen == MainScreens.RPG)
-        {
-            personNameObject = GameObject.Find("personNameText");
-            personNameObject.SetActive(false);
-        }
-
-        if (rpgText == null && rpgTextObject != null)
-        {
-            rpgText = rpgTextObject.GetComponent<TextMeshProUGUI>();
-            currentPageAuto = rpgText.pageToDisplay;
-            originalDialogueBounds = 100; // Default value for dialogue bounds
-        }
-        if (personNameText == null && personNameObject != null)
-        {
-            personNameText = personNameObject.GetComponent<TextMeshProUGUI>();
-        }
-        if (GameManager.instance.DialogueProgression == 0 && dialogueVault != null && GameManagerRPG.instance.playerpg != null)
-        {
-            StartTextBox(3, 0, 1, dialogueVault.dialogueSets[0]);
-        }
-
-
-
+        StartCoroutine(dialogueRunner("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"));
     }
-
     void Update()
     {
-        if (GameManagerRPG.instance.playerpg != null)
-        {
-            if (isEnabled)
-            {
-                if (rpgTextObject != null) rpgTextObject.SetActive(true);
-                if (personNameObject != null) personNameObject.SetActive(true);
-            }
-            else
-            {
-                rpgTextObject.SetActive(false);
-                personNameObject.SetActive(false);
-            }
-
-        }
 
     }
-    public void StartTextBox(int seconds, int startRangee, int endRange, DialogueVault.DialogueSet[] dialogueSet)
+    public IEnumerator dialogueRunner(string sentence, bool killDialogueScreen = false)
     {
-        StartCoroutine(RPGTextBox(seconds, startRangee, endRange, dialogueSet));
-    }
-    public IEnumerator RPGTextBox(int seconds, int startRangee, int endRange, DialogueVault.DialogueSet[] dialogueSet)
-    {
-        yield return new WaitForSeconds(seconds);
-        isEnabled = true;
-        UIManager.instance.startTransitions[0] = true;
-        startRange = startRangee;
-        endDialogueRange = endRange;
-        dialogueNumber = startRangee;
-        dialogueShells = dialogueSet;
-    }
-    public void StartDialogueController()
-    {
-        StopAllCoroutines();
-        StartCoroutine(DialogueController(dialogueShells));
-    }
-    public IEnumerator DialogueController(DialogueVault.DialogueSet[] sets)
-    {
-        
-        string sentence = sets[dialogueNumber].dialogueLine;
-        dialogueBounds = originalDialogueBounds;
-        int trueDialogueBounds = (dialogueBounds >= 0 && dialogueBounds < sentence.Length) ? dialogueBounds - 1 : sentence.Length - 1;
-        isTalking = true;
-        nextButton.SetActive(false);
-        personNameText.text = sets[dialogueNumber].characterName;
-        TalkingStick(sets[dialogueNumber].characterName);
-        if (sentence[trueDialogueBounds] != '.' && sentence[trueDialogueBounds] != '?' && sentence[trueDialogueBounds] != '!')
+        Debug.Log("Dialogue started.");
+        for (int i = 0; i <= (sentence.Length <= dialogueBounds ? dialogueBounds : sentence.Length); i++)
         {
-            Debug.LogWarning("Dialogue bounds are not set correctly. Please ensure the dialogue ends with a punctuation mark.");
-        }
-        
-        rpgText.text = string.Empty;
-        if (brokenSentence != string.Empty)
-        {
-            sentence = brokenSentence;
-            brokenSentence = string.Empty;
-        }
-
-        GameManagerRPG.instance.playerpg.isMovable = false;
-        for (int i = 0; i < sentence.Length + 1; i++)
-        {
-            
-            if (sentence[i] == '<')
+            isDialogueActive = true;
+            rpgText.text = sentence.Substring(0, i);
+            yield return new WaitForSeconds(dialogueSpeed);
+            if (i == dialogueBounds && sentence.Length > dialogueBounds)
             {
-                dialogueBounds = i;
-                Debug.Log("Dialogue bounds set to: " + dialogueBounds);
-            }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                isTalking = false;
-                ResetTalkingStick();
-                Debug.Log(sentence.Length);
-
-                if (sentence.Length < dialogueBounds)
-                {
-                    rpgText.text = sentence;
-                    brokenSentence = string.Empty;
-                    nextButton.SetActive(true);
-                }
-                else
-                {
-                    rpgText.text = sentence.Substring(0, dialogueBounds);
-                    int newLength = sentence.Length - dialogueBounds;
-                    brokenSentence = sentence.Substring(dialogueBounds, newLength);
-                    nextButton.SetActive(true);
-                }
-
-
+                brokenSentence = sentence.Substring(i, i + dialogueBounds < sentence.Length - i ? dialogueBounds : sentence.Length - i);
+                Debug.Log("Breaking sentence: " + brokenSentence + " at index: " + i + " with length: " + brokenSentence.Length + " The original sentence's length was " + sentence.Length);
                 break;
             }
-            if (rpgText.text.Length < dialogueBounds)
-            {
-                Debug.Log(rpgText.text.Length);
-                rpgText.text = sentence.Substring(0, i);
-                yield return new WaitForSeconds(dialogueSpeed);
-                nextButton.SetActive(false);
-                continue;
-            }
-            else
-            {
-                ResetTalkingStick();
-                if (sentence.Length <= dialogueBounds)
-                {
-                    rpgText.text = sentence;
-                    brokenSentence = string.Empty;
-                    nextButton.SetActive(true);
-                    break;
-                }
-                else
-                {
-                    rpgText.text = sentence.Substring(0, dialogueBounds);
-                    int newLength = sentence.Length - dialogueBounds;
-                    brokenSentence = sentence.Substring(dialogueBounds, newLength);
-                    nextButton.SetActive(true);
-                    break;
-                }
-            }
-
         }
+        isDialogueActive = false;
+
     }
-
-
-    public void ResetDialogue()
+    public bool CheckForSigns(char sign)
     {
-        GameManager.instance.DialogueProgression++;
-        GameManagerRPG.instance.playerpg.isMovable = true;
-        DialogueProcessor.instance.DialogueProgressionFunction();
-
-        dialogueNumber = 0;
-        dialogueShells = null;
-        startRange = 0;
-        endDialogueRange = 0;
-        currentPage = 1;
-        rpgText.text = string.Empty;
-        UIManager.instance.ChangeStartTransitionsBoolArray(0, false);
-        UIManager.instance.ChangeStartTransitionsBoolArray(1, false);
-        ResetTalkingStick();
-        DialogueProcessor.instance.isTalkingToHomelessMan = false;
-    }
-    public void TalkingStick(string characterName)
-    {
-        switch (characterName)
+        switch (sign)
         {
-            case "Abdurahman":
-                playersTalking[0] = true;
-                break;
-            case "Yasir":
-                playersTalking[1] = true;
-                break;
-            // Add more cases as needed
+            case '.':
+            case ',':
+            case '?':
+            case '!':
+                return true;
             default:
+                Debug.Log("Unknown sign detected: " + sign);
+                return false;
+        }
+    }
+    
 
-                break;
-        }
-    }
-    public void ResetTalkingStick()
-    {
-        Debug.Log("Resetting talking stick");
-        isTalking = false;
-        for (int i = 0; i < playersTalking.Length; i++)
-        {
-            playersTalking[i] = false;
-        }
-    }
     
 }

@@ -171,10 +171,6 @@ public class GameManager : MonoBehaviour
         startSpawnPlatforming = GameObject.Find("spawnPointPlatforming");
         dialogueManager = FindFirstObjectByType<DialogueManager>();
         dialogueVault = FindFirstObjectByType<DialogueVault>();
-        if (dialogueManager != null && dialogueVault != null)
-        {
-            dialogueManager.dialogueVault = dialogueVault;
-        }
     }
 
     
