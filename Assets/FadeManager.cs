@@ -81,7 +81,7 @@ public class FadeManager : MonoBehaviour
         {
             faderImage.color = new Color(0, 0, 0, fader ? 1 : 0);
             instance.targetColor = new Color(0, 0, 0, fader ? 0 : 1);
-        }
+        } 
         else
         {
             if (imageSprite == null)
