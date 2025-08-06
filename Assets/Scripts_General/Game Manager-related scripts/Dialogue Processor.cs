@@ -117,7 +117,12 @@ public class DialogueProcessor : MonoBehaviour
         else if (GameManager.instance.DialogueProgression == 4)
         {
             FadeManager.instance.Fader(false, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
-            DialogueManager.instance.StartTextBox(2, 5, dialogueVault.dialogueSets[2].Length, dialogueVault.dialogueSets[2]);
+            DialogueManager.instance.StartTextBox(2, 5, 11, dialogueVault.dialogueSets[2]);
+        } else if (GameManager.instance.DialogueProgression == 5)
+        {
+            FadeManager.instance.Fader(true, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
+            DialogueManager.instance.StartTextBox(2, 12, dialogueVault.dialogueSets[2].Length, dialogueVault.dialogueSets[2]);
+
         }
         else if (isTalkingToHomelessMan && GameManager.instance.DialogueProgression > 2)
         {
@@ -125,6 +130,14 @@ public class DialogueProcessor : MonoBehaviour
 
         }
 
+    }
+    public IEnumerator RestartCameraZoom(float waitForPlayerMovement)
+    {
+        GameManagerRPG.instance.playerpg.isMovable = false;
+        yield return new WaitForSeconds(waitForPlayerMovement);
+        GameManagerRPG.instance.CameraZoom(5f, 10f);
+        yield return new WaitForSeconds(waitForPlayerMovement);
+        GameManagerRPG.instance.playerpg.isMovable = true;
     }
     public IEnumerator PhoneRinging(int seconds)
     {

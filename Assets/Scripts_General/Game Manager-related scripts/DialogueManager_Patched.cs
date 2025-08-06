@@ -16,7 +16,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject rpgTextObject;
     public GameObject personNameObject;
     public GameObject nextButton;
-    
+
     public int startRange;
     public int dialogueNumber = 0;
     public int endDialogueRange;
@@ -33,6 +33,7 @@ public class DialogueManager : MonoBehaviour
     public string brokenSentence;
     public float dialogueSpeed;
     public int dialogueBounds;
+    public int originalDialogueBounds;
 
     void Awake()
     {
@@ -63,7 +64,7 @@ public class DialogueManager : MonoBehaviour
         {
             rpgTextObject = GameObject.Find("rpgText");
             rpgTextObject.SetActive(false);
-        
+
         }
         if (personNameObject == null && UIManager.instance.currentScreen == MainScreens.RPG)
         {
@@ -75,6 +76,7 @@ public class DialogueManager : MonoBehaviour
         {
             rpgText = rpgTextObject.GetComponent<TextMeshProUGUI>();
             currentPageAuto = rpgText.pageToDisplay;
+            originalDialogueBounds = 100; // Default value for dialogue bounds
         }
         if (personNameText == null && personNameObject != null)
         {
@@ -85,7 +87,7 @@ public class DialogueManager : MonoBehaviour
             StartTextBox(3, 0, 1, dialogueVault.dialogueSets[0]);
         }
 
-        
+
 
     }
 
@@ -102,10 +104,10 @@ public class DialogueManager : MonoBehaviour
             {
                 rpgTextObject.SetActive(false);
                 personNameObject.SetActive(false);
-            }  
-            
+            }
+
         }
-        
+
     }
     public void StartTextBox(int seconds, int startRangee, int endRange, DialogueVault.DialogueSet[] dialogueSet)
     {
@@ -128,12 +130,19 @@ public class DialogueManager : MonoBehaviour
     }
     public IEnumerator DialogueController(DialogueVault.DialogueSet[] sets)
     {
+        
+        string sentence = sets[dialogueNumber].dialogueLine;
+        dialogueBounds = originalDialogueBounds;
+        int trueDialogueBounds = (dialogueBounds >= 0 && dialogueBounds < sentence.Length) ? dialogueBounds - 1 : sentence.Length - 1;
         isTalking = true;
         nextButton.SetActive(false);
         personNameText.text = sets[dialogueNumber].characterName;
         TalkingStick(sets[dialogueNumber].characterName);
-
-        string sentence = sets[dialogueNumber].dialogueLine;
+        if (sentence[trueDialogueBounds] != '.' && sentence[trueDialogueBounds] != '?' && sentence[trueDialogueBounds] != '!')
+        {
+            Debug.LogWarning("Dialogue bounds are not set correctly. Please ensure the dialogue ends with a punctuation mark.");
+        }
+        
         rpgText.text = string.Empty;
         if (brokenSentence != string.Empty)
         {
@@ -142,16 +151,14 @@ public class DialogueManager : MonoBehaviour
         }
 
         GameManagerRPG.instance.playerpg.isMovable = false;
-        if (!isTalking)
-        {
-            nextButton.SetActive(!isTalking);
-            yield break;
-        }
         for (int i = 0; i < sentence.Length + 1; i++)
         {
-
-
-
+            
+            if (sentence[i] == '<')
+            {
+                dialogueBounds = i;
+                Debug.Log("Dialogue bounds set to: " + dialogueBounds);
+            }
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 isTalking = false;
@@ -162,83 +169,58 @@ public class DialogueManager : MonoBehaviour
                 {
                     rpgText.text = sentence;
                     brokenSentence = string.Empty;
-                    nextButton.SetActive(!isTalking);
+                    nextButton.SetActive(true);
                 }
                 else
                 {
                     rpgText.text = sentence.Substring(0, dialogueBounds);
                     int newLength = sentence.Length - dialogueBounds;
-
-
                     brokenSentence = sentence.Substring(dialogueBounds, newLength);
-                    nextButton.SetActive(!isTalking);
-
-
+                    nextButton.SetActive(true);
                 }
-                
+
 
                 break;
             }
-            if (rpgText.text.Length < dialogueBounds - 1)
+            if (rpgText.text.Length < dialogueBounds)
             {
                 Debug.Log(rpgText.text.Length);
                 rpgText.text = sentence.Substring(0, i);
                 yield return new WaitForSeconds(dialogueSpeed);
-                nextButton.SetActive(!isTalking);
+                nextButton.SetActive(false);
                 continue;
             }
             else
             {
-                isTalking = false;
                 ResetTalkingStick();
-                if (sentence.Length < dialogueBounds)
+                if (sentence.Length <= dialogueBounds)
                 {
                     rpgText.text = sentence;
                     brokenSentence = string.Empty;
-                    nextButton.SetActive(!isTalking);
-                    
+                    nextButton.SetActive(true);
                     break;
                 }
                 else
                 {
                     rpgText.text = sentence.Substring(0, dialogueBounds);
                     int newLength = sentence.Length - dialogueBounds;
-
-
                     brokenSentence = sentence.Substring(dialogueBounds, newLength);
-                    nextButton.SetActive(!isTalking);
-                    
+                    nextButton.SetActive(true);
                     break;
-
-
                 }
             }
 
-            
-
-
-
-
-
-
-
-
-
-
         }
-
-        
-
-
     }
 
 
     public void ResetDialogue()
     {
         GameManager.instance.DialogueProgression++;
-        DialogueProcessor.instance.DialogueProgressionFunction();
         GameManagerRPG.instance.playerpg.isMovable = true;
-         dialogueNumber = 0;
+        DialogueProcessor.instance.DialogueProgressionFunction();
+
+        dialogueNumber = 0;
         dialogueShells = null;
         startRange = 0;
         endDialogueRange = 0;
@@ -267,10 +249,12 @@ public class DialogueManager : MonoBehaviour
     }
     public void ResetTalkingStick()
     {
+        Debug.Log("Resetting talking stick");
+        isTalking = false;
         for (int i = 0; i < playersTalking.Length; i++)
-                {
-                    playersTalking[i] = false;
-                }
+        {
+            playersTalking[i] = false;
+        }
     }
     
 }

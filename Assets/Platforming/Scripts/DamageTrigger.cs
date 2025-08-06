@@ -31,16 +31,12 @@ public class DamageTrigger : MonoBehaviour
             }
             if (player.playerHealth != 0)
             {
-                
+                gameManagerPlatformer.instance.StartCooldownforHits(coolDownPeriod);
                 healthScript.SetDestroyIndividualHealth(player.playerHealth);
                 player.playerHealth--;
                 Debug.Log("Player Health: " + player.playerHealth);
-                
                 player.Knockback(transform.position.x);
-                StopAllCoroutines();
-
-                gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.playerHitSound);
-                gameManagerPlatformer.instance.StartCooldownforHits(coolDownPeriod);
+                
 
             }
             else

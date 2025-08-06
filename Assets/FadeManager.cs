@@ -53,6 +53,7 @@ public class FadeManager : MonoBehaviour
             {
                 fadeImage.color = targetColor;
                 fadeImage = null;
+                fading = false;
             }
             if (loadScene)
             {
@@ -114,7 +115,10 @@ public class FadeManager : MonoBehaviour
             Debug.LogError("FadeManager instance not found in the scene.");
             return;
         }
-        StopAllCoroutines();
+        if (fading == true) {
+            Debug.LogWarning("A fade operation is already in progress.");
+            return;
+        }
         Debug.Log("Fading started with duration: " + duration + ", speed: " + speed + ", loadScene: " + loadScene + ", sceneName: " + sceneName);
         StartCoroutine(instance.Fading(duration, speed, loadScene, sceneName, desiredFunction));
 

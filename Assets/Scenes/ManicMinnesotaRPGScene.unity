@@ -285,7 +285,8 @@ MonoBehaviour:
   endBrokenSentence: 0
   brokenSentence: 
   dialogueSpeed: 0
-  dialogueBounds: 82
+  dialogueBounds: 50
+  originalDialogueBounds: 50
 --- !u!114 &102804296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3296,8 +3297,16 @@ PrefabInstance:
       value: -275.2265
       objectReference: {fileID: 0}
     - target: {fileID: 7323868811522972258, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323868811522972258, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
       propertyPath: m_fontSizeMin
-      value: 20
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323868811522972258, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7323868811522972258, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
       propertyPath: m_enableAutoSizing

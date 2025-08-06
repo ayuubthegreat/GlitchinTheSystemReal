@@ -37,7 +37,7 @@ public class GameManagerRPG : MonoBehaviour
         playerpg = FindFirstObjectByType<playerpg>();
         targetSize = main.orthographicSize;
         audioSourceVolume = GameManager.instance.musicVolume;
-        
+
         if (GameManager.instance.startSpawnBool && GameManager.instance.phoneBoothSpawn == Vector3.zero)
         {
             spawnObject = startSpawnRPG.transform.position;
@@ -53,7 +53,7 @@ public class GameManagerRPG : MonoBehaviour
         {
             mainMap.SetActive(false);
             playerHouse.SetActive(true);
-            
+
             source.clip = audioClips[0];
             source.Play();
         }
@@ -63,10 +63,11 @@ public class GameManagerRPG : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (main.orthographicSize != targetSize) {
-          main.orthographicSize = Mathf.Lerp(main.orthographicSize, targetSize, Time.deltaTime * cameraSpeed);  
+        if (main.orthographicSize != targetSize)
+        {
+            main.orthographicSize = Mathf.Lerp(main.orthographicSize, targetSize, Time.deltaTime * cameraSpeed);
         }
-        
+
         source.volume = audioSourceVolume;
         if (decreaseVolume)
         {
@@ -76,9 +77,9 @@ public class GameManagerRPG : MonoBehaviour
         {
             GradualVolumeIncrease();
         }
-        
 
-        
+
+
     }
     public void RespawnPlayerInCheckpoint(Vector3 newSpawnPoint, int index)
     {
@@ -153,5 +154,13 @@ public class GameManagerRPG : MonoBehaviour
     {
         targetSize = newSize;
         cameraSpeed = speed;
+    }
+    public void MoveCamera(Vector3 newPosition)
+    {
+        Vector3 targetPosition = main.transform.position + newPosition;
+        while (Vector3.Distance(main.transform.position, targetPosition) > 0.01f)
+        {
+            main.transform.position = Vector3.MoveTowards(main.transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        }
     }
 }
