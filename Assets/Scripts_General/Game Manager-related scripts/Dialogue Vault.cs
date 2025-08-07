@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class DialogueVault : MonoBehaviour
 {
+    public static DialogueVault instance;
     public DialogueSet[][] dialogueSets;
 
     [Serializable]
@@ -15,6 +16,14 @@ public class DialogueVault : MonoBehaviour
 
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         // Opening dialogue
         dialogueSets = new DialogueSet[][]
         {

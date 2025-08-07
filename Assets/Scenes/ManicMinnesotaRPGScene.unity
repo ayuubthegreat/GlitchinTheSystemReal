@@ -267,10 +267,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rpgText: {fileID: 1469994117}
-  dialogueBounds: 50
+  dialogueBox: {fileID: 1021619528}
+  dialogueBounds: 100
   brokenSentence: 
+  dialogueIndex: 0
   isDialogueActive: 0
-  dialogueSpeed: 0
+  dialogueSpeed: 0.04
+  dialogueLines: []
+  testLine: Hello World! My name is Abdurahman. Nice to meet you.
 --- !u!114 &102804296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3215,6 +3219,18 @@ PrefabInstance:
     - target: {fileID: 3496008404311260382, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
       propertyPath: m_Name
       value: rpgtext
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544843843249567140, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 102804295}
+    - target: {fileID: 5544843843249567140, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateDialogueText
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544843843249567140, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DialogueManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
