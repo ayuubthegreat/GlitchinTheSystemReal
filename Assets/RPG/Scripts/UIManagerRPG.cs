@@ -10,7 +10,7 @@ public class UIManagerRPG : MonoBehaviour
     public GameObject rpgTextObject;
     public GameObject personNameObject;
     public GameObject phone;
-    public GameObject dialogueAnimations;
+    public GameObject person1DialogueAnimation;
     public Image cutsceneImageObject;
     [Header("Location Announcer Elements")]
     public RectTransform rectTransform;
@@ -51,9 +51,9 @@ public class UIManagerRPG : MonoBehaviour
     }
     public void ControlRPGUIElements(bool isActive)
     {
-        // rpgTextObject.SetActive(isActive);
-        // personNameObject.SetActive(isActive);
-        dialogueAnimations.SetActive(isActive);
+        rpgTextObject.SetActive(isActive);
+        personNameObject.SetActive(isActive);
+        person1DialogueAnimation.SetActive(isActive);
         phone.SetActive(isActive);
     }
     public void SetLocationAnnouncerElements()
@@ -69,7 +69,7 @@ public class UIManagerRPG : MonoBehaviour
     }
     public void ChangeLocationPosition()
     {
-        rectTransform.anchoredPosition = Vector3.Lerp(rectTransform.anchoredPosition, waypoints[waypointIndex], Time.deltaTime * 5f);
+        rectTransform.anchoredPosition = Vector3.MoveTowards(rectTransform.anchoredPosition, waypoints[waypointIndex], Time.deltaTime * 5f);
     }
     public bool ChangeText(string newText = "")
     {

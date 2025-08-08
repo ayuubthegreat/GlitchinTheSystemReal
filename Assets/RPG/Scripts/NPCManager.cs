@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class NPCManager : MonoBehaviour
+public class NPC : MonoBehaviour
 {
-    public static NPCManager instance;
+    public static NPC instance;
     public Animator npcAnimator;
     public Vector2[] npcWaypoints;
     public float npcSpeed = 2.0f;

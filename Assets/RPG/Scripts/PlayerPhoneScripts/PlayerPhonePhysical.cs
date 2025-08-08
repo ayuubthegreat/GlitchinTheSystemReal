@@ -23,10 +23,7 @@ public class PlayerPhonePhysical : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (DialogueProcessor.instance.playerPhoneDialogue != null)
-        {
-            DialogueProcessor.instance.playerPhoneDialogue.SetActive(DialogueProcessor.instance.isPhoneActive);
-        }
+
     }
     void OnTriggerStay2D(Collider2D collision)
     {

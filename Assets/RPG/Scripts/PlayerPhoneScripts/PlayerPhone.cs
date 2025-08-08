@@ -4,6 +4,7 @@ public class PlayerPhone : MonoBehaviour
 {
     
     public Animator anim;
+    public bool isMouth;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,21 +14,17 @@ public class PlayerPhone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.DialogueProgression != 0 && DialogueProcessor.instance.isPhoneActive)
+        bool canTalk = DialogueProcessor.instance.person1turn && DialogueManager.instance.isDialogueActive;
+        if (GameManager.instance.DialogueProgression != 0 && DialogueProcessor.instance.isConversationActive)
         {
-            anim.SetInteger("DP", GameManager.instance.DialogueProgression);
-            anim.SetBool("player1talking", DialogueProcessor.instance.person1turn);
-            anim.SetBool("isThinking", DialogueProcessor.instance.expressions[0]);
-            anim.SetBool("isSurprised", DialogueProcessor.instance.expressions[1]);
-            anim.SetBool("isThinkingFace", DialogueProcessor.instance.faces[0]);
-            anim.SetBool("isSurprisedFace", DialogueProcessor.instance.faces[1]);
-            anim.SetBool("isTalking", DialogueManager.instance.isDialogueActive);
-        }
-        else
-        {
-            anim.SetInteger("DP", 0);
-            anim.SetBool("player1talking", false);
-
+            if (isMouth)
+            {
+                anim.SetBool("isTalking", canTalk);
+            }
+            else
+            {
+                anim.SetInteger("DP", GameManager.instance.DialogueProgression);
+            }
         }
     }
 

@@ -110,7 +110,6 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        CheckForGameState();
 
         if (MainScreens.Platforming == currentScreen)
         {

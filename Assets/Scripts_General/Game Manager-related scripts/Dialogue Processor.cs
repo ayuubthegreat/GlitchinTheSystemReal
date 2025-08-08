@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using AOT;
 
 public class DialogueProcessor : MonoBehaviour
 {
@@ -14,8 +15,6 @@ public class DialogueProcessor : MonoBehaviour
     public bool isConversationActive = false;
     public bool person1turn = false;
     public bool person2turn = false;
-    public bool mouthMovement1 = false;
-    public bool mouthMovement2 = false;
     public bool twopeopletalking = false;
     public bool isPhoneActive = false;
     public bool isTalkingToHomelessMan = false;
@@ -86,42 +85,14 @@ public class DialogueProcessor : MonoBehaviour
     }
     public void DialogueProgressionFunction()
     {
-        bool conversationEnded1 = GameManager.instance.DialogueProgression == 3 && isPhoneActive;
-        bool conversationBegan1 = GameManager.instance.DialogueProgression == 2 && isPhoneActive;
         if (GameManager.instance.DialogueProgression == 1)
         {
             StartCoroutine(DialogueProgression1());
 
         }
-        else if (conversationBegan1)
+        if (isConversationActive)
         {
-            isPhoneActive = true;
-            int secondsToWait = UnityEngine.Random.Range(5, 10);
-
-
-            StartCoroutine(PhoneRinging(secondsToWait)); // Start the conversation with Abdurahman
-
-        }
-        else if (conversationEnded1)
-        {
-            isPhoneActive = false;
-            recieverPhoneDialogue2SetActive();
-            UIManagerRPG.instance.phone.SetActive(false);
-        }
-        else if (GameManager.instance.DialogueProgression > 1 && GameManager.instance.DialogueProgression < 4 && !isPhoneActive)
-        {
-            GameManagerRPG.instance.playerpg.isMovable = false;
-            GameManagerRPG.instance.CameraZoom(10f, 10f);
-            NPCManager.instance.StartMovingNPC(0, 20f, new Vector2[] { new Vector2(0, (NPCManager.instance.playerPosition.y - NPCManager.instance.transform.position.y) - 6), new Vector2(NPCManager.instance.playerPosition.x - NPCManager.instance.transform.position.x, 0) });
-        }
-        else if (GameManager.instance.DialogueProgression == 4)
-        {
-            FadeManager.instance.Fader(false, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
-        } else if (GameManager.instance.DialogueProgression == 5)
-        {
-            FadeManager.instance.Fader(true, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
-           
-
+            ConversationManager();
         }
 
     }
@@ -135,12 +106,13 @@ public class DialogueProcessor : MonoBehaviour
     }
     public IEnumerator PhoneRinging(int seconds)
     {
-        UIManagerRPG.instance.dialogueAnimations.SetActive(true);
-        recieverPhoneDialogue2.SetActive(false);
+        yield return new WaitForSeconds(.1f);
+        GameManagerRPG.instance.playerpg.isMovable = false;
+        Debug.Log("Phone is ringing for " + seconds + " seconds.");
+        playerPhoneDialogue.SetActive(true);
         yield return new WaitForSeconds(seconds);
-        isConversationActive = true;
-        recieverPhoneDialogue2SetActive();
-
+        recieverPhoneDialogue2.SetActive(true);
+        DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[1], 0, dialogueVault.dialogueSets[1].Length - 1, 2f);
     }
     public IEnumerator DialogueProgression1()
     {
@@ -151,68 +123,31 @@ public class DialogueProcessor : MonoBehaviour
             dialogueVault = GetComponent<DialogueVault>();
 
         }
+        DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[0], 1, 1, secondstoWait);
         yield return new WaitForSeconds(secondstoWait);
-        DialogueProgression1Func();
-
-    }
-    public void DialogueProgression1Func()
-    {
-        if (isPhoneActive)
-        {
-            return;
-        }
         UIManagerRPG.instance.phone.SetActive(true);
-       
     }
-    public void recieverPhoneDialogue2SetActive() => recieverPhoneDialogue2.SetActive(isPhoneActive);
     
-    public void ChangeExpressionBools(int value)
+
+    public void FranticTeenagerDialogue1() => DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 0, 5, 2f);
+    public void ConversationManager(NPC npc = null)
     {
-
-        for (int i = 0; i < expressions.Length; i++)
+        person1turn = true;
+        switch (GameManager.instance.DialogueProgression)
         {
-            if (value == i && value <= expressions.Length)
-            {
-                Debug.Log(expressions[i]);
-                expressions[i] = true;
-            }
-            else
-            {
-                expressions[i] = false;
-            }
+            case 2:
+                int secondstoWait = UnityEngine.Random.Range(5, 10);
+                StartCoroutine(PhoneRinging(secondstoWait));
+                break;
+            case 3:
+                GameManagerRPG.instance.CameraZoom(10f, 10f);
+                Debug.Log("NPC Position: " + npc.transform.position + " Player Position: " + GameManagerRPG.instance.playerpg.transform.position);
+                npc.StartMovingNPC(1, 10f, new Vector2[] { new Vector2(0f, npc.playerPosition.y - npc.transform.position.y - 2f), new Vector2(npc.playerPosition.x - npc.transform.position.x, 0f) }, FranticTeenagerDialogue1);
+                break;
+            default:
+                Debug.Log("No conversation detected.");
+                return;
         }
-
-
-    }
-    public void ChangeFaceExpressionBools(int value)
-    {
-        for (int i = 0; i < faces.Length; i++)
-        {
-            if (value == i && value <= expressions.Length)
-            {
-                faces[i] = true;
-            }
-            else
-            {
-                faces[i] = false;
-            }
-
-        }
-
-    }
-    public void PoseChanger(Transform targetTransform)
-    {
-        playerpg playerpg = GameManagerRPG.instance.playerpg;
-        if (targetTransform.position.x > playerpg.transform.position.x)
-        {
-            playerpg.startingPose = 2;
-        }
-        else
-        {
-            playerpg.startingPose = 3;
-        }
-
-
     }
 
 }

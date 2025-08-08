@@ -29,8 +29,8 @@ public class DialogueVault : MonoBehaviour
         {
             new DialogueSet[]
             {
-                new DialogueSet { dialogueLine = "Alhamdulillah, I managed to wake myself up so early. Now I can begin my day.", characterName = "Abdurahman" },
-                new DialogueSet { dialogueLine = "I miss when there used to be other people besides me in this house......", characterName = "Abdurahman" },
+                new DialogueSet { dialogueLine = "Alhamdulillah, I managed to wake myself up so early. <Now I can begin my day. ", characterName = "Abdurahman" },
+                new DialogueSet { dialogueLine = "I miss when there used to be other people besides me in this house...... <I wonder what they're all doing now.", characterName = "Abdurahman" },
             },
             
             // Yasir's Call
