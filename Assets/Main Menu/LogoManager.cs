@@ -39,17 +39,13 @@ public class LogoManager : MonoBehaviour
     }
     public IEnumerator ChangeLogo(int duration)
     {
-        while (spriteLogoNum < availableLogos.Length)
+        
+        while (spriteLogoNum <= availableLogos.Length)
         {
             yield return new WaitForSeconds(spriteLogoNum < availableLogos.Length - 1 ? duration * 2 : duration);
-            FadeManager.instance.StartFading(duration, 0.1f, false, "", IncreaseIndex);
+            FadeManager.instance.StartFading(duration, 0.1f, false, "", spriteLogoNum < availableLogos.Length - 1 ? IncreaseIndex : DisplayMainMenu);
         }
-        if (spriteLogoNum == availableLogos.Length && !endLogos)
-        {
-            Debug.Log("All logos displayed, displaying main menu.");
-            DisplayMainMenu();
-        }
-        // Activate the MainMenuLoader after logo changes
+        Debug.Log("All logos displayed, ending logo sequence.");
     }
     public void IncreaseIndex()
     {
@@ -68,16 +64,15 @@ public class LogoManager : MonoBehaviour
     }
     public void DisplayMainMenu()
     {
+        FadeManager.instance.Fader(true);
         endLogos = true;
         spriteLogoNum = 0; // Reset the logo index
         image.sprite = availableLogos[0]; // Reset the image to the first logo
         Debug.Log("Displaying main menu.");
-        FadeManager.instance.StartFading(1f, 0.05f, false, "", () =>
-        {
-            gameObject.SetActive(false);
-            mainMenu.gameObject.SetActive(true);
-            mainSource.clip = UIManager.instance.mainMenuMusic;
-            mainSource.Play();
-        });
+        gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(true);  
+        mainSource.clip = UIManager.instance.mainMenuMusic;
+        mainSource.Play();
+        
     }
 }

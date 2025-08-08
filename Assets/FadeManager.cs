@@ -52,7 +52,7 @@ public class FadeManager : MonoBehaviour
             if (Vector4.Distance(fadeImage.color, targetColor) < 0.01f)
             {
                 fadeImage.color = targetColor;
-                fadeImage = null;
+                fadeImage = GetComponent<Image>();
                 fading = false;
             }
             if (loadScene)
@@ -105,6 +105,10 @@ public class FadeManager : MonoBehaviour
 
         Fader(false);
         yield return new WaitForSeconds(fadeDuration);
+        if (desiredFunction != null)
+        {
+            Debug.Log("Invoking desired function after fade out."); 
+        }
         desiredFunction?.Invoke();
         Fader(true);
     }
@@ -113,10 +117,6 @@ public class FadeManager : MonoBehaviour
         if (instance == null)
         {
             Debug.LogError("FadeManager instance not found in the scene.");
-            return;
-        }
-        if (fading == true) {
-            Debug.LogWarning("A fade operation is already in progress.");
             return;
         }
         Debug.Log("Fading started with duration: " + duration + ", speed: " + speed + ", loadScene: " + loadScene + ", sceneName: " + sceneName);
