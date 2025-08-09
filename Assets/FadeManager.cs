@@ -70,14 +70,16 @@ public class FadeManager : MonoBehaviour
     }
     public void Fader(bool fader, Sprite imageSprite = null, Image faderImage = null)
     {
+        if (fading)
+        {
+            return; // Prevent multiple fade calls
+        }
         if (faderImage == null)
         {
             faderImage = GetComponent<Image>();
         }
-        
         fadeImage = faderImage;
-        bool isOriginalImage = (fadeImage == GetComponent<Image>());
-        fading = true;
+        bool isOriginalImage = fadeImage == GetComponent<Image>();
         if (isOriginalImage)
         {
             faderImage.color = new Color(0, 0, 0, fader ? 1 : 0);
@@ -85,11 +87,7 @@ public class FadeManager : MonoBehaviour
         } 
         else
         {
-            if (imageSprite == null)
-            {
-                Debug.LogError("Image sprite is null. Please provide a valid sprite for the fader image.");
-                return;
-            }
+    
             faderImage.color = new Color(1, 1, 1, fader ? 1 : 0);
             instance.targetColor = new Color(1, 1, 1, fader ? 0 : 1);
         }

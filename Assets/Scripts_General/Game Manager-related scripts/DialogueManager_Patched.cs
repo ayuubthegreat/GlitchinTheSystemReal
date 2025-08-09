@@ -152,13 +152,13 @@ public class DialogueManager : MonoBehaviour
             rpgText.text = string.Empty;
             dialogueBounds = originalDialogueBounds;
             dialogueIndex = 0;
-            
-            
-            DialogueProcessor.instance.DialogueProgressionFunction();
-            if (!GameManagerRPG.instance.movingAutonomously)
+             if (!GameManagerRPG.instance.movingAutonomously)
             {
                 GameManager.instance.DialogueProgression++;
             }
+            
+            DialogueProcessor.instance.DialogueProgressionFunction();
+           
             Debug.Log("Dialogue ended.");
             dialogueBox.SetActive(false);
             return;

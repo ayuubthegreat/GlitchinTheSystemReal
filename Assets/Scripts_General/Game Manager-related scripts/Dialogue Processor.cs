@@ -90,7 +90,13 @@ public class DialogueProcessor : MonoBehaviour
             case 1:
                 StartCoroutine(DialogueProgression1());
                 break;
+            case 4:
+                FadeManager.instance.Fader(false, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
+                DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 5, dialogueVault.dialogueSets[2].Length - 1, 2f);
+                UIManagerRPG.instance.phone.SetActive(false);
+                break;
             case 5:
+                UIManagerRPG.instance.phone.SetActive(true);
                 GameManagerRPG.instance.movingAutonomously = true;
                 break;
         }
@@ -133,7 +139,7 @@ public class DialogueProcessor : MonoBehaviour
     }
     
 
-    public void FranticTeenagerDialogue1() => DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 0, 5, .3f);
+    public void FranticTeenagerDialogue1() => DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 0, 4, .3f);
     public void ConversationManager(NPC npc = null)
     {
         person1turn = true;

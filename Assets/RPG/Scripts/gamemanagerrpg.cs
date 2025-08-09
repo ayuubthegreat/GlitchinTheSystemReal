@@ -38,7 +38,7 @@ public class GameManagerRPG : MonoBehaviour
         playerpg = FindFirstObjectByType<playerpg>();
         targetSize = main.orthographicSize;
         audioSourceVolume = GameManager.instance.musicVolume;
-
+        
         if (GameManager.instance.startSpawnBool && GameManager.instance.phoneBoothSpawn == Vector3.zero)
         {
             spawnObject = startSpawnRPG.transform.position;
@@ -52,6 +52,7 @@ public class GameManagerRPG : MonoBehaviour
         }
         if (GameManager.instance.DialogueProgression <= 3)
         {
+            movingAutonomously = false;
             mainMap.SetActive(false);
             playerHouse.SetActive(true);
 
