@@ -54,7 +54,7 @@ public class DialogueVault : MonoBehaviour
                 new DialogueSet { dialogueLine = "Now that's what I would call either genius....or a conspiracy.", characterName = "Yasir" },
                 new DialogueSet { dialogueLine = "Either way, Yasir....I think I'm on to something here. Since what P-Tech is doing is illegal, we have the right to stand up against them and get society functional again. Yasir, I was thinking of starting a revolution against the P-Tech company.", characterName = "Abdurahman" },
                 new DialogueSet { dialogueLine = "That's....crazy. Just crazy....but if you're going to revolt against them, you're going to need some people to back you up. (He pauses for a few seconds.) I'm willing to join you in this cause. Inshallah, we'll reach our goal!", characterName = "Yasir" },
-                new DialogueSet { dialogueLine = "Well.....", characterName = "Abdurahman" },
+                new DialogueSet { dialogueLine = "Well.....", characterName = "Abdurahman", dialogueAction = () => DialogueManager.instance.DisplayChoices("Will you invite Yasir?", "Yes", "No")},
             },
             
             // Frantic Teenager encounter

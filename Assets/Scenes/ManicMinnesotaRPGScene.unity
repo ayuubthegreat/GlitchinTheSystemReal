@@ -264,9 +264,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef08f3c8966447049891d82e98a44d69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentDialogueSet: []
   rpgText: {fileID: 1469994117}
+  yesButtonText: {fileID: 1555390998}
+  noButtonText: {fileID: 1222931049}
   dialogueBox: {fileID: 1021619528}
   nextButton: {fileID: 1184196970}
+  yesButton: {fileID: 183514012}
+  noButton: {fileID: 1758017966}
+  hitYesButton: 0
+  hitNoButton: 0
   dialogueBounds: 100
   originalDialogueBounds: 0
   brokenSentence: 
@@ -287,6 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4efc8c3daca2fba4f99b4b5c2071aad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPhone: {fileID: 0}
   rpgTextObject: {fileID: 1021619528}
   personNameObject: {fileID: 3496008403201727413}
   phone: {fileID: 1347589300}
@@ -346,6 +354,7 @@ MonoBehaviour:
   isDonewithPlatforming: 0
   decreaseVolume: 0
   increaseVolume: 0
+  isPhoneActive: 0
   audioSourceVolume: 1
   fadeSpeed: 0.5
   moveSpeed: 5
@@ -489,6 +498,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &183514012 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8733004116352073781, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
+  m_PrefabInstance: {fileID: 1492550409}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &204320129 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5570968367209030824, guid: a6b377066ebfcd44eb71d00182b5b1ac, type: 3}
@@ -2216,6 +2236,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2013175868}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1222931049 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 951254439546883229, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
+  m_PrefabInstance: {fileID: 1492550409}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1299081431
 GameObject:
   m_ObjectHideFlags: 0
@@ -2531,7 +2562,7 @@ GameObject:
   - component: {fileID: 1347589304}
   - component: {fileID: 1347589303}
   - component: {fileID: 1347589302}
-  - component: {fileID: 1347589301}
+  - component: {fileID: 1347589306}
   m_Layer: 5
   m_Name: phone
   m_TagString: Untagged
@@ -2539,25 +2570,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1347589301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1347589300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40152776b7a50b041929e72bfd894215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myButton: {fileID: 0}
-  saveFileScreen: {fileID: 5703462296808861905, guid: 04d552cd91342364cbd1071e6094f019, type: 3}
-  optionsScreen: {fileID: 0}
-  warningScreen: {fileID: 0}
-  SaveFileFound: 0
-  sceneName: 
-  buttonType: 7
 --- !u!114 &1347589302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2671,6 +2683,20 @@ RectTransform:
   m_AnchoredPosition: {x: -512, y: -295}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1347589306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347589300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4753e310cf725994a802bf5a23575a40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  isMouth: 0
 --- !u!1 &1364994759
 GameObject:
   m_ObjectHideFlags: 0
@@ -3372,6 +3398,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   isMouth: 1
+--- !u!114 &1555390998 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 640585794178639406, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
+  m_PrefabInstance: {fileID: 1492550409}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1739566267 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7575638846953823653, guid: 3ac4912cb5f32d249b0208b963cd87fb, type: 3}
@@ -3382,6 +3419,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8884490417260768870, guid: 3ac4912cb5f32d249b0208b963cd87fb, type: 3}
   m_PrefabInstance: {fileID: 396120483}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1758017966 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6426697994695078930, guid: b2abf5fc6388304428ef2f8552999419, type: 3}
+  m_PrefabInstance: {fileID: 1492550409}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1783638031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3679,7 +3727,7 @@ PrefabInstance:
       objectReference: {fileID: 1944592912}
     - target: {fileID: 8871675453636400643, guid: 0159be88d5d57bf4ab684c709b71edc4, type: 3}
       propertyPath: DialogueProgression
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

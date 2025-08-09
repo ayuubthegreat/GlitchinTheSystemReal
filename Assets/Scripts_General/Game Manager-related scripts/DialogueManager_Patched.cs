@@ -7,10 +7,18 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    #region Values and Variables
     public static DialogueManager instance;
+    public DialogueVault.DialogueSet[] currentDialogueSet;
     public TextMeshProUGUI rpgText;
+    public TextMeshProUGUI yesButtonText;
+    public TextMeshProUGUI noButtonText;
     public GameObject dialogueBox;
     public Button nextButton;
+    public Button yesButton;
+    public Button noButton;
+    public bool hitYesButton = false;
+    public bool hitNoButton = false;
     public int dialogueBounds;
     public int originalDialogueBounds;
     public string brokenSentence;
@@ -19,7 +27,8 @@ public class DialogueManager : MonoBehaviour
     public float dialogueSpeed = .3f;
     public string[] dialogueLines;
     public string testLine;
-   
+    #endregion
+
     void Awake()
     {
         if (instance == null)
@@ -36,14 +45,15 @@ public class DialogueManager : MonoBehaviour
         originalDialogueBounds = dialogueBounds;
         if (GameManager.instance.DialogueProgression == 0)
         {
-           StartDialogueTexts(DialogueVault.instance.dialogueSets[0], 0, 0, 2f); 
+            StartDialogueTexts(DialogueVault.instance.dialogueSets[0], 0, 0, 2f);
         }
-        
+
     }
     void Update()
     {
 
     }
+    #region Dialogue Functions
     public IEnumerator dialogueRunner(string sentence, bool killDialogueScreen = false)
     {
         rpgText.text = string.Empty;
@@ -97,6 +107,7 @@ public class DialogueManager : MonoBehaviour
         {
             end = dialogueSets.Length;
         }
+
         dialogueLines = new string[end - start + 1];
         for (int i = start; i <= end; i++)
         {
@@ -104,19 +115,25 @@ public class DialogueManager : MonoBehaviour
         }
         GameManagerRPG.instance.playerpg.isMovable = false;
         dialogueIndex = 0;
+        currentDialogueSet = dialogueSets;
         yield return new WaitForSeconds(duration);
         dialogueBox.SetActive(true);
         StartCoroutine(dialogueRunner(dialogueLines[dialogueIndex]));
     }
     public void UpdateDialogueText()
     {
+        if (currentDialogueSet[dialogueIndex].dialogueAction != null)
+        {
+            currentDialogueSet[dialogueIndex].dialogueAction.Invoke();
+            return;
+        }
         if (brokenSentence == string.Empty)
         {
             dialogueIndex++;
             if (DialogueProcessor.instance.isConversationActive)
             {
-            DialogueProcessor.instance.person1turn = !DialogueProcessor.instance.person1turn;
-            DialogueProcessor.instance.person2turn = !DialogueProcessor.instance.person2turn;
+                DialogueProcessor.instance.person1turn = !DialogueProcessor.instance.person1turn;
+                DialogueProcessor.instance.person2turn = !DialogueProcessor.instance.person2turn;
             }
         }
         if (dialogueIndex >= dialogueLines.Length)
@@ -135,8 +152,13 @@ public class DialogueManager : MonoBehaviour
             rpgText.text = string.Empty;
             dialogueBounds = originalDialogueBounds;
             dialogueIndex = 0;
-            GameManager.instance.DialogueProgression++;
+            
+            
             DialogueProcessor.instance.DialogueProgressionFunction();
+            if (!GameManagerRPG.instance.movingAutonomously)
+            {
+                GameManager.instance.DialogueProgression++;
+            }
             Debug.Log("Dialogue ended.");
             dialogueBox.SetActive(false);
             return;
@@ -144,7 +166,7 @@ public class DialogueManager : MonoBehaviour
 
         StopAllCoroutines();
         dialogueBounds = originalDialogueBounds;
-        
+
         StartCoroutine(dialogueRunner(dialogueLines[dialogueIndex]));
     }
     public void StartConversation()
@@ -152,6 +174,52 @@ public class DialogueManager : MonoBehaviour
         DialogueProcessor.instance.isConversationActive = true;
         DialogueProcessor.instance.ConversationManager();
     }
+    public void DisplayChoices(string choiceName, string choice1, string choice2)
+    {
+        rpgText.text = choiceName;
+        yesButton.gameObject.SetActive(true);
+        noButton.gameObject.SetActive(true);
+        yesButtonText.text = choice1;
+        noButtonText.text = choice2;
+    }
+    public void ShowResults(int choice)
+    {
+        switch (choice)
+        {
+            case 1:
+                Debug.Log("Choice 1 selected.");
+                hitYesButton = true;
+                hitNoButton = false;
+                switch (GameManager.instance.DialogueProgression)
+                {
+                    case 2:
+                        Debug.Log("Player has chosen to invite Yasir to the revolution.");
+                        break;
+                    case 3:
+                        Debug.Log("Player has chosen to support the revolution.");
+                        break;
+                }
+                break;
+            case 2:
+                Debug.Log("Choice 2 selected.");
+                hitYesButton = false;
+                hitNoButton = true;
+                switch (GameManager.instance.DialogueProgression)
+                {
+                    case 2:
+                        Debug.Log("Player has chosen not to invite Yasir to the revolution.");
+                        break;
+                    case 3:
+                        Debug.Log("Player has chosen not to support the revolution.");
+                        break;
+                }
+                break;
+            default:
+                Debug.LogWarning("Invalid choice selected.");
+                return;
+        }
+    }
+    #endregion
     
 
     

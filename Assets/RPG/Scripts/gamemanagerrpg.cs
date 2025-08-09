@@ -19,6 +19,7 @@ public class GameManagerRPG : MonoBehaviour
     public bool isDonewithPlatforming;
     public bool decreaseVolume;
     public bool increaseVolume;
+    public bool isPhoneActive = false;
     public float audioSourceVolume = 1;
     public float fadeSpeed = 0.5f;
     public float moveSpeed = 5f;
@@ -131,25 +132,6 @@ public class GameManagerRPG : MonoBehaviour
 
     }
 
-    public void StartMovingAutonomously(Vector2 target)
-    {
-        movingAutonomously = true;
-        MovingAutonomously(target);
-    }
-    public void MovingAutonomously(Vector2 targetPosition)
-    {
-        if (!movingAutonomously)
-        {
-            return;
-        }
-        playerpg.isMovable = false;
-        Vector2.MoveTowards(playerpg.transform.position, targetPosition, moveSpeed * Time.deltaTime);
-        if (Vector2.Distance(playerpg.transform.position, targetPosition) < 0.01f)
-        {
-            movingAutonomously = false;
-            playerpg.isMovable = true;
-        }
-    }
     public void CameraZoom(float newSize, float speed)
     {
         targetSize = newSize;

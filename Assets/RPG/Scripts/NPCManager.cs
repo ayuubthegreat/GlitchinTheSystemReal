@@ -36,6 +36,8 @@ public class NPC : MonoBehaviour
     public void StartMovingNPC(int duration, float speed, Vector2[] waypoints, Action desiredFunction = null)
     {
         if (waypoints.Length == 0) return;
+        GameManagerRPG.instance.playerpg.isMovable = false; // Disable player movement
+        GameManagerRPG.instance.playerpg.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero; // Reset player velocity
         npcRigidbody.linearVelocity = Vector2.zero; // Reset velocity before starting movement
         waypointIndex = 0; // Reset to the first waypoint
         StartCoroutine(MoveNPC(duration, speed, waypoints, desiredFunction));

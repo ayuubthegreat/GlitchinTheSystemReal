@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIManagerRPG : MonoBehaviour
 {
     public static UIManagerRPG instance;
+    public PlayerPhonePhysical playerPhone;
     [Header("RPG Text Related Objects")]
     public GameObject rpgTextObject;
     public GameObject personNameObject;
@@ -54,7 +55,6 @@ public class UIManagerRPG : MonoBehaviour
         rpgTextObject.SetActive(isActive);
         personNameObject.SetActive(isActive);
         person1DialogueAnimation.SetActive(isActive);
-        phone.SetActive(isActive);
     }
     public void SetLocationAnnouncerElements()
     {

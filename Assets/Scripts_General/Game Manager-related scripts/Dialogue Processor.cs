@@ -85,10 +85,14 @@ public class DialogueProcessor : MonoBehaviour
     }
     public void DialogueProgressionFunction()
     {
-        if (GameManager.instance.DialogueProgression == 1)
+        switch (GameManager.instance.DialogueProgression)
         {
-            StartCoroutine(DialogueProgression1());
-
+            case 1:
+                StartCoroutine(DialogueProgression1());
+                break;
+            case 5:
+                GameManagerRPG.instance.movingAutonomously = true;
+                break;
         }
         if (isConversationActive)
         {
@@ -129,7 +133,7 @@ public class DialogueProcessor : MonoBehaviour
     }
     
 
-    public void FranticTeenagerDialogue1() => DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 0, 5, 2f);
+    public void FranticTeenagerDialogue1() => DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 0, 5, .3f);
     public void ConversationManager(NPC npc = null)
     {
         person1turn = true;
@@ -142,7 +146,7 @@ public class DialogueProcessor : MonoBehaviour
             case 3:
                 GameManagerRPG.instance.CameraZoom(10f, 10f);
                 Debug.Log("NPC Position: " + npc.transform.position + " Player Position: " + GameManagerRPG.instance.playerpg.transform.position);
-                npc.StartMovingNPC(1, 10f, new Vector2[] { new Vector2(0f, npc.playerPosition.y - npc.transform.position.y - 2f), new Vector2(npc.playerPosition.x - npc.transform.position.x, 0f) }, FranticTeenagerDialogue1);
+                npc.StartMovingNPC(0, 50f, new Vector2[] { new Vector2(0f, npc.playerPosition.y - npc.transform.position.y - 5f), new Vector2(npc.playerPosition.x - npc.transform.position.x, 0f) }, FranticTeenagerDialogue1);
                 break;
             default:
                 Debug.Log("No conversation detected.");
