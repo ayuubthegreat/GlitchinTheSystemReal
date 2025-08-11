@@ -166,7 +166,7 @@ public class gameManagerPlatformer : MonoBehaviour
     }
     public void FiftyCoins()
     {
-        if (coinNumbers == 50)
+        if (coinNumbers >= 50)
         {
             coinNumbers = 0; // Reset coin count after granting life
             Debug.Log("You have collected 50 coins! Extra life granted.");

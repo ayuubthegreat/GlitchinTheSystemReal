@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class DamageTrigger : MonoBehaviour
 {
+    public gameManagerPlatformer gmp;
     public BoxCollider2D boxCollider;
     public float coolDownPeriod = 2f;
     public startHealthScriptt healthScript;
     public void Start()
     {
+        if (gmp == null)
+        {
+            gmp = FindObjectOfType<gameManagerPlatformer>();
+        }
         boxCollider = GetComponent<BoxCollider2D>();
         healthScript = FindFirstObjectByType<startHealthScriptt>();
     }
@@ -18,13 +23,13 @@ public class DamageTrigger : MonoBehaviour
         player player = collision.gameObject.GetComponent<player>();
         if (player != null)
         {
-            if (!gameManagerPlatformer.instance.canBeHit)
+            if (!gmp.canBeHit)
             {
                 return;
             }
             if (player.playerHealth != 0)
             {
-                StartCoroutine(Cooldown(coolDownPeriod));
+                gmp.StartCooldownforHits(coolDownPeriod);
                 healthScript.SetDestroyIndividualHealth(player.playerHealth);
                 player.playerHealth--;
                 Debug.Log("Player Health: " + player.playerHealth);
@@ -34,19 +39,13 @@ public class DamageTrigger : MonoBehaviour
             }
             else
             {
-                gameManagerPlatformer.instance.warningScreenandTeleport(5);
+                gmp.warningScreenandTeleport(5);
             }
 
 
         }
 
 
-    }
-public IEnumerator Cooldown(float seconds)
-    {
-        gameManagerPlatformer.instance.canBeHit = false;
-        yield return new WaitForSeconds(seconds);
-        gameManagerPlatformer.instance.canBeHit = true;
     }
     
 

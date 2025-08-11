@@ -163,7 +163,7 @@ public class DialogueManager : MonoBehaviour
             GameManagerRPG.instance.playerpg.isMovable = true;
             DialogueProcessor.instance.isConversationActive = false;
             UIManagerRPG.instance.ControlRPGUIElements(false);
-            dialogueLines = new string[0];
+            dialogueLines = [];
             isDialogueActive = false;
             rpgText.text = string.Empty;
             dialogueBounds = originalDialogueBounds;
