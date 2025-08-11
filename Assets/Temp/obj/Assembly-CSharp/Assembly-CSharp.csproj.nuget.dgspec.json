@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ayuubyusufmac/Documents/GitS/GlitchinTheSystemReal/Assets/Assembly-CSharp.csproj": {}
+    "/Users/achieve/Documents/GitHub/GlitchinTheSystemReal/Assets/Assembly-CSharp.csproj": {}
   },
   "projects": {
-    "/Users/ayuubyusufmac/Documents/GitS/GlitchinTheSystemReal/Assets/Assembly-CSharp.csproj": {
+    "/Users/achieve/Documents/GitHub/GlitchinTheSystemReal/Assets/Assembly-CSharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ayuubyusufmac/Documents/GitS/GlitchinTheSystemReal/Assets/Assembly-CSharp.csproj",
+        "projectUniqueName": "/Users/achieve/Documents/GitHub/GlitchinTheSystemReal/Assets/Assembly-CSharp.csproj",
         "projectName": "Assembly-CSharp",
-        "projectPath": "/Users/ayuubyusufmac/Documents/GitS/GlitchinTheSystemReal/Assets/Assembly-CSharp.csproj",
-        "packagesPath": "/Users/ayuubyusufmac/.nuget/packages/",
-        "outputPath": "/Users/ayuubyusufmac/Documents/GitS/GlitchinTheSystemReal/Assets/Temp/obj/Assembly-CSharp/",
+        "projectPath": "/Users/achieve/Documents/GitHub/GlitchinTheSystemReal/Assets/Assembly-CSharp.csproj",
+        "packagesPath": "/Users/achieve/.nuget/packages/",
+        "outputPath": "/Users/achieve/Documents/GitHub/GlitchinTheSystemReal/Assets/Temp/obj/Assembly-CSharp/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/ayuubyusufmac/.nuget/NuGet/NuGet.Config"
+          "/Users/achieve/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -54,7 +54,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.304/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.301/RuntimeIdentifierGraph.json"
         }
       }
     }

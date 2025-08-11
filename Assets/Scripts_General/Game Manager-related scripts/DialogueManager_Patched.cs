@@ -144,11 +144,14 @@ public class DialogueManager : MonoBehaviour
         if (brokenSentence == string.Empty)
         {
             dialogueIndex++;
-            personName.text = currentDialogueSet[dialogueIndex].characterName;
+            if (dialogueIndex < currentDialogueSet.Length)
+            {
+              personName.text = currentDialogueSet[dialogueIndex].characterName;  
+            }
             if (DialogueProcessor.instance.isConversationActive)
             {
-                DialogueProcessor.instance.person1turn = !DialogueProcessor.instance.person1turn;
-                DialogueProcessor.instance.person2turn = !DialogueProcessor.instance.person2turn;
+                DialogueProcessor.instance.person1turn = currentDialogueSet[dialogueIndex].characterName == "Abdurahman";
+                DialogueProcessor.instance.person2turn = dialogueIndex % 2 == 0 && currentDialogueSet[dialogueIndex].characterName != "Narrator";
             }
         }
         
@@ -163,7 +166,7 @@ public class DialogueManager : MonoBehaviour
             GameManagerRPG.instance.playerpg.isMovable = true;
             DialogueProcessor.instance.isConversationActive = false;
             UIManagerRPG.instance.ControlRPGUIElements(false);
-            dialogueLines = [];
+            dialogueLines = new string[0];
             isDialogueActive = false;
             rpgText.text = string.Empty;
             dialogueBounds = originalDialogueBounds;
@@ -214,7 +217,7 @@ public class DialogueManager : MonoBehaviour
             
             case 2:
                 Debug.Log("Player has chosen to invite Yasir to the revolution.");
-                StartDialogueTexts(DialogueProcessor.instance.dialogueVault.dialogueSetsYes[0], 0, DialogueProcessor.instance.dialogueVault.dialogueSetsYes[0].Length, 0f);
+                StartDialogueTexts(DialogueProcessor.instance.dialogueVault.dialogueSetsYes[0], 0, DialogueProcessor.instance.dialogueVault.dialogueSetsYes[0].Length - 1, 0f);
                 break;
             case 3:
                 Debug.Log("Player has chosen to support the revolution.");
