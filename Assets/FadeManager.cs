@@ -42,7 +42,7 @@ public class FadeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fadeImage.color != targetColor)
+        if (fadeImage.color != targetColor && fading)
         {
             fadeImage.color = Color.Lerp(fadeImage.color, targetColor, Time.deltaTime / fadeSpeed);
             targetAlpha = fadeImage.color.a;
@@ -58,8 +58,9 @@ public class FadeManager : MonoBehaviour
             if (loadScene)
             {
                 fading = false;
-                SceneManager.LoadScene(sceneName);
                 loadScene = false;
+                SceneManager.LoadScene(sceneName);
+                
             }
 
 
@@ -70,10 +71,6 @@ public class FadeManager : MonoBehaviour
     }
     public void Fader(bool fader, Sprite imageSprite = null, Image faderImage = null)
     {
-        if (fading)
-        {
-            return; // Prevent multiple fade calls
-        }
         if (faderImage == null)
         {
             faderImage = GetComponent<Image>();
@@ -92,7 +89,7 @@ public class FadeManager : MonoBehaviour
             instance.targetColor = new Color(1, 1, 1, fader ? 0 : 1);
         }
         
-        instance.fading = true;
+        fading = true;
     }
     public IEnumerator Fading(float duration = 1f, float speed = .1f, bool loadScene = false, string sceneName = "", Action desiredFunction = null, Sprite imageSprite = null)
     {

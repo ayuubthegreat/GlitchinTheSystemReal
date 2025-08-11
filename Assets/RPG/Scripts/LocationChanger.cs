@@ -30,7 +30,7 @@ public class LocationChanger : MonoBehaviour
         if (player && showLocationSlider) {
             if (player.yInput == 1)
             {
-                UIManager.instance.location = backLocation;
+                UIManagerRPG.instance.ChangeText(backLocation);
                 if (musicChanges)
                 {
                     GameManagerRPG.instance.StartFadingVolume(clipBehind, 3);
@@ -40,15 +40,14 @@ public class LocationChanger : MonoBehaviour
             }
             else if (player.yInput == -1)
             {
-                UIManager.instance.location = frontLocation;
+                UIManagerRPG.instance.ChangeText(frontLocation);
                 if (musicChanges)
                 {
                     GameManagerRPG.instance.StartFadingVolume(clipFront, 3); 
                 }
                 
             }
-            
-            UIManager.instance.StartChangeTransitionBools();
+            UIManagerRPG.instance.StartMoveLocationAnnouncer(3f);
         }
     }
     

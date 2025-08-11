@@ -18,6 +18,7 @@ public class door : MonoBehaviour
     public int xInputNum;
     public int facingDir;
     public bool isTouchingPlayer;
+    public bool canTeleport = true;
     public SceneManager sm;
     public Animator anim;
     public int seconds2Wait = 3;
@@ -51,6 +52,9 @@ public class door : MonoBehaviour
         playerpg playerpg = collision.gameObject.GetComponent<playerpg>();
         if (playerpg != null)
         {
+            if (!canTeleport) {
+                return;
+            }
             Debug.Log("This is working.");
             if (xInput == xInputNum && yInput == yInputNum)
             {
@@ -66,12 +70,14 @@ public class door : MonoBehaviour
     }
     public IEnumerator LoadandRespawnPlayer()
     {
+        canTeleport = false;
         FadeManager.instance.StartFading(seconds2Wait, .1f, false);
         GameManager.instance.iswalkingdoor = GetComponentInChildren<doorSpawner>() ? true : false;
-       
+
         yield return new WaitForSeconds(seconds2Wait);
         TeleportationPoint();
         GameManagerRPG.instance.playerpg.isMovable = true;
+        canTeleport = true;
 
     }
     public void TeleportationPoint()
@@ -103,7 +109,7 @@ public class door : MonoBehaviour
             }
             GameManager.instance.startSpawnBool = false;
             GameManagerRPG.instance.playerpg.transform.position = GameManagerRPG.instance.spawnObject;
-            audioSource.clip = GameManagerRPG.instance.audioClips[1];
+            audioSource.clip = GameManagerRPG.instance.musicClips[1];
             audioSource.Play();
             UIManager.instance.location = newLocationName;
             GameManager.instance.iswalkingdoor = false;

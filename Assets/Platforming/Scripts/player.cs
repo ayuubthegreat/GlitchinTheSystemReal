@@ -249,7 +249,6 @@ public class player : MonoBehaviour
         StartCoroutine(KnockbackandDashRoutine(0));
         anim.SetTrigger("knockback");
         rb.linearVelocity = new Vector2(knockbackPower.x * knockbackDirection, knockbackPower.y);
-        gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.playerHitSound);
     }
     public void Dash(float currentenemyXPosition)
     {

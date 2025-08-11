@@ -26,8 +26,6 @@ public class DialogueProcessor : MonoBehaviour
 
     void Awake()
     {
-        gameManager = GetComponent<GameManager>();
-        dialogueVault = GetComponent<DialogueVault>();
         if (instance == null)
         {
             instance = this;
@@ -36,6 +34,9 @@ public class DialogueProcessor : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        gameManager = GetComponent<GameManager>();
+        dialogueVault = GetComponent<DialogueVault>();
+        
 
 
     }
@@ -91,11 +92,18 @@ public class DialogueProcessor : MonoBehaviour
                 StartCoroutine(DialogueProgression1());
                 break;
             case 4:
+                isConversationActive = true;
                 FadeManager.instance.Fader(false, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
-                DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 5, dialogueVault.dialogueSets[2].Length - 1, 2f);
+                DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 5, 10, 2f);
                 UIManagerRPG.instance.phone.SetActive(false);
                 break;
             case 5:
+                isConversationActive = true;
+                FadeManager.instance.Fader(true, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
+                DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 11, dialogueVault.dialogueSets[2].Length - 1, 3f);
+                break;
+            case 6:
+                GameManagerRPG.instance.CameraZoom(5f, 5f);
                 UIManagerRPG.instance.phone.SetActive(true);
                 GameManagerRPG.instance.movingAutonomously = true;
                 break;

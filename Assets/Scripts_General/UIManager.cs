@@ -290,6 +290,10 @@ public class UIManager : MonoBehaviour
         {
             bools[i] = value;
         }
-    } 
+    }
+    public void EndGame()
+    {
+        Application.Quit();
+    }
     
 }

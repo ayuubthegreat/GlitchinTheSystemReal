@@ -12,6 +12,7 @@ public class UIManagerRPG : MonoBehaviour
     public GameObject personNameObject;
     public GameObject phone;
     public GameObject person1DialogueAnimation;
+    public GameObject person2DialogueAnimation;
     public Image cutsceneImageObject;
     [Header("Location Announcer Elements")]
     public RectTransform rectTransform;
@@ -55,6 +56,7 @@ public class UIManagerRPG : MonoBehaviour
         rpgTextObject.SetActive(isActive);
         personNameObject.SetActive(isActive);
         person1DialogueAnimation.SetActive(isActive);
+        person2DialogueAnimation.SetActive(isActive);
     }
     public void SetLocationAnnouncerElements()
     {

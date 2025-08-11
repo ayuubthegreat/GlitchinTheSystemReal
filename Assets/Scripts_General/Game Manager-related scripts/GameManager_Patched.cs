@@ -1,19 +1,20 @@
 
-using System;
+
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.PlayerLoop;
+
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public DialogueManager dialogueManager;
     public DialogueVault dialogueVault;
+    public bool[] choicesBools;
+    public int currentChoiceIndex = 0;
 
     [Header("Camera(s)")]
     public CameraControllerRPG cameraControllerRPG;
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        
         if (startSpawnBool && !isDonewithPlatforming && startSpawnRPG != null && DialogueProgression == 0)
         {
             outsideDoorSpawnObject = startSpawnRPG.transform.position;
@@ -199,6 +201,28 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         SceneManager.LoadScene(scene);
     }
-   
+
+   public void StartRevertingSoundClips(AudioClip clip, AudioSource source = null) => StartCoroutine(RevertOriginalSoundClip(clip, source));
+   public IEnumerator RevertOriginalSoundClip(AudioClip clip, AudioSource source = null)
+    {
+        if (source == null)
+        {
+            source = Camera.main.GetComponent<AudioSource>(); // Use the main audio source if none is provided
+        } // Reset pitch to normal
+        float musicTime = source.time;
+        AudioClip musicClip = source.clip; // Store the original music clip
+        if (source != null)
+        {
+            source.clip = clip;
+            source.pitch = 1f; // Reset pitch after playing
+            source.Play();
+        }
+        yield return new WaitForSeconds(clip.length);
+        source.clip = musicClip; // Revert to original music clip
+        source.time = musicTime; // Restore the original time
+        source.pitch = 1f; // Reset pitch to normal
+        source.Play();
+
+    }
     
 }

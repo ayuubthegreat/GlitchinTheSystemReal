@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class playerpg : MonoBehaviour
 {

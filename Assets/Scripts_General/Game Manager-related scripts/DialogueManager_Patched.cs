@@ -11,9 +11,11 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager instance;
     public DialogueVault.DialogueSet[] currentDialogueSet;
     public TextMeshProUGUI rpgText;
+    public TextMeshProUGUI personName;
     public TextMeshProUGUI yesButtonText;
     public TextMeshProUGUI noButtonText;
     public GameObject dialogueBox;
+    public GameObject personNameBox;
     public Button nextButton;
     public Button yesButton;
     public Button noButton;
@@ -26,6 +28,7 @@ public class DialogueManager : MonoBehaviour
     public bool isDialogueActive = false;
     public float dialogueSpeed = .3f;
     public string[] dialogueLines;
+    public string[] speakerNames;
     public string testLine;
     #endregion
 
@@ -54,9 +57,11 @@ public class DialogueManager : MonoBehaviour
 
     }
     #region Dialogue Functions
-    public IEnumerator dialogueRunner(string sentence, bool killDialogueScreen = false)
+    public IEnumerator dialogueRunner(string sentence, string speaker = "")
     {
         rpgText.text = string.Empty;
+        personName.text = speaker;
+
         if (brokenSentence != string.Empty)
         {
             sentence = brokenSentence;
@@ -64,28 +69,31 @@ public class DialogueManager : MonoBehaviour
         }
         isDialogueActive = true;
         int i = 0;
-        dialogueBounds = originalDialogueBounds;
+
         while (i < sentence.Length && i < dialogueBounds)
         {
+            GameManagerRPG.instance.soundEffectSource.PlayOneShot(GameManagerRPG.instance.dialogueBlips[0]);
             nextButton.interactable = false;
-            rpgText.text = sentence.Substring(0, i);
+            rpgText.text = sentence[..i];
             if (CheckForSigns(sentence[i]))
             {
-                dialogueBounds = i + 1;
                 sentence.Remove(i, 1);
+                dialogueBounds = i + 1;
                 Debug.Log("Detected a sign at index: " + i + " with length: " + sentence.Length);
+                yield return new WaitForSeconds(0.1f);
             }
             yield return new WaitForSeconds(dialogueSpeed);
             i++;
         }
         if (sentence.Length > dialogueBounds)
         {
-            brokenSentence = sentence.Substring(i, i + dialogueBounds < sentence.Length - i ? dialogueBounds : sentence.Length - i);
+            brokenSentence = sentence.Substring(i, sentence.Length - i);
             Debug.Log("Breaking sentence: " + brokenSentence + " at index: " + i + " with length: " + brokenSentence.Length + " The original sentence's length was " + sentence.Length);
         }
+        rpgText.text = sentence.Length <= dialogueBounds ? sentence : sentence[..dialogueBounds]; // Display the full sentence after the loop
         isDialogueActive = false;
         nextButton.interactable = true;
-
+        dialogueBounds = originalDialogueBounds;
     }
     public bool CheckForSigns(char sign)
     {
@@ -99,6 +107,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void StartDialogueTexts(DialogueVault.DialogueSet[] dialogueSets, int start, int end = -1, float duration = 0f)
     {
+        StopAllCoroutines();
         StartCoroutine(DialogueTexts(dialogueSets, start, end, duration));
     }
     public IEnumerator DialogueTexts(DialogueVault.DialogueSet[] dialogueSets, int start, int end = -1, float duration = 0f)
@@ -109,33 +118,40 @@ public class DialogueManager : MonoBehaviour
         }
 
         dialogueLines = new string[end - start + 1];
+        speakerNames = new string[end - start + 1];
         for (int i = start; i <= end; i++)
         {
             dialogueLines[i - start] = dialogueSets[i].dialogueLine;
+            speakerNames[i - start] = dialogueSets[i].characterName;
         }
         GameManagerRPG.instance.playerpg.isMovable = false;
         dialogueIndex = 0;
         currentDialogueSet = dialogueSets;
         yield return new WaitForSeconds(duration);
         dialogueBox.SetActive(true);
-        StartCoroutine(dialogueRunner(dialogueLines[dialogueIndex]));
+        personNameBox.SetActive(true);
+        personName.text = currentDialogueSet[dialogueIndex].characterName;
+        StartCoroutine(dialogueRunner(dialogueLines[dialogueIndex], speakerNames[dialogueIndex]));
     }
     public void UpdateDialogueText()
     {
-        if (currentDialogueSet[dialogueIndex].dialogueAction != null)
+        if (currentDialogueSet[dialogueIndex].dialogueAction != null && dialogueIndex < dialogueLines.Length)
         {
             currentDialogueSet[dialogueIndex].dialogueAction.Invoke();
             return;
         }
+        
         if (brokenSentence == string.Empty)
         {
             dialogueIndex++;
+            personName.text = currentDialogueSet[dialogueIndex].characterName;
             if (DialogueProcessor.instance.isConversationActive)
             {
                 DialogueProcessor.instance.person1turn = !DialogueProcessor.instance.person1turn;
                 DialogueProcessor.instance.person2turn = !DialogueProcessor.instance.person2turn;
             }
         }
+        
         if (dialogueIndex >= dialogueLines.Length)
         {
             Debug.Log("Dialogue ended, resetting dialogue box.");
@@ -152,22 +168,21 @@ public class DialogueManager : MonoBehaviour
             rpgText.text = string.Empty;
             dialogueBounds = originalDialogueBounds;
             dialogueIndex = 0;
-             if (!GameManagerRPG.instance.movingAutonomously)
+            if (!GameManagerRPG.instance.movingAutonomously)
             {
                 GameManager.instance.DialogueProgression++;
             }
-            
+
             DialogueProcessor.instance.DialogueProgressionFunction();
-           
+
             Debug.Log("Dialogue ended.");
             dialogueBox.SetActive(false);
             return;
         }
-
         StopAllCoroutines();
         dialogueBounds = originalDialogueBounds;
 
-        StartCoroutine(dialogueRunner(dialogueLines[dialogueIndex]));
+        StartCoroutine(dialogueRunner(dialogueLines[dialogueIndex], speakerNames[dialogueIndex]));
     }
     public void StartConversation()
     {
@@ -177,50 +192,61 @@ public class DialogueManager : MonoBehaviour
     public void DisplayChoices(string choiceName, string choice1, string choice2)
     {
         rpgText.text = choiceName;
+        nextButton.gameObject.SetActive(false);
         yesButton.gameObject.SetActive(true);
         noButton.gameObject.SetActive(true);
         yesButtonText.text = choice1;
         noButtonText.text = choice2;
     }
-    public void ShowResults(int choice)
+    public void ShowResultsYes()
     {
-        switch (choice)
+        GameManager.instance.choicesBools[GameManager.instance.currentChoiceIndex] = true;
+        GameManager.instance.currentChoiceIndex++;
+        Debug.Log("Choice 1 selected.");
+        hitYesButton = true;
+        hitNoButton = false;
+        yesButton.gameObject.SetActive(false);
+        noButton.gameObject.SetActive(false);
+        nextButton.gameObject.SetActive(true);
+        dialogueIndex = 0;
+        switch (GameManager.instance.DialogueProgression)
         {
-            case 1:
-                Debug.Log("Choice 1 selected.");
-                hitYesButton = true;
-                hitNoButton = false;
-                switch (GameManager.instance.DialogueProgression)
-                {
-                    case 2:
-                        Debug.Log("Player has chosen to invite Yasir to the revolution.");
-                        break;
-                    case 3:
-                        Debug.Log("Player has chosen to support the revolution.");
-                        break;
-                }
-                break;
+            
             case 2:
-                Debug.Log("Choice 2 selected.");
-                hitYesButton = false;
-                hitNoButton = true;
-                switch (GameManager.instance.DialogueProgression)
-                {
-                    case 2:
-                        Debug.Log("Player has chosen not to invite Yasir to the revolution.");
-                        break;
-                    case 3:
-                        Debug.Log("Player has chosen not to support the revolution.");
-                        break;
-                }
+                Debug.Log("Player has chosen to invite Yasir to the revolution.");
+                StartDialogueTexts(DialogueProcessor.instance.dialogueVault.dialogueSetsYes[0], 0, DialogueProcessor.instance.dialogueVault.dialogueSetsYes[0].Length, 0f);
                 break;
-            default:
-                Debug.LogWarning("Invalid choice selected.");
-                return;
+            case 3:
+                Debug.Log("Player has chosen to support the revolution.");
+                break;
+        }
+
+    }
+    public void ShowResultsNo()
+    {
+        GameManager.instance.choicesBools[GameManager.instance.currentChoiceIndex] = false;
+        GameManager.instance.currentChoiceIndex++;
+        Debug.Log("Choice 2 selected.");
+        hitYesButton = false;
+        hitNoButton = true;
+        yesButton.gameObject.SetActive(false);
+        noButton.gameObject.SetActive(false);
+        nextButton.gameObject.SetActive(true);
+        dialogueIndex = 0;
+        switch (GameManager.instance.DialogueProgression)
+        {
+            case 2:
+                Debug.Log("Player has chosen not to invite Yasir to the revolution.");
+                StartDialogueTexts(DialogueProcessor.instance.dialogueVault.dialogueSetsNo[0], 0, DialogueProcessor.instance.dialogueVault.dialogueSetsNo[0].Length - 1, 0f);
+                break;
+            case 3:
+                Debug.Log("Player has chosen not to support the revolution.");
+                break;
         }
     }
+    
     #endregion
-    
 
-    
+
+
 }

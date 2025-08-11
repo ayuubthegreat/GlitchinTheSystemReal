@@ -4,12 +4,15 @@ using UnityEngine;
 public class GameManagerRPG : MonoBehaviour
 {
     public static GameManagerRPG instance;
+    public AudioSource soundEffectSource;
     public Camera main;
     public CameraControllerRPG cameraController;
     public float targetSize;
     public float cameraSpeed;
     public AudioSource source;
-    public AudioClip[] audioClips;
+    public AudioClip[] musicClips;
+    public AudioClip[] dialogueBlips;
+    public AudioClip[] soundEffects;
     public playerpg playerpg;
     public GameObject startSpawnRPG;
     public Vector3 spawnObject;
@@ -56,7 +59,7 @@ public class GameManagerRPG : MonoBehaviour
             mainMap.SetActive(false);
             playerHouse.SetActive(true);
 
-            source.clip = audioClips[0];
+            source.clip = musicClips[0];
             source.Play();
         }
 
@@ -138,12 +141,12 @@ public class GameManagerRPG : MonoBehaviour
         targetSize = newSize;
         cameraSpeed = speed;
     }
-    public void MoveCamera(Vector3 newPosition)
+    public void MoveCamera(Vector3 newPosition, float speed)
     {
         Vector3 targetPosition = main.transform.position + newPosition;
         while (Vector3.Distance(main.transform.position, targetPosition) > 0.01f)
         {
-            main.transform.position = Vector3.MoveTowards(main.transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            main.transform.position = Vector3.MoveTowards(main.transform.position, targetPosition, speed * Time.deltaTime);
         }
     }
 }

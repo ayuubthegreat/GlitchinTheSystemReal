@@ -5,6 +5,8 @@ public class DialogueVault : MonoBehaviour
 {
     public static DialogueVault instance;
     public DialogueSet[][] dialogueSets;
+    public DialogueSet[][] dialogueSetsYes;
+    public DialogueSet[][] dialogueSetsNo;
 
     [Serializable]
     public struct DialogueSet
@@ -25,6 +27,10 @@ public class DialogueVault : MonoBehaviour
             Destroy(gameObject);
         }
         // Opening dialogue
+        
+    }
+    void Start()
+    {
         dialogueSets = new DialogueSet[][]
         {
             new DialogueSet[]
@@ -48,39 +54,73 @@ public class DialogueVault : MonoBehaviour
                 new DialogueSet { dialogueLine = "Not really; I'm usually away from my house. I only go there occasionally now. But now that you mention it....", characterName = "Yasir" },
                 new DialogueSet { dialogueLine = "You do notice?", characterName = "Abdurahman" },
                 new DialogueSet { dialogueLine = "....My mother did buy the rest of my siblings the same VR headsets a week ago....<and I just received a call from her saying that they had gone missing. I'm on their trail now.", characterName = "Yasir" },
-                new DialogueSet { dialogueLine = "You see now? This cannot be just a coincidence. My house has been deserted ever since my siblings received VR sets from the P-tech corporation, and now yours has left you as well! There's a deeper agenda here, and I think it's those VR goggles that are the main pawn in it.", characterName = "Abdurahman" },
+                new DialogueSet { dialogueLine = "You see now? This cannot be just a coincidence. My house has been deserted ever since my siblings received VR sets from the P-tech corporation, <and now yours has left you as well! There's a deeper agenda here, <and I think it's those VR goggles that are the main pawn in it.", characterName = "Abdurahman" },
                 new DialogueSet { dialogueLine = "...That does make sense....but what are we supposed to do about it, other than ensure we never get those goggles?", characterName = "Yasir" },
-                new DialogueSet { dialogueLine = "I just called a police officer yesterday, who explained to me that what P-Tech is doing to our society is far beyond illegal, even more so than they usually are. I mean, you've seen the news. Society has basically halted. No stores are running, no banks are printing checks....it's like those VR headsets pulled everyone in to them and left only husks walking around the streets.", characterName = "Abdurahman" },
+                new DialogueSet { dialogueLine = "I just called a police officer yesterday, <who explained to me that what P-Tech is doing to our society is far beyond illegal, <even more so than they usually are. I mean, you've seen the news. <Society has basically halted. No stores are running, no banks are printing checks....<it's like those VR headsets pulled everyone in to them <and left only husks walking around the streets.", characterName = "Abdurahman" },
                 new DialogueSet { dialogueLine = "Now that's what I would call either genius....or a conspiracy.", characterName = "Yasir" },
                 new DialogueSet { dialogueLine = "Either way, Yasir....I think I'm on to something here. Since what P-Tech is doing is illegal, we have the right to stand up against them and get society functional again. Yasir, I was thinking of starting a revolution against the P-Tech company.", characterName = "Abdurahman" },
-                new DialogueSet { dialogueLine = "That's....crazy. Just crazy....but if you're going to revolt against them, you're going to need some people to back you up. (He pauses for a few seconds.) I'm willing to join you in this cause. Inshallah, we'll reach our goal!", characterName = "Yasir" },
+                new DialogueSet { dialogueLine = "That's....crazy. Just crazy....but if you're going to revolt against them, you're going to need some people to back you up. <(He pauses for a few seconds.) <I'm willing to join you in this cause. Inshallah, we'll reach our goal!", characterName = "Yasir" },
                 new DialogueSet { dialogueLine = "Well.....", characterName = "Abdurahman", dialogueAction = () => DialogueManager.instance.DisplayChoices("Will you invite Yasir?", "Yes", "No")},
             },
+            // If Yasir is invited
+            
+            // If Yasir is not invited
             
             // Frantic Teenager encounter
             new DialogueSet[]
             {
                 new DialogueSet { dialogueLine = "Oh, my god! \n OH, MY GOD!", characterName = "Frantic Teenager" },
                 new DialogueSet { dialogueLine = "What's wrong, sir?", characterName = "Abdurahman" },
-                new DialogueSet { dialogueLine = "I just got back from the P-Tech internship lobby.....they were doing some weird stuff, man.....really weird stuff.....", characterName = "Frantic Teenager" },
+                new DialogueSet { dialogueLine = "I just got back from the P-Tech internship lobby.....<they were doing some weird stuff, man.....really weird stuff.....", characterName = "Frantic Teenager" },
                 new DialogueSet { dialogueLine = "What were they doing?", characterName = "Abdurahman" },
                 new DialogueSet { dialogueLine = "Well, first I saw them experimenting with a chicken.......", characterName = "Frantic Teenager" },
                 new DialogueSet { dialogueLine = "What are you going to do to that chicken, Mr..?", characterName = "Frantic Teenager" },
-                new DialogueSet { dialogueLine = "Charles. Mr. Charles, \n and how lucky you are, young man, to witness our biochemical department in action.", characterName = "Mr. Charles" },
+                new DialogueSet { dialogueLine = "Charles. Mr. Charles, \n and how lucky you are, young man, <to witness our biochemical department in action.", characterName = "Mr. Charles" },
                 new DialogueSet { dialogueLine = "W-why would--?", characterName = "Frantic Teenager" },
-                new DialogueSet { dialogueLine = "For meat, intern, for meat. \n Do you know how much meat we can get out of this one chicken?! \n <It's a real money-saver!", characterName = "Mr. Charles" },
+                new DialogueSet { dialogueLine = "For meat, intern, for meat. \nDo you know how much meat we can get out of this one chicken?! \n <It's a real money-saver!", characterName = "Mr. Charles" },
                 new DialogueSet { dialogueLine = "B-\nbut what about the chicken?", characterName = "Frantic Teenager" },
-                new DialogueSet { dialogueLine = "Do you think the chicken cares, intern? \n You're awfully soft, aren't you? \n < You're going to have to get a lot tougher if you want a job here, young man.", characterName = "Mr. Charles" },
+                new DialogueSet { dialogueLine = "Do you think the chicken cares, intern? \n You're awfully soft, aren't you? \n <You're going to have to get a lot tougher if you want a job here, young man.", characterName = "Mr. Charles" },
                 new DialogueSet { dialogueLine = "That poor chicken.....he can't even walk now......", characterName = "Frantic Teenager" },
                 new DialogueSet { dialogueLine = "Subhanallah......", characterName = "Abdurahman" },
                 new DialogueSet { dialogueLine = "What?", characterName = "Frantic Teenager" },
                 new DialogueSet { dialogueLine = "Oh, nothing......<so they mutated it?", characterName = "Abdurahman"},
-                new DialogueSet { dialogueLine = "(He nods shakily.)", characterName = " " },
-                new DialogueSet { dialogueLine = "They must be stopped, man...<I can't even imagine what else they could be getting away with if they got away with mutating farm animals……..", characterName = "Frantic Teenager" },
-                new DialogueSet { dialogueLine = "Indeed, indeed. Well, you know…..I am going to start a revolt against them.", characterName = "Abdurahman"},
-                new DialogueSet { dialogueLine = "A revolt? Against P-Tech? \n<wICKED! I want to help!", characterName = "Frantic Teenager"},
+                new DialogueSet { dialogueLine = "(He nods shakily.) ", characterName = " " },
+                new DialogueSet { dialogueLine = "They must be stopped, man...<I can't even imagine what else they could be getting away with <if they got away with mutating farm animals……..", characterName = "Frantic Teenager" },
+                new DialogueSet { dialogueLine = "Indeed, indeed. <Well, you know…..<I am going to start a revolt against them.", characterName = "Abdurahman"},
+                new DialogueSet { dialogueLine = "A revolt? Against P-Tech? \n<WICKED! I want to help!", characterName = "Frantic Teenager"},
                 new DialogueSet { dialogueLine = "Well……<Any information would be great right now. ", characterName = "Abdurahman" },
             }
         };
+        dialogueSetsYes = new DialogueSet[][]
+        {
+            new DialogueSet[]
+            {
+                new DialogueSet { dialogueLine = "let's go, then! <You're on my team!", characterName = "Abdurahman" },
+                new DialogueSet { dialogueLine = "Yeah!", characterName = "Yasir"},
+                new DialogueSet { dialogueLine = DeclarePartyMember("Yasir"), characterName = " ", },
+                new DialogueSet{dialogueLine = "Come over to my house, and we'll go over what we need to do next.", characterName = "Abdurahman" },
+                new DialogueSet{dialogueLine = "All right! See you there. Assalamu alaykum.", characterName = "Yasir" },
+                new DialogueSet{dialogueLine = "Wa alaykumas Salaam, Yasir.", characterName = "Abdurahman"},
+                new DialogueSet { dialogueLine = "And so the journey begins......<With Yasir on board for the rebellion, Abdurahman truly feels confident in his abilities<to lead the charge against P-Tech.<Inshallah, he will succeed in his goal.", characterName = "Narrator" },
+            },
+        };
+        dialogueSetsNo = new DialogueSet[][]
+        {
+            new DialogueSet[]
+            {
+                new DialogueSet { dialogueLine = "I don't know, Yasir....<I don't want you to get hurt alongside me.<It's best if you lay low.", characterName = "Abdurahman" },
+                new DialogueSet { dialogueLine = "But what about you? Aren't you putting yourself at risk by fighting the largest corporation on Earth?", characterName = "Yasir"},
+                new DialogueSet { dialogueLine = "I am, yes. But I have to do this. <You have more pressing matters to worry about--your family.", characterName = "Abdurahman" },
+                new DialogueSet { dialogueLine = "Alright......<then what can I do to help you out?", characterName = "Yasir" },
+                new DialogueSet { dialogueLine = "You can help train me, get me prepared for the fight ahead.", characterName = "Abdurahman" },
+                new DialogueSet { dialogueLine = "All right, then. <That sounds good. Just call if you need some training, okay?", characterName = "Yasir" },
+                new DialogueSet { dialogueLine = "All right.", characterName = "Abdurahman" },
+            },
+        };
+    }
+    public string DeclarePartyMember(string partyMemberName)
+    {
+        GameManager.instance.StartRevertingSoundClips(GameManagerRPG.instance.soundEffects[0], GameManagerRPG.instance.source);
+        return partyMemberName + " has joined the revolution!";
     }
 }

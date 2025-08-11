@@ -15,5 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/WindyTerrace1_1.unity
     guid: c03a85df9df0e4d4299540ce7b8c2f3f
   m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: cc6517ce406039d49861e21c2f51abec, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

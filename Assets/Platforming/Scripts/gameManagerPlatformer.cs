@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System.Collections;
 
 public class gameManagerPlatformer : MonoBehaviour
@@ -46,7 +45,10 @@ public class gameManagerPlatformer : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -169,30 +171,14 @@ public class gameManagerPlatformer : MonoBehaviour
             coinNumbers = 0; // Reset coin count after granting life
             Debug.Log("You have collected 50 coins! Extra life granted.");
             Debug.Log("Audio Clip: " + extraLifeSound.name);
-            StartCoroutine(RevertOriginalSoundClip(extraLifeSound));
+            StartCoroutine(GameManager.instance.RevertOriginalSoundClip(extraLifeSound, source));
             source.loop = false;
             source.pitch = 1f;
             playerLives++;
             
         }
     }
-    public IEnumerator RevertOriginalSoundClip(AudioClip clip)
-    {
-        float musicTime = source.time;
-        AudioClip musicClip = source.clip; // Store the original music clip
-        if (source != null)
-        {
-            source.clip = clip;
-            source.pitch = 1f; // Reset pitch after playing
-            source.Play();
-        }
-        yield return new WaitForSeconds(clip.length);
-        source.clip = musicClip; // Revert to original music clip
-        source.time = musicTime; // Restore the original time
-        source.pitch = 1f; // Reset pitch to normal
-        source.Play();
-
-    }
+    
     public void StartCooldownforHits(float cooldown = 1f)
     {
 
