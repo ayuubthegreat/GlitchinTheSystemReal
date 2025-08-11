@@ -26,8 +26,6 @@ public class DialogueVault : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        // Opening dialogue
-        
     }
     void Start()
     {
@@ -120,7 +118,6 @@ public class DialogueVault : MonoBehaviour
     }
     public string DeclarePartyMember(string partyMemberName)
     {
-        GameManager.instance.StartRevertingSoundClips(GameManagerRPG.instance.soundEffects[0], GameManagerRPG.instance.source);
         return partyMemberName + " has joined the revolution!";
     }
 }
