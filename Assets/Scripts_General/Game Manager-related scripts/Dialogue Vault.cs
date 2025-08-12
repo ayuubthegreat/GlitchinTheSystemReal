@@ -87,6 +87,21 @@ public class DialogueVault : MonoBehaviour
                 new DialogueSet { dialogueLine = "Indeed, indeed. <Well, you know…..<I am going to start a revolt against them.", characterName = "Abdurahman"},
                 new DialogueSet { dialogueLine = "A revolt? Against P-Tech? \n<WICKED! I want to help!", characterName = "Frantic Teenager"},
                 new DialogueSet { dialogueLine = "Well……<Any information would be great right now. ", characterName = "Abdurahman" },
+                new DialogueSet{dialogueLine = "(He looks around him wildly, then whispers:)", characterName = string.Empty},
+                new DialogueSet{dialogueLine = "You know those P-Tech Phone Booths?", characterName = "Frantic Teenager", dialogueAction =() => {
+                    Debug.Log("Phone Booths dialogue action triggered.");
+                    GameManagerRPG.instance.MoveCamera(new Vector3(10, 10, 10), 10f);
+                }},
+                new DialogueSet{dialogueLine = "Yes, I do. <They are the ones that people use to call P-Tech's customer service, right?", characterName = "Abdurahman"},
+                new DialogueSet{dialogueLine = "(The Frantic Teenager nods.)", characterName = string.Empty},
+                new DialogueSet{dialogueLine = "Well, I heard from someone who was planning <to get an internship there that <they're hiding something in those booths.....<but she left before I could get anything else out of her.", characterName = "Frantic Teenager"},
+                new DialogueSet{dialogueLine = "Really?", characterName = "Abdurahman"},
+                new DialogueSet{dialogueLine = "(The Frantic Teenager nods.)", characterName = string.Empty},
+                new DialogueSet{dialogueLine = "That's all I know.", characterName = "Frantic Teenager"},
+                new DialogueSet{dialogueLine = "Thanks, man!", characterName = "Abdurahman"},
+                new DialogueSet{dialogueLine = "No problem. <Take 'em down, will you?", characterName = "Frantic Teenager"},
+                new DialogueSet{dialogueLine = "You got it. Bye!", characterName = "Abdurahman"},
+                new DialogueSet{dialogueLine = "Bye!", characterName = "Frantic Teenager"},
             }
         };
         dialogueSetsYes = new DialogueSet[][]
@@ -120,4 +135,6 @@ public class DialogueVault : MonoBehaviour
     {
         return partyMemberName + " has joined the revolution!";
     }
+    public void MoveCameratoFirstPhoneBooth() => GameManagerRPG.instance.MoveCamera(new Vector3(10, 10, 10), 10f);
+    
 }

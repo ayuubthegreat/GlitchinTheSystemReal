@@ -7,6 +7,7 @@ public class GameManagerRPG : MonoBehaviour
     public AudioSource soundEffectSource;
     public Camera main;
     public CameraControllerRPG cameraController;
+    public teleport[] phoneBooths;
     public float targetSize;
     public float cameraSpeed;
     public AudioSource source;
@@ -23,6 +24,7 @@ public class GameManagerRPG : MonoBehaviour
     public bool decreaseVolume;
     public bool increaseVolume;
     public bool isPhoneActive = false;
+    public bool isCutsceneActive = false;
     public float audioSourceVolume = 1;
     public float fadeSpeed = 0.5f;
     public float moveSpeed = 5f;
@@ -41,7 +43,8 @@ public class GameManagerRPG : MonoBehaviour
         playerpg = FindFirstObjectByType<playerpg>();
         targetSize = main.orthographicSize;
         audioSourceVolume = GameManager.instance.musicVolume;
-        
+        phoneBooths = FindObjectsByType<teleport>(FindObjectsSortMode.None);
+
         if (GameManager.instance.startSpawnBool && GameManager.instance.phoneBoothSpawn == Vector3.zero)
         {
             spawnObject = startSpawnRPG.transform.position;
@@ -143,10 +146,20 @@ public class GameManagerRPG : MonoBehaviour
     }
     public void MoveCamera(Vector3 newPosition, float speed)
     {
+        Debug.Log("This function was called.");
+        isCutsceneActive = true;
         Vector3 targetPosition = main.transform.position + newPosition;
+        StartCoroutine(MoveCameraCoroutine(targetPosition, speed));
+    }
+
+    private IEnumerator MoveCameraCoroutine(Vector3 targetPosition, float speed)
+    {
         while (Vector3.Distance(main.transform.position, targetPosition) > 0.01f)
         {
+            Debug.Log("Moving camera towards target position: " + targetPosition);
             main.transform.position = Vector3.MoveTowards(main.transform.position, targetPosition, speed * Time.deltaTime);
+            yield return null;
         }
+        main.transform.position = targetPosition;
     }
 }

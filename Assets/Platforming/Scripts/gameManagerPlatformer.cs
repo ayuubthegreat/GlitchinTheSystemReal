@@ -181,7 +181,6 @@ public class gameManagerPlatformer : MonoBehaviour
     
     public void StartCooldownforHits(float cooldown = 1f)
     {
-
         StartCoroutine(CooldownforHits(cooldown));
     }
     public IEnumerator CooldownforHits(float cooldown = 1f)

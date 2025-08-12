@@ -46,7 +46,11 @@ public class CameraControllerRPG : MonoBehaviour
             }
             else if (playerpg != null)
             {
-                transform.position = playerpg.transform.position;
+                if (GameManagerRPG.instance.isCutsceneActive == false)
+                {
+                    transform.position = playerpg.transform.position;
+                }
+                
             }
         }
     }

@@ -13,23 +13,21 @@ public class DamageTrigger : MonoBehaviour
     {
         if (gmp == null)
         {
-            gmp = FindObjectOfType<gameManagerPlatformer>();
+            gmp = FindFirstObjectByType<gameManagerPlatformer>();
         }
         boxCollider = GetComponent<BoxCollider2D>();
         healthScript = FindFirstObjectByType<startHealthScriptt>();
     }
-    public void OnTriggerStay2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         player player = collision.gameObject.GetComponent<player>();
         if (player != null)
         {
-            if (!gmp.canBeHit)
-            {
-                return;
-            }
+
+            if (!gameManagerPlatformer.instance.canBeHit) return;
             if (player.playerHealth != 0)
             {
-                gmp.StartCooldownforHits(coolDownPeriod);
+                gameManagerPlatformer.instance.StartCooldownforHits(coolDownPeriod);
                 healthScript.SetDestroyIndividualHealth(player.playerHealth);
                 player.playerHealth--;
                 Debug.Log("Player Health: " + player.playerHealth);
@@ -39,7 +37,7 @@ public class DamageTrigger : MonoBehaviour
             }
             else
             {
-                gmp.warningScreenandTeleport(5);
+                gameManagerPlatformer.instance.warningScreenandTeleport(5);
             }
 
 

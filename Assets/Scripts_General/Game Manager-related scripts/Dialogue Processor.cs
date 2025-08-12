@@ -9,6 +9,7 @@ public class DialogueProcessor : MonoBehaviour
     public GameManager gameManager;
     public DialogueVault dialogueVault;
     public static DialogueProcessor instance;
+    public teleport introductoryPhoneBooth;
     public GameObject playerPhoneDialogue;
     public GameObject recieverPhoneDialogue2;
     public int PhoneRingingSeconds;
@@ -36,7 +37,7 @@ public class DialogueProcessor : MonoBehaviour
         }
         gameManager = GetComponent<GameManager>();
         dialogueVault = GetComponent<DialogueVault>();
-        
+
 
 
     }
@@ -92,21 +93,13 @@ public class DialogueProcessor : MonoBehaviour
                 StartCoroutine(DialogueProgression1());
                 break;
             case 4:
-                isConversationActive = true;
-                FadeManager.instance.Fader(false, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
-                DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 5, 10, 2f);
-                UIManagerRPG.instance.phone.SetActive(false);
-                break;
             case 5:
-                isConversationActive = true;
-                FadeManager.instance.Fader(true, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
-                DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 11, dialogueVault.dialogueSets[2].Length - 1, 3f);
-                break;
             case 6:
-                GameManagerRPG.instance.CameraZoom(5f, 5f);
-                UIManagerRPG.instance.phone.SetActive(true);
-                GameManagerRPG.instance.movingAutonomously = true;
+            case 7:
+            case 8:
+                isConversationActive = true;
                 break;
+           
         }
         if (isConversationActive)
         {
@@ -145,7 +138,7 @@ public class DialogueProcessor : MonoBehaviour
         yield return new WaitForSeconds(secondstoWait);
         UIManagerRPG.instance.phone.SetActive(true);
     }
-    
+
 
     public void FranticTeenagerDialogue1() => DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 0, 4, .3f);
     public void ConversationManager(NPC npc = null)
@@ -162,10 +155,36 @@ public class DialogueProcessor : MonoBehaviour
                 Debug.Log("NPC Position: " + npc.transform.position + " Player Position: " + GameManagerRPG.instance.playerpg.transform.position);
                 npc.StartMovingNPC(0, 50f, new Vector2[] { new Vector2(0f, npc.playerPosition.y - npc.transform.position.y - 5f), new Vector2(npc.playerPosition.x - npc.transform.position.x, 0f) }, FranticTeenagerDialogue1);
                 break;
+            case 4:
+                FadeManager.instance.Fader(false, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
+                DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 5, 10, 2f);
+                UIManagerRPG.instance.phone.SetActive(false);
+                break;
+            case 5:
+                FadeManager.instance.Fader(true, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
+                DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 11, 20, 3f);
+                break;
+            case 6:
+                GameManagerRPG.instance.MoveCamera(new Vector3(introductoryPhoneBooth.transform.position.x - Camera.main.transform.position.x, introductoryPhoneBooth.transform.position.y - Camera.main.transform.position.y, 0), 50f);
+                DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 21, 27, 3f);
+                break;
+            case 7:
+                GameManagerRPG.instance.MoveCamera(new Vector3(Camera.main.transform.position.x - GameManagerRPG.instance.playerpg.transform.position.x, Camera.main.transform.position.y - GameManagerRPG.instance.playerpg.transform.position.y, 0), 50f);
+                DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 28, -1, 3f);
+                break;
+            case 8:
+                npc.StartMovingNPC(0, 30f, new Vector2[] { new Vector2(-30, 0) }, BeginAutonomousExploration);
+                break;
             default:
                 Debug.Log("No conversation detected.");
                 return;
         }
+    }
+    public void BeginAutonomousExploration()
+    {
+        GameManagerRPG.instance.CameraZoom(5f, 5f);
+        UIManagerRPG.instance.phone.SetActive(true);
+        GameManagerRPG.instance.movingAutonomously = true;
     }
 
 }

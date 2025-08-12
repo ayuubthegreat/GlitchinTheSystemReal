@@ -114,9 +114,9 @@ public class DialogueManager : MonoBehaviour
     {
         if (end == -1)
         {
-            end = dialogueSets.Length;
+            end = dialogueSets.Length - 1;
         }
-
+        GameManagerRPG.instance.isCutsceneActive = true;
         dialogueLines = new string[end - start + 1];
         speakerNames = new string[end - start + 1];
         for (int i = start; i <= end; i++)
@@ -135,14 +135,39 @@ public class DialogueManager : MonoBehaviour
     }
     public void UpdateDialogueText()
     {
-        if (dialogueIndex >= dialogueLines.Length)
+        if (dialogueIndex < dialogueLines.Length)
         {
-            Debug.Log("Dialogue ended, resetting dialogue box.");
+            if (currentDialogueSet[dialogueIndex].dialogueAction != null)
+            {
+                Debug.Log("Executing dialogue action for index: " + dialogueIndex);
+                currentDialogueSet[dialogueIndex].dialogueAction.Invoke();
+            }
+            if (brokenSentence == string.Empty)
+            {
+                dialogueIndex++;
+                if (dialogueIndex >= dialogueLines.Length)
+                {
+                    Debug.LogWarning("Dialogue index exceeds the length of dialogue lines. Resetting dialogue.");
+                    return;
+                }
+                personName.text = currentDialogueSet[dialogueIndex].characterName;
+
+                if (DialogueProcessor.instance.isConversationActive)
+                {
+                    DialogueProcessor.instance.person1turn = currentDialogueSet[dialogueIndex].characterName == "Abdurahman";
+                    DialogueProcessor.instance.person2turn = dialogueIndex % 2 == 0 && currentDialogueSet[dialogueIndex].characterName != "Narrator";
+                }
+            }
+        }
+        else
+        {
+             Debug.Log("Dialogue ended, resetting dialogue box.");
             if (dialogueBox == null)
             {
                 Debug.LogError("Dialogue box is not assigned in the inspector.");
                 return;
             }
+            GameManagerRPG.instance.isCutsceneActive = false;
             GameManagerRPG.instance.playerpg.isMovable = true;
             DialogueProcessor.instance.isConversationActive = false;
             UIManagerRPG.instance.ControlRPGUIElements(false);
@@ -162,30 +187,6 @@ public class DialogueManager : MonoBehaviour
             dialogueBox.SetActive(false);
             return;
         }
-        if (currentDialogueSet[dialogueIndex].dialogueAction != null && dialogueIndex < dialogueLines.Length)
-        {
-            currentDialogueSet[dialogueIndex].dialogueAction.Invoke();
-            return;
-        }
-        
-        if (brokenSentence == string.Empty)
-        {
-            dialogueIndex++;
-            if (dialogueIndex >= dialogueLines.Length)
-            {
-                Debug.LogWarning("Dialogue index exceeds the length of dialogue lines. Resetting dialogue.");
-                return;
-            }
-                personName.text = currentDialogueSet[dialogueIndex].characterName;
-            
-            if (DialogueProcessor.instance.isConversationActive)
-            {
-                DialogueProcessor.instance.person1turn = currentDialogueSet[dialogueIndex].characterName == "Abdurahman";
-                DialogueProcessor.instance.person2turn = dialogueIndex % 2 == 0 && currentDialogueSet[dialogueIndex].characterName != "Narrator";
-            }
-        }
-        
-        
         StopAllCoroutines();
         dialogueBounds = originalDialogueBounds;
 
