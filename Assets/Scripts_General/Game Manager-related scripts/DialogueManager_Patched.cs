@@ -90,10 +90,29 @@ public class DialogueManager : MonoBehaviour
             brokenSentence = sentence.Substring(i, sentence.Length - i);
             Debug.Log("Breaking sentence: " + brokenSentence + " at index: " + i + " with length: " + brokenSentence.Length + " The original sentence's length was " + sentence.Length);
         }
-        rpgText.text = sentence.Length <= dialogueBounds ? sentence : sentence[..dialogueBounds]; // Display the full sentence after the loop
+        rpgText.text = sentence.Length <= dialogueBounds ? CheckSentenceForSigns(sentence) : CheckSentenceForSigns(sentence)[..dialogueBounds]; // Display the full sentence after the loop
         isDialogueActive = false;
         nextButton.interactable = true;
         dialogueBounds = originalDialogueBounds;
+    }
+    public string CheckSentenceForSigns(string sentence)
+    {
+        if (string.IsNullOrEmpty(sentence))
+        {
+            Debug.LogWarning("The sentence is empty or null.");
+            return string.Empty;
+        }
+        for (int i = 0; i < sentence.Length; i++)
+        {
+            if (CheckForSigns(sentence[i]))
+            {
+                Debug.Log("Sign detected at index: " + i + " with character: " + sentence[i]);
+                sentence = sentence.Remove(i, 1);
+                return sentence; // Return the modified sentence without the sign
+            }
+        }
+        Debug.Log("No signs detected in the sentence.");
+        return sentence;
     }
     public bool CheckForSigns(char sign)
     {
