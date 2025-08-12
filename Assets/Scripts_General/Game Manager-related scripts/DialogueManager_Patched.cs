@@ -135,26 +135,6 @@ public class DialogueManager : MonoBehaviour
     }
     public void UpdateDialogueText()
     {
-        if (currentDialogueSet[dialogueIndex].dialogueAction != null && dialogueIndex < dialogueLines.Length)
-        {
-            currentDialogueSet[dialogueIndex].dialogueAction.Invoke();
-            return;
-        }
-        
-        if (brokenSentence == string.Empty)
-        {
-            dialogueIndex++;
-            if (dialogueIndex < currentDialogueSet.Length)
-            {
-              personName.text = currentDialogueSet[dialogueIndex].characterName;  
-            }
-            if (DialogueProcessor.instance.isConversationActive)
-            {
-                DialogueProcessor.instance.person1turn = currentDialogueSet[dialogueIndex].characterName == "Abdurahman";
-                DialogueProcessor.instance.person2turn = dialogueIndex % 2 == 0 && currentDialogueSet[dialogueIndex].characterName != "Narrator";
-            }
-        }
-        
         if (dialogueIndex >= dialogueLines.Length)
         {
             Debug.Log("Dialogue ended, resetting dialogue box.");
@@ -182,6 +162,30 @@ public class DialogueManager : MonoBehaviour
             dialogueBox.SetActive(false);
             return;
         }
+        if (currentDialogueSet[dialogueIndex].dialogueAction != null && dialogueIndex < dialogueLines.Length)
+        {
+            currentDialogueSet[dialogueIndex].dialogueAction.Invoke();
+            return;
+        }
+        
+        if (brokenSentence == string.Empty)
+        {
+            dialogueIndex++;
+            if (dialogueIndex >= dialogueLines.Length)
+            {
+                Debug.LogWarning("Dialogue index exceeds the length of dialogue lines. Resetting dialogue.");
+                return;
+            }
+                personName.text = currentDialogueSet[dialogueIndex].characterName;
+            
+            if (DialogueProcessor.instance.isConversationActive)
+            {
+                DialogueProcessor.instance.person1turn = currentDialogueSet[dialogueIndex].characterName == "Abdurahman";
+                DialogueProcessor.instance.person2turn = dialogueIndex % 2 == 0 && currentDialogueSet[dialogueIndex].characterName != "Narrator";
+            }
+        }
+        
+        
         StopAllCoroutines();
         dialogueBounds = originalDialogueBounds;
 
