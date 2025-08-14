@@ -18,6 +18,8 @@ public class teleport : MonoBehaviour
     public Vector3 spawnDistance;
     public int seconds;
     public SceneManager sm;
+    public string levelName;
+    public int worldNumber;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -44,13 +46,19 @@ public class teleport : MonoBehaviour
                 playerpg.isMovable = false;
                 GameManager.instance.phoneBoothSpawn = transform.position + spawnDistance;
                 UIManagerRPG.instance.ChangeText(newLocationName);
-                GameManager.instance.LoadNewSceneReal(seconds, scene);
-                
+
             }
-            
-            
 
 
+
+
+        }
+    }
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            UIManagerRPG.instance.AnnounceLevel(levelName, worldNumber, scene);
         }
     }
 }
