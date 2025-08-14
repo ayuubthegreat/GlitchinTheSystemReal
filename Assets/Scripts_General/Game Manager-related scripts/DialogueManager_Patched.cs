@@ -78,7 +78,7 @@ public class DialogueManager : MonoBehaviour
             if (CheckForSigns(sentence[i]))
             {
                 sentence.Remove(i, 1);
-                dialogueBounds = i + 1;
+                dialogueBounds = i;
                 Debug.Log("Detected a sign at index: " + i + " with length: " + sentence.Length);
                 yield return new WaitForSeconds(0.1f);
             }

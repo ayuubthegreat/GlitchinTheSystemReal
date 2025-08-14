@@ -9,6 +9,7 @@ public class DialogueProcessor : MonoBehaviour
     public GameManager gameManager;
     public DialogueVault dialogueVault;
     public static DialogueProcessor instance;
+    public NPC franticTeenager;
     public teleport introductoryPhoneBooth;
     public GameObject playerPhoneDialogue;
     public GameObject recieverPhoneDialogue2;
@@ -169,11 +170,11 @@ public class DialogueProcessor : MonoBehaviour
                 DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 21, 27, 3f);
                 break;
             case 7:
-                GameManagerRPG.instance.MoveCamera(new Vector3(Camera.main.transform.position.x - GameManagerRPG.instance.playerpg.transform.position.x, Camera.main.transform.position.y - GameManagerRPG.instance.playerpg.transform.position.y, 0), 50f);
+                GameManagerRPG.instance.MoveCamera(new Vector3(GameManagerRPG.instance.playerpg.transform.position.x - Camera.main.transform.position.x, GameManagerRPG.instance.playerpg.transform.position.y - Camera.main.transform.position.y, 0), 50f);
                 DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 28, -1, 3f);
                 break;
             case 8:
-                npc.StartMovingNPC(0, 30f, new Vector2[] { new Vector2(-30, 0) }, BeginAutonomousExploration);
+                franticTeenager.StartMovingNPC(0, 30f, new Vector2[] { new Vector2(-30, 0) }, BeginAutonomousExploration);
                 break;
             default:
                 Debug.Log("No conversation detected.");
@@ -182,9 +183,10 @@ public class DialogueProcessor : MonoBehaviour
     }
     public void BeginAutonomousExploration()
     {
-        GameManagerRPG.instance.CameraZoom(5f, 5f);
+        GameManagerRPG.instance.CameraZoom(8f, 5f);
         UIManagerRPG.instance.phone.SetActive(true);
         GameManagerRPG.instance.movingAutonomously = true;
+        GameManagerRPG.instance.playerpg.isMovable = true;
     }
 
 }
