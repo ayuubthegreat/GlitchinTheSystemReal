@@ -24,6 +24,11 @@ public class UIManagerRPG : MonoBehaviour
     public string locationName = "Abdurahman's House";
     [Header("Image Cutscenes")]
     public Sprite[] cutsceneImages;
+    [Header("Level Announcer Elements")]
+    public GameObject levelAnnouncerObject;
+    public TextMeshProUGUI levelText;
+    public TextMeshProUGUI worldNumberText;
+    public string levelSceneName = "Level1";
     void Awake()
     {
         if (instance == null)
@@ -88,11 +93,11 @@ public class UIManagerRPG : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        waypointIndex = 1; 
+        waypointIndex = 1;
 
-        yield return new WaitForSeconds(duration); 
+        yield return new WaitForSeconds(duration);
 
-        waypointIndex = 0; 
+        waypointIndex = 0;
     }
     public void StartMoveLocationAnnouncer(float duration)
     {
@@ -100,4 +105,16 @@ public class UIManagerRPG : MonoBehaviour
         waypointIndex = 0; // Start from the first waypoint
         StartCoroutine(MoveLocationAnnouncer(duration));
     }
+    public void AnnounceLevel(string levelName, int worldNumber, string scene = "")
+    {
+        levelSceneName = scene;
+        levelAnnouncerObject.SetActive(true);
+        levelText.text = levelName;
+        worldNumberText.text = "World " + worldNumber.ToString();
+    }
+    public void HideLevelAnnouncer()
+    {
+        levelAnnouncerObject.SetActive(false);
+    }
+    public void LoadNewLevel() => GameManager.instance.LoadNewSceneReal(2, levelSceneName);
 }

@@ -18,6 +18,8 @@ public class teleport : MonoBehaviour
     public Vector3 spawnDistance;
     public int seconds;
     public SceneManager sm;
+    public string levelName;
+    public int worldNumber;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,6 +34,13 @@ public class teleport : MonoBehaviour
 
 
     }
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+
+        }
+    }
     void OnTriggerEnter2D(Collider2D collision)
     {
         isTouchingPlayer = xInput == xInputNum && yInput == yInputNum;
@@ -41,16 +50,22 @@ public class teleport : MonoBehaviour
             Debug.Log("This is working.");
             if (xInput == xInputNum && yInput == yInputNum)
             {
-                playerpg.isMovable = false;
+                UIManagerRPG.instance.AnnounceLevel(levelName, worldNumber, scene);
                 GameManager.instance.phoneBoothSpawn = transform.position + spawnDistance;
                 UIManagerRPG.instance.ChangeText(newLocationName);
-                GameManager.instance.LoadNewSceneReal(seconds, scene);
-                
             }
-            
-            
+
+
 
 
         }
     }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<playerpg>() != null)
+        {
+            UIManagerRPG.instance.HideLevelAnnouncer();
+        }
+    }
+    
 }
