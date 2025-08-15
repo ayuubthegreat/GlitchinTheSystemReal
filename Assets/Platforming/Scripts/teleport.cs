@@ -34,6 +34,13 @@ public class teleport : MonoBehaviour
 
 
     }
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+
+        }
+    }
     void OnTriggerEnter2D(Collider2D collision)
     {
         isTouchingPlayer = xInput == xInputNum && yInput == yInputNum;
@@ -43,10 +50,9 @@ public class teleport : MonoBehaviour
             Debug.Log("This is working.");
             if (xInput == xInputNum && yInput == yInputNum)
             {
-                playerpg.isMovable = false;
+                UIManagerRPG.instance.AnnounceLevel(levelName, worldNumber, scene);
                 GameManager.instance.phoneBoothSpawn = transform.position + spawnDistance;
                 UIManagerRPG.instance.ChangeText(newLocationName);
-
             }
 
 
@@ -54,11 +60,12 @@ public class teleport : MonoBehaviour
 
         }
     }
-    void OnTriggerStay2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (collision.gameObject.GetComponent<playerpg>() != null)
         {
-            UIManagerRPG.instance.AnnounceLevel(levelName, worldNumber, scene);
+            UIManagerRPG.instance.HideLevelAnnouncer();
         }
     }
+    
 }
