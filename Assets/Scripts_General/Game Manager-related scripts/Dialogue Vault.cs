@@ -33,15 +33,15 @@ public class DialogueVault : MonoBehaviour
         {
             new DialogueSet[]
             {
-                new DialogueSet { dialogueLine = "Alhamdulillah, I managed to wake myself up so early. <Now I can begin my day. ", characterName = "Abdurahman" },
+                new DialogueSet { dialogueLine = "I managed to wake myself up so early. <Now I can begin my day. ", characterName = "Abdurahman" },
                 new DialogueSet { dialogueLine = "I miss when there used to be other people besides me in this house...... <I wonder what they're all doing now.", characterName = "Abdurahman" },
             },
             
             // Yasir's Call
             new DialogueSet[]
             {
-                new DialogueSet { dialogueLine = "Assalamu Alaykum, Yasir.", characterName = "Abdurahman" },
-                new DialogueSet { dialogueLine = "Wa alaykumas Salaam, Abdurahman. Are you good?", characterName = "Yasir" },
+                new DialogueSet { dialogueLine = "Hello there, Yasir.", characterName = "Abdurahman" },
+                new DialogueSet { dialogueLine = "Hello, Abdurahman. Are you good?", characterName = "Yasir" },
                 new DialogueSet { dialogueLine = "I'm good, yes. Listen....I've been thinking....", characterName = "Abdurahman" },
                 new DialogueSet { dialogueLine = "Thinking about what?", characterName = "Yasir" },
                 new DialogueSet { dialogueLine = "I've been thinking....those VR headsets that everyone's been talking about....<they weren't just built for amusement and entertainment.", characterName = "Abdurahman" },
@@ -57,7 +57,7 @@ public class DialogueVault : MonoBehaviour
                 new DialogueSet { dialogueLine = "I just called a police officer yesterday, <who explained to me that what P-Tech is doing to our society is far beyond illegal, <even more so than they usually are. I mean, you've seen the news. <Society has basically halted. No stores are running, no banks are printing checks....<it's like those VR headsets pulled everyone in to them <and left only husks walking around the streets.", characterName = "Abdurahman" },
                 new DialogueSet { dialogueLine = "Now that's what I would call either genius....or a conspiracy.", characterName = "Yasir" },
                 new DialogueSet { dialogueLine = "Either way, Yasir....I think I'm on to something here. Since what P-Tech is doing is illegal, we have the right to stand up against them and get society functional again. Yasir, I was thinking of starting a revolution against the P-Tech company.", characterName = "Abdurahman" },
-                new DialogueSet { dialogueLine = "That's....crazy. Just crazy....but if you're going to revolt against them, you're going to need some people to back you up. <(He pauses for a few seconds.) <I'm willing to join you in this cause. Inshallah, we'll reach our goal!", characterName = "Yasir" },
+                new DialogueSet { dialogueLine = "That's....crazy. Just crazy....but if you're going to revolt against them, you're going to need some people to back you up. <(He pauses for a few seconds.) <I'm willing to join you in this cause. We'll reach our goal!", characterName = "Yasir" },
                 new DialogueSet { dialogueLine = "Well.....", characterName = "Abdurahman", dialogueAction = () => DialogueManager.instance.DisplayChoices("Will you invite Yasir?", "Yes", "No")},
             },
             // If Yasir is invited
@@ -79,7 +79,7 @@ public class DialogueVault : MonoBehaviour
                 new DialogueSet { dialogueLine = "B-\nbut what about the chicken?", characterName = "Frantic Teenager" },
                 new DialogueSet { dialogueLine = "Do you think the chicken cares, intern? \n You're awfully soft, aren't you? \n <You're going to have to get a lot tougher if you want a job here, young man.", characterName = "Mr. Charles" },
                 new DialogueSet { dialogueLine = "That poor chicken.....he can't even walk now......", characterName = "Frantic Teenager" },
-                new DialogueSet { dialogueLine = "Subhanallah......", characterName = "Abdurahman" },
+                new DialogueSet { dialogueLine = "Wow......", characterName = "Abdurahman" },
                 new DialogueSet { dialogueLine = "What?", characterName = "Frantic Teenager" },
                 new DialogueSet { dialogueLine = "Oh, nothing......<so they mutated it?", characterName = "Abdurahman"},
                 new DialogueSet { dialogueLine = "(He nods shakily.) ", characterName = " " },
@@ -112,8 +112,8 @@ public class DialogueVault : MonoBehaviour
                 new DialogueSet { dialogueLine = "Yeah!", characterName = "Yasir"},
                 new DialogueSet { dialogueLine = DeclarePartyMember("Yasir"), characterName = " ", },
                 new DialogueSet{dialogueLine = "Come over to my house, and we'll go over what we need to do next.", characterName = "Abdurahman" },
-                new DialogueSet{dialogueLine = "All right! See you there. Assalamu alaykum.", characterName = "Yasir" },
-                new DialogueSet{dialogueLine = "Wa alaykumas Salaam, Yasir.", characterName = "Abdurahman"},
+                new DialogueSet{dialogueLine = "All right! See you there. Bye.", characterName = "Yasir" },
+                new DialogueSet{dialogueLine = "Goodbye, Yasir.", characterName = "Abdurahman"},
                 new DialogueSet { dialogueLine = "And so the journey begins......<With Yasir on board for the rebellion, Abdurahman truly feels confident in his abilities<to lead the charge against P-Tech.<Inshallah, he will succeed in his goal.", characterName = "Narrator" },
             },
         };
@@ -133,8 +133,10 @@ public class DialogueVault : MonoBehaviour
     }
     public string DeclarePartyMember(string partyMemberName)
     {
+        GameManagerRPG.instance.soundEffectSource.PlayOneShot(GameManagerRPG.instance.soundEffects[0]);
+        Debug.Log(partyMemberName + " has joined the revolution!");
         return partyMemberName + " has joined the revolution!";
     }
-    public void MoveCameratoFirstPhoneBooth() => GameManagerRPG.instance.MoveCamera(new Vector3(10, 10, 10), 10f);
-    
+    public void MoveCameraToFirstPhoneBooth() => GameManagerRPG.instance.MoveCamera(new Vector3(10, 10, 10), 10f);
+
 }

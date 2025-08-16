@@ -135,7 +135,7 @@ public class DialogueManager : MonoBehaviour
         {
             end = dialogueSets.Length - 1;
         }
-        GameManagerRPG.instance.isCutsceneActive = true;
+        
         dialogueLines = new string[end - start + 1];
         speakerNames = new string[end - start + 1];
         for (int i = start; i <= end; i++)
@@ -147,6 +147,7 @@ public class DialogueManager : MonoBehaviour
         dialogueIndex = 0;
         currentDialogueSet = dialogueSets;
         yield return new WaitForSeconds(duration);
+        GameManagerRPG.instance.isCutsceneActive = true;
         dialogueBox.SetActive(true);
         personNameBox.SetActive(true);
         personName.text = currentDialogueSet[dialogueIndex].characterName;

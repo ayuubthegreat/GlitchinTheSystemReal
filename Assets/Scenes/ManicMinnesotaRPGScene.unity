@@ -338,9 +338,9 @@ MonoBehaviour:
   locationName: Abdurahman's House
   cutsceneImages:
   - {fileID: -634114315441119763, guid: cf3c905bb20da134fa2842763964cd5f, type: 3}
-  levelAnnouncerObject: {fileID: 2091765458}
-  levelText: {fileID: 1483316287}
-  worldNumberText: {fileID: 1120384404}
+  levelAnnouncerObject: {fileID: 0}
+  levelText: {fileID: 0}
+  worldNumberText: {fileID: 0}
   levelSceneName: Level1
 --- !u!4 &102804297
 Transform:
@@ -373,7 +373,6 @@ MonoBehaviour:
   main: {fileID: 0}
   cameraController: {fileID: 519420033}
   phoneBooths: []
-  phoneBooths: []
   targetSize: 0
   cameraSpeed: 0
   source: {fileID: 519420034}
@@ -394,7 +393,6 @@ MonoBehaviour:
   decreaseVolume: 0
   increaseVolume: 0
   isPhoneActive: 0
-  isCutsceneActive: 0
   isCutsceneActive: 0
   audioSourceVolume: 1
   fadeSpeed: 0.5
@@ -4385,11 +4383,7 @@ PrefabInstance:
       objectReference: {fileID: 1944592912}
     - target: {fileID: 8871675453636400643, guid: 0159be88d5d57bf4ab684c709b71edc4, type: 3}
       propertyPath: DialogueProgression
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8871675453636400643, guid: 0159be88d5d57bf4ab684c709b71edc4, type: 3}
-      propertyPath: DialogueProgression
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4618,7 +4612,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.21, y: 6.57}
+    oldSize: {x: 15.143698, y: 19.539999}
     newSize: {x: 15.143698, y: 19.539999}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
