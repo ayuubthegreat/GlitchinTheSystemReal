@@ -70,6 +70,8 @@ void Awake() {
             rb.linearVelocity = Vector2.zero;
             xInput = 0;
             yInput = 0;
+            anim.SetFloat("xInput", xInput);
+            anim.SetFloat("yInput", yInput);
             return;
         }
         xInput = Input.GetAxisRaw("Horizontal");

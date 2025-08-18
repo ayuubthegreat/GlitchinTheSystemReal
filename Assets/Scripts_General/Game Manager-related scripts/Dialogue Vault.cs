@@ -103,6 +103,8 @@ public class DialogueVault : MonoBehaviour
                 new DialogueSet{dialogueLine = "You got it. Bye!", characterName = "Abdurahman"},
                 new DialogueSet{dialogueLine = "Bye!", characterName = "Frantic Teenager"},
             }
+            // Homeless Man Dialogue
+            
         };
         dialogueSetsYes = new DialogueSet[][]
         {
