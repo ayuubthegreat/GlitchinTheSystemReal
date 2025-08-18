@@ -61,7 +61,7 @@ public class GameManagerRPG : MonoBehaviour
             movingAutonomously = false;
             mainMap.SetActive(false);
             playerHouse.SetActive(true);
-
+            isCutsceneActive = false;
             source.clip = musicClips[0];
             source.Play();
         }

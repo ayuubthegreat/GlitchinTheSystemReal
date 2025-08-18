@@ -70,6 +70,8 @@ void Awake() {
             rb.linearVelocity = Vector2.zero;
             xInput = 0;
             yInput = 0;
+            anim.SetFloat("xInput", xInput);
+            anim.SetFloat("yInput", yInput);
             return;
         }
         xInput = Input.GetAxisRaw("Horizontal");
@@ -83,12 +85,13 @@ void Awake() {
         
 
         anim.SetInteger("PoseNum", startingPose);
-        anim.SetFloat("xInput", xInput);
-        anim.SetFloat("yInput", yInput);
+        
 
         isFacingBehind = (yInput < 0) && isMovable;
         isTurningLeft = (xInput != 0) && isMovable;
         isFacingForwards = (yInput > 0) && isMovable;
+        anim.SetFloat("xInput", xInput);
+        anim.SetFloat("yInput", yInput);
         anim.SetBool("Right", isTurningLeft);
         anim.SetBool("Front", isFacingForwards);
         anim.SetBool("Bottom", isFacingBehind);
