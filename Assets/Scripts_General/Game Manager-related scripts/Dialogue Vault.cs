@@ -135,7 +135,6 @@ public class DialogueVault : MonoBehaviour
     }
     public string DeclarePartyMember(string partyMemberName)
     {
-        GameManagerRPG.instance.soundEffectSource.PlayOneShot(GameManagerRPG.instance.soundEffects[0]);
         Debug.Log(partyMemberName + " has joined the revolution!");
         return partyMemberName + " has joined the revolution!";
     }

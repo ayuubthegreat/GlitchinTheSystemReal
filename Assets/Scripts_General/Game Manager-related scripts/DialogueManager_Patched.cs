@@ -144,6 +144,7 @@ public class DialogueManager : MonoBehaviour
             speakerNames[i - start] = dialogueSets[i].characterName;
         }
         GameManagerRPG.instance.playerpg.isMovable = false;
+        GameManagerRPG.instance.playerpg.rb.linearVelocity = Vector2.zero;
         dialogueIndex = 0;
         currentDialogueSet = dialogueSets;
         yield return new WaitForSeconds(duration);

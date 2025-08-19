@@ -85,12 +85,13 @@ void Awake() {
         
 
         anim.SetInteger("PoseNum", startingPose);
-        anim.SetFloat("xInput", xInput);
-        anim.SetFloat("yInput", yInput);
+        
 
         isFacingBehind = (yInput < 0) && isMovable;
         isTurningLeft = (xInput != 0) && isMovable;
         isFacingForwards = (yInput > 0) && isMovable;
+        anim.SetFloat("xInput", xInput);
+        anim.SetFloat("yInput", yInput);
         anim.SetBool("Right", isTurningLeft);
         anim.SetBool("Front", isFacingForwards);
         anim.SetBool("Bottom", isFacingBehind);
