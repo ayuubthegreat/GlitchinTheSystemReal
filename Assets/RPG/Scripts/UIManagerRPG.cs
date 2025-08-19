@@ -108,13 +108,13 @@ public class UIManagerRPG : MonoBehaviour
     public void AnnounceLevel(string levelName, int worldNumber, string scene = "")
     {
         levelSceneName = scene;
-        levelAnnouncerObject.SetActive(true);
+        Mover.instance.AssignNewWaypointsAndMoveObject(levelAnnouncerObject.GetComponent<RectTransform>(), new Vector2[] { new Vector2(0, 100)}, 10f, false);
         levelText.text = levelName;
         worldNumberText.text = "World " + worldNumber.ToString();
     }
     public void HideLevelAnnouncer()
     {
-        levelAnnouncerObject.SetActive(false);
+        Mover.instance.AssignNewWaypointsAndMoveObject(levelAnnouncerObject.GetComponent<RectTransform>(), new Vector2[] { new Vector2(0, -100)}, 10f, false);
     }
     public void LoadNewLevel() => GameManager.instance.LoadNewSceneReal(2, levelSceneName);
 }
