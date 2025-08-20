@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2059063379
-  m_SortingLayer: 4
+  m_SortingLayer: 11
   m_SortingOrder: 1
   m_Sprite: {fileID: -8374406825309485557, guid: 47713f6454db46f439283db775f34208, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -238,11 +238,13 @@ MonoBehaviour:
   xInputNum: 0
   facingDir: 0
   isTouchingPlayer: 0
+  canTeleport: 1
   anim: {fileID: 0}
   seconds2Wait: 0
   canNotBeASpawnPoint: 0
   audioSource: {fileID: 0}
   clipNew: {fileID: 0}
+  announceNewLocation: 0
 --- !u!95 &4478611624495304934
 Animator:
   serializedVersion: 7
@@ -307,10 +309,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624259077
-  m_SortingLayer: 3
+  m_SortingLayer: 9
   m_SortingOrder: -1
   m_Sprite: {fileID: 229992989312293679, guid: ffa5e13807c50b24e91ec73f0980023a, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.54509807, g: 0.5254902, b: 0.5254902, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

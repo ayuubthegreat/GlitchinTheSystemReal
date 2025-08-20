@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2059063379
-  m_SortingLayer: 4
+  m_SortingLayer: 11
   m_SortingOrder: 4
   m_Sprite: {fileID: 3972235531454738951, guid: 362250d54b8f8484da54657dc6405c25, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -249,6 +249,18 @@ PrefabInstance:
     - target: {fileID: 4316210886394773645, guid: 42c364186d715094b952f95d2dbedfaa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5127086604662698707, guid: 42c364186d715094b952f95d2dbedfaa, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 5127086604662698707, guid: 42c364186d715094b952f95d2dbedfaa, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 5127086604662698707, guid: 42c364186d715094b952f95d2dbedfaa, type: 3}
+      propertyPath: m_Color.r
+      value: 0.54509807
       objectReference: {fileID: 0}
     - target: {fileID: 9128397467690038221, guid: 42c364186d715094b952f95d2dbedfaa, type: 3}
       propertyPath: PlayerCheckDistance

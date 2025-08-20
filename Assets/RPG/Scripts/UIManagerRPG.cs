@@ -25,13 +25,14 @@ public class UIManagerRPG : MonoBehaviour
     [Header("Image Cutscenes")]
     public Sprite[] cutsceneImages;
     [Header("Level Announcer Elements")]
-    public GameObject levelAnnouncerObject;
+    public Mover levelAnnouncerObject;
     public Transform endTransform;
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI worldNumberText;
     public string levelSceneName = "Level1";
     [Header("Menu Elements")]
-    public GameObject settingsMenu;
+    public Mover settingsMenu;
+    public GameObject options;
 
     void Awake()
     {
@@ -111,7 +112,7 @@ public class UIManagerRPG : MonoBehaviour
     }
     public void AnnounceLevel(string levelName, int worldNumber, string scene = "")
     {
-        Mover.instance.AssignNewWaypointsAndMoveObject(levelAnnouncerObject.GetComponent<RectTransform>(), new Vector2[] { new Vector2(-400, 0) }, 700f, false);
+        levelAnnouncerObject.AssignNewWaypointsAndMoveObject(new Vector2[] { new Vector2(-400, 0) }, 700f, false);
         levelSceneName = scene;
 
         levelText.text = levelName;
@@ -119,11 +120,16 @@ public class UIManagerRPG : MonoBehaviour
     }
     public void HideLevelAnnouncer()
     {
-        Mover.instance.AssignNewWaypointsAndMoveObject(levelAnnouncerObject.GetComponent<RectTransform>(), new Vector2[] { new Vector2(400, 0) }, 700f, false);
+        levelAnnouncerObject.AssignNewWaypointsAndMoveObject(new Vector2[] { new Vector2(400, 0) }, 700f, false);
     }
     public void LoadNewLevel()
     {
         GameManager.instance.LoadNewSceneReal(2, levelSceneName);
         GameManagerRPG.instance.playerpg.isMovable = false;
+    }
+    public void LoadOptionsMenu()
+    {
+        options.SetActive(!options.activeSelf);
+        settingsMenu.gameObject.SetActive(!options.activeSelf);
     }
 }

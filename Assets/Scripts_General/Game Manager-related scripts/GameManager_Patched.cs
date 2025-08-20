@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour
@@ -69,7 +70,10 @@ public class GameManager : MonoBehaviour
     public int DialogueProgression = 0;
     [Header("Settings for Game")]
     public bool noMusic = false;
+    public Slider musicSlider;
+    public Slider soundEffectSlider;
     public float musicVolume = 1f;
+    public float soundEffectVolume = 1f;
 
     void Awake()
     {
@@ -98,7 +102,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+
         if (startSpawnBool && !isDonewithPlatforming && startSpawnRPG != null && DialogueProgression == 0)
         {
             outsideDoorSpawnObject = startSpawnRPG.transform.position;
@@ -111,7 +115,7 @@ public class GameManager : MonoBehaviour
             isDonewithPlatforming = false;
         }
         Camera.main.GetComponent<AudioSource>().volume = musicVolume;
-        
+
 
 
         iswalkingdoor = false;
@@ -119,7 +123,7 @@ public class GameManager : MonoBehaviour
 
     public bool FruitsAreRandom() => FruitsRandom;
 
-    
+
 
     public void NewPlayeronTheBlock(player newPlayerScript)
     {
@@ -175,7 +179,7 @@ public class GameManager : MonoBehaviour
         dialogueVault = FindFirstObjectByType<DialogueVault>();
     }
 
-    
+
 
     public void CreateNewObjectReal(GameObject go, Transform position, float delay = 0)
     {
@@ -201,8 +205,8 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
 
-   public void StartRevertingSoundClips(AudioClip clip, AudioSource source = null) => StartCoroutine(RevertOriginalSoundClip(clip, source));
-   public IEnumerator RevertOriginalSoundClip(AudioClip clip, AudioSource source = null)
+    public void StartRevertingSoundClips(AudioClip clip, AudioSource source = null) => StartCoroutine(RevertOriginalSoundClip(clip, source));
+    public IEnumerator RevertOriginalSoundClip(AudioClip clip, AudioSource source = null)
     {
         if (source == null)
         {
@@ -223,5 +227,14 @@ public class GameManager : MonoBehaviour
         source.Play();
 
     }
-    
+    public void ChangeMusicVolume()
+    {
+        musicVolume = musicSlider.value;
+    }
+
+    public void ChangeSoundEffectVolume()
+    {
+        soundEffectVolume = soundEffectSlider.value;
+    }
+
 }

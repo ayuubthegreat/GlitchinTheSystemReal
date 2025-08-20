@@ -30,6 +30,7 @@ public class GameManagerRPG : MonoBehaviour
     public float moveSpeed = 5f;
     public bool iswalkingdoor = false;
     public bool movingAutonomously = false;
+    public bool isPaused = false;
 
 
     void Awake()
@@ -71,17 +72,18 @@ public class GameManagerRPG : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        source.volume = GameManager.instance.musicVolume;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Time.timeScale = Time.timeScale == 0 ? 1 : 0; // Toggle pause
-            UIManagerRPG.instance.settingsMenu.SetActive(!UIManagerRPG.instance.settingsMenu.activeSelf);
+            if (UIManagerRPG.instance.options.activeSelf) return;
+            MainMenu();
         }
         if (main.orthographicSize != targetSize)
         {
             main.orthographicSize = Mathf.Lerp(main.orthographicSize, targetSize, Time.deltaTime * cameraSpeed);
         }
 
-        source.volume = audioSourceVolume;
+        
         if (decreaseVolume)
         {
             GradualVolumeDecrease();
@@ -105,7 +107,7 @@ public class GameManagerRPG : MonoBehaviour
         {
             return;
         }
-        audioSourceVolume = Mathf.MoveTowards(audioSourceVolume, 0f, fadeSpeed * Time.deltaTime);
+        source.volume = Mathf.MoveTowards(GameManager.instance.musicVolume, 0f, fadeSpeed * Time.deltaTime);
         if (audioSourceVolume <= 0)
         {
             audioSourceVolume = 0;
@@ -119,10 +121,10 @@ public class GameManagerRPG : MonoBehaviour
         {
             return;
         }
-        audioSourceVolume = Mathf.MoveTowards(audioSourceVolume, 1f, fadeSpeed * Time.deltaTime);
-        if (audioSourceVolume >= GameManager.instance.musicVolume)
+        source.volume = Mathf.MoveTowards(source.volume, 1f, fadeSpeed * Time.deltaTime);
+        if (source.volume >= GameManager.instance.musicVolume)
         {
-            audioSourceVolume = GameManager.instance.musicVolume;
+            source.volume = GameManager.instance.musicVolume;
             increaseVolume = false;
             return;
         }
@@ -166,5 +168,14 @@ public class GameManagerRPG : MonoBehaviour
             yield return null;
         }
         main.transform.position = targetPosition;
+    }
+    public void MainMenu()
+    {
+        isPaused = !isPaused;
+            Vector3 pos = UIManagerRPG.instance.settingsMenu.transform.position;
+            pos.x = !isPaused ? 0f : UIManagerRPG.instance.settingsMenu.originalPosition.x;
+            UIManagerRPG.instance.settingsMenu.transform.position = pos;
+            UIManagerRPG.instance.settingsMenu.AssignNewWaypointsAndMoveObject(new Vector2[] { new Vector2(isPaused ? 400f : -400f, 0) }, 700f, false);
+            Time.timeScale = Time.timeScale == 1 ? 0 : 1;
     }
 }
