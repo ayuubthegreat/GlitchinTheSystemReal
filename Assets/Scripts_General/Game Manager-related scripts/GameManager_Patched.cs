@@ -196,7 +196,6 @@ public class GameManager : MonoBehaviour
     }
 
     public IEnumerator LoadNewScene(int seconds, string scene)
-
     {
         yield return new WaitForSeconds(seconds);
         SceneManager.LoadScene(scene);

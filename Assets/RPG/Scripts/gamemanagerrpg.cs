@@ -71,6 +71,11 @@ public class GameManagerRPG : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = Time.timeScale == 0 ? 1 : 0; // Toggle pause
+            UIManagerRPG.instance.settingsMenu.SetActive(!UIManagerRPG.instance.settingsMenu.activeSelf);
+        }
         if (main.orthographicSize != targetSize)
         {
             main.orthographicSize = Mathf.Lerp(main.orthographicSize, targetSize, Time.deltaTime * cameraSpeed);
