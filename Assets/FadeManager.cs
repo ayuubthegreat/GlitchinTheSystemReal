@@ -44,7 +44,7 @@ public class FadeManager : MonoBehaviour
     {
         if (fadeImage.color != targetColor && fading)
         {
-            fadeImage.color = Color.Lerp(fadeImage.color, targetColor, Time.deltaTime / fadeSpeed);
+            fadeImage.color = Color.Lerp(fadeImage.color, targetColor, Time.unscaledDeltaTime / fadeSpeed);
             targetAlpha = fadeImage.color.a;
         }
         else
@@ -99,7 +99,7 @@ public class FadeManager : MonoBehaviour
         fadeSpeed = speed;
 
         Fader(false);
-        yield return new WaitForSeconds(fadeDuration);
+        yield return new WaitForSecondsRealtime(fadeDuration);
         if (desiredFunction != null)
         {
             Debug.Log("Invoking desired function after fade out."); 
