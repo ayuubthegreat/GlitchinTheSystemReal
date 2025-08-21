@@ -71,6 +71,7 @@ public class buttonLoad : MonoBehaviour
                 HandlePhoneInteraction();
                 break;
             case ButtonType.SceneLoader:
+            Camera.main.GetComponent<AudioSource>().Stop();
              FadeManager.instance.StartFading(2f, .1f, true, sceneName);
                 break;
             case ButtonType.Settings:
