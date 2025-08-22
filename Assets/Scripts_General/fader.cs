@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class FadeManager : MonoBehaviour
+public class fader : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public static FadeManager instance;
+    public static fader instance;
     public bool fadeInOnStart = true;
     public bool fading = false;
     public Image fadeImage;
