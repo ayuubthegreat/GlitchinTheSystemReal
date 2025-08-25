@@ -157,12 +157,12 @@ public class DialogueProcessor : MonoBehaviour
                 npc.StartMovingNPC(0, 50f, new Vector2[] { new Vector2(0f, npc.playerPosition.y - npc.transform.position.y - 5f), new Vector2(npc.playerPosition.x - npc.transform.position.x, 0f) }, FranticTeenagerDialogue1);
                 break;
             case 4:
-                FadeManager.instance.Fader(false, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
+                fader.instance.Fader(false, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
                 DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 5, 10, 2f);
                 UIManagerRPG.instance.phone.SetActive(false);
                 break;
             case 5:
-                FadeManager.instance.Fader(true, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
+                fader.instance.Fader(true, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
                 DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 11, 20, 3f);
                 break;
             case 6:

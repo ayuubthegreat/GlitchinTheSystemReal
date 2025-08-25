@@ -194,7 +194,7 @@ public class UIManager : MonoBehaviour
             GameManager.instance.startSpawnBoolPlatforming = true;
         }
         yield return new WaitForSeconds(duration);
-        FadeManager.instance.StartFading(3f, .1f, true, deathScene);
+       fader.instance.StartFading(3f, .1f, true, deathScene);
     }
     public void SetStartBool()
     {

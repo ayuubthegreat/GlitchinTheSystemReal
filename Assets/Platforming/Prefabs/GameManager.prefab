@@ -217,7 +217,10 @@ MonoBehaviour:
   RPGTimes: 0
   DialogueProgression: 2
   noMusic: 0
+  musicSlider: {fileID: 0}
+  soundEffectSlider: {fileID: 0}
   musicVolume: 1
+  soundEffectVolume: 1
 --- !u!114 &103523432012286817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,14 +484,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2805028177673404513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5818f60aaddf524ebc4013fdabc4233, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f71638ca4d1c4b50a446f048d5cf6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fadeInOnStart: 1
   fading: 0
-  fadeImage: {fileID: 3599244656631469756}
+  fadeImage: {fileID: 0}
   fadeDuration: 1
-  fadeSpeed: 0.1
+  fadeSpeed: 3
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   loadScene: 0
   sceneName: 

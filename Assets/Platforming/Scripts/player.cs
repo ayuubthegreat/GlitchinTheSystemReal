@@ -481,7 +481,7 @@ public class player : MonoBehaviour
         
         whoosh = true;
         yield return new WaitForSeconds(1f);
-        FadeManager.instance.StartFading(3.5f, .1f);
+        fader.instance.StartFading(3.5f, .1f);
         this.gameObject.SetActive(false);
         
 
