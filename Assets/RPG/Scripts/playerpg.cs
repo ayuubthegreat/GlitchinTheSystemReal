@@ -9,6 +9,7 @@ public class playerpg : MonoBehaviour
 {
     public Rigidbody2D rb;
     public SceneManager sm;
+    public AnimationClip originalIdleClip;
     public float xInput;
     public float yInput;
     public bool isMovable = true;
@@ -17,7 +18,7 @@ public class playerpg : MonoBehaviour
     public bool isFacingForwards;
     public bool isFacingBehind;
     public bool facingLeft;
-    public int startingPose;
+    public int startingPose; // 0: Default, 1: Facing Right, 2: Facing Left, 3: Facing Up, 4: Facing Down
 
     
     [SerializeField] private float moveSpeed;

@@ -958,6 +958,7 @@ GameObject:
   - component: {fileID: 112697944}
   - component: {fileID: 112697943}
   - component: {fileID: 112697942}
+  - component: {fileID: 112697946}
   m_Layer: 0
   m_Name: FranticTeenager
   m_TagString: FranticTeenager
@@ -1008,8 +1009,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -825955607
   m_SortingLayer: 8
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -4209461767521648114, guid: 0bac453b565d344a99fe7ba450083c4f, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 6607746636732751730, guid: 46a55d37e34fbd9499693881e2ff82bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1056,19 +1057,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 112697941}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93362aefac508dd4cad93cc24d61954c, type: 3}
+  m_Script: {fileID: 11500000, guid: b5ae30de1aff8ea41a64f02aa56b3fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   npcAnimator: {fileID: 0}
-  npcWaypoints:
-  - {x: 10, y: 0}
-  - {x: 10, y: 20}
-  - {x: 10, y: 90}
-  npcSpeed: 20
-  waypointIndex: 0
+  npcWaypoints: []
+  npcSpeed: 2
+  waypointIndex: 1
   npcDetector: {fileID: 0}
   npcRigidbody: {fileID: 112697943}
   playerPosition: {x: 0, y: 0}
+  xVelocity: 0
+  yVelocity: 0
+  facingDir: 0
 --- !u!4 &112697945
 Transform:
   m_ObjectHideFlags: 0
@@ -1084,6 +1085,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &112697946
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112697941}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9c30f909b0aeff945b8d1a4bd6cb33b4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!224 &138134294 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 449072289556124539, guid: 9cdc13aba0c8a4afba2449cd5aef071b, type: 3}
@@ -2939,7 +2962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &604447122
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3138,7 +3161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.324875, y: 0.13023438}
   m_AnchorMax: {x: 0.8973125, y: 0.73762506}
-  m_AnchoredPosition: {x: 3.6625671, y: -12.721985}
+  m_AnchoredPosition: {x: 3.6625671, y: -12.721924}
   m_SizeDelta: {x: 17.003399, y: 12.8353}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &671600773
@@ -8669,7 +8692,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.76, y: 6.77}
+    oldSize: {x: 4.87, y: 6.42}
     newSize: {x: 4.87, y: 6.42}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -8690,6 +8713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  originalIdleClip: {fileID: 0}
   xInput: 0
   yInput: 0
   isMovable: 1

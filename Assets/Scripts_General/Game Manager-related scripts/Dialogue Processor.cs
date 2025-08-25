@@ -141,7 +141,12 @@ public class DialogueProcessor : MonoBehaviour
     }
 
 
-    public void FranticTeenagerDialogue1() => DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 0, 4, .3f);
+    public void FranticTeenagerDialogue1()
+    {
+        franticTeenager.FacePlayer();
+        DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 0, 4, .3f);
+    }
+
     public void ConversationManager(NPC npc = null)
     {
         person1turn = true;
@@ -154,7 +159,7 @@ public class DialogueProcessor : MonoBehaviour
             case 3:
                 GameManagerRPG.instance.CameraZoom(10f, 10f);
                 Debug.Log("NPC Position: " + npc.transform.position + " Player Position: " + GameManagerRPG.instance.playerpg.transform.position);
-                npc.StartMovingNPC(0, 50f, new Vector2[] { new Vector2(0f, npc.playerPosition.y - npc.transform.position.y - 5f), new Vector2(npc.playerPosition.x - npc.transform.position.x, 0f) }, FranticTeenagerDialogue1);
+                npc.StartMovingNPC(0, 20f, new Vector2[] { new Vector2(0f, npc.playerPosition.y - npc.transform.position.y - 5f), new Vector2(npc.playerPosition.x - npc.transform.position.x, 0f) }, FranticTeenagerDialogue1);
                 break;
             case 4:
                 fader.instance.Fader(false, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
