@@ -179,6 +179,7 @@ public class DialogueProcessor : MonoBehaviour
                 DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 28, -1, 3f);
                 break;
             case 8:
+                franticTeenager.facingDir = 0;
                 franticTeenager.StartMovingNPC(0, 30f, new Vector2[] { new Vector2(-30, 0) }, BeginAutonomousExploration);
                 break;
             default:

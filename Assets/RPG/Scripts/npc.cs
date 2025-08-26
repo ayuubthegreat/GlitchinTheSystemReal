@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-
+[RequireComponent(typeof(Animator), typeof(SpriteRenderer))]
 public class NPC : MonoBehaviour
 {
     public static NPC instance;
@@ -10,12 +10,13 @@ public class NPC : MonoBehaviour
     public Vector2[] npcWaypoints;
     public float npcSpeed = 2.0f;
     public int waypointIndex = 1;
-    public Collider2D npcDetector;
+    public Collider2D playerDetector;
     public Rigidbody2D npcRigidbody;
     public Vector2 playerPosition;
     public float xVelocity;
     public float yVelocity;
     public int facingDir = 0; // 0: Default, 1: Right, 2: Left, 3: Up, 4: Down
+    public SpriteRenderer sr;
 
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class NPC : MonoBehaviour
     {
         npcAnimator = GetComponent<Animator>();
         npcRigidbody = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
     public void Update()
     {
@@ -101,6 +103,14 @@ public class NPC : MonoBehaviour
             GameManagerRPG.instance.playerpg.startingPose = 3;
         }
         npcAnimator.SetInteger("facingDir", facingDir);
+    }
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        changeSortingLayer csl = other.GetComponent<changeSortingLayer>();
+        if (csl != null)
+        {
+            sr.sortingLayerName = csl.originalSortingLayer;
+        }
     }
 
 }
