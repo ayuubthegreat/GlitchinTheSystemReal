@@ -143,8 +143,7 @@ public class DialogueProcessor : MonoBehaviour
 
     public void FranticTeenagerDialogue1()
     {
-        franticTeenager.FacePlayer();
-        DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 0, 4, .3f);
+        DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 0, 4, .3f, franticTeenager);
     }
 
     public void ConversationManager(NPC npc = null)
@@ -162,12 +161,16 @@ public class DialogueProcessor : MonoBehaviour
                 npc.StartMovingNPC(0, 20f, new Vector2[] { new Vector2(0f, npc.playerPosition.y - npc.transform.position.y - 5f), new Vector2(npc.playerPosition.x - npc.transform.position.x, 0f) }, FranticTeenagerDialogue1);
                 break;
             case 4:
-                fader.instance.Fader(false, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
+                fader.instance.Fader(false, UIManagerRPG.instance.cutsceneImageBackgrounds[0], UIManagerRPG.instance.cutsceneImageObject);
+                UIManagerRPG.instance.cutsceneObjects[0].gameObject.SetActive(true);
+                UIManagerRPG.instance.cutsceneObjects[1].gameObject.SetActive(true);
+                UIManagerRPG.instance.cutsceneObjects[0].ChangeLocationPositionandSprite(default, UIManagerRPG.instance.cutsceneAnimators[0], null, 1f, "Frantic Teenager");
+                UIManagerRPG.instance.cutsceneObjects[1].ChangeLocationPositionandSprite(default, UIManagerRPG.instance.cutsceneAnimators[1], null, 1f, "Mr. Charles");
                 DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 5, 10, 2f);
                 UIManagerRPG.instance.phone.SetActive(false);
                 break;
             case 5:
-                fader.instance.Fader(true, UIManagerRPG.instance.cutsceneImages[0], UIManagerRPG.instance.cutsceneImageObject);
+                fader.instance.Fader(true, UIManagerRPG.instance.cutsceneImageBackgrounds[0], UIManagerRPG.instance.cutsceneImageObject);
                 DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 11, 20, 3f);
                 break;
             case 6:

@@ -75,6 +75,10 @@ public class fader : MonoBehaviour
         {
             faderImage = GetComponent<Image>();
         }
+        if (imageSprite != null)
+        {
+            faderImage.sprite = imageSprite;
+        }
         fadeImage = faderImage;
         bool isOriginalImage = fadeImage == GetComponent<Image>();
         if (isOriginalImage)
@@ -116,7 +120,5 @@ public class fader : MonoBehaviour
         }
         Debug.Log("Fading started with duration: " + duration + ", speed: " + speed + ", loadScene: " + loadScene + ", sceneName: " + sceneName);
         StartCoroutine(instance.Fading(duration, speed, loadScene, sceneName, desiredFunction));
-
-
     }
 }

@@ -2,11 +2,14 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEditor.Animations;
 
 public class UIManagerRPG : MonoBehaviour
 {
     public static UIManagerRPG instance;
     public PlayerPhonePhysical playerPhone;
+    public dialogueObject[] cutsceneObjects;
+    public AnimatorOverrideController[] cutsceneAnimators;
     [Header("RPG Text Related Objects")]
     public GameObject rpgTextObject;
     public GameObject personNameObject;
@@ -23,7 +26,7 @@ public class UIManagerRPG : MonoBehaviour
     public float announcementSpeed = 5f;
     public string locationName = "Abdurahman's House";
     [Header("Image Cutscenes")]
-    public Sprite[] cutsceneImages;
+    public Sprite[] cutsceneImageBackgrounds;
     [Header("Level Announcer Elements")]
     public Mover levelAnnouncerObject;
     public Transform endTransform;
