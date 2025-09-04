@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yusuf\\Downloads\\GitS\\GlitchinTheSystemReal\\Assets\\Assembly-CSharp.csproj": {}
+    "C:\\Users\\yusuf\\Documents\\GlitchinTheSystemReal\\Assets\\Assembly-CSharp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yusuf\\Downloads\\GitS\\GlitchinTheSystemReal\\Assets\\Assembly-CSharp.csproj": {
+    "C:\\Users\\yusuf\\Documents\\GlitchinTheSystemReal\\Assets\\Assembly-CSharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yusuf\\Downloads\\GitS\\GlitchinTheSystemReal\\Assets\\Assembly-CSharp.csproj",
+        "projectUniqueName": "C:\\Users\\yusuf\\Documents\\GlitchinTheSystemReal\\Assets\\Assembly-CSharp.csproj",
         "projectName": "Assembly-CSharp",
-        "projectPath": "C:\\Users\\yusuf\\Downloads\\GitS\\GlitchinTheSystemReal\\Assets\\Assembly-CSharp.csproj",
+        "projectPath": "C:\\Users\\yusuf\\Documents\\GlitchinTheSystemReal\\Assets\\Assembly-CSharp.csproj",
         "packagesPath": "C:\\Users\\yusuf\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yusuf\\Downloads\\GitS\\GlitchinTheSystemReal\\Assets\\Temp\\obj\\Assembly-CSharp\\",
+        "outputPath": "C:\\Users\\yusuf\\Documents\\GlitchinTheSystemReal\\Assets\\Temp\\obj\\Assembly-CSharp\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\yusuf\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\yusuf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
