@@ -9,6 +9,7 @@ public class playerpg : MonoBehaviour
 {
     public Rigidbody2D rb;
     public SceneManager sm;
+    public AnimationClip originalIdleClip;
     public float xInput;
     public float yInput;
     public bool isMovable = true;
@@ -17,9 +18,11 @@ public class playerpg : MonoBehaviour
     public bool isFacingForwards;
     public bool isFacingBehind;
     public bool facingLeft;
-    public int startingPose;
+    public int startingPose; // 0: Default, 1: Facing Right, 2: Facing Left, 3: Facing Up, 4: Facing Down
+    public Transform npcLayerSwitcher;
+    public float npcDetectionRadius = 0.1f;
+    public Collider2D npcLayerCollider;
 
-    
     [SerializeField] private float moveSpeed;
     [SerializeField] private float ymoveSpeed;
     [SerializeField] private float wallCheckDistance;
@@ -27,10 +30,11 @@ public class playerpg : MonoBehaviour
     [SerializeField] public int facingDir = 1;
     private bool isTouchingWall;
 
-void Awake() {
+    void Awake()
+    {
 
-} 
-    
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,15 +46,15 @@ void Awake() {
             GameManagerRPG.instance.playerpg = gameObject.GetComponent<playerpg>();
         }
         transform.position = GameManagerRPG.instance.spawnObject;
-        
-        
-        
+
+
+
 
         if (startingPose == 3)
         {
             transform.Rotate(0, 180, 0);
         }
-        
+
 
     }
 
@@ -82,10 +86,10 @@ void Awake() {
             startingPose = 0;
         }
 
-        
+
 
         anim.SetInteger("PoseNum", startingPose);
-        
+
 
         isFacingBehind = (yInput < 0) && isMovable;
         isTurningLeft = (xInput != 0) && isMovable;
@@ -107,10 +111,12 @@ void Awake() {
             transform.Rotate(0, 0, 0);
         }
 
-        
+
     }
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + (wallCheckDistance * facingDir), transform.position.y) );
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + (wallCheckDistance * facingDir), transform.position.y));
     }
+    
+    
 }

@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
     #region Values and Variables
     public static DialogueManager instance;
     public DialogueVault.DialogueSet[] currentDialogueSet;
+    public NPC currentNPC;
     public TextMeshProUGUI rpgText;
     public TextMeshProUGUI personName;
     public TextMeshProUGUI yesButtonText;
@@ -52,6 +53,13 @@ public class DialogueManager : MonoBehaviour
         }
 
     }
+    void OnEnable()
+    {
+        if (dialogueIndex > 0)
+        {
+            StartCoroutine(dialogueRunner(currentDialogueSet[dialogueIndex].dialogueLine, currentDialogueSet[dialogueIndex].characterName));
+        }
+    }
     void Update()
     {
 
@@ -59,6 +67,10 @@ public class DialogueManager : MonoBehaviour
     #region Dialogue Functions
     public IEnumerator dialogueRunner(string sentence, string speaker = "")
     {
+        if (currentNPC != null)
+        {
+            currentNPC.isInDialogue = true;
+        }
         rpgText.text = string.Empty;
         personName.text = speaker;
 
@@ -68,10 +80,20 @@ public class DialogueManager : MonoBehaviour
             brokenSentence = string.Empty;
         }
         isDialogueActive = true;
+        if (!dialogueBox.activeSelf)
+        {
+            Debug.LogWarning("The dialogue box is not active in the hierarchy. Cannot start dialogue.");
+            isDialogueActive = false;
+            yield break;
+        }
         int i = 0;
 
         while (i < sentence.Length && i < dialogueBounds)
         {
+            if (!isDialogueActive)
+            {
+                yield break;
+            }
             GameManagerRPG.instance.soundEffectSource.PlayOneShot(GameManagerRPG.instance.dialogueBlips[0]);
             nextButton.interactable = false;
             rpgText.text = sentence[..i];
@@ -124,20 +146,21 @@ public class DialogueManager : MonoBehaviour
                 return false;
         }
     }
-    public void StartDialogueTexts(DialogueVault.DialogueSet[] dialogueSets, int start, int end = -1, float duration = 0f)
+    public void StartDialogueTexts(DialogueVault.DialogueSet[] dialogueSets, int start, int end = -1, float duration = 0f, NPC npc = null, int[] choiceIndices = null)
     {
         StopAllCoroutines();
-        StartCoroutine(DialogueTexts(dialogueSets, start, end, duration));
+        StartCoroutine(DialogueTexts(dialogueSets, start, end, duration, npc, choiceIndices));
     }
-    public IEnumerator DialogueTexts(DialogueVault.DialogueSet[] dialogueSets, int start, int end = -1, float duration = 0f)
+    public IEnumerator DialogueTexts(DialogueVault.DialogueSet[] dialogueSets, int start, int end = -1, float duration = 0f, NPC npc = null, int[] choiceIndices = null)
     {
         if (end == -1)
         {
             end = dialogueSets.Length - 1;
         }
-        
+
         dialogueLines = new string[end - start + 1];
         speakerNames = new string[end - start + 1];
+        
         for (int i = start; i <= end; i++)
         {
             dialogueLines[i - start] = dialogueSets[i].dialogueLine;
@@ -148,21 +171,22 @@ public class DialogueManager : MonoBehaviour
         dialogueIndex = 0;
         currentDialogueSet = dialogueSets;
         yield return new WaitForSeconds(duration);
+        if (npc != null)
+        {
+            currentNPC = npc;
+            currentNPC.FacePlayer();
+        }
         GameManagerRPG.instance.isCutsceneActive = true;
         dialogueBox.SetActive(true);
         personNameBox.SetActive(true);
         personName.text = currentDialogueSet[dialogueIndex].characterName;
         StartCoroutine(dialogueRunner(dialogueLines[dialogueIndex], speakerNames[dialogueIndex]));
+        
     }
     public void UpdateDialogueText()
     {
         if (dialogueIndex < dialogueLines.Length)
         {
-            if (currentDialogueSet[dialogueIndex].dialogueAction != null)
-            {
-                Debug.Log("Executing dialogue action for index: " + dialogueIndex);
-                currentDialogueSet[dialogueIndex].dialogueAction.Invoke();
-            }
             if (brokenSentence == string.Empty)
             {
                 dialogueIndex++;
@@ -172,11 +196,18 @@ public class DialogueManager : MonoBehaviour
                     return;
                 }
                 personName.text = currentDialogueSet[dialogueIndex].characterName;
+                DialogueProcessor.instance.StartIDP();
 
                 if (DialogueProcessor.instance.isConversationActive)
                 {
-                    DialogueProcessor.instance.person1turn = currentDialogueSet[dialogueIndex].characterName == "Abdurahman";
-                    DialogueProcessor.instance.person2turn = dialogueIndex % 2 == 0 && currentDialogueSet[dialogueIndex].characterName != "Narrator";
+                    if (currentDialogueSet[dialogueIndex].characterName == "Narrator")
+                    {
+                        DialogueProcessor.instance.person1turn = false;
+                        DialogueProcessor.instance.person2turn = false;
+                    }
+                    DialogueProcessor.instance.person1turn = !DialogueProcessor.instance.person1turn;
+                    DialogueProcessor.instance.person2turn = !DialogueProcessor.instance.person2turn;
+
                 }
             }
         }
@@ -191,6 +222,12 @@ public class DialogueManager : MonoBehaviour
             GameManagerRPG.instance.isCutsceneActive = false;
             GameManagerRPG.instance.playerpg.isMovable = true;
             DialogueProcessor.instance.isConversationActive = false;
+            if (currentNPC != null)
+            {
+                currentNPC.isInDialogue = false;
+                currentNPC.facingDir = 0;
+                currentNPC = null;
+            }
             UIManagerRPG.instance.ControlRPGUIElements(false);
             dialogueLines = new string[0];
             isDialogueActive = false;

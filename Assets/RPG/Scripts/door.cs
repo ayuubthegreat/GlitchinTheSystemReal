@@ -71,7 +71,7 @@ public class door : MonoBehaviour
     public IEnumerator LoadandRespawnPlayer()
     {
         canTeleport = false;
-        FadeManager.instance.StartFading(seconds2Wait, .1f, false);
+        fader.instance.StartFading(seconds2Wait, .1f, false);
         GameManager.instance.iswalkingdoor = GetComponentInChildren<doorSpawner>() ? true : false;
 
         yield return new WaitForSeconds(seconds2Wait);

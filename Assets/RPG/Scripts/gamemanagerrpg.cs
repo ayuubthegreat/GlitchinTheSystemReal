@@ -1,8 +1,11 @@
 using System.Collections;
+using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class GameManagerRPG : MonoBehaviour
 {
+    public CutsceneAssembler[] cutsceneAssemblers;
     public static GameManagerRPG instance;
     public AudioSource soundEffectSource;
     public Camera main;
@@ -31,7 +34,16 @@ public class GameManagerRPG : MonoBehaviour
     public bool iswalkingdoor = false;
     public bool movingAutonomously = false;
     public bool isPaused = false;
-
+    [System.Serializable]
+    public struct CutsceneAssembler
+    {
+        public AnimatorController[] headAnims;
+        public AnimatorController[] bodyAnims;
+        public Vector3[] cutsceneObjectPositions;
+        public float[] cutsceneObjectSizes;
+        public string[] characterNames;
+        public object[] additionalData; // This array can accept multiple types
+    }
 
     void Awake()
     {
@@ -83,7 +95,7 @@ public class GameManagerRPG : MonoBehaviour
             main.orthographicSize = Mathf.Lerp(main.orthographicSize, targetSize, Time.deltaTime * cameraSpeed);
         }
 
-        
+
         if (decreaseVolume)
         {
             GradualVolumeDecrease();
@@ -172,10 +184,11 @@ public class GameManagerRPG : MonoBehaviour
     public void MainMenu()
     {
         isPaused = !isPaused;
-            Vector3 pos = UIManagerRPG.instance.settingsMenu.transform.position;
-            pos.x = !isPaused ? 0f : UIManagerRPG.instance.settingsMenu.originalPosition.x;
-            UIManagerRPG.instance.settingsMenu.transform.position = pos;
-            UIManagerRPG.instance.settingsMenu.AssignNewWaypointsAndMoveObject(new Vector2[] { new Vector2(isPaused ? 400f : -400f, 0) }, 700f, false);
-            Time.timeScale = Time.timeScale == 1 ? 0 : 1;
+        Vector3 pos = UIManagerRPG.instance.settingsMenu.transform.position;
+        pos.x = !isPaused ? 0f : UIManagerRPG.instance.settingsMenu.originalPosition.x;
+        UIManagerRPG.instance.settingsMenu.transform.position = pos;
+        UIManagerRPG.instance.settingsMenu.AssignNewWaypointsAndMoveObject(new Vector2[] { new Vector2(isPaused ? 400f : -400f, 0) }, 700f, false);
+        Time.timeScale = Time.timeScale == 1 ? 0 : 1;
     }
+    
 }
