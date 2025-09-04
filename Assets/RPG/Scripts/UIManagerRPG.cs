@@ -8,8 +8,9 @@ public class UIManagerRPG : MonoBehaviour
 {
     public static UIManagerRPG instance;
     public PlayerPhonePhysical playerPhone;
-    public dialogueObject[] cutsceneObjects;
-    public AnimatorOverrideController[] cutsceneAnimators;
+    [Header("Cutscene Related Objects")]
+    public GameObject cutsceneParent;
+    public GameObject cutsceneObjectPrefab;
     [Header("RPG Text Related Objects")]
     public GameObject rpgTextObject;
     public GameObject personNameObject;

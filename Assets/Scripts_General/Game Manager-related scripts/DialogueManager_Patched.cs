@@ -53,6 +53,13 @@ public class DialogueManager : MonoBehaviour
         }
 
     }
+    void OnEnable()
+    {
+        if (dialogueIndex > 0)
+        {
+            StartCoroutine(dialogueRunner(currentDialogueSet[dialogueIndex].dialogueLine, currentDialogueSet[dialogueIndex].characterName));
+        }
+    }
     void Update()
     {
 
@@ -73,10 +80,20 @@ public class DialogueManager : MonoBehaviour
             brokenSentence = string.Empty;
         }
         isDialogueActive = true;
+        if (!dialogueBox.activeSelf)
+        {
+            Debug.LogWarning("The dialogue box is not active in the hierarchy. Cannot start dialogue.");
+            isDialogueActive = false;
+            yield break;
+        }
         int i = 0;
 
         while (i < sentence.Length && i < dialogueBounds)
         {
+            if (!isDialogueActive)
+            {
+                yield break;
+            }
             GameManagerRPG.instance.soundEffectSource.PlayOneShot(GameManagerRPG.instance.dialogueBlips[0]);
             nextButton.interactable = false;
             rpgText.text = sentence[..i];
@@ -129,12 +146,12 @@ public class DialogueManager : MonoBehaviour
                 return false;
         }
     }
-    public void StartDialogueTexts(DialogueVault.DialogueSet[] dialogueSets, int start, int end = -1, float duration = 0f, NPC npc = null)
+    public void StartDialogueTexts(DialogueVault.DialogueSet[] dialogueSets, int start, int end = -1, float duration = 0f, NPC npc = null, int[] choiceIndices = null)
     {
         StopAllCoroutines();
-        StartCoroutine(DialogueTexts(dialogueSets, start, end, duration, npc));
+        StartCoroutine(DialogueTexts(dialogueSets, start, end, duration, npc, choiceIndices));
     }
-    public IEnumerator DialogueTexts(DialogueVault.DialogueSet[] dialogueSets, int start, int end = -1, float duration = 0f, NPC npc = null)
+    public IEnumerator DialogueTexts(DialogueVault.DialogueSet[] dialogueSets, int start, int end = -1, float duration = 0f, NPC npc = null, int[] choiceIndices = null)
     {
         if (end == -1)
         {
@@ -170,11 +187,6 @@ public class DialogueManager : MonoBehaviour
     {
         if (dialogueIndex < dialogueLines.Length)
         {
-            if (currentDialogueSet[dialogueIndex].dialogueAction != null)
-            {
-                Debug.Log("Executing dialogue action for index: " + dialogueIndex);
-                currentDialogueSet[dialogueIndex].dialogueAction.Invoke();
-            }
             if (brokenSentence == string.Empty)
             {
                 dialogueIndex++;
@@ -184,6 +196,7 @@ public class DialogueManager : MonoBehaviour
                     return;
                 }
                 personName.text = currentDialogueSet[dialogueIndex].characterName;
+                DialogueProcessor.instance.StartIDP();
 
                 if (DialogueProcessor.instance.isConversationActive)
                 {
@@ -194,6 +207,7 @@ public class DialogueManager : MonoBehaviour
                     }
                     DialogueProcessor.instance.person1turn = !DialogueProcessor.instance.person1turn;
                     DialogueProcessor.instance.person2turn = !DialogueProcessor.instance.person2turn;
+
                 }
             }
         }

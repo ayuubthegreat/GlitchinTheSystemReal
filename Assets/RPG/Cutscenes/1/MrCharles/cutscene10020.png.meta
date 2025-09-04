@@ -116,10 +116,10 @@ TextureImporter:
       name: cutscene10020_0
       rect:
         serializedVersion: 2
-        x: 2586
-        y: 1164
+        x: 2588
+        y: 1160
         width: 843
-        height: 896
+        height: 884
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

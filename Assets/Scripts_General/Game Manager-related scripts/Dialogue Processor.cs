@@ -2,11 +2,15 @@ using UnityEngine;
 using System;
 using System.Collections;
 using AOT;
+using Unity.VisualScripting;
 
 public class DialogueProcessor : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameManager gameManager;
+    public GameManagerRPG.CutsceneAssembler currentCutscene;
+    public Animator[] currentViableCutsceneAnimators;
+    public GameObject[] currentCutsceneObjects;
     public DialogueVault dialogueVault;
     public static DialogueProcessor instance;
     public NPC franticTeenager;
@@ -100,7 +104,7 @@ public class DialogueProcessor : MonoBehaviour
             case 8:
                 isConversationActive = true;
                 break;
-           
+
         }
         if (isConversationActive)
         {
@@ -162,10 +166,8 @@ public class DialogueProcessor : MonoBehaviour
                 break;
             case 4:
                 fader.instance.Fader(false, UIManagerRPG.instance.cutsceneImageBackgrounds[0], UIManagerRPG.instance.cutsceneImageObject);
-                UIManagerRPG.instance.cutsceneObjects[0].gameObject.SetActive(true);
-                UIManagerRPG.instance.cutsceneObjects[1].gameObject.SetActive(true);
-                UIManagerRPG.instance.cutsceneObjects[0].ChangeLocationPositionandSprite(default, UIManagerRPG.instance.cutsceneAnimators[0], null, 1f, "Frantic Teenager");
-                UIManagerRPG.instance.cutsceneObjects[1].ChangeLocationPositionandSprite(default, UIManagerRPG.instance.cutsceneAnimators[1], null, 1f, "Mr. Charles");
+                CutsceneManager(GameManagerRPG.instance.cutsceneAssemblers[0], StartIDP);
+                currentCutsceneObjects[4].GetComponent<dialogueObject>().bodyAnim.speed = 0f;
                 DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 5, 10, 2f);
                 UIManagerRPG.instance.phone.SetActive(false);
                 break;
@@ -196,6 +198,94 @@ public class DialogueProcessor : MonoBehaviour
         UIManagerRPG.instance.phone.SetActive(true);
         GameManagerRPG.instance.movingAutonomously = true;
         GameManagerRPG.instance.playerpg.isMovable = true;
+    }
+    public void StartIDP() => StartCoroutine(InternalDialogueProcessor());
+    public IEnumerator InternalDialogueProcessor()
+    {
+        switch (GameManager.instance.DialogueProgression)
+        {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                switch (DialogueManager.instance.dialogueIndex)
+                {
+                    case 1:
+                        
+                        currentViableCutsceneAnimators[1].SetTrigger("move");
+                        break;
+                    case 2:
+                        currentViableCutsceneAnimators[1].SetTrigger("moveBack");
+                        DialogueManager.instance.dialogueBox.SetActive(false);
+                        DialogueManager.instance.isDialogueActive = false;
+                        yield return new WaitForSeconds(1f);
+                        currentCutsceneObjects[0].transform.localPosition = new Vector3(900, 0, 0);
+                        currentCutsceneObjects[1].transform.localPosition = new Vector3(900, 0, 0);
+                        currentCutsceneObjects[2].transform.localPosition = new Vector3(0, 0, 0);
+                        currentCutsceneObjects[3].transform.localPosition = new Vector3(0, 88, 0);
+                        currentCutsceneObjects[4].transform.localPosition = new Vector3(-4, 79, 0);
+                        UIManagerRPG.instance.cutsceneImageObject.sprite = UIManagerRPG.instance.cutsceneImageBackgrounds[1];
+                        yield return new WaitForSeconds(2f);
+                        currentCutsceneObjects[4].GetComponent<dialogueObject>().bodyAnim.speed = 1f;
+                        break;
+                }
+                break;
+            case 5:
+
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+        }
+    }
+    public void CutsceneManager(GameManagerRPG.CutsceneAssembler cutscene, System.Action desiredFunction = null)
+    {
+        if (cutscene.cutsceneObjectSizes.Length < 0)
+        {
+            Debug.LogError("Invalid cutscene object number.");
+            return;
+        }
+        currentCutscene = cutscene;
+        currentCutsceneObjects = new GameObject[cutscene.cutsceneObjectSizes.Length];
+        currentViableCutsceneAnimators = new Animator[cutscene.cutsceneObjectSizes.Length * 2];
+        int i = 0;
+        while (i < cutscene.cutsceneObjectSizes.Length)
+        {
+            GameObject cutsceneObject = Instantiate(UIManagerRPG.instance.cutsceneObjectPrefab, UIManagerRPG.instance.cutsceneParent.transform);
+            if (cutscene.headAnims[i] == null)
+            {
+                cutsceneObject.GetComponent<dialogueObject>().headAnim.gameObject.SetActive(false);
+            }
+            else
+            {
+                cutsceneObject.GetComponent<dialogueObject>().headAnim.runtimeAnimatorController = cutscene.headAnims[i];
+                currentViableCutsceneAnimators[i] = cutsceneObject.GetComponent<dialogueObject>().headAnim;
+            }
+
+            cutsceneObject.transform.localPosition = cutscene.cutsceneObjectPositions[i];
+            if (cutscene.bodyAnims[i] == null)
+            {
+                cutsceneObject.GetComponent<dialogueObject>().bodyAnim.gameObject.SetActive(false);
+            }
+            else
+            {
+                cutsceneObject.GetComponent<dialogueObject>().bodyAnim.runtimeAnimatorController = cutscene.bodyAnims[i];
+                currentViableCutsceneAnimators[i + 1] = cutsceneObject.GetComponent<dialogueObject>().bodyAnim;
+            }
+            cutsceneObject.transform.localScale = Vector3.one * cutscene.cutsceneObjectSizes[i];
+            cutsceneObject.name = cutscene.characterNames[i];
+            currentCutsceneObjects[i] = cutsceneObject;
+            i++;
+            
+        }
+        
+        desiredFunction?.Invoke();
     }
 
 }

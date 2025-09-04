@@ -6,12 +6,6 @@ using UnityEngine.UI;
 public class dialogueObject : MonoBehaviour
 {
     public RectTransform rectTransform;
-    public AnimationClip headClip;
-    public AnimationClip bodyClip;
-    public Sprite headSprite;
-    public Sprite eyeSprite;
-    public Image headImage;
-    public Image eyeImage;
     public Animator headAnim;
     public Animator mouthAnim;
     public Animator bodyAnim;
