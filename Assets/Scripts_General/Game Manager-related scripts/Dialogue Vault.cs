@@ -160,15 +160,8 @@ public class DialogueVault : MonoBehaviour
         yield return new WaitForSeconds(1f);
         UIManagerRPG.instance.battleShortMenu.SetActive(false);
         Debug.Log("Attacking enemy with " + moveName + " for " + damageAmount + " damage!");
-        if (DialogueManager.instance != null)
-        {
-            DialogueManager.instance.StartDialogueTexts(dialogueForBattle[0], 3, 3);
-        }
-        else
-        {
-            Debug.LogWarning("DialogueManager instance is null. Cannot start battle dialogue.");
-        }
-
+        dialogueForBattle[0][3].dialogueLine = GameManagerRPG.instance.isPlayerTurn ? "You use " + moveName + "!" : enemyName + " uses " + moveName + "!";
+        DialogueManager.instance.StartDialogueTexts(dialogueForBattle[0], 3, 3);
         // Implement attack logic here
         yield return new WaitForSeconds(1f);
         GameManagerRPG.instance.SpriteFlicker(GameManagerRPG.instance.isPlayerTurn ? GameManagerRPG.instance.enemiesInBattle[0].GetComponent<Image>() : GameManagerRPG.instance.battleAlliesPrefab[0].GetComponent<Image>(), 10);
