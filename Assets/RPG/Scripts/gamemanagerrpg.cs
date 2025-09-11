@@ -37,7 +37,6 @@ public class GameManagerRPG : MonoBehaviour
     public bool iswalkingdoor = false;
     public bool movingAutonomously = false;
     public bool isInBattle = false;
-    public int dialogueProgression = 0;
     public bool isPaused = false;
     public int numberOfEnemies = 1;
     public int enemyHealth = 10;
@@ -51,6 +50,8 @@ public class GameManagerRPG : MonoBehaviour
     public GameObject[] moveButtons;
     public Move currentPlayerMove;
     public Move currentEnemyMove;
+    public int currentAllyIndex = 0;
+    public int currentEnemyIndex = 0;
     [System.Serializable]
     public struct CutsceneAssembler
     {
@@ -240,7 +241,7 @@ public class GameManagerRPG : MonoBehaviour
         battleAlliesPrefab[0].transform.localPosition = new Vector3(-429, -87, 0);
         enemiesInBattle[0].transform.localPosition = new Vector3(247, 200, 0);
         UIManagerRPG.instance.battleShortMenu.SetActive(true);
-        PartyManager.instance.UpdateMoveButtons(PartyManager.instance.partyMembers[0]);
+        PartyManager.instance.UpdateMoveButtons(PartyManager.instance.partyMembers[currentAllyIndex]);
 
         // Implement battle initiation logic here
     }
@@ -257,7 +258,7 @@ public class GameManagerRPG : MonoBehaviour
         DialogueVault.instance.enemyName = enemiesInBattle[0].GetComponent<battleStats>().isFallenMuslim ? "Fallen Muslim" : "Generic Enemy";
         DialogueVault.instance.isFallenMuslim = enemiesInBattle[0].GetComponent<battleStats>().isFallenMuslim;
 
-        DialogueManager.instance.StartDialogueTexts(DialogueVault.instance.dialogueForBattle[0], 0, 2, 0, null, true, 3);
+        DialogueManager.instance.StartDialogueTexts(DialogueVault.instance.dialogueForBattler[0], 0, 2, 0, null, true, 3);
     }
     public void CalculateRandomStatsofEnemy()
     {
@@ -265,6 +266,7 @@ public class GameManagerRPG : MonoBehaviour
         enemiesInBattle = new GameObject[numberOfEnemies];
         for (int i = 0; i < numberOfEnemies; i++)
         {
+            
             bool isFallenMuslim = Random.Range(0, 5) == 0; // 20% chance
             bool isGirlorBoy = Random.Range(0, 1) == 0; // 50% chance
             GameObject enemy = Instantiate(battleEnemyPrefab, UIManagerRPG.instance.cutsceneParent.transform);
@@ -277,6 +279,10 @@ public class GameManagerRPG : MonoBehaviour
 
             enemy.transform.localPosition = new Vector3(900, 0, 0);
             enemiesInBattle[i] = enemy;
+            if (i != 0)
+            {
+                enemy.SetActive(false);
+            }
         }
 
     }
@@ -291,7 +297,7 @@ public class GameManagerRPG : MonoBehaviour
         {
             if (i == moveNumber)
             {
-                Move moveToChange = PartyManager.instance.partyMembers[0].assignedMoves[i];
+                Move moveToChange = PartyManager.instance.partyMembers[currentEnemyIndex].assignedMoves[i];
                 switch (isPlayerTurn ? 0 : 1)
                 {
                     case 0:

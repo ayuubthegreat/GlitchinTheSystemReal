@@ -9,7 +9,7 @@ public class DialogueVault : MonoBehaviour
     public DialogueSet[][] dialogueSets;
     public DialogueSet[][] dialogueSetsYes;
     public DialogueSet[][] dialogueSetsNo;
-    public DialogueSet[][] dialogueForBattle;
+    public DialogueSet[][] dialogueForBattler;
     public string enemyName;
     public bool isFallenMuslim;
     public bool isGirlorBoy; // True for girl, false for boy
@@ -26,6 +26,18 @@ public class DialogueVault : MonoBehaviour
     void Awake()
     {
         instance = this;
+        dialogueForBattler = new DialogueSet[][]
+        {
+            new DialogueSet[]
+            {
+                new DialogueSet { dialogueLine = "An enemy appears!", characterName = "" },
+                new DialogueSet { dialogueLine = "They're a fallen Muslim! You might want to save them!", characterName = "" },
+                new DialogueSet { dialogueLine = "What shall you do?", characterName = "Narrator" },
+                new DialogueSet { dialogueLine = "", characterName = " " }, // This will be set dynamically during the battle
+                new DialogueSet {dialogueLine = "You faint........<Oh, well. At least you tried your best....."},
+                new DialogueSet{dialogueLine = "You win the battle!", characterName= ""},
+            },
+        };
         dialogueSets = new DialogueSet[][]
         {
             new DialogueSet[]
@@ -99,7 +111,7 @@ public class DialogueVault : MonoBehaviour
                 new DialogueSet{dialogueLine = "No problem. <Take 'em down, will you?", characterName = "Frantic Teenager"},
                 new DialogueSet{dialogueLine = "You got it. Bye!", characterName = "Abdurahman"},
                 new DialogueSet{dialogueLine = "Bye!", characterName = "Frantic Teenager"},
-            }
+            },
             // Homeless Man Dialogue
             
         };
@@ -130,23 +142,7 @@ public class DialogueVault : MonoBehaviour
             },
         };
 
-        dialogueForBattle = new DialogueSet[][] {
         
-            // Dialogue for the battle encounter
-            new DialogueSet[]
-            {
-                new DialogueSet { dialogueLine = "A Generic Enemy appears!", characterName = string.Empty },
-                // If enemy is a fallen Muslim
-                new DialogueSet { dialogueLine = "It's a fallen Muslim! You might want to save" + (isGirlorBoy ? " her" : " him") + "!", characterName = string.Empty },
-                new DialogueSet { dialogueLine = "What shall you do?" , characterName = string.Empty },
-                new DialogueSet { dialogueLine = GameManagerRPG.instance.isPlayerTurn ? "You use " + GameManagerRPG.instance.currentPlayerMove.moveName + "!" : enemyName + " uses " + (GameManagerRPG.instance != null ? GameManagerRPG.instance.currentEnemyMove.moveName : "Unknown Move") + "!", characterName = string.Empty },
-            },
-        };
-    }
-    void Start()
-    {
-        
-
     }
     public string DeclarePartyMember(string partyMemberName)
     {
@@ -154,16 +150,17 @@ public class DialogueVault : MonoBehaviour
         return partyMemberName + " has joined the revolution!";
     }
     public void MoveCameraToFirstPhoneBooth() => GameManagerRPG.instance.MoveCamera(new Vector3(10, 10, 10), 10f);
-    public void AttackinBattle(string moveName = "Slash", int damageAmount = 10) => StartCoroutine(attackinBattle(moveName, damageAmount));
-    public IEnumerator attackinBattle(string moveName = "Slash", int damageAmount = 10)
+    public void AttackinBattle(string moveName = "Slash", int damageAmount = 10, bool isPhysical = true, int stageChange = 0) => StartCoroutine(attackinBattle(moveName, damageAmount, isPhysical, stageChange));
+    public IEnumerator attackinBattle(string moveName = "Slash", int damageAmount = 10, bool isPhysical = true, int stageChange = 0)
     {
         yield return new WaitForSeconds(1f);
         UIManagerRPG.instance.battleShortMenu.SetActive(false);
         Debug.Log("Attacking enemy with " + moveName + " for " + damageAmount + " damage!");
-        dialogueForBattle[0][3].dialogueLine = GameManagerRPG.instance.isPlayerTurn ? "You use " + moveName + "!" : enemyName + " uses " + moveName + "!";
-        DialogueManager.instance.StartDialogueTexts(dialogueForBattle[0], 3, 3);
+        dialogueForBattler[0][3].dialogueLine = GameManagerRPG.instance.isPlayerTurn ? "You use " + moveName + "!" : enemyName + " uses " + moveName + "!";
+        DialogueManager.instance.StartDialogueTexts(dialogueForBattler[0], 3, -1);
         // Implement attack logic here
         yield return new WaitForSeconds(1f);
+
         GameManagerRPG.instance.SpriteFlicker(GameManagerRPG.instance.isPlayerTurn ? GameManagerRPG.instance.enemiesInBattle[0].GetComponent<Image>() : GameManagerRPG.instance.battleAlliesPrefab[0].GetComponent<Image>(), 10);
         if (GameManagerRPG.instance.isPlayerTurn)
         {
@@ -173,15 +170,26 @@ public class DialogueVault : MonoBehaviour
             {
                 Debug.Log("Enemy defeated!");
                 // Handle enemy defeat (e.g., remove from battle, give rewards, etc.)
-                Destroy(GameManagerRPG.instance.enemiesInBattle[0]);
-                
-                if (GameManagerRPG.instance.enemiesInBattle.Length == 0)
+                GameManagerRPG.instance.enemiesInBattle[GameManagerRPG.instance.currentEnemyIndex].SetActive(false);
+                GameManagerRPG.instance.currentEnemyIndex++;
+                if (GameManagerRPG.instance.currentEnemyIndex < GameManagerRPG.instance.enemiesInBattle.Length - 1)
                 {
-                    Debug.Log("All enemies defeated! You win the battle!");
+                    GameManagerRPG.instance.enemiesInBattle[GameManagerRPG.instance.currentEnemyIndex].SetActive(true);
+                }
+                else
+                {
+                   Debug.Log("All enemies defeated! You win the battle!");
+                   dialogueForBattler[0][5].dialogueLine += "< You recieve " + UnityEngine.Random.Range(20, 100) + " coins as a reward!";
+                   DialogueManager.instance.StartDialogueTexts(dialogueForBattler[0], 5, -1, 0, null, true, 1);
                     // Handle battle victory (e.g., exit battle mode, give rewards, etc.)
                     UIManagerRPG.instance.battleShortMenu.SetActive(false);
-                    yield break; // Exit the coroutine early since the battle is over
+                    yield break; // Exit the coroutine early since the battle is over 
                 }
+                
+                
+                
+                    
+                
             }
         }
         else
@@ -198,7 +206,16 @@ public class DialogueVault : MonoBehaviour
         }
         yield return new WaitForSeconds(1f);
         GameManagerRPG.instance.isPlayerTurn = !GameManagerRPG.instance.isPlayerTurn;
-        UIManagerRPG.instance.battleShortMenu.SetActive(true);
+        if (GameManagerRPG.instance.isPlayerTurn)
+        {
+            UIManagerRPG.instance.battleShortMenu.SetActive(true);
+            yield break;
+        }
+        else
+        {
+            GameManagerRPG.instance.CommenceBattle(UnityEngine.Random.Range(0, 4));
+        }
+        
     }
 
 }
