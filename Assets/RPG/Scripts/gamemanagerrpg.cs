@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -21,6 +22,7 @@ public class GameManagerRPG : MonoBehaviour
     public GameObject startSpawnRPG;
     public Vector3 spawnObject;
     public GameObject mainMap;
+    public GameObject battleMap;
     public GameObject playerHouse;
     public GameObject doorSpawn;
     public bool isDonewithPlatforming;
@@ -33,7 +35,21 @@ public class GameManagerRPG : MonoBehaviour
     public float moveSpeed = 5f;
     public bool iswalkingdoor = false;
     public bool movingAutonomously = false;
+    public bool isInBattle = false;
+    public int dialogueProgression = 0;
     public bool isPaused = false;
+    public int numberOfEnemies = 1;
+    public int enemyHealth = 10;
+    public int playerLevel = 1;
+    public int enemyLevel = 1;
+    public int playerHealth = 20;
+    public bool isPlayerTurn = true;
+    public GameObject[] enemiesInBattle;
+    public GameObject battleEnemyPrefab;
+    public GameObject[] battleAlliesPrefab;
+    public GameObject[] moveButtons;
+    public Move currentPlayerMove;
+    public Move currentEnemyMove;
     [System.Serializable]
     public struct CutsceneAssembler
     {
@@ -57,6 +73,7 @@ public class GameManagerRPG : MonoBehaviour
         targetSize = main.orthographicSize;
         audioSourceVolume = GameManager.instance.musicVolume;
         phoneBooths = FindObjectsByType<teleport>(FindObjectsSortMode.None);
+        battleAlliesPrefab[0].SetActive(false);
 
         if (GameManager.instance.startSpawnBool && GameManager.instance.phoneBoothSpawn == Vector3.zero)
         {
@@ -92,7 +109,7 @@ public class GameManagerRPG : MonoBehaviour
         }
         if (main.orthographicSize != targetSize)
         {
-            main.orthographicSize = Mathf.Lerp(main.orthographicSize, targetSize, Time.deltaTime * cameraSpeed);
+            main.orthographicSize = Mathf.Lerp(main.orthographicSize, targetSize, Time.unscaledDeltaTime * cameraSpeed);
         }
 
 
@@ -190,5 +207,125 @@ public class GameManagerRPG : MonoBehaviour
         UIManagerRPG.instance.settingsMenu.AssignNewWaypointsAndMoveObject(new Vector2[] { new Vector2(isPaused ? 400f : -400f, 0) }, 700f, false);
         Time.timeScale = Time.timeScale == 1 ? 0 : 1;
     }
-    
+    public void BeginBattle(GameObject enemy = null)
+    {
+        StartCoroutine(StartBattle());
+    }
+    public IEnumerator StartBattle()
+    {
+        isInBattle = true;
+        movingAutonomously = false;
+        playerpg.isMovable = false;
+        Camera.main.GetComponent<AudioSource>().Pause();
+        yield return new WaitForSecondsRealtime(0.5f);
+        Time.timeScale = 0;
+        // Play the animation even if the game is paused
+        playerpg.anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+        playerpg.anim.SetTrigger("enemyEncounter");
+        yield return new WaitForSecondsRealtime(1f);
+        Camera.main.GetComponent<AudioSource>().clip = musicClips[2];
+        Camera.main.GetComponent<AudioSource>().Play();
+        yield return new WaitForSecondsRealtime(1f);
+        CameraZoom(1f, 2f);
+        yield return new WaitForSecondsRealtime(.5f);
+        UIManager.instance.fadeableGeneralObjects[0].StartFading(3f, 10f);
+        yield return new WaitForSecondsRealtime(3f);
+        BattleTransition();
+        CameraZoom(9f, 2f);
+        yield return new WaitForSecondsRealtime(10f);
+        UIManager.instance.fadeableGeneralObjects[0].StartFading(2f, 20f);
+        yield return new WaitForSecondsRealtime(1.5f);
+        battleAlliesPrefab[0].SetActive(true);
+        battleAlliesPrefab[0].transform.localPosition = new Vector3(-429, -87, 0);
+        enemiesInBattle[0].transform.localPosition = new Vector3(247, 200, 0);
+        UIManagerRPG.instance.battleShortMenu.SetActive(true);
+        PartyManager.instance.UpdateMoveButtons(PartyManager.instance.partyMembers[0]);
+
+        // Implement battle initiation logic here
+    }
+    public void BattleTransition()
+    {
+        mainMap.SetActive(false);
+        playerpg.gameObject.SetActive(false);
+        UIManagerRPG.instance.fadeableRPGObjects[0].Fader(false, UIManagerRPG.instance.battleImageBackgrounds[0]);
+        CalculateRandomStatsofEnemy();
+        enemiesInBattle[0].gameObject.transform.localPosition = new Vector3(0, 0, 0);
+        Time.timeScale = 1;
+        battleAlliesPrefab[0].GetComponent<battleStats>().health = playerHealth;
+        battleAlliesPrefab[0].GetComponent<battleStats>().level = playerLevel;
+        DialogueVault.instance.enemyName = enemiesInBattle[0].GetComponent<battleStats>().isFallenMuslim ? "Fallen Muslim" : "Generic Enemy";
+        DialogueVault.instance.isFallenMuslim = enemiesInBattle[0].GetComponent<battleStats>().isFallenMuslim;
+        DialogueManager.instance.StartDialogueTexts(DialogueVault.instance.dialogueForBattle[0], 0, -1, 0, null, true, 3);
+    }
+    public void CalculateRandomStatsofEnemy()
+    {
+        numberOfEnemies = Random.Range(1, 4);
+        enemiesInBattle = new GameObject[numberOfEnemies];
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
+            bool isFallenMuslim = Random.Range(0, 5) == 0; // 20% chance
+            bool isGirlorBoy = Random.Range(0, 1) == 0; // 50% chance
+            GameObject enemy = Instantiate(battleEnemyPrefab, UIManagerRPG.instance.cutsceneParent.transform);
+            enemy.GetComponent<battleStats>().health = Random.Range(20, 40) * playerLevel;
+            enemy.GetComponent<battleStats>().attack = Random.Range(5, 15) * playerLevel;
+            enemy.GetComponent<battleStats>().defense = Random.Range(5, 15) * playerLevel;
+            enemy.GetComponent<battleStats>().level = playerLevel + Random.Range(-5, 5);
+            enemy.GetComponent<battleStats>().isFallenMuslim = isFallenMuslim;
+            enemy.GetComponent<battleStats>().isGirlorBoy = isGirlorBoy;
+
+            enemy.transform.localPosition = new Vector3(900, 0, 0);
+            enemiesInBattle[i] = enemy;
+        }
+
+    }
+    public void CommenceBattle(int moveNumber, int playerOrEnemy)
+    {
+        StartCoroutine(commenceBattle(moveNumber, playerOrEnemy));
+    }
+    public IEnumerator commenceBattle(int moveNumber, int playerOrEnemy)
+    {
+        UIManagerRPG.instance.battleMovesAnimator.SetTrigger("disperse");
+        for (int i = 0; i <= 4; i++)
+        {
+            if (i == moveNumber)
+            {
+                Move moveToChange = PartyManager.instance.partyMembers[0].assignedMoves[i];
+                switch (playerOrEnemy)
+                {
+                    case 0:
+                        currentPlayerMove = moveToChange;
+                        break;
+                    case 1:
+                        currentEnemyMove = moveToChange;
+                        break;
+                }
+
+            }
+        }
+        yield return new WaitForSeconds(1f);
+        DialogueVault.instance.AttackinBattle(playerOrEnemy == 0 ? currentPlayerMove.moveName : currentEnemyMove.moveName, playerOrEnemy == 0 ? currentPlayerMove.power : currentEnemyMove.power);
+    }
+    public void SpriteFlicker(SpriteRenderer sprite, int flickerCount = 5, float flickerDuration = 0.1f)
+    {
+        StartCoroutine(spriteFlicker(sprite, flickerCount, flickerDuration));
+    }
+
+    private IEnumerator spriteFlicker(SpriteRenderer sprite, int flickerCount = 5, float flickerDuration = 0.1f)
+    {
+        if (sprite != null)
+        {
+            Color originalColor = sprite.color;
+            float flickerInterval = flickerDuration / flickerCount;
+
+            while (flickerCount > 0)
+            {
+                sprite.enabled = !sprite.enabled;
+                flickerCount--;
+                yield return new WaitForSeconds(flickerInterval);
+            }
+
+            sprite.enabled = true; // Ensure the sprite is visible at the end
+            sprite.color = originalColor; // Restore original color
+        }
+    }
 }

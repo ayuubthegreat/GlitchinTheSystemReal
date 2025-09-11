@@ -43,7 +43,7 @@ public class LogoManager : MonoBehaviour
         while (spriteLogoNum <= availableLogos.Length)
         {
             yield return new WaitForSeconds(spriteLogoNum < availableLogos.Length - 1 ? duration * 2 : duration);
-            fader.instance.StartFading(duration, 0.1f, false, "", spriteLogoNum < availableLogos.Length - 1 ? IncreaseIndex : DisplayMainMenu);
+            UIManager.instance.fadeableGeneralObjects[0].StartFading(duration, 0.1f, false, "", spriteLogoNum < availableLogos.Length - 1 ? IncreaseIndex : DisplayMainMenu);
         }
         Debug.Log("All logos displayed, ending logo sequence.");
     }
@@ -64,7 +64,7 @@ public class LogoManager : MonoBehaviour
     }
     public void DisplayMainMenu()
     {
-        fader.instance.Fader(true);
+        UIManager.instance.fadeableGeneralObjects[0].Fader(true);
         endLogos = true;
         spriteLogoNum = 0; // Reset the logo index
         image.sprite = availableLogos[0]; // Reset the image to the first logo

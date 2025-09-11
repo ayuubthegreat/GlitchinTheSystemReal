@@ -9,14 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54bc53fee17636543b6cf6363de396a2, type: 3}
+  m_Script: {fileID: 11500000, guid: c1ac3966fcc52d24cae22365b893e898, type: 3}
   m_Name: Slash
   m_EditorClassIdentifier: 
   moveName: Slash
-  attackDamage: 5
-  isPhysicalMove: 0
-  isSpecialMove: 0
-  attackLoweringOrRaisingNum: 0
-  defenseLoweringOrRaisingNum: 0
-  speedLoweringOrRaisingNum: 0
-  accuracyLoweringOrRaisingNum: 0
+  power: 20
+  accuracy: 10
+  priority: 1
+  category: 0
+  effectDescription: Basic attack move
+  target: 0
+  attackChange: 0
+  defenseChange: 0
+  speedChange: 0
+  accuracyChange: 0

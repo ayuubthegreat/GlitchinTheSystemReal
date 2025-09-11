@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5528409781875577181}
   - component: {fileID: 4024157831846780359}
+  - component: {fileID: 2789467068140158200}
   m_Layer: 5
   m_Name: person
   m_TagString: Untagged
@@ -155,6 +156,27 @@ MonoBehaviour:
   isMouth: 0
   personNumber: 1
   canTalk: 0
+--- !u!114 &2789467068140158200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552459747254688100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 818da7cb092905f4c9ea94f32112d30f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mtransform: {fileID: 0}
+  waypoints: []
+  scaleWaypoints: []
+  waypointIndex: 0
+  scaleWaypointIndex: 0
+  speed: 5
+  scaleSpeed: 5
+  loop: 0
+  originalPosition: {x: 0, y: 0}
 --- !u!1 &2853001429681293888
 GameObject:
   m_ObjectHideFlags: 0

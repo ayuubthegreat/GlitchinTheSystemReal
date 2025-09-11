@@ -82,7 +82,7 @@ MonoBehaviour:
   victoryMusic: {fileID: 8300000, guid: dd24a738218946643845e7c0e9f8feea, type: 3}
   platformerTimes: 0
   RPGTimes: 0
-  DialogueProgression: 2
+  DialogueProgression: 0
   noMusic: 0
   musicSlider: {fileID: 0}
   soundEffectSlider: {fileID: 0}
@@ -118,7 +118,8 @@ MonoBehaviour:
   phone: {fileID: 0}
   dialogueScreen: {fileID: 0}
   mainMenu: {fileID: 0}
-  fade: {fileID: 0}
+  fadeableGeneralObjects:
+  - {fileID: 7793528866458970870}
   start: 0
   isDead: 0
   isAlive: 1
@@ -141,14 +142,13 @@ GameObject:
   - component: {fileID: 1278436114771250369}
   - component: {fileID: 3599244656631469756}
   - component: {fileID: 7793528866458970870}
-  - component: {fileID: 2214796113239320096}
   m_Layer: 5
   m_Name: FadeScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7054067448285227096
 RectTransform:
   m_ObjectHideFlags: 0
@@ -215,48 +215,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2805028177673404513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f71638ca4d1c4b50a446f048d5cf6c9, type: 3}
+  m_Script: {fileID: 11500000, guid: a055425b9b345b54d86a317a3b0eb6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fadeInOnStart: 1
   fading: 0
   fadeImage: {fileID: 0}
   fadeDuration: 1
-  fadeSpeed: 3
+  fadeSpeed: 30
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   loadScene: 0
   sceneName: 
   targetAlpha: 0
---- !u!114 &2214796113239320096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2805028177673404513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &2907360417165420266
 GameObject:
   m_ObjectHideFlags: 0

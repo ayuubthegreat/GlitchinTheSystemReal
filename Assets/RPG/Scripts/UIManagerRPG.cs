@@ -8,6 +8,8 @@ public class UIManagerRPG : MonoBehaviour
 {
     public static UIManagerRPG instance;
     public PlayerPhonePhysical playerPhone;
+    [Header("Fadeable Objects")]
+    public fader[] fadeableRPGObjects;
     [Header("Cutscene Related Objects")]
     public GameObject cutsceneParent;
     public GameObject cutsceneObjectPrefab;
@@ -37,6 +39,9 @@ public class UIManagerRPG : MonoBehaviour
     [Header("Menu Elements")]
     public Mover settingsMenu;
     public GameObject options;
+    public Sprite[] battleImageBackgrounds;
+    public GameObject battleShortMenu;
+    public Animator battleMovesAnimator;
 
     void Awake()
     {
@@ -56,6 +61,7 @@ public class UIManagerRPG : MonoBehaviour
         SetLocationAnnouncerElements();
         ChangeText(locationName);
         StartMoveLocationAnnouncer(2f);
+        battleMovesAnimator = battleShortMenu.GetComponent<Animator>();
 
 
     }
@@ -71,6 +77,7 @@ public class UIManagerRPG : MonoBehaviour
         personNameObject.SetActive(isActive);
         person1DialogueAnimation.SetActive(isActive);
         person2DialogueAnimation.SetActive(isActive);
+        battleShortMenu.SetActive(isActive);
     }
     public void SetLocationAnnouncerElements()
     {

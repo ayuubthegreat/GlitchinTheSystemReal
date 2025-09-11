@@ -9,6 +9,7 @@ public class DialogueProcessor : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameManager gameManager;
     public GameManagerRPG.CutsceneAssembler currentCutscene;
+    public Mover[] movableObjects;
     public Animator[] currentViableCutsceneAnimators;
     public GameObject[] currentCutsceneObjects;
     public DialogueVault dialogueVault;
@@ -25,6 +26,7 @@ public class DialogueProcessor : MonoBehaviour
     public bool isPhoneActive = false;
     public bool isTalkingToHomelessMan = false;
     public float npcSpeed = 20f;
+    public float cameraShakeIntensity = 2f;
 
     public bool[] faces;
     public bool[] expressions;
@@ -61,16 +63,7 @@ public class DialogueProcessor : MonoBehaviour
             false
         };
 
-        if (gameManager == null)
-        {
-            Debug.LogError("GameManager instance is not found in the scene.");
-            return;
-        }
 
-        if (DialogueManager.instance == null)
-        {
-            Debug.LogError("DialogueManager instance is not set.");
-        }
         if (GameManager.instance.playerpg == null)
         {
             return;
@@ -92,8 +85,16 @@ public class DialogueProcessor : MonoBehaviour
     }
     public void DialogueProgressionFunction()
     {
+        if (DialogueManager.instance == null || dialogueVault == null)
+        {
+            Debug.LogError("DialogueManager or DialogueVault is not assigned.");
+            return;
+        }
         switch (GameManager.instance.DialogueProgression)
         {
+            case 0:
+                DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[0], 0, 0, 2f);
+                break;
             case 1:
                 StartCoroutine(DialogueProgression1());
                 break;
@@ -165,14 +166,16 @@ public class DialogueProcessor : MonoBehaviour
                 npc.StartMovingNPC(0, 20f, new Vector2[] { new Vector2(0f, npc.playerPosition.y - npc.transform.position.y - 5f), new Vector2(npc.playerPosition.x - npc.transform.position.x, 0f) }, FranticTeenagerDialogue1);
                 break;
             case 4:
-                fader.instance.Fader(false, UIManagerRPG.instance.cutsceneImageBackgrounds[0], UIManagerRPG.instance.cutsceneImageObject);
+                UIManagerRPG.instance.fadeableRPGObjects[0].Fader(false, UIManagerRPG.instance.cutsceneImageBackgrounds[0]);
                 CutsceneManager(GameManagerRPG.instance.cutsceneAssemblers[0], StartIDP);
-                currentCutsceneObjects[4].GetComponent<dialogueObject>().bodyAnim.speed = 0f;
+                currentCutsceneObjects[1].GetComponent<dialogueObject>().personNumber = 2;
+                currentCutsceneObjects[3].GetComponent<dialogueObject>().bodyAnim.speed = 0f;
                 DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 5, 10, 2f);
                 UIManagerRPG.instance.phone.SetActive(false);
                 break;
             case 5:
-                fader.instance.Fader(true, UIManagerRPG.instance.cutsceneImageBackgrounds[0], UIManagerRPG.instance.cutsceneImageObject);
+                DestroyCutsceneObjects();
+                UIManagerRPG.instance.fadeableRPGObjects[0].Fader(true, UIManagerRPG.instance.cutsceneImageBackgrounds[0]);
                 DialogueManager.instance.StartDialogueTexts(dialogueVault.dialogueSets[2], 11, 20, 3f);
                 break;
             case 6:
@@ -202,46 +205,103 @@ public class DialogueProcessor : MonoBehaviour
     public void StartIDP() => StartCoroutine(InternalDialogueProcessor());
     public IEnumerator InternalDialogueProcessor()
     {
-        switch (GameManager.instance.DialogueProgression)
+        if (GameManagerRPG.instance.movingAutonomously || GameManagerRPG.instance.isInBattle)
         {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                switch (DialogueManager.instance.dialogueIndex)
+            if (GameManagerRPG.instance.isInBattle)
+            {
+                switch(DialogueManager.instance.dialogueIndex)
                 {
                     case 1:
-                        
-                        currentViableCutsceneAnimators[1].SetTrigger("move");
-                        break;
-                    case 2:
-                        currentViableCutsceneAnimators[1].SetTrigger("moveBack");
-                        DialogueManager.instance.dialogueBox.SetActive(false);
-                        DialogueManager.instance.isDialogueActive = false;
-                        yield return new WaitForSeconds(1f);
-                        currentCutsceneObjects[0].transform.localPosition = new Vector3(900, 0, 0);
-                        currentCutsceneObjects[1].transform.localPosition = new Vector3(900, 0, 0);
-                        currentCutsceneObjects[2].transform.localPosition = new Vector3(0, 0, 0);
-                        currentCutsceneObjects[3].transform.localPosition = new Vector3(0, 88, 0);
-                        currentCutsceneObjects[4].transform.localPosition = new Vector3(-4, 79, 0);
-                        UIManagerRPG.instance.cutsceneImageObject.sprite = UIManagerRPG.instance.cutsceneImageBackgrounds[1];
-                        yield return new WaitForSeconds(2f);
-                        currentCutsceneObjects[4].GetComponent<dialogueObject>().bodyAnim.speed = 1f;
+                        if (GameManagerRPG.instance.enemiesInBattle[0].GetComponent<battleStats>().isFallenMuslim == false)
+                        {
+                            DialogueManager.instance.dialogueIndex = 2; // Skip to the non-fallen Muslim dialogue
+                        }
                         break;
                 }
-                break;
-            case 5:
+            }
+        }
+        else
+        {
+            switch (GameManager.instance.DialogueProgression)
+            {
+                case 1:
+                    break;
+                case 2:
+                    switch (DialogueManager.instance.dialogueIndex)
+                    {
+                        case 18:
+                            DialogueManager.instance.DisplayChoices("Do you invite Yasir?", "Invite Yasir", "Don't Invite Yasir");
+                            break;
+                    }
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    switch (DialogueManager.instance.dialogueIndex)
+                    {
+                        case 1:
 
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
+                            currentViableCutsceneAnimators[1].SetTrigger("move");
+                            break;
+                        case 2:
+
+                            currentViableCutsceneAnimators[1].SetTrigger("moveBack");
+                            DialogueManager.instance.dialogueBox.SetActive(false);
+                            DialogueManager.instance.isDialogueActive = false;
+                            yield return new WaitForSeconds(1f);
+                            currentCutsceneObjects[0].transform.localPosition = new Vector3(1200, 0, 0);
+                            currentCutsceneObjects[1].transform.localPosition = new Vector3(1200, 0, 0);
+
+                            currentCutsceneObjects[2].transform.localPosition = new Vector3(0, 88, 0);
+
+                            currentCutsceneObjects[3].transform.localPosition = new Vector3(-4, 79, 0);
+                            currentCutsceneObjects[4].transform.localPosition = new Vector3(0, 0, 0);
+                            movableObjects[0].transform.localScale = new Vector3(1.8f, 1.8f, 1.8f);
+                            UIManagerRPG.instance.cutsceneImageObject.sprite = UIManagerRPG.instance.cutsceneImageBackgrounds[1];
+                            currentCutsceneObjects[4].GetComponent<dialogueObject>().bodyAnim.SetTrigger("move");
+                            yield return new WaitForSeconds(1f);
+                            currentCutsceneObjects[2].GetComponent<Mover>().AssignNewWaypointsAndMoveObject(new Vector2[] { new Vector2(0, -50) }, 100f, false);
+                            currentCutsceneObjects[3].GetComponent<Mover>().AssignNewWaypointsAndMoveObject(new Vector2[] { new Vector2(0, -50) }, 100f, false);
+                            yield return new WaitForSeconds(5f);
+                            movableObjects[0].AssignNewWaypointsAndMoveObject(new Vector2[] { new Vector2(0, -500) }, 1600f, false);
+                            movableObjects[0].Scaler(new Vector2[] { new Vector2(2.2f, 2.2f) }, 3f, false);
+                            yield return new WaitForSeconds(8f);
+                            currentCutsceneObjects[3].GetComponent<dialogueObject>().bodyAnim.speed = 1f;
+                            yield return new WaitForSeconds(.3f);
+                            currentCutsceneObjects[4].GetComponent<dialogueObject>().bodyAnim.SetTrigger("swell");
+                            movableObjects[0].AssignNewWaypointsAndMoveObject(new Vector2[] { new Vector2(0, 500) }, 1600f, false);
+                            // movableObjects[0].Scaler(new Vector2[] { new Vector2(1.8f, 1.8f) }, 8f, false);
+                            yield return new WaitForSeconds(.2f);
+                            ShakeCutsceneImage(cameraShakeIntensity);
+                            yield return new WaitForSeconds(5f);
+                            StopShakingCutsceneImage();
+                            yield return new WaitForSeconds(2.5f);
+                            currentCutsceneObjects[2].GetComponent<Mover>().AssignNewWaypointsAndMoveObject(new Vector2[] { new Vector2(0, 50) }, 100f, false);
+                            currentCutsceneObjects[3].GetComponent<Mover>().AssignNewWaypointsAndMoveObject(new Vector2[] { new Vector2(0, 50) }, 100f, false);
+                            yield return new WaitForSeconds(4f);
+                            currentCutsceneObjects[4].GetComponent<Mover>().AssignNewWaypointsAndMoveObject(new Vector2[] { new Vector2(900, 0) }, 200f, false);
+                            yield return new WaitForSeconds(2f);
+                            UIManagerRPG.instance.cutsceneImageObject.sprite = UIManagerRPG.instance.cutsceneImageBackgrounds[0];
+                            DialogueManager.instance.dialogueBox.SetActive(true);
+                            movableObjects[0].transform.localScale = new Vector3(1f, 1f, 1f);
+                            movableObjects[0].transform.localPosition = new Vector3(0, 0, 0);
+                            UpdateMultipleCutscenePositions(new Vector2[] { new Vector2(0, 0), new Vector2(-67, 33) }, 0, 1);
+                            UpdateMultipleCutscenePositions(new Vector2[] { new Vector2(1200, 0) }, 2, 4);
+                            currentViableCutsceneAnimators[0].SetTrigger("move");
+                            DialogueManager.instance.ContinueDialogue();
+                            break;
+                    }
+                    break;
+                case 5:
+
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+            }
         }
     }
     public void CutsceneManager(GameManagerRPG.CutsceneAssembler cutscene, System.Action desiredFunction = null)
@@ -282,10 +342,32 @@ public class DialogueProcessor : MonoBehaviour
             cutsceneObject.name = cutscene.characterNames[i];
             currentCutsceneObjects[i] = cutsceneObject;
             i++;
-            
+
         }
-        
+
         desiredFunction?.Invoke();
     }
-
+    public void ShakeCutsceneImage(float shakeIntensity = 2f) => movableObjects[0].AssignNewWaypointsAndMoveObject(new Vector2[] { new Vector2(-shakeIntensity, -shakeIntensity), new Vector2(shakeIntensity, shakeIntensity), new Vector2(-shakeIntensity, shakeIntensity), new Vector2(shakeIntensity, -shakeIntensity), new Vector2(shakeIntensity, -shakeIntensity), new Vector2(-shakeIntensity, shakeIntensity) }, 1000f, true);
+    public void StopShakingCutsceneImage() => movableObjects[0].AssignNewWaypointsAndMoveObject(new Vector2[] { new Vector2(0, 0) }, 1000f, false);
+    public void UpdateMultipleCutscenePositions(Vector2[] newPositions, int startIndex, int endIndex)
+    {
+        for (int i = startIndex; i <= endIndex; i++)
+        {
+            if (i > currentCutsceneObjects.Length - 1) break;
+            currentCutsceneObjects[i].transform.localPosition = newPositions[newPositions.Length > 1 ? i : 0];
+        }
+    }
+    public void DestroyCutsceneObjects()
+    {
+        if (currentCutsceneObjects == null || currentCutsceneObjects.Length == 0) return;
+        foreach (GameObject obj in currentCutsceneObjects)
+        {
+            if (obj != null)
+            {
+                Destroy(obj);
+            }
+        }
+        currentCutsceneObjects = new GameObject[0];
+        currentViableCutsceneAnimators = new Animator[0];
+    }
 }

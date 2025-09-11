@@ -10,7 +10,7 @@ public class dialogueObject : MonoBehaviour
     public Animator mouthAnim;
     public Animator bodyAnim;
     public bool isMouth;
-    public int personNumber;
+    public int personNumber = 1;
     public bool canTalk;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
@@ -22,27 +22,12 @@ public class dialogueObject : MonoBehaviour
     void Update()
     {
         canTalk = (personNumber == 1 && DialogueProcessor.instance.person1turn || personNumber == 2 && DialogueProcessor.instance.person2turn) && DialogueManager.instance.isDialogueActive;
-        if (GameManager.instance.DialogueProgression != 0 && DialogueProcessor.instance.isConversationActive)
+        if (DialogueProcessor.instance.isConversationActive)
         {
             mouthAnim.SetBool("isTalking", canTalk);
             headAnim.SetInteger("DP", GameManager.instance.DialogueProgression);
         }
     }
-    public void ChangeLocationPositionandSprite(Vector2 newPosition = default, AnimatorOverrideController newHeadAnimatorController = null, AnimatorController newBodyAnimatorController = null, float scaleSize = 1f, string characterName = "", Action desiredFunction = null)
-    {
-        rectTransform.anchoredPosition = newPosition;
-        rectTransform.localScale = new Vector3(scaleSize, scaleSize, scaleSize);
-        if (newHeadAnimatorController != null)
-        {
-            headAnim.runtimeAnimatorController = newHeadAnimatorController;
-        }
-        if (newBodyAnimatorController != null)
-        {
-            bodyAnim.runtimeAnimatorController = newBodyAnimatorController;
-        }
-        Debug.Log("Changed location and sprite of " + characterName);
-        desiredFunction?.Invoke();
-
-    }
+    
 
 }

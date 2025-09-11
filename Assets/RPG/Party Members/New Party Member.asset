@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: New Party Member
+  m_EditorClassIdentifier: Assembly-CSharp::PartyMember
+  memberName: Abdurahman
+  level: 1
+  health: 20
+  attack: 0
+  defense: 0
+  speed: 0
+  assignedMoves:
+  - {fileID: 11400000, guid: ba2a2f1ee1a4a3648a243a52d528036b, type: 2}
+  - {fileID: 11400000, guid: 8fa98ab3f08158e408673fbb6d3829d8, type: 2}
+  - {fileID: 11400000, guid: 7c9943e3448020e43b1df397fbda47cf, type: 2}
+  - {fileID: 11400000, guid: 053b4b06ce6f69d439402ac4c973330b, type: 2}

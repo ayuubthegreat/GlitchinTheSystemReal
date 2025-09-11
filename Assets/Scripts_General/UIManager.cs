@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
     public GameObject dialogueScreen;
     public GameObject mainMenu;
 
-    public GameObject fade;
+    public fader[] fadeableGeneralObjects;
 
     [Header("Player States")]
     public bool start = false;
@@ -77,10 +77,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        if (GameManager.instance != null && GameManager.instance.player != null && fade != null)
-        {
-            fade.transform.position = GameManager.instance.player.transform.position;
-        }
+        
         fadeNums = 2;
         location = "Abdurahman's House";
         MainMenuTransitions = new bool[] {
@@ -146,45 +143,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void FadeController(int seconds)
-    {
-        Debug.Log("This parent fade function was called.");
-        StartCoroutine(Fade(seconds));
-    }
-
-    public IEnumerator Fade(int seconds)
-    {
-        fadeNums = 1;
-
-        if (fade == null || GameManager.instance?.camera == null)
-        {
-            Debug.Log("Fade or camera is null.");
-            yield break;
-        }
-
-        GameObject fadeInObject = Instantiate(fade, GameManager.instance.camera.transform.position, Quaternion.identity);
-
-        if (fadeInObject != null)
-        {
-            Debug.Log("This worked.");
-        }
-        else
-        {
-            Debug.Log("This doesn't work.");
-        }
-
-        yield return new WaitForSeconds(seconds);
-
-        if (GameManager.instance.player != null)
-        {
-            fadeInObject.transform.position = GameManager.instance.camera.transform.position;
-            fadeNums = 2;
-        }
-        else
-        {
-            Debug.Log("This fader is broken.");
-        }
-    }
+    
 
     public IEnumerator TimetoDie(float duration)
     {
@@ -194,7 +153,7 @@ public class UIManager : MonoBehaviour
             GameManager.instance.startSpawnBoolPlatforming = true;
         }
         yield return new WaitForSeconds(duration);
-       fader.instance.StartFading(3f, .1f, true, deathScene);
+       fadeableGeneralObjects[0].StartFading(3f, .1f, true, deathScene);
     }
     public void SetStartBool()
     {

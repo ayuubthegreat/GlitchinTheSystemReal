@@ -31,7 +31,7 @@ public class NPC : MonoBehaviour
     {
 
     }
-    public void OnEnable()
+    protected virtual void OnEnable()
     {
         npcAnimator = GetComponent<Animator>();
         npcRigidbody = GetComponent<Rigidbody2D>();
@@ -52,7 +52,7 @@ public class NPC : MonoBehaviour
             };
         }
     }
-    public void Update()
+    protected virtual void Update()
     {
         playerPosition = GameManagerRPG.instance.playerpg.transform.position;
         npcAnimator.SetFloat("xVelocity", xVelocity);
@@ -63,6 +63,11 @@ public class NPC : MonoBehaviour
     public void StartMovingNPC(float duration, float speed, Vector2[] waypoints, Action desiredFunction = null, bool loop = false)
     {
         if (waypoints.Length == 0) return;
+        if (GameManagerRPG.instance == null)
+        {
+            Debug.LogWarning("GameManagerRPG instance is null. Cannot start moving NPC.");
+            return;
+        }
         GameManagerRPG.instance.playerpg.isMovable = false; // Disable player movement
         GameManagerRPG.instance.playerpg.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero; // Reset player velocity
         npcRigidbody.linearVelocity = Vector2.zero; // Reset velocity before starting movement

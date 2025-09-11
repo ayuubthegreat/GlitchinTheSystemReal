@@ -72,7 +72,7 @@ public class buttonLoad : MonoBehaviour
                 break;
             case ButtonType.SceneLoader:
             Camera.main.GetComponent<AudioSource>().Stop();
-             fader.instance.StartFading(2f, .1f, true, sceneName);
+             UIManager.instance.fadeableGeneralObjects[0].StartFading(2f, .1f, true, sceneName);
                 break;
             case ButtonType.Settings:
                 MenuLoader.instance.MoveToNewPosition(200f);

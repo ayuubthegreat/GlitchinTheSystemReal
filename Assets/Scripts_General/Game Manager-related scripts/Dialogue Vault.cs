@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class DialogueVault : MonoBehaviour
@@ -7,6 +8,11 @@ public class DialogueVault : MonoBehaviour
     public DialogueSet[][] dialogueSets;
     public DialogueSet[][] dialogueSetsYes;
     public DialogueSet[][] dialogueSetsNo;
+    public DialogueSet[][] dialogueForBattle;
+    public string enemyName;
+    public bool isFallenMuslim;
+    public bool isGirlorBoy; // True for girl, false for boy
+
 
     [Serializable]
     public struct DialogueSet
@@ -132,6 +138,17 @@ public class DialogueVault : MonoBehaviour
                 new DialogueSet { dialogueLine = "All right.", characterName = "Abdurahman" },
             },
         };
+        dialogueForBattle = new DialogueSet[][] {
+            // Dialogue for the battle encounter
+            new DialogueSet[] {
+                new DialogueSet{dialogueLine = "A Generic Enemy appears!", characterName = string.Empty},
+                // If enemy is a fallen Muslim
+                new DialogueSet{dialogueLine = "It's a fallen Muslim! You might want to save" + (isGirlorBoy ? " her" : " him") + "!", characterName = string.Empty},
+                new DialogueSet{dialogueLine = "What shall you do?" , characterName = string.Empty},
+                new DialogueSet{dialogueLine = GameManagerRPG.instance.isPlayerTurn ? "You use " + GameManagerRPG.instance.currentPlayerMove.moveName + "!" : enemyName + " uses " + GameManagerRPG.instance.currentEnemyMove.moveName + "!", characterName = string.Empty},
+            }
+        };
+
     }
     public string DeclarePartyMember(string partyMemberName)
     {
@@ -139,5 +156,14 @@ public class DialogueVault : MonoBehaviour
         return partyMemberName + " has joined the revolution!";
     }
     public void MoveCameraToFirstPhoneBooth() => GameManagerRPG.instance.MoveCamera(new Vector3(10, 10, 10), 10f);
+    public void AttackinBattle(string moveName = "Slash", int damageAmount = 10) => StartCoroutine(attackinBattle(moveName, damageAmount));
+    public IEnumerator attackinBattle(string moveName = "Slash", int damageAmount = 10)
+    {
+        Debug.Log("Attacking enemy with " + moveName + " for " + damageAmount + " damage!");
+        DialogueManager.instance.StartDialogueTexts(dialogueForBattle[0], 3, 3);
+        // Implement attack logic here
+        yield return new WaitForSeconds(1f);
+        GameManagerRPG.instance.SpriteFlicker(GameManagerRPG.instance.isPlayerTurn ? GameManagerRPG.instance.enemiesInBattle[0].GetComponent<SpriteRenderer>() : GameManagerRPG.instance.battleAlliesPrefab[0].GetComponent<SpriteRenderer>(), 10);
+    }
 
 }

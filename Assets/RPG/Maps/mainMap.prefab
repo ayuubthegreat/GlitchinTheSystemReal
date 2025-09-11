@@ -9536,7 +9536,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1510938079500314600, guid: 11d4d18e59f60e44795e6b989f4c19a7, type: 3}
       propertyPath: scene
-      value: platformerScene1
+      value: WindyTerrace1_1
       objectReference: {fileID: 0}
     - target: {fileID: 1510938079500314600, guid: 11d4d18e59f60e44795e6b989f4c19a7, type: 3}
       propertyPath: seconds
