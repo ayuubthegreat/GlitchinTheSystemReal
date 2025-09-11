@@ -1280,6 +1280,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6873609307654311020, guid: 46c120b58f30b2f41b248a39b5a16be7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 102804298}
+    - target: {fileID: 6873609307654311020, guid: 46c120b58f30b2f41b248a39b5a16be7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CommenceBattle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873609307654311020, guid: 46c120b58f30b2f41b248a39b5a16be7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9109070717980360623, guid: 46c120b58f30b2f41b248a39b5a16be7, type: 3}
       propertyPath: m_Name
       value: moveButton3
@@ -2686,6 +2698,18 @@ PrefabInstance:
     - target: {fileID: 4502082409885014432, guid: 46c120b58f30b2f41b248a39b5a16be7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873609307654311020, guid: 46c120b58f30b2f41b248a39b5a16be7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 102804298}
+    - target: {fileID: 6873609307654311020, guid: 46c120b58f30b2f41b248a39b5a16be7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CommenceBattle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873609307654311020, guid: 46c120b58f30b2f41b248a39b5a16be7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9109070717980360623, guid: 46c120b58f30b2f41b248a39b5a16be7, type: 3}
       propertyPath: m_Name
@@ -11420,6 +11444,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6873609307654311020, guid: 46c120b58f30b2f41b248a39b5a16be7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 102804298}
+    - target: {fileID: 6873609307654311020, guid: 46c120b58f30b2f41b248a39b5a16be7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CommenceBattle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873609307654311020, guid: 46c120b58f30b2f41b248a39b5a16be7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9109070717980360623, guid: 46c120b58f30b2f41b248a39b5a16be7, type: 3}
       propertyPath: m_Name
       value: moveButton2
@@ -11533,6 +11569,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6873609307654311020, guid: 46c120b58f30b2f41b248a39b5a16be7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 102804298}
     - target: {fileID: 9109070717980360623, guid: 46c120b58f30b2f41b248a39b5a16be7, type: 3}
       propertyPath: m_Name
       value: moveButton

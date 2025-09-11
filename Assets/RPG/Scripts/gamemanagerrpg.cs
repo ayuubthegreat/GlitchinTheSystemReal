@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.UI;
 
 public class GameManagerRPG : MonoBehaviour
 {
@@ -255,7 +256,8 @@ public class GameManagerRPG : MonoBehaviour
         battleAlliesPrefab[0].GetComponent<battleStats>().level = playerLevel;
         DialogueVault.instance.enemyName = enemiesInBattle[0].GetComponent<battleStats>().isFallenMuslim ? "Fallen Muslim" : "Generic Enemy";
         DialogueVault.instance.isFallenMuslim = enemiesInBattle[0].GetComponent<battleStats>().isFallenMuslim;
-        DialogueManager.instance.StartDialogueTexts(DialogueVault.instance.dialogueForBattle[0], 0, -1, 0, null, true, 3);
+
+        DialogueManager.instance.StartDialogueTexts(DialogueVault.instance.dialogueForBattle[0], 0, 2, 0, null, true, 3);
     }
     public void CalculateRandomStatsofEnemy()
     {
@@ -278,11 +280,11 @@ public class GameManagerRPG : MonoBehaviour
         }
 
     }
-    public void CommenceBattle(int moveNumber, int playerOrEnemy)
+    public void CommenceBattle(int moveNumber)
     {
-        StartCoroutine(commenceBattle(moveNumber, playerOrEnemy));
+        StartCoroutine(commenceBattle(moveNumber));
     }
-    public IEnumerator commenceBattle(int moveNumber, int playerOrEnemy)
+    public IEnumerator commenceBattle(int moveNumber)
     {
         UIManagerRPG.instance.battleMovesAnimator.SetTrigger("disperse");
         for (int i = 0; i <= 4; i++)
@@ -290,7 +292,7 @@ public class GameManagerRPG : MonoBehaviour
             if (i == moveNumber)
             {
                 Move moveToChange = PartyManager.instance.partyMembers[0].assignedMoves[i];
-                switch (playerOrEnemy)
+                switch (isPlayerTurn ? 0 : 1)
                 {
                     case 0:
                         currentPlayerMove = moveToChange;
@@ -303,14 +305,14 @@ public class GameManagerRPG : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(1f);
-        DialogueVault.instance.AttackinBattle(playerOrEnemy == 0 ? currentPlayerMove.moveName : currentEnemyMove.moveName, playerOrEnemy == 0 ? currentPlayerMove.power : currentEnemyMove.power);
+        DialogueVault.instance.AttackinBattle(isPlayerTurn ? currentPlayerMove.moveName : currentEnemyMove.moveName, isPlayerTurn ? currentPlayerMove.power : currentEnemyMove.power);
     }
-    public void SpriteFlicker(SpriteRenderer sprite, int flickerCount = 5, float flickerDuration = 0.1f)
+    public void SpriteFlicker(Image sprite, int flickerCount = 5, float flickerDuration = 0.1f)
     {
         StartCoroutine(spriteFlicker(sprite, flickerCount, flickerDuration));
     }
 
-    private IEnumerator spriteFlicker(SpriteRenderer sprite, int flickerCount = 5, float flickerDuration = 0.1f)
+    private IEnumerator spriteFlicker(Image sprite, int flickerCount = 5, float flickerDuration = 0.1f)
     {
         if (sprite != null)
         {

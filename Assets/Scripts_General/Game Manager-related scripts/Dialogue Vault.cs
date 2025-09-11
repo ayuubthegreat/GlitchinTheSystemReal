@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueVault : MonoBehaviour
 {
@@ -24,17 +25,7 @@ public class DialogueVault : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-    void Start()
-    {
+        instance = this;
         dialogueSets = new DialogueSet[][]
         {
             new DialogueSet[]
@@ -138,16 +129,23 @@ public class DialogueVault : MonoBehaviour
                 new DialogueSet { dialogueLine = "All right.", characterName = "Abdurahman" },
             },
         };
+
         dialogueForBattle = new DialogueSet[][] {
+        
             // Dialogue for the battle encounter
-            new DialogueSet[] {
-                new DialogueSet{dialogueLine = "A Generic Enemy appears!", characterName = string.Empty},
+            new DialogueSet[]
+            {
+                new DialogueSet { dialogueLine = "A Generic Enemy appears!", characterName = string.Empty },
                 // If enemy is a fallen Muslim
-                new DialogueSet{dialogueLine = "It's a fallen Muslim! You might want to save" + (isGirlorBoy ? " her" : " him") + "!", characterName = string.Empty},
-                new DialogueSet{dialogueLine = "What shall you do?" , characterName = string.Empty},
-                new DialogueSet{dialogueLine = GameManagerRPG.instance.isPlayerTurn ? "You use " + GameManagerRPG.instance.currentPlayerMove.moveName + "!" : enemyName + " uses " + GameManagerRPG.instance.currentEnemyMove.moveName + "!", characterName = string.Empty},
-            }
+                new DialogueSet { dialogueLine = "It's a fallen Muslim! You might want to save" + (isGirlorBoy ? " her" : " him") + "!", characterName = string.Empty },
+                new DialogueSet { dialogueLine = "What shall you do?" , characterName = string.Empty },
+                new DialogueSet { dialogueLine = GameManagerRPG.instance.isPlayerTurn ? "You use " + GameManagerRPG.instance.currentPlayerMove.moveName + "!" : enemyName + " uses " + (GameManagerRPG.instance != null ? GameManagerRPG.instance.currentEnemyMove.moveName : "Unknown Move") + "!", characterName = string.Empty },
+            },
         };
+    }
+    void Start()
+    {
+        
 
     }
     public string DeclarePartyMember(string partyMemberName)
@@ -159,11 +157,55 @@ public class DialogueVault : MonoBehaviour
     public void AttackinBattle(string moveName = "Slash", int damageAmount = 10) => StartCoroutine(attackinBattle(moveName, damageAmount));
     public IEnumerator attackinBattle(string moveName = "Slash", int damageAmount = 10)
     {
+        yield return new WaitForSeconds(1f);
+        UIManagerRPG.instance.battleShortMenu.SetActive(false);
         Debug.Log("Attacking enemy with " + moveName + " for " + damageAmount + " damage!");
-        DialogueManager.instance.StartDialogueTexts(dialogueForBattle[0], 3, 3);
+        if (DialogueManager.instance != null)
+        {
+            DialogueManager.instance.StartDialogueTexts(dialogueForBattle[0], 3, 3);
+        }
+        else
+        {
+            Debug.LogWarning("DialogueManager instance is null. Cannot start battle dialogue.");
+        }
+
         // Implement attack logic here
         yield return new WaitForSeconds(1f);
-        GameManagerRPG.instance.SpriteFlicker(GameManagerRPG.instance.isPlayerTurn ? GameManagerRPG.instance.enemiesInBattle[0].GetComponent<SpriteRenderer>() : GameManagerRPG.instance.battleAlliesPrefab[0].GetComponent<SpriteRenderer>(), 10);
+        GameManagerRPG.instance.SpriteFlicker(GameManagerRPG.instance.isPlayerTurn ? GameManagerRPG.instance.enemiesInBattle[0].GetComponent<Image>() : GameManagerRPG.instance.battleAlliesPrefab[0].GetComponent<Image>(), 10);
+        if (GameManagerRPG.instance.isPlayerTurn)
+        {
+            GameManagerRPG.instance.enemiesInBattle[0].GetComponent<battleStats>().health -= damageAmount;
+            Debug.Log("Enemy health is now: " + GameManagerRPG.instance.enemiesInBattle[0].GetComponent<battleStats>().health);
+            if (GameManagerRPG.instance.enemiesInBattle[0].GetComponent<battleStats>().health <= 0)
+            {
+                Debug.Log("Enemy defeated!");
+                // Handle enemy defeat (e.g., remove from battle, give rewards, etc.)
+                Destroy(GameManagerRPG.instance.enemiesInBattle[0]);
+                
+                if (GameManagerRPG.instance.enemiesInBattle.Length == 0)
+                {
+                    Debug.Log("All enemies defeated! You win the battle!");
+                    // Handle battle victory (e.g., exit battle mode, give rewards, etc.)
+                    UIManagerRPG.instance.battleShortMenu.SetActive(false);
+                    yield break; // Exit the coroutine early since the battle is over
+                }
+            }
+        }
+        else
+        {
+            GameManagerRPG.instance.battleAlliesPrefab[0].GetComponent<battleStats>().health -= damageAmount;
+            Debug.Log("Player health is now: " + GameManagerRPG.instance.battleAlliesPrefab[0].GetComponent<battleStats>().health);
+            if (GameManagerRPG.instance.battleAlliesPrefab[0].GetComponent<battleStats>().health <= 0)
+            {
+                Debug.Log("Player defeated! Game Over!");
+                // Handle player defeat (e.g., game over sequence, reload last save, etc.)
+                UIManagerRPG.instance.battleShortMenu.SetActive(false);
+                yield break; // Exit the coroutine early since the game is over
+            }
+        }
+        yield return new WaitForSeconds(1f);
+        GameManagerRPG.instance.isPlayerTurn = !GameManagerRPG.instance.isPlayerTurn;
+        UIManagerRPG.instance.battleShortMenu.SetActive(true);
     }
 
 }
