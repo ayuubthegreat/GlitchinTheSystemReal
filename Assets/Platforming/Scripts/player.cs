@@ -491,6 +491,33 @@ public class player : MonoBehaviour
 
 
     }
+    public void Ouch(Collider2D collision, startHealthScriptt healthScript)
+    {
+        player player = collision.gameObject.GetComponent<player>();
+        if (player != null)
+        {
+            if (player.playerHealth != 0)
+            {
+                if (gameManagerPlatformer.instance == null)
+                {
+                    Debug.LogError("gameManagerPlatformer instance is null!");
+                    return;
+                }
+                healthScript.SetDestroyIndividualHealth(player.playerHealth);
+                player.playerHealth--;
+                Debug.Log("Player Health: " + player.playerHealth);
+                player.Knockback(transform.position.x);
+
+
+            }
+            else
+            {
+                gameManagerPlatformer.instance.warningScreenandTeleport(5);
+            }
+
+
+        }
+    }
     public void Whoosh()
     {
         rb.linearVelocity = new Vector2(100, 0);

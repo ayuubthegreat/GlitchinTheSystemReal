@@ -82,7 +82,7 @@ MonoBehaviour:
   victoryMusic: {fileID: 8300000, guid: dd24a738218946643845e7c0e9f8feea, type: 3}
   platformerTimes: 0
   RPGTimes: 0
-  DialogueProgression: 0
+  DialogueProgression: 3
   noMusic: 0
   musicSlider: {fileID: 0}
   soundEffectSlider: {fileID: 0}

@@ -11,8 +11,8 @@ public class LogoManager : MonoBehaviour
     public int productionLogoLimit = 2;
     public MenuLoader mainMenu;
     public AudioSource mainSource;
-    public bool endLogos; // Reference to the AudioSource
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public bool endLogos;
+    public int fadeSpeed = 3;
     void Start()
     {
         mainSource = Camera.main.GetComponent<AudioSource>();
@@ -34,6 +34,7 @@ public class LogoManager : MonoBehaviour
         {
             Debug.Log("Return key pressed, skipping logos.");
             StopCoroutine(ChangeLogo(changeDuration));
+            UIManager.instance.fadeableGeneralObjects[0].Fader(true);
             DisplayMainMenu();
         }
     }
@@ -43,7 +44,7 @@ public class LogoManager : MonoBehaviour
         while (spriteLogoNum <= availableLogos.Length)
         {
             yield return new WaitForSeconds(spriteLogoNum < availableLogos.Length - 1 ? duration * 2 : duration);
-            UIManager.instance.fadeableGeneralObjects[0].StartFading(duration, 0.1f, false, "", spriteLogoNum < availableLogos.Length - 1 ? IncreaseIndex : DisplayMainMenu);
+            UIManager.instance.fadeableGeneralObjects[0].StartFading(duration, fadeSpeed, false, "", spriteLogoNum < availableLogos.Length - 1 ? IncreaseIndex : DisplayMainMenu);
         }
         Debug.Log("All logos displayed, ending logo sequence.");
     }
@@ -64,7 +65,6 @@ public class LogoManager : MonoBehaviour
     }
     public void DisplayMainMenu()
     {
-        UIManager.instance.fadeableGeneralObjects[0].Fader(true);
         endLogos = true;
         spriteLogoNum = 0; // Reset the logo index
         image.sprite = availableLogos[0]; // Reset the image to the first logo
