@@ -17,6 +17,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI noButtonText;
     public GameObject dialogueBox;
     public GameObject personNameBox;
+    public System.Action actionOnComplete;
     public Button nextButton;
     public Button yesButton;
     public Button noButton;
@@ -136,22 +137,19 @@ public class DialogueManager : MonoBehaviour
                 return false;
         }
     }
-    public void StartDialogueTexts(DialogueVault.DialogueSet[] dialogueSets, int start, int end = -1, float duration = 0f, NPC npc = null, bool isAutonomus = false, int autonomusDuration = 2)
+    public void StartDialogueTexts(DialogueVault.DialogueSet[] dialogueSets, int start, int end = -1, float duration = 0f, NPC npc = null, bool isAutonomus = false, int autonomusDuration = 2, System.Action actionOnComplete = null)
     {
         StopAllCoroutines();
-        StartCoroutine(DialogueTexts(dialogueSets, start, end, duration, npc, isAutonomus, autonomusDuration));
+        StartCoroutine(DialogueTexts(dialogueSets, start, end, duration, npc, isAutonomus, autonomusDuration, actionOnComplete));
     }
-    public IEnumerator DialogueTexts(DialogueVault.DialogueSet[] dialogueSets, int start, int end = -1, float duration = 0f, NPC npc = null, bool isAutonomus = false, int autonomusDuration = 2)
+    public IEnumerator DialogueTexts(DialogueVault.DialogueSet[] dialogueSets, int start, int end = -1, float duration = 0f, NPC npc = null, bool isAutonomus = false, int autonomusDuration = 2, System.Action actionOnComplete = null)
     {
 
         if (end == -1)
         {
             end = dialogueSets.Length - 1;
         }
-        if (isAutonomus)
-        {
-            nextButton.gameObject.SetActive(false);
-        }
+        nextButton.gameObject.SetActive(!isAutonomus);
         dialogueLines = new string[end - start + 1];
         speakerNames = new string[end - start + 1];
 
@@ -160,11 +158,12 @@ public class DialogueManager : MonoBehaviour
             dialogueLines[i - start] = dialogueSets[i].dialogueLine;
             speakerNames[i - start] = dialogueSets[i].characterName;
         }
-        GameManagerRPG.instance.playerpg.isMovable = false;
+        this.actionOnComplete = actionOnComplete;
 
         dialogueIndex = 0;
         currentDialogueSet = dialogueSets;
         yield return new WaitForSeconds(duration);
+        GameManagerRPG.instance.playerpg.isMovable = false;
         GameManagerRPG.instance.playerpg.rb.linearVelocity = Vector2.zero;
         dialogueBox.SetActive(true);
         personNameBox.SetActive(true);
@@ -179,7 +178,7 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(dialogueRunner(dialogueLines[dialogueIndex], speakerNames[dialogueIndex]));
         if (isAutonomus)
         {
-            while (dialogueIndex < dialogueLines.Length)
+            while (dialogueIndex < dialogueLines.Length + 1)
             {
                 yield return new WaitForSeconds(autonomusDuration);
                 UpdateDialogueText();
@@ -189,6 +188,13 @@ public class DialogueManager : MonoBehaviour
     }
     public void UpdateDialogueText()
     {
+        if (brokenSentence != string.Empty)
+        {
+            Debug.Log("Continuing broken sentence: " + brokenSentence);
+            StopAllCoroutines();
+            StartCoroutine(dialogueRunner(brokenSentence, personName.text));
+            return;
+        }
         if (dialogueIndex < dialogueLines.Length - 1)
         {
             if (brokenSentence == string.Empty)
@@ -241,9 +247,11 @@ public class DialogueManager : MonoBehaviour
             if (!GameManagerRPG.instance.movingAutonomously && !GameManagerRPG.instance.isInBattle)
             {
                 GameManager.instance.DialogueProgression++;
+                DialogueProcessor.instance.DialogueProgressionFunction();
             }
 
-            DialogueProcessor.instance.DialogueProgressionFunction();
+            actionOnComplete?.Invoke();
+            actionOnComplete = null;
 
             Debug.Log("Dialogue ended.");
             dialogueBox.SetActive(false);

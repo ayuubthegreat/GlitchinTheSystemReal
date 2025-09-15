@@ -111,6 +111,7 @@ public class DialogueProcessor : MonoBehaviour
         {
             ConversationManager();
         }
+        
 
     }
     public IEnumerator RestartCameraZoom(float waitForPlayerMovement)
@@ -161,6 +162,8 @@ public class DialogueProcessor : MonoBehaviour
                 StartCoroutine(PhoneRinging(secondstoWait));
                 break;
             case 3:
+                GameManagerRPG.instance.ControlNPCMovement(false, new NPC[] {npc});
+                npc.movingAutonomously = true;
                 GameManagerRPG.instance.CameraZoom(10f, 10f);
                 Debug.Log("NPC Position: " + npc.transform.position + " Player Position: " + GameManagerRPG.instance.playerpg.transform.position);
                 npc.StartMovingNPC(0, 20f, new Vector2[] { new Vector2(0f, npc.playerPosition.y - npc.transform.position.y - 5f), new Vector2(npc.playerPosition.x - npc.transform.position.x, 0f) }, FranticTeenagerDialogue1);
@@ -189,6 +192,8 @@ public class DialogueProcessor : MonoBehaviour
             case 8:
                 franticTeenager.facingDir = 0;
                 franticTeenager.StartMovingNPC(0, 30f, new Vector2[] { new Vector2(-30, 0) }, BeginAutonomousExploration);
+                GameManagerRPG.instance.ControlNPCMovement(true);
+                
                 break;
             default:
                 Debug.Log("No conversation detected.");

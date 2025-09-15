@@ -1,7 +1,5 @@
-using System;
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class dialogueObject : MonoBehaviour
 {

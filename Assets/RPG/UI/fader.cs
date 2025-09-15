@@ -45,13 +45,7 @@ public class fader : MonoBehaviour
                 targetAlpha = fadeImage.color.a;
                 fading = false;
             }
-            if (loadScene)
-            {
-                fading = false;
-                loadScene = false;
-                SceneManager.LoadScene(sceneName);
-                
-            }
+            
 
 
         }
@@ -82,6 +76,13 @@ public class fader : MonoBehaviour
         if (desiredFunction != null)
         {
             Debug.Log("Invoking desired function after fade out."); 
+        }
+        if (loadScene)
+        {
+        fading = false;
+        loadScene = false;
+        SceneManager.LoadScene(sceneName);
+                
         }
         desiredFunction?.Invoke();
         yield return new WaitForSecondsRealtime(0.1f); // Small delay to ensure the function has time to execute before fading back in

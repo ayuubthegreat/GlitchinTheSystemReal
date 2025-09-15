@@ -26,6 +26,7 @@ public class NPC : MonoBehaviour
     public int yRandomOffsetLimit = 20;
     public int xRandomOffsetLimit = 20;
     public bool isInDialogue = false;
+    public bool canMove = true;
 
     private void Awake()
     {
@@ -84,7 +85,7 @@ public class NPC : MonoBehaviour
             Flip(targetPosition);
             while (Vector2.Distance(npcRigidbody.position, targetPosition) > 0.1f)
             {
-                if (isInDialogue)
+                if (isInDialogue || !canMove)
                 {
                     npcRigidbody.linearVelocity = Vector2.zero; // Stop the NPC
                     xVelocity = 0;

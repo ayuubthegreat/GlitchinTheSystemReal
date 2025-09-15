@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class DialogueVault : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public class DialogueVault : MonoBehaviour
     public DialogueSet[][] dialogueForBattler;
     public string enemyName;
     public bool isFallenMuslim;
-    public bool isGirlorBoy; // True for girl, false for boy
+    public bool isGirlorBoy;
+    public int experiencePointsGained;
+    public int coinsGained; // True for girl, false for boy
 
 
     [Serializable]
@@ -34,8 +37,14 @@ public class DialogueVault : MonoBehaviour
                 new DialogueSet { dialogueLine = "They're a fallen Muslim! You might want to save them!", characterName = "" },
                 new DialogueSet { dialogueLine = "What shall you do?", characterName = "Narrator" },
                 new DialogueSet { dialogueLine = "", characterName = " " }, // This will be set dynamically during the battle
+                // Player victory dialogue
                 new DialogueSet {dialogueLine = "You faint........<Oh, well. At least you tried your best....."},
-                new DialogueSet{dialogueLine = "You win the battle!", characterName= ""},
+                // Enemy fainting dialogue
+                new DialogueSet{dialogueLine = enemyName + " faints!", characterName= ""},
+                new DialogueSet{dialogueLine = "You defeated " + enemyName + "!", characterName= "Narrator"},
+                new DialogueSet{dialogueLine = "You gained " + experiencePointsGained + " experience points!", characterName= "Narrator"},
+                new DialogueSet{dialogueLine = "You gained " + coinsGained + " coins!", characterName= "Narrator"},
+                new DialogueSet{dialogueLine = "You leveled up to level " + GameManagerRPG.instance.playerLevel + "!", characterName= "Narrator"},
             },
         };
         dialogueSets = new DialogueSet[][]
@@ -150,72 +159,6 @@ public class DialogueVault : MonoBehaviour
         return partyMemberName + " has joined the revolution!";
     }
     public void MoveCameraToFirstPhoneBooth() => GameManagerRPG.instance.MoveCamera(new Vector3(10, 10, 10), 10f);
-    public void AttackinBattle(string moveName = "Slash", int damageAmount = 10, bool isPhysical = true, int stageChange = 0) => StartCoroutine(attackinBattle(moveName, damageAmount, isPhysical, stageChange));
-    public IEnumerator attackinBattle(string moveName = "Slash", int damageAmount = 10, bool isPhysical = true, int stageChange = 0)
-    {
-        yield return new WaitForSeconds(1f);
-        UIManagerRPG.instance.battleShortMenu.SetActive(false);
-        Debug.Log("Attacking enemy with " + moveName + " for " + damageAmount + " damage!");
-        dialogueForBattler[0][3].dialogueLine = GameManagerRPG.instance.isPlayerTurn ? "You use " + moveName + "!" : enemyName + " uses " + moveName + "!";
-        DialogueManager.instance.StartDialogueTexts(dialogueForBattler[0], 3, -1);
-        // Implement attack logic here
-        yield return new WaitForSeconds(1f);
-
-        GameManagerRPG.instance.SpriteFlicker(GameManagerRPG.instance.isPlayerTurn ? GameManagerRPG.instance.enemiesInBattle[0].GetComponent<Image>() : GameManagerRPG.instance.battleAlliesPrefab[0].GetComponent<Image>(), 10);
-        if (GameManagerRPG.instance.isPlayerTurn)
-        {
-            GameManagerRPG.instance.enemiesInBattle[0].GetComponent<battleStats>().health -= damageAmount;
-            Debug.Log("Enemy health is now: " + GameManagerRPG.instance.enemiesInBattle[0].GetComponent<battleStats>().health);
-            if (GameManagerRPG.instance.enemiesInBattle[0].GetComponent<battleStats>().health <= 0)
-            {
-                Debug.Log("Enemy defeated!");
-                // Handle enemy defeat (e.g., remove from battle, give rewards, etc.)
-                GameManagerRPG.instance.enemiesInBattle[GameManagerRPG.instance.currentEnemyIndex].SetActive(false);
-                GameManagerRPG.instance.currentEnemyIndex++;
-                if (GameManagerRPG.instance.currentEnemyIndex < GameManagerRPG.instance.enemiesInBattle.Length - 1)
-                {
-                    GameManagerRPG.instance.enemiesInBattle[GameManagerRPG.instance.currentEnemyIndex].SetActive(true);
-                }
-                else
-                {
-                   Debug.Log("All enemies defeated! You win the battle!");
-                   dialogueForBattler[0][5].dialogueLine += "< You recieve " + UnityEngine.Random.Range(20, 100) + " coins as a reward!";
-                   DialogueManager.instance.StartDialogueTexts(dialogueForBattler[0], 5, -1, 0, null, true, 1);
-                    // Handle battle victory (e.g., exit battle mode, give rewards, etc.)
-                    UIManagerRPG.instance.battleShortMenu.SetActive(false);
-                    yield break; // Exit the coroutine early since the battle is over 
-                }
-                
-                
-                
-                    
-                
-            }
-        }
-        else
-        {
-            GameManagerRPG.instance.battleAlliesPrefab[0].GetComponent<battleStats>().health -= damageAmount;
-            Debug.Log("Player health is now: " + GameManagerRPG.instance.battleAlliesPrefab[0].GetComponent<battleStats>().health);
-            if (GameManagerRPG.instance.battleAlliesPrefab[0].GetComponent<battleStats>().health <= 0)
-            {
-                Debug.Log("Player defeated! Game Over!");
-                // Handle player defeat (e.g., game over sequence, reload last save, etc.)
-                UIManagerRPG.instance.battleShortMenu.SetActive(false);
-                yield break; // Exit the coroutine early since the game is over
-            }
-        }
-        yield return new WaitForSeconds(1f);
-        GameManagerRPG.instance.isPlayerTurn = !GameManagerRPG.instance.isPlayerTurn;
-        if (GameManagerRPG.instance.isPlayerTurn)
-        {
-            UIManagerRPG.instance.battleShortMenu.SetActive(true);
-            yield break;
-        }
-        else
-        {
-            GameManagerRPG.instance.CommenceBattle(UnityEngine.Random.Range(0, 4));
-        }
-        
-    }
+    
 
 }
