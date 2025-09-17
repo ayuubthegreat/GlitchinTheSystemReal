@@ -1340,15 +1340,13 @@ MonoBehaviour:
   isInBattle: 0
   isPaused: 0
   numberOfEnemies: 1
-  maxNumberOfEnemies: 10
+  maxNumberOfEnemies: 5
   enemyHealth: 20
-  playerLevel: 1
+  playerLevel: 10
   experiencePoints: 0
   xptoNextLevel: 20
   coins: 0
   enemyLevel: 1
-  originalPlayerHealth: 20
-  playerHealth: 20
   isPlayerTurn: 1
   enemiesInBattle: []
   battleEnemyPrefab: {fileID: 1774157130506522685, guid: dc045a4455a84154bb25c71d76188cbc, type: 3}
@@ -1497,6 +1495,7 @@ MonoBehaviour:
   - memberName: Abdurahman
     level: 1
     health: 20
+    originalHealth: 20
     attack: 1
     defense: 1
     speed: 1
@@ -1545,9 +1544,11 @@ MonoBehaviour:
       defenseChange: 0
       speedChange: 0
       accuracyChange: 0
+    battleAnimator: {fileID: 0}
   - memberName: Yasir
     level: 5
     health: 40
+    originalHealth: 0
     attack: 1
     defense: 1
     speed: 1
@@ -1596,9 +1597,11 @@ MonoBehaviour:
       defenseChange: 0
       speedChange: 0
       accuracyChange: 0
+    battleAnimator: {fileID: 0}
   - memberName: Bakr
     level: 8
     health: 40
+    originalHealth: 0
     attack: 1
     defense: 1
     speed: 1
@@ -1647,9 +1650,11 @@ MonoBehaviour:
       defenseChange: 0
       speedChange: 0
       accuracyChange: 0
+    battleAnimator: {fileID: 0}
   - memberName: Omar
     level: 1
     health: 40
+    originalHealth: 0
     attack: 1
     defense: 1
     speed: 1
@@ -1698,9 +1703,11 @@ MonoBehaviour:
       defenseChange: 0
       speedChange: 0
       accuracyChange: 0
+    battleAnimator: {fileID: 0}
   - memberName: Ammar
     level: 12
     health: 40
+    originalHealth: 0
     attack: 1
     defense: 1
     speed: 1
@@ -1749,6 +1756,7 @@ MonoBehaviour:
       defenseChange: 0
       speedChange: 0
       accuracyChange: 0
+    battleAnimator: {fileID: 0}
   moveButtons:
   - {fileID: 112975860}
   - {fileID: 1453986783}
@@ -3595,6 +3603,10 @@ PrefabInstance:
     - target: {fileID: 5264552028339603898, guid: b8b11132b8c62da4781875c0f556d8d8, type: 3}
       propertyPath: m_Name
       value: healthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586507000346059846, guid: b8b11132b8c62da4781875c0f556d8d8, type: 3}
+      propertyPath: isPlayerorEnemy
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13075,7 +13087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2805028177673404513, guid: 0159be88d5d57bf4ab684c709b71edc4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8871675453636400643, guid: 0159be88d5d57bf4ab684c709b71edc4, type: 3}
       propertyPath: mainMap
@@ -16692,10 +16704,6 @@ PrefabInstance:
     - target: {fileID: 3422415518491081412, guid: 2c775ff4e85e44a4d808938347d2e209, type: 3}
       propertyPath: m_Name
       value: PlayerBattlePrefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 3422415518491081412, guid: 2c775ff4e85e44a4d808938347d2e209, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

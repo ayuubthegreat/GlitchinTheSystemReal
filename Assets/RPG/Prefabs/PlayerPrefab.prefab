@@ -10,7 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1774157130506522685, guid: dc045a4455a84154bb25c71d76188cbc, type: 3}
       propertyPath: m_Name
-      value: BattleCharacter Variant
+      value: PlayerPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 1774157130506522685, guid: dc045a4455a84154bb25c71d76188cbc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3521523257035349649, guid: dc045a4455a84154bb25c71d76188cbc, type: 3}
       propertyPath: m_Pivot.x
@@ -74,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3521523257035349649, guid: dc045a4455a84154bb25c71d76188cbc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 247
+      value: -385
       objectReference: {fileID: 0}
     - target: {fileID: 3521523257035349649, guid: dc045a4455a84154bb25c71d76188cbc, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -92,7 +96,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6165542569070124307, guid: dc045a4455a84154bb25c71d76188cbc, type: 3}
+      propertyPath: health
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6165542569070124307, guid: dc045a4455a84154bb25c71d76188cbc, type: 3}
+      propertyPath: originalHealth
+      value: 20
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6165542569070124307, guid: dc045a4455a84154bb25c71d76188cbc, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

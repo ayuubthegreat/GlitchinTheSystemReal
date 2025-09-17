@@ -239,7 +239,7 @@ public class UIManagerRPG : MonoBehaviour
                 PartyMember memberStats = PartyManager.instance.partyMembers[0]; // Assuming Abdurahman is the first party member
                 abdurahmanProfileScreen.coinsText.text = GameManagerRPG.instance.coins.ToString();
                 abdurahmanProfileScreen.levelText.text = "Level: " + memberStats.level.ToString();
-                abdurahmanProfileScreen.healthText.text = "Health: " + memberStats.health.ToString() + "/" + GameManagerRPG.instance.originalPlayerHealth.ToString();
+                abdurahmanProfileScreen.healthText.text = "Health: " + memberStats.health.ToString() + "/" + memberStats.originalHealth.ToString();
             }
         }
     }

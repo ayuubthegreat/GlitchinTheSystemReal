@@ -39,10 +39,12 @@ public struct PartyMember
     public string memberName;
     public int level;
     public int health;
+    public int originalHealth;
     public int attack;
     public int defense;
     public int speed;
     public Move[] assignedMoves;
+    public RuntimeAnimatorController battleAnimator;
 }
 
 public class PartyManager : MonoBehaviour
