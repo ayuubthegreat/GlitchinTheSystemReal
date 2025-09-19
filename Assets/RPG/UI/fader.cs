@@ -24,7 +24,7 @@ public class fader : MonoBehaviour
         if (fadeInOnStart)
         {
             fadeImage.color = new Color(0, 0, 0, 1);
-            Fader(true);
+            StartCoroutine(Fader(true));
         }
 
     }
@@ -53,17 +53,26 @@ public class fader : MonoBehaviour
 
 
     }
-    public void Fader(bool fader, Sprite imageSprite = null)
+    public IEnumerator Fader(bool fader, Sprite imageSprite = null, float duration = 1f, float speed = 1f)
     {
-        
+        float time = 0f;
         if (imageSprite != fadeImage.sprite)
         {
             fadeImage.sprite = imageSprite;
         }
         int imageOrNoImage = fadeImage.sprite != null ? 1 : 0;
-        fadeImage.color = new Color(imageOrNoImage, imageOrNoImage, imageOrNoImage, fader ? 1 : 0);
-        targetColor = new Color(imageOrNoImage, imageOrNoImage, imageOrNoImage, fader ? 0 : 1);
-        fading = true;
+        float transitionalAlpha;
+        int targetAlpha = fader ? 0 : 1;
+        targetColor = new Color(imageOrNoImage, imageOrNoImage, imageOrNoImage, targetAlpha);
+        while (time < duration)
+        {
+            time += Time.unscaledDeltaTime * speed;
+            transitionalAlpha = Mathf.Lerp(fadeImage.color.a, targetAlpha, time / duration);
+            fadeImage.color = new Color(imageOrNoImage, imageOrNoImage, imageOrNoImage, transitionalAlpha);
+            yield return null;
+        }
+        fadeImage.color = new Color(imageOrNoImage, imageOrNoImage, imageOrNoImage, targetAlpha);
+        
     }
     public IEnumerator Fading(float duration = 1f, float speed = 10f, bool loadScene = false, string sceneName = "", Action desiredFunction = null)
     {
@@ -71,7 +80,7 @@ public class fader : MonoBehaviour
         this.sceneName = sceneName;
         fadeDuration = duration;
         fadeSpeed = speed;
-        Fader(false);
+        yield return StartCoroutine(Fader(false));
         yield return new WaitForSecondsRealtime(fadeDuration);
         if (desiredFunction != null)
         {
@@ -86,7 +95,7 @@ public class fader : MonoBehaviour
         }
         desiredFunction?.Invoke();
         yield return new WaitForSecondsRealtime(0.1f); // Small delay to ensure the function has time to execute before fading back in
-        Fader(true);
+        StartCoroutine(Fader(true));
     }
     public void StartFading(float duration = 3f, float speed = 10f, bool loadScene = false, string sceneName = "", Action desiredFunction = null)
     {

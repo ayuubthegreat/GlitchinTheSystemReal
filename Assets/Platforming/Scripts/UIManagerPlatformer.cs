@@ -19,6 +19,7 @@ public class UIManagerPlatformer : MonoBehaviour
     public float waitForCoinCount = 1f;
     public int coinCount = 0;
     public bool finishedCounting = false;
+    public startHealthScriptt healthScript;
 
     void Awake()
     {

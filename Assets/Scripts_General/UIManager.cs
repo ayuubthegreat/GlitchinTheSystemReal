@@ -50,6 +50,9 @@ public class UIManager : MonoBehaviour
     public bool[] MainMenuTransitions;
     public string streetName;
     public string deathScene;
+    public GameObject warningBlockScreen;
+    public Animator warningBlockAnimator;
+    public TextMeshProUGUI warningBlockText;
 
 
     void Awake()
@@ -77,7 +80,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        
+
         fadeNums = 2;
         location = "Abdurahman's House";
         MainMenuTransitions = new bool[] {
@@ -143,7 +146,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    
+
 
     public IEnumerator TimetoDie(float duration)
     {
@@ -153,7 +156,7 @@ public class UIManager : MonoBehaviour
             GameManager.instance.startSpawnBoolPlatforming = true;
         }
         yield return new WaitForSeconds(duration);
-       fadeableGeneralObjects[0].StartFading(3f, .1f, true, deathScene);
+        fadeableGeneralObjects[0].StartFading(3f, .1f, true, deathScene);
     }
     public void SetStartBool()
     {
@@ -253,6 +256,27 @@ public class UIManager : MonoBehaviour
     public void EndGame()
     {
         Application.Quit();
+    }
+    public void ShowWarningBlock(string warningText)
+    {
+        if (warningBlockScreen != null && warningBlockAnimator != null && warningBlockText != null)
+        {
+            warningBlockText.text = warningText;
+            warningBlockScreen.SetActive(true);
+        }
+    }
+    public void HideWarningBlock()
+    {
+        StartCoroutine(hideWarningBlock());
+    }
+    public IEnumerator hideWarningBlock()
+    {
+        if (warningBlockScreen != null && warningBlockAnimator != null)
+        {
+            warningBlockAnimator.SetTrigger("Hide");
+            yield return new WaitForSeconds(1f); // Wait for the animation to finish
+            warningBlockScreen.SetActive(false);
+        }
     }
     
 }

@@ -28,7 +28,7 @@ public class LogoManager : MonoBehaviour
         {
             Debug.Log("Escape key pressed, quitting application.");
             Application.Quit();
-            
+
         }
         if (Input.GetKeyDown(KeyCode.Return) && !endLogos)
         {
@@ -40,7 +40,7 @@ public class LogoManager : MonoBehaviour
     }
     public IEnumerator ChangeLogo(int duration)
     {
-        
+
         while (spriteLogoNum <= availableLogos.Length)
         {
             yield return new WaitForSeconds(spriteLogoNum < availableLogos.Length - 1 ? duration * 2 : duration);
@@ -65,14 +65,23 @@ public class LogoManager : MonoBehaviour
     }
     public void DisplayMainMenu()
     {
+        Invoke(nameof(ShowGameInDevelopmentWarning), 2f);
         endLogos = true;
         spriteLogoNum = 0; // Reset the logo index
         image.sprite = availableLogos[0]; // Reset the image to the first logo
         Debug.Log("Displaying main menu.");
         gameObject.SetActive(false);
-        mainMenu.gameObject.SetActive(true);  
+        mainMenu.gameObject.SetActive(true);
         mainSource.clip = UIManager.instance.mainMenuMusic;
         mainSource.Play();
-        
+
+    }
+    public void ShowGameInDevelopmentWarning()
+    {
+        if (UIManager.instance != null && UIManager.instance.warningBlockScreen != null && UIManager.instance.warningBlockAnimator != null && UIManager.instance.warningBlockText != null)
+        {
+            UIManager.instance.ShowWarningBlock("This game is not complete. Some features may not work as intended.");
+        }
+       
     }
 }

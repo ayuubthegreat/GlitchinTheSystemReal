@@ -58,6 +58,8 @@ public class UIManagerRPG : MonoBehaviour
     public TextMeshProUGUI[] partyMembersLevels;
     public int currentSelectedPartyMember = 0;
     public AbdurahmanProfileScreen abdurahmanProfileScreen;
+    
+    
 
     void Awake()
     {
@@ -243,4 +245,5 @@ public class UIManagerRPG : MonoBehaviour
             }
         }
     }
+    
 }

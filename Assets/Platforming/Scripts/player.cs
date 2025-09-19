@@ -73,6 +73,16 @@ public class player : MonoBehaviour
     [Header("Enemy Destruction Values")]
     public Transform enemyDestroy;
     public float enemyDestroyRadius;
+    [Header("Rev Up Values")]
+    public float revUpTime = 1f;
+    public float originalRevUpTime = 1f;
+    public bool isRevvedUp = false;
+    public bool revvingUp = false;
+    public float dashMultiplierwhenRevvedUp = 1.5f;
+    public float revverBuffer = .5f;
+    [Header("Key Codes for Movement")]
+    public KeyCode jump;
+    public KeyCode dash;
     [Header("Other Values")]
     public float TargetTime = 0.01f;
     private int facingDir = 1;
@@ -120,15 +130,14 @@ public class player : MonoBehaviour
         if (isMovable && !crouched && !isDashing)
         {
             bool isTrampolining = gameManagerPlatformer.instance.isTrampolining && xInput == 0;
-            rb.linearVelocity = new Vector2(isTrampolining ? rb.linearVelocity.x : xInput * moveSpeed, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(isTrampolining ? rb.linearVelocity.x : xInput * (isRevvedUp ? moveSpeed / 2 : moveSpeed), rb.linearVelocity.y);
         }
-        if (yInput < 0 && isGrounded)
+        crouched = yInput < 0 && isGrounded;
+
+        if (Input.GetKey(dash))
         {
-            crouched = true;
-        }
-        else
-        {
-            crouched = false;
+            Dash(0);
+
         }
 
     }
@@ -136,10 +145,7 @@ public class player : MonoBehaviour
     void Update()
     {
         anim.SetBool("levelStarted", gameManagerPlatformer.instance.levelStarted);
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            Dash(0);
-        }
+
         UpdateAirbornStatus();
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
         isTouchingWall = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
@@ -162,15 +168,36 @@ public class player : MonoBehaviour
         EnemyDetectionandDestruction();
         WallSlide();
         HandleFlip();
-        
+
 
         isDead = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsDeadZone);
         canWallSlide = isTouchingWall && rb.linearVelocity.y < 0;
-
-        bool coyoteJumpAvailable = Time.time < coyoteJumpActivated + coyoteJumpWindow;
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (isDashing && isTouchingWall)
         {
-            if (isGrounded || coyoteJumpAvailable)
+            Knockback(facingDir);
+        }
+        bool coyoteJumpAvailable = Time.time < coyoteJumpActivated + coyoteJumpWindow;
+        if (Input.GetKey(jump))
+        {
+            if (crouched)
+            {
+                if (isRevvedUp)
+                {
+                    revvingUp = false;
+                    return;
+                }
+                revvingUp = true;
+                revUpTime -= Time.deltaTime;
+                if (revUpTime <= 0)
+                {
+                    isRevvedUp = true;
+                    revUpTime = 0;
+                }
+
+
+                return;
+            }
+            if ((isGrounded || coyoteJumpAvailable) && !crouched)
             {
                 if (coyoteJumpAvailable)
                 {
@@ -189,8 +216,14 @@ public class player : MonoBehaviour
                 canDoubleJump = false;
             }
 
+
             CancelCoyoteJump();
         }
+        else
+        {
+            StopRevving();
+        }
+
         if (Input.GetKeyDown(KeyCode.C))
         {
             Flip();
@@ -210,7 +243,8 @@ public class player : MonoBehaviour
         anim.SetBool("isTouchingWall", isTouchingWall);
         anim.SetBool("landonenemy", landedonEnemy);
         anim.SetBool("crouched", crouched);
-        
+        anim.SetBool("revUp", revvingUp);
+
     }
     private void requestBufferJump()
     {
@@ -252,13 +286,18 @@ public class player : MonoBehaviour
     }
     public void Dash(float currentenemyXPosition)
     {
-        if (isDashing)
+        if (isDashing || crouched)
         {
             return;
         }
         anim.SetTrigger("dashing");
         StartCoroutine(KnockbackandDashRoutine(1));
-        rb.linearVelocity = new Vector2(dashPower.x * facingDir, 0f);
+        rb.linearVelocity = new Vector2((isRevvedUp ? dashPower.x * dashMultiplierwhenRevvedUp : dashPower.x) * facingDir, 0f);
+        if (isRevvedUp)
+        {
+            isRevvedUp = false;
+            revUpTime = originalRevUpTime;
+        }
     }
 
     private void WallJump()
@@ -312,6 +351,9 @@ public class player : MonoBehaviour
 
     private void Jump()
     {
+        if (crouched) {
+            return;
+        }
         rb.linearVelocity = new Vector2(isDashing ? rb.linearVelocity.x * 1.5f : rb.linearVelocity.x, isDashing ? jumpForce * 1.2f : jumpForce);
         if (isDashing && !isGrounded)
         {
@@ -322,6 +364,9 @@ public class player : MonoBehaviour
     }
     private void DoubleJump()
     {
+        if (crouched) {
+            return;
+        }
         isWallMoving = false;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, doubleJumpForce);
         gameManagerPlatformer.instance.soundEffectSource.PlayOneShot(gameManagerPlatformer.instance.playerJumpSound);
@@ -478,12 +523,12 @@ public class player : MonoBehaviour
         transform.position = finishLineTransform.position;
         yield return new WaitForSeconds(2f);
         Debug.Log("Level Completed!");
-        
+
         whoosh = true;
         yield return new WaitForSeconds(1f);
         UIManager.instance.fadeableGeneralObjects[0].StartFading(3.5f, .1f);
         this.gameObject.SetActive(false);
-        
+
 
 
 
@@ -493,20 +538,20 @@ public class player : MonoBehaviour
     }
     public void Ouch(Collider2D collision, startHealthScriptt healthScript)
     {
-        player player = collision.gameObject.GetComponent<player>();
-        if (player != null)
+        ComplexEnemy enemy = collision.GetComponent<ComplexEnemy>();
+        if (enemy != null)
         {
-            if (player.playerHealth != 0)
+            if (playerHealth != 0)
             {
                 if (gameManagerPlatformer.instance == null)
                 {
                     Debug.LogError("gameManagerPlatformer instance is null!");
                     return;
                 }
-                healthScript.SetDestroyIndividualHealth(player.playerHealth);
-                player.playerHealth--;
-                Debug.Log("Player Health: " + player.playerHealth);
-                player.Knockback(transform.position.x);
+                UIManagerPlatformer.instance.healthScript.SetDestroyIndividualHealth(playerHealth);
+                playerHealth--;
+                Debug.Log("Player Health: " + playerHealth);
+                Knockback(transform.position.x);
 
 
             }
@@ -522,6 +567,30 @@ public class player : MonoBehaviour
     {
         rb.linearVelocity = new Vector2(100, 0);
     }
+
+    public IEnumerator WindDown()
+    {
+        yield return new WaitForSeconds(revverBuffer);
+        anim.SetBool("revUp", false);
+        revUpTime = revUpTime == 0 ? 0 : originalRevUpTime;
+        windDownCoroutine = null;
+    }
+    private Coroutine windDownCoroutine;
+
+    public void StopRevving()
+    {
+        if (isRevvedUp)
+        {
+            return;
+        }
+        revvingUp = false;
+        if (windDownCoroutine == null)
+        {
+            windDownCoroutine = StartCoroutine(WindDown());
+        }
+    }
+}
+    
     #endregion
 
-} 
+

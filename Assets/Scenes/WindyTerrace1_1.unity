@@ -5059,7 +5059,7 @@ PrefabInstance:
     - target: {fileID: 2595181430630548481, guid: 3bd3ccf01698dd248bebe59615cdb2d1, type: 3}
       propertyPath: boxCollider
       value: 
-      objectReference: {fileID: 659266100}
+      objectReference: {fileID: 0}
     - target: {fileID: 3513663096356515678, guid: 3bd3ccf01698dd248bebe59615cdb2d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 338
@@ -5109,11 +5109,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bd3ccf01698dd248bebe59615cdb2d1, type: 3}
---- !u!61 &659266100 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 9201005531618075592, guid: 3bd3ccf01698dd248bebe59615cdb2d1, type: 3}
-  m_PrefabInstance: {fileID: 659266099}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &662450380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10585,6 +10580,7 @@ MonoBehaviour:
   waitForCoinCount: 2
   coinCount: 0
   finishedCounting: 0
+  healthScript: {fileID: 1678369551}
 --- !u!82 &1173870025
 AudioSource:
   m_ObjectHideFlags: 0

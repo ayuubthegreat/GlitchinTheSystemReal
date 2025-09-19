@@ -1096,6 +1096,7 @@ MonoBehaviour:
   mainMenu: {fileID: 1000995989}
   mainSource: {fileID: 0}
   endLogos: 0
+  fadeSpeed: 3
 --- !u!114 &1395044955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1375,18 +1376,6 @@ PrefabInstance:
     - target: {fileID: 2451863304878607264, guid: 0159be88d5d57bf4ab684c709b71edc4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2805028177673404513, guid: 0159be88d5d57bf4ab684c709b71edc4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3599244656631469756, guid: 0159be88d5d57bf4ab684c709b71edc4, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7793528866458970870, guid: 0159be88d5d57bf4ab684c709b71edc4, type: 3}
-      propertyPath: fadeInOnStart
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

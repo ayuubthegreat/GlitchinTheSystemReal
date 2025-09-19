@@ -43,11 +43,12 @@ public class GameManagerRPG : MonoBehaviour
     public int xptoNextLevel = 20;
     public int coins = 0;
     public int enemyLevel = 1;
-    
+
     public bool isPlayerTurn = true;
     public GameObject[] enemiesInBattle;
     public GameObject battleEnemyPrefab;
-    public GameObject[] battleAlliesPrefab;
+    public GameObject battleAllyPrefab;
+    public GameObject[] alliesInBattle;
     public GameObject[] moveButtons;
     public Move currentPlayerMove;
     public Move currentEnemyMove;
@@ -79,7 +80,6 @@ public class GameManagerRPG : MonoBehaviour
         targetSize = main.orthographicSize;
         audioSourceVolume = GameManager.instance.musicVolume;
         phoneBooths = FindObjectsByType<teleport>(FindObjectsSortMode.None);
-        battleAlliesPrefab[0].SetActive(false);
 
         if (GameManager.instance.startSpawnBool && GameManager.instance.phoneBoothSpawn == Vector3.zero)
         {
@@ -246,34 +246,43 @@ public class GameManagerRPG : MonoBehaviour
         BattleTransition();
         CameraZoom(9f, 2f);
         yield return new WaitForSecondsRealtime(enemiesInBattle[0].GetComponent<battleStats>().isFallenMuslim ? 9f : 6f);
+        CalculatePlayerParty();
         UIManager.instance.fadeableGeneralObjects[0].StartFading(1.5f, 20f);
         yield return new WaitForSecondsRealtime(1.5f);
         UIManagerRPG.instance.playerStatsObject.SetActive(true);
         UIManagerRPG.instance.enemyStatsObject.SetActive(true);
-        battleAlliesPrefab[0].SetActive(true);
-        battleAlliesPrefab[0].transform.localPosition = new Vector3(-429, -87, 0);
+        alliesInBattle[0].SetActive(true);
+        alliesInBattle[0].transform.localPosition = new Vector3(-429, -87, 0);
         enemiesInBattle[0].transform.localPosition = new Vector3(247, 200, 0);
         UIManagerRPG.instance.battleShortMenu.SetActive(true);
         PartyManager.instance.UpdateMoveButtons(PartyManager.instance.partyMembers[currentAllyIndex]);
-        
-
-        // Implement battle initiation logic here
     }
     public void BattleTransition()
     {
-        
+
         mainMap.SetActive(false);
         playerpg.gameObject.SetActive(false);
         UIManagerRPG.instance.fadeableRPGObjects[0].Fader(false, UIManagerRPG.instance.battleImageBackgrounds[0]);
         CalculateRandomStatsofEnemy();
+        
         enemiesInBattle[0].gameObject.transform.localPosition = new Vector3(0, 0, 0);
         Time.timeScale = 1;
         UIManagerRPG.instance.playerHealthBar.originalHealth = PartyManager.instance.partyMembers[currentAllyIndex].originalHealth;
-        
+
         DialogueVault.instance.enemyName = enemiesInBattle[0].GetComponent<battleStats>().isFallenMuslim ? "Fallen Muslim" : "Generic Enemy";
         DialogueVault.instance.isFallenMuslim = enemiesInBattle[0].GetComponent<battleStats>().isFallenMuslim;
         UpdateBattleStatsInRealTime();
         DialogueManager.instance.StartDialogueTexts(DialogueVault.instance.dialogueForBattler[0], 0, 2, 0, null, true, 3);
+    }
+    public void CalculatePlayerParty()
+    {
+        alliesInBattle = new GameObject[PartyManager.instance.partyMembers.Length];
+        for (int i = 0; i < PartyManager.instance.partyMembers.Length; i++)
+        {
+            PartyMember member = PartyManager.instance.partyMembers[i];
+            alliesInBattle[i] = Instantiate(battleAllyPrefab, UIManagerRPG.instance.cutsceneParent.transform);
+            alliesInBattle[i].SetActive(false);
+        }
     }
     public void CalculateRandomStatsofEnemy()
     {
@@ -285,7 +294,7 @@ public class GameManagerRPG : MonoBehaviour
             bool isGirlorBoy = Random.Range(0, 1) == 0; // 50% chance
             int playerLevel = PartyManager.instance.partyMembers[currentAllyIndex].level;
             GameObject enemy = Instantiate(battleEnemyPrefab, UIManagerRPG.instance.cutsceneParent.transform);
-            
+
             battleStats enemyStats = enemy.GetComponent<battleStats>();
             enemyStats.health = playerLevel * (isFallenMuslim ? Random.Range(15, 25) : Random.Range(8, 15));
             if (i == 0)
@@ -307,7 +316,7 @@ public class GameManagerRPG : MonoBehaviour
             {
                 enemy.SetActive(false);
             }
-           
+
         }
         UpdateBattleStatsInRealTime();
     }
@@ -381,7 +390,7 @@ public class GameManagerRPG : MonoBehaviour
 
         if (isPhysical)
         {
-            SpriteFlicker(isPlayerTurn ? enemiesInBattle[currentEnemyIndex].GetComponent<Image>() : battleAlliesPrefab[currentAllyIndex].GetComponent<Image>(), 10);
+            SpriteFlicker(isPlayerTurn ? enemiesInBattle[currentEnemyIndex].GetComponent<Image>() : alliesInBattle[currentAllyIndex].GetComponent<Image>(), 10);
             if (isPlayerTurn)
             {
                 // Player attacks enemy
@@ -392,6 +401,7 @@ public class GameManagerRPG : MonoBehaviour
                     {
                         enemiesInBattle[currentEnemyIndex].GetComponent<battleStats>().health = 0;
                         isDead = true;
+                        UpdateBattleStatsInRealTime();
                         break;
                     }
                     UpdateBattleStatsInRealTime();
@@ -408,6 +418,7 @@ public class GameManagerRPG : MonoBehaviour
                     {
                         PartyManager.instance.partyMembers[currentAllyIndex].health = 0;
                         isDead = true;
+                        UpdateBattleStatsInRealTime();
                         break;
                     }
                     UpdateBattleStatsInRealTime();
@@ -434,12 +445,24 @@ public class GameManagerRPG : MonoBehaviour
                 while (experiencePoints >= xptoNextLevel)
                 {
                     LevelUpPlayer();
+
                 }
-                
+
             }
             else if (PartyManager.instance.partyMembers[currentAllyIndex].health <= 0)
             {
-                DialogueManager.instance.StartDialogueTexts(DialogueVault.instance.dialogueForBattler[0], 4, 4, 0, null, true, 3);
+                bool allDead = true;
+                for (int i = 0; i < PartyManager.instance.partyMembers.Length; i++)
+                {
+                    if (PartyManager.instance.partyMembers[i].health > 0)
+                    {
+                        allDead = false;
+                        break;
+                    }
+                }
+                
+                DialogueVault.instance.dialogueForBattler[0][4].dialogueLine = PartyManager.instance.partyMembers[currentAllyIndex].memberName + " fainted........" + (allDead ? "<Oh, well. At least you tried your best....." : "<Who will fight next?");
+                DialogueManager.instance.StartDialogueTexts(DialogueVault.instance.dialogueForBattler[0], 4, 4, 0, null, false, 0, () => PlayerDefeated(allDead));
             }
 
         }
@@ -460,19 +483,20 @@ public class GameManagerRPG : MonoBehaviour
 
 
     }
-    
-    
+
+
     public void ResetBattleStats()
     {
+        UpdateBattleStatsInRealTime();
         playerpg.isMovable = true;
         mainMap.SetActive(true);
         playerpg.gameObject.SetActive(true);
-        battleAlliesPrefab[0].SetActive(false);
+        alliesInBattle[0].SetActive(false);
         currentAllyIndex = 0;
         currentEnemyIndex = 0;
         isPlayerTurn = true;
-        
-        UpdateBattleStatsInRealTime();
+
+
     }
     public void ControlNPCMovement(bool move, NPC[] exceptionNPCs = null)
     {
@@ -501,6 +525,8 @@ public class GameManagerRPG : MonoBehaviour
     }
     public void LevelUpPlayer()
     {
+        experiencePoints -= xptoNextLevel;
+        xptoNextLevel = Mathf.FloorToInt(xptoNextLevel * 1.5f);
         PartyManager.instance.partyMembers[currentAllyIndex].level++;
         PartyManager.instance.partyMembers[currentAllyIndex].originalHealth += 5;
         PartyManager.instance.partyMembers[currentAllyIndex].health = PartyManager.instance.partyMembers[currentAllyIndex].originalHealth;
@@ -539,8 +565,28 @@ public class GameManagerRPG : MonoBehaviour
         PartyMember playerStats = PartyManager.instance.partyMembers[currentAllyIndex];
         UIManagerRPG.instance.playerHealthText.text = "HP: " + playerStats.health.ToString();
         UIManagerRPG.instance.playerLevelText.text = "Lv. " + playerStats.level.ToString();
-        UIManagerRPG.instance.enemyHealthText.text = "HP: " + enemiesInBattle[currentEnemyIndex].GetComponent<battleStats>().health.ToString();
-        UIManagerRPG.instance.enemyLevelText.text = "Lv. " + enemiesInBattle[currentEnemyIndex].GetComponent<battleStats>().level.ToString();
+        if (enemiesInBattle[currentEnemyIndex] != null)
+        {
+            UIManagerRPG.instance.enemyHealthText.text = "HP: " + enemiesInBattle[currentEnemyIndex].GetComponent<battleStats>().health.ToString();
+            UIManagerRPG.instance.enemyLevelText.text = "Lv. " + enemiesInBattle[currentEnemyIndex].GetComponent<battleStats>().level.ToString();
+        }
+
     }
+    public void PlayerDefeated(bool allDead)
+    {
+        switch(allDead)
+        {
+            case true:
+                isInBattle = false;
+                GameManager.instance.LoadNewSceneReal(1, "MainMenuScene");
+                break;
+            case false:
+                Debug.Log("Choose a new party member to fight!");
+                UIManager.instance.ShowWarningBlock("Choose a new party member to fight!");
+                isPlayerTurn = true;
+                break;
+        }
+    }
+    
 }
 

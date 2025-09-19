@@ -38,7 +38,7 @@ public class DialogueVault : MonoBehaviour
                 new DialogueSet { dialogueLine = "What shall you do?", characterName = "Narrator" },
                 new DialogueSet { dialogueLine = "", characterName = " " }, // This will be set dynamically during the battle
                 // Player victory dialogue
-                new DialogueSet {dialogueLine = "You faint........<Oh, well. At least you tried your best....."},
+                new DialogueSet {dialogueLine = "You faint........"},
                 // Enemy fainting dialogue
                 new DialogueSet{dialogueLine = enemyName + " faints!", characterName= ""},
                 new DialogueSet{dialogueLine = "You defeated " + enemyName + "!", characterName= "Narrator"},
